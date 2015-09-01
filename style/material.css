@@ -7,8 +7,8 @@
     src: url("fonts/ionicons.ttf");
 }
 @font-face {
-    font-family:Futura;
-    src:url("fonts/Futura-Medium.ttf");
+    font-family:MenloII;
+    src:url("fonts/Menlo-Regular.ttf");
 }
 
 * {

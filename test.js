@@ -25,7 +25,8 @@ let Demo2;
 let imgSource;
 
 imgSource = "http://7-themes.com/data_images/out/76/7031783-vivi-ornitier-final-fantasy.jpg";
-imgSource = "https://coedbc.files.wordpress.com/2014/09/screen-shot-2014-09-25-at-1-34-30-pm.png?w=640";
+// imgSource = "https://coedbc.files.wordpress.com/2014/09/screen-shot-2014-09-25-at-1-34-30-pm.png?w=640";
+imgSource = "https://scontent.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11887880_828950683869813_8315773794433143779_n.jpg?oh=d7c00ab390cf81fe2fbd3aeb20e44daa&oe=565FD46C";
 
 Demo = React.createClass({
     mixins: [
@@ -40,7 +41,7 @@ Demo = React.createClass({
     },
     render () {
         return (
-            <Screen title="Test">
+            <Screen title={"Test \ud83d\ude03"} titleStyle={{fontFamily: "Courier New"}}>
                 <RaisedButton text="test" onTap={() => this.transitionTo("/test/1-1-1970")} />
                 <Image height={350} source={imgSource} />
             </Screen>
