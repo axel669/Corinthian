@@ -1,5 +1,7 @@
 import React from "react";
 import fc from "lib-source/factotum.es7.js";
+import icons from "lib-source/ionic-icons.js";
+
 React.initializeTouchEvents(true);
 
 let Touchable;
@@ -247,7 +249,7 @@ Spinner = React.createClass({
             color
         };
 
-        return <div style={style} className="material-spinner">{"\uf29c"}</div>;
+        return <div style={style} className="material-spinner">{icons["ion-load-c"]}</div>;
     }
 });
 
@@ -265,7 +267,12 @@ Checkbox = React.createClass({
         let {checked, style, text, checkColor} = this.props;
         let checkString;
 
-        checkString = (checked === true) ? "\uf374" : "\uf372";
+        if (checked === true) {
+            checkString = icons["ion-android-checkbox"];
+        } else {
+            checkString = icons["ion-android-checkbox-outline-blank"];
+        }
+        // checkString = (checked === true) ? icons["ion-android-checkbox"] : icons["ion-android-checkbox-outline-blank"];
         style = style || null;
 
         return (
@@ -315,7 +322,11 @@ RadioItem = React.createClass({
         let {checked, itemTapped, radioColor} = this.props;
         let checkString;
 
-        checkString = (checked === true) ? "\uf3a7" : "\uf3a6";
+        if (checked === true) {
+            checkString = icons["ion-android-radio-button-on"];
+        } else {
+            checkString = icons["ion-android-radio-button-off"];
+        }
 
         return (
             <Touchable component="div" onTap={itemTapped} className="material-radio-item">
@@ -331,6 +342,8 @@ TextInput = React.createClass({
         return {
             label: null,
             value: "",
+            icon: null,
+            iconStyle: null,
             onChange () {},
         };
     },
@@ -341,16 +354,25 @@ TextInput = React.createClass({
         this.refs.input.getDOMNode().focus();
     },
     render () {
-        let {label, placeholder, value} = this.props;
+        let {label, placeholder, value, icon, iconStyle} = this.props;
+        let style;
 
         if (label !== null) {
             label = <div>{label}</div>;
         }
 
+        if (icon === null) {
+            style = null;
+        } else {
+            icon = <div className="material-input-icon" style={iconStyle}>{icons[icon]}</div>;
+            style = {paddingLeft: 35};
+        }
+
         return (
             <Touchable component="div" onTap={this.focus} className="material-input">
                 {label}
-                <input type="text" ref="input" placeholder={placeholder} className="material-input-elem" value={value} onChange={this.update} />
+                {icon}
+                <input type="text" ref="input" style={style} placeholder={placeholder} className="material-input-elem" value={value} onChange={this.update} />
             </Touchable>
         );
     }

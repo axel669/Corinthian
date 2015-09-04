@@ -7,8 +7,8 @@
     src: url("fonts/ionicons.ttf");
 }
 @font-face {
-    font-family:MenloII;
-    src:url("fonts/Menlo-Regular.ttf");
+    font-family:Futura;
+    src:url("fonts/Futura-Medium.ttf");
 }
 
 * {
@@ -117,6 +117,7 @@ body, html {
     margin-top: -1px;
     padding-top: 2px;
     padding-bottom: 2px;
+    position: relative;
 }
 .material-input-elem {
     border: 0px;
@@ -127,6 +128,17 @@ body, html {
     background-color: transparent;
     font-family: Roboto-Light;
     font-size: 14px;
+}
+.material-input-icon {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-family: "Ionicons";
+    font-size: 24px;
 }
 
 .material-overlay {

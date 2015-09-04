@@ -9,8 +9,9 @@ import "external/gesture.js";
 import UI from "lib-source/ui.es7.jsx";
 import factotum from "lib-source/factotum.es7.js";
 import {Zip} from "lib-source/zip.es7.js";
-// import fs from "lib-source/fs.es7.js";
-// import {Picture} from "lib-source/camera.es7.js";
+import fs from "lib-source/fs.es7.js";
+import {Picture} from "lib-source/camera.es7.js";
+import icons from "lib-source/ionic-icons.js";
 
 let App;
 let ScreenWrapper;
@@ -24,8 +25,9 @@ window.PubSub = PubSub;
 window.React = React;
 window.ReactRouter = ReactRouter;
 window.UI = UI;
-// window.fs = fs;
-// window.Picture = Picture;
+window.fs = fs;
+window.Picture = Picture;
+window.ionic = icons;
 
 window.asyncChain = async funcs => {
     let caller = async (index, cb) => {
