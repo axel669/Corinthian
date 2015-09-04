@@ -25,6 +25,10 @@ let genDirFunctions;
 
 appFileSystem = new Promise(
     (resolve, reject) => {
+        if (typeof requestFileSystem === 'undefined') {
+            resolve(null);
+            return;
+        }
         requestFileSystem(
             LocalFileSystem.PERSISTENT,
             0,
@@ -35,6 +39,10 @@ appFileSystem = new Promise(
 );
 tempFileSystem = new Promise(
     (resolve, reject) => {
+        if (typeof requestFileSystem === 'undefined') {
+            resolve(null);
+            return;
+        }
         requestFileSystem(
             LocalFileSystem.TEMPORARY,
             0,

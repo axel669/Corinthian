@@ -1,4 +1,11 @@
 let camera = navigator.camera;
+if (navigator.hasOwnProperty('camera') === false) {
+    camera = {
+        PictureSourceType: {},
+        DestinationType: {},
+        EncodingType: {}
+    };
+}
 let sourceType = camera.PictureSourceType;
 let destType = camera.DestinationType;
 
