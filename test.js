@@ -25,8 +25,40 @@ let Demo2;
 let imgSource;
 
 imgSource = "http://7-themes.com/data_images/out/76/7031783-vivi-ornitier-final-fantasy.jpg";
-// imgSource = "https://coedbc.files.wordpress.com/2014/09/screen-shot-2014-09-25-at-1-34-30-pm.png?w=640";
-imgSource = "https://scontent.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11887880_828950683869813_8315773794433143779_n.jpg?oh=d7c00ab390cf81fe2fbd3aeb20e44daa&oe=565FD46C";
+imgSource = "https://coedbc.files.wordpress.com/2014/09/screen-shot-2014-09-25-at-1-34-30-pm.png?w=640";
+imgSource = "adriana.jpg";
+
+// function mixin (_mixin) {
+//     return _class => {
+//         Object.keys(_mixin).forEach(key => _class.prototype[key] = _mixin[key]);
+//         return _class;
+//     };
+// }
+
+// @mixin(ReactRouter.Navigation)
+// @mixin(ReactRouter.State)
+// class Demo extends React.Component {
+//     state = {
+//         index: 0,
+//         now: Date.now(),
+//         on: false
+//     };
+
+//     constructor (props) {
+//         super(props);
+//     }
+
+//     render () {
+//         return (
+//             <Screen title="Test">
+//                 <TextInput placeholder="Email" icon="ion-android-mail" />
+//                 <TextInput placeholder="Password" icon="ion-android-lock" />
+//                 <TextInput placeholder="Password" icon="ion-android-lock" iconStyle={{color: 'cyan'}} />
+//                 <Image height="50%" width="100%" source={imgSource} />
+//             </Screen>
+//         );
+//     }
+// }
 
 Demo = React.createClass({
     mixins: [
@@ -36,14 +68,21 @@ Demo = React.createClass({
     getInitialState () {
         return {
             index: 0,
-            now: Date.now()
+            now: Date.now(),
+            on: false
         };
     },
     render () {
         return (
-            <Screen title={"Test \ud83d\ude03"} titleStyle={{fontFamily: "Courier New"}}>
-                <RaisedButton text="test" onTap={() => this.transitionTo("/test/1-1-1970")} />
-                <Image height={350} source={imgSource} />
+            <Screen title="Test">
+                <TextInput placeholder="Email" icon="ion-android-mail" />
+                <TextInput placeholder="Password" icon="ion-android-lock" />
+                <ScrollContainer style={{height: '75%'}}>
+                    <Grid cols={2} rows={1} height="100%" width="200%">
+                        <Image height="100%" width="100%" source={imgSource} />
+                        <Image height="100%" width="100%" source={imgSource} />
+                    </Grid>
+                </ScrollContainer>
             </Screen>
         );
     }
@@ -92,7 +131,7 @@ let Wrap = React.createClass({
 });
 
 App.start(
-    <Route handler={Wrap}>
+    <Route>
         <Route path="/" handler={Demo} />
         <Route path="/test/:id" handler={Demo2} />
     </Route>
