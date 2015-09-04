@@ -588,11 +588,13 @@ Screen = React.createClass({
             titleStyle: {},
             footer: null,
             back: false,
-            contentStyle: {}
+            contentStyle: {},
+            scrollable: false
         };
     },
     render () {
-        let {title, footer, back, contentStyle} = this.props;
+        let {title, footer, back, contentStyle, scrollable} = this.props;
+        let content;
 
         contentStyle = {
             ...contentStyle,
@@ -602,6 +604,12 @@ Screen = React.createClass({
             left: 0,
             right: 0
         };
+
+        if (scrollable === false) {
+            content = this.props.children;
+        } else {
+            content = <ScrollContainer>{this.props.children}</ScrollContainer>
+        }
 
         // if (back !== false) {
         //     back = <Touchable component="div" onTap={() => App.switchBack()} className="material-title-back">{"\uf124"}</Touchable>;
@@ -614,7 +622,7 @@ Screen = React.createClass({
             <div style={{WebkitTransform: "translateZ(0)", position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
                 {title}
                 <div style={contentStyle} name="screen-content">
-                    {this.props.children}
+                    {content}
                 </div>
             </div>
         );

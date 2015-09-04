@@ -57,12 +57,7 @@
 expressions
     : e EOF
         {
-            var info = $1.toExponential().match(/(\d\.)(.+)(e\+|\-)(\d+)/);
-            var output;
-            if (info[4] === '0') {
-                output = info[1] + info[2].substr(0, 14);
-            }
-            return info[1];
+            return parseFloat($1.toFixed(14));
         }
     ;
 
@@ -88,7 +83,7 @@ e
     | PI
         {$$ = Math.PI;}
     | FUNCTION '[' args ']'
-        {$$ = Math[$1]($3);}
+        {$$ = Math[$1].apply(null, $3);}
     ;
 
 args

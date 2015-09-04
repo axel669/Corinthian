@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"scrol",
+				"scrollable"
+			],
+			[
 				"Demo",
 				"Demo2"
 			],
@@ -510,10 +514,6 @@
 			[
 				"ac",
 				"activity"
-			],
-			[
-				"cont",
-				"contour"
 			]
 		]
 	},
@@ -525,15 +525,15 @@
 	"command_palette":
 	{
 		"height": 392.0,
-		"last_filter": "gulp",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
-				"gulp",
+				"",
 				"Gulp"
 			],
 			[
-				"",
+				"gulp",
 				"Gulp"
 			],
 			[
@@ -651,6 +651,12 @@
 	},
 	"file_history":
 	[
+		"/C/inetpub/wwwroot/page.xaml",
+		"/C/inetpub/wwwroot/iisstart.htm",
+		"/C/inetpub/wwwroot/datasource.js",
+		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/datasource.js",
+		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/page.xaml",
+		"/C/Source/Skillsbook/Core/CARD.Core.Utilities/CARD.Core.Utilities.csproj",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/.gitignore",
 		"/C/Program Files/Sublime Text 3/.gitignore",
@@ -772,13 +778,7 @@
 		"/C/Users/Axel1/Documents/programming/github/brain/data/load/lesson.js",
 		"/C/Users/Axel1/Documents/programming/github/brain/data/lesson.json",
 		"/C/Users/Axel1/Documents/programming/github/brain/brain-regions.jsx",
-		"/C/Users/Axel1/Documents/programming/github/brain/tool/view/RegionXView.jsx",
-		"/C/Users/Axel1/Documents/programming/github/brain/tool/view/BrainView.jsx",
-		"/C/Users/Axel1/Documents/programming/github/brain/tool/index.html",
-		"/C/Users/Axel1/Documents/programming/github/brain/data/region-info.js",
-		"/C/Users/cmorgan2/Documents/programming/axel669.net/brain/gesture.js",
-		"/C/Users/cmorgan2/Documents/region-brain-drft3-wf.svg",
-		"/C/Users/cmorgan2/Google Drive/Files/programming/game of life/www/index.html"
+		"/C/Users/Axel1/Documents/programming/github/brain/tool/view/RegionXView.jsx"
 	],
 	"find":
 	{
@@ -796,6 +796,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Label",
 			"fs",
 			"Loading",
 			"bottom",
@@ -922,8 +923,7 @@
 			"id",
 			"weight",
 			"id",
-			"height",
-			"id"
+			"height"
 		],
 		"highlight": true,
 		"in_selection": false,

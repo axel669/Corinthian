@@ -25,7 +25,7 @@ let Demo2;
 let imgSource;
 
 imgSource = "http://7-themes.com/data_images/out/76/7031783-vivi-ornitier-final-fantasy.jpg";
-imgSource = "https://coedbc.files.wordpress.com/2014/09/screen-shot-2014-09-25-at-1-34-30-pm.png?w=640";
+// imgSource = "https://coedbc.files.wordpress.com/2014/09/screen-shot-2014-09-25-at-1-34-30-pm.png?w=640";
 imgSource = "adriana.jpg";
 
 // function mixin (_mixin) {
@@ -75,14 +75,7 @@ Demo = React.createClass({
     render () {
         return (
             <Screen title="Test">
-                <TextInput placeholder="Email" icon="ion-android-mail" />
-                <TextInput placeholder="Password" icon="ion-android-lock" />
-                <ScrollContainer style={{height: '75%'}}>
-                    <Grid cols={2} rows={1} height="100%" width="200%">
-                        <Image height="100%" width="100%" source={imgSource} />
-                        <Image height="100%" width="100%" source={imgSource} />
-                    </Grid>
-                </ScrollContainer>
+                <Image height="100%" width="100%" source={imgSource} />
             </Screen>
         );
     }
