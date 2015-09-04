@@ -2,13 +2,11 @@ var gulp;
 var browserify;
 var source;
 var babelify;
-var run;
 
 gulp = require("gulp");
 browserify = require("browserify");
 source = require("vinyl-source-stream");
 babelify = require("babelify");
-run = require('gulp-run');
 
 gulp.task(
     "test-script",
