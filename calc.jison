@@ -18,6 +18,10 @@
     return '-'
 "+"
     return '+'
+":="
+    return ":="
+"=>"
+    return 'ARROW'
 "^"
     return '^'
 "("
@@ -36,6 +40,8 @@
     return 'FUNCTION'
 ','
     return ','
+';'
+    return ';'
 <<EOF>>
     return 'EOF'
 .
@@ -52,14 +58,24 @@
 
 %start expressions
 
+%parse-param context
+
 %% /* language grammar */
 
 expressions
-    : e EOF
-        {
-            return parseFloat($1.toFixed(14));
-        }
+    : expressionGroup EOF
+        {console.log(context); return $1;}
     ;
+
+expressionGroup
+    : e ';'
+        {return $1;}
+    ;
+    /*: e ';'
+        {$$ = [parseFloat($1.toFixed(14))];}
+    | expressionGroup e ';'
+        {$$ = $1.concat([parseFloat($2.toFixed(14))]);}
+    ;*/
 
 e
     : e '+' e

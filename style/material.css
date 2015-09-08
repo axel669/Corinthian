@@ -27,7 +27,7 @@ body, html {
     text-align: left;
     -webkit-user-select: none;
     touch-events: none;
-    -webkit-transform: translateZ(0);
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 .material-button {
