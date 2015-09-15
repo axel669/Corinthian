@@ -86,11 +86,13 @@ Button = React.createClass({
             textColor: 'black',
             shadow: false,
             style: {},
-            className: ""
+            className: "",
+            icon: null,
+            fillContainer: false
         };
     },
     render () {
-        let {className, color, textColor, shadow, style, onTap, text} = this.props;
+        let {className, color, textColor, shadow, style, onTap, text, icon, fillContainer} = this.props;
 
         if (shadow === true) {
             shadow = "0px 1px 3px rgba(0, 0, 0, 0.35)";
@@ -106,10 +108,27 @@ Button = React.createClass({
             WebkitBoxShadow: shadow
         };
 
+        if (fillContainer === true) {
+            style = {
+                ...style,
+                margin: 0,
+                height: '100%'
+            };
+        }
+
+        if (icon !== null) {
+            style.fontFamily = "Ionicons";
+            text = icons[icon];
+        }
+
         return (
             <Touchable component="div" className={className} style={style} onTap={onTap}>
                 <div className="material-button-overlay" />
-                {text}
+                <div className="material-button-text">
+                    <div style={{display: 'table-cell', verticalAlign: 'middle'}}>
+                        {text}
+                    </div>
+                </div>
             </Touchable>
         );
     }
@@ -344,7 +363,9 @@ TextInput = React.createClass({
             value: "",
             icon: null,
             iconStyle: null,
-            onChange () {},
+            type: "text",
+            fillWidth: null,
+            onChange () {}
         };
     },
     update (evt) {
@@ -354,25 +375,31 @@ TextInput = React.createClass({
         this.refs.input.getDOMNode().focus();
     },
     render () {
-        let {label, placeholder, value, icon, iconStyle} = this.props;
-        let style;
+        let {label, placeholder, value, icon, iconStyle, type, fillWidth} = this.props;
+        let inputStyle;
 
         if (label !== null) {
             label = <div>{label}</div>;
         }
 
-        if (icon === null) {
-            style = null;
-        } else {
+        inputStyle = {
+            width: fillWidth
+        };
+
+        if (icon !== null) {
             icon = <div className="material-input-icon" style={iconStyle}>{icons[icon]}</div>;
-            style = {paddingLeft: 35};
+            inputStyle = {
+                paddingLeft: 35
+            };
         }
 
         return (
             <Touchable component="div" onTap={this.focus} className="material-input">
                 {label}
-                {icon}
-                <input type="text" ref="input" style={style} placeholder={placeholder} className="material-input-elem" value={value} onChange={this.update} />
+                <div style={{position: 'relative', width: fillWidth, margin: 'auto'}}>
+                    {icon}
+                    <input type={type} ref="input" style={inputStyle} placeholder={placeholder} className="material-input-elem" value={value} onChange={this.update} />
+                </div>
             </Touchable>
         );
     }
@@ -822,6 +849,11 @@ VSplit = React.createClass({
             }
         );
 
+        style = {
+            ...this.props.style,
+            ...style
+        };
+
         return <div style={style}>{children}</div>;
     }
 });
@@ -911,6 +943,11 @@ HSplit = React.createClass({
                 return <div style={{position: 'absolute', top: 0, bottom: 0, left, right}}>{child}</div>;
             }
         );
+
+        style = {
+            ...this.props.style,
+            ...style
+        };
 
         return <div style={style}>{children}</div>;
     }

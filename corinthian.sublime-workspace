@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"librar",
+				"library-min"
+			],
+			[
 				"back",
 				"backspace"
 			],
@@ -510,10 +514,6 @@
 			[
 				"entr",
 				"entries"
-			],
-			[
-				"lessong",
-				"lessonEdge"
 			]
 		]
 	},
@@ -655,6 +655,17 @@
 	},
 	"file_history":
 	[
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/camera.es7.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/zip.es7.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/calc-lang.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ionic-icons.js",
+		"/C/Users/cmorgan2/Documents/programming/git/parent-portal/main.js",
+		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.931/gulpfile.js",
+		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.320/package.json",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/calc-lang.jison",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/calc-lang.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/calc-lang.jison",
@@ -671,7 +682,6 @@
 		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/datasource.js",
 		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/page.xaml",
 		"/C/Source/Skillsbook/Core/CARD.Core.Utilities/CARD.Core.Utilities.csproj",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/.gitignore",
 		"/C/Program Files/Sublime Text 3/.gitignore",
 		"/C/Users/cmorgan2/Documents/programming/js/base/lib.js",
@@ -772,17 +782,7 @@
 		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/background.js",
 		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/alertify.js",
 		"/C/Source/BrainServer/BrainServer/lib/gesture.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/gesture.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/gesture2.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/Corinthian/www/manifest.mobile.json",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/source/reduce.jsx",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/source/sum.jsx",
-		"/C/Users/cmorgan2/AppData/Roaming/npm/node_modules/gulp-rename/index.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/source/demo.jsx",
-		"/C/Users/cmorgan2/Documents/LINQPad Queries/data/patient-lesson-edges.json",
-		"/C/Users/cmorgan2/Documents/LINQPad Queries/data/patient-exemplar-edges.json",
-		"/C/Source/BrainServer/BrainServer/tool/view/BrainView.jsx",
-		"/C/Source/BrainServer/BrainServer/style/alertify/alertify.css"
+		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/gesture.js"
 	],
 	"find":
 	{
@@ -800,6 +800,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"sourceFileEntry",
+			"icons",
 			"round",
 			"options",
 			"binaryOp",
@@ -925,8 +927,6 @@
 			", ",
 			"id",
 			"order",
-			"id",
-			"baseXP",
 			"id"
 		],
 		"highlight": true,

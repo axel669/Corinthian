@@ -12,6 +12,7 @@ import {Zip} from "lib-source/zip.es7.js";
 import fs from "lib-source/fs.es7.js";
 import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
+import crypto from "lib-source/crypto.es7.js";
 
 let App;
 let ScreenWrapper;
@@ -28,6 +29,7 @@ window.UI = UI;
 window.fs = fs;
 window.Picture = Picture;
 window.ionic = icons;
+window.security = crypto;
 
 window.asyncChain = async funcs => {
     let caller = async (index, cb) => {
@@ -236,7 +238,23 @@ ScreenWrapper = React.createClass({
 App.ScreenTransition = ScreenWrapper;
 
 appContainer = document.querySelector("#AppContainer");
-App.start = (routes) => {
+App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'}) => {
+    let bbox;
+    let container;
+
+    bbox = document.body.getBoundingClientRect();
+    if (hiddenStatusBar === true) {
+        bbox = screen;
+    }
+    let {width, height} = bbox;
+    if (orientation === 'landscape' && width < height) {
+        [width, height] = [height, width];
+    }
+
+    container = document.querySelector("#AppContainer");
+    container.style.width = `${width}px`;
+    container.style.height = `${height}px`;
+
     ReactRouter.run(
         routes,
         (Handler, changeInfo) => {
