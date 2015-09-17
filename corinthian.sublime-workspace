@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"app",
+				"appComponent"
+			],
+			[
+				"trans",
+				"transitionTo"
+			],
+			[
 				"librar",
 				"library-min"
 			],
@@ -506,14 +514,6 @@
 			[
 				"soure",
 				"sourceID"
-			],
-			[
-				"temp",
-				"tempEdges"
-			],
-			[
-				"entr",
-				"entries"
 			]
 		]
 	},
@@ -655,6 +655,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/index.html",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/camera.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/zip.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
@@ -780,9 +782,7 @@
 		"/C/Users/cmorgan2/AppData/Roaming/npm/node_modules/reapp/node_modules/reapp-object-assign/index.js",
 		"/C/Users/cmorgan2/AppData/Roaming/npm/node_modules/reapp/node_modules/reapp-pack/index.js",
 		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/background.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/alertify.js",
-		"/C/Source/BrainServer/BrainServer/lib/gesture.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/gesture.js"
+		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/alertify.js"
 	],
 	"find":
 	{

@@ -1,7 +1,7 @@
 import regex from "xregexp";
 import PubSub from "pubsub-js";
 import React from "react/addons";
-import ReactRouter from "react-router";
+import * as ReactRouter from "react-router";
 import alertify from "external/alertify.js";
 import "external/zip.js";
 import "external/zip-ext.js";
@@ -13,6 +13,8 @@ import fs from "lib-source/fs.es7.js";
 import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
+
+let {Router} = ReactRouter;
 
 let App;
 let ScreenWrapper;
@@ -237,8 +239,9 @@ ScreenWrapper = React.createClass({
 
 App.ScreenTransition = ScreenWrapper;
 
+let appComponent;
 appContainer = document.querySelector("#AppContainer");
-App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'}) => {
+App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) => {
     let bbox;
     let container;
 
@@ -255,15 +258,24 @@ App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'}) => {
     container.style.width = `${width}px`;
     container.style.height = `${height}px`;
 
-    ReactRouter.run(
-        routes,
-        (Handler, changeInfo) => {
-            React.render(
-                <Handler action={changeInfo.action} />,
-                appContainer
-            );
-        }
+    // ReactRouter.run(
+    //     routes,
+    //     (Handler, changeInfo) => {
+    //         React.render(
+    //             <Handler action={changeInfo.action} />,
+    //             appContainer
+    //         );
+    //     }
+    // );
+    appComponent = React.render(
+        <Router>{routes}</Router>,
+        appContainer
     );
 };
 
+App.transitionTo = url => appComponent.history.transitionTo(url);
+App.replaceWith = url => appComponent.history.replaceState(null, url, {});
+App.dump = () => console.log(appComponent, appComponent.history);
+
 window.App = App;
+window.createComponent = React.createClass;
