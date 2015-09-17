@@ -273,9 +273,9 @@ App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) =
     );
 };
 
-App.transitionTo = url => appComponent.history.transitionTo(url);
-App.replaceWith = url => appComponent.history.replaceState(null, url, {});
-App.dump = () => console.log(appComponent, appComponent.history);
+App.transitionTo = url => appComponent.history.pushState(null, url);
+App.replaceWith = url => appComponent.history.replaceState(null, url, null);
+App.goBack = () => appComponent.history.goBack();
 
 window.App = App;
 window.createComponent = React.createClass;
