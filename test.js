@@ -8,12 +8,25 @@ let Wrapper = React.createClass({
 });
 
 const Main = React.createClass({
+    getInitialState () {
+        return {active: true};
+    },
+    updateSetting (name) {
+        return value => {
+            console.log('saving:', name, value);
+            this.setState({[name]: value});
+        };
+    },
+    save () {
+        console.log(this.state);
+    },
     render () {
         return (
             <Screen title="Flashcards">
                 <RaisedButton text="Create Flashcards" />
                 <RaisedButton text="Use Flashcards" />
-                <UI.Checkbox checked={true} text="Woah" />
+                <UI.Checkbox checked={this.state.active} onChange={this.updateSetting('active')} text="Woah" />
+                <UI.Button text="Save" onTap={this.save} />
             </Screen>
         );
     }

@@ -41,7 +41,9 @@ body, html {
   margin: 4px;
   font-weight: none;
   overflow: hidden;
-  z-index: +0; }
+  z-index: +0;
+  background-color: transparent;
+  color: #000; }
 
 .material-button-text {
   display: table;
@@ -66,7 +68,8 @@ body, html {
   margin: 10px;
   padding: 7px;
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
-  border: 1px solid #e9e9e9; }
+  border: 1px solid #e9e9e9;
+  background-color: white; }
 
 .material-checkbox {
   background-position: 5px center;
@@ -365,22 +368,22 @@ input[type=range]::-webkit-slider-thumb {
 
 .screen-forward-enter {
   z-index: +1;
-  /*transform: translateX(100%);*/
+  /*transform: translateX(100%)*/
   transform: scale(1.3, 1.3) translateY(50%);
   opacity: 0; }
 
 .screen-forward-enter.screen-forward-enter-active {
-  /*transform: translateX(0%);*/
+  /*transform: translateX(0%)*/
   transform: scale(1, 1) translateY(0%);
   opacity: 1; }
 
 .screen-forward-leave {
-  /*transform: translateX(0%);*/
+  /*transform: translateX(0%)*/
   transform: scale(1, 1) translateY(0%);
   opacity: 1; }
 
 .screen-forward-leave.screen-forward-leave-active {
-  /*transform: translateX(-100%);*/
+  /*transform: translateX(-100%)*/
   transform: scale(0.5, 0.5) translateY(-50%);
   opacity: 0; }
 
@@ -391,31 +394,22 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-transition: transform 250ms ease-in, opacity 250ms ease-in; }
 
 .screen-backward-enter {
-  /*transform: translateX(-100%);*/
+  /*transform: translateX(-100%)*/
   transform: scale(0.5, 0.5) translateY(-50%);
   opacity: 0; }
 
 .screen-backward-enter.screen-backward-enter-active {
-  /*transform: translateX(0%);*/
+  /*transform: translateX(0%)*/
   transform: scale(1, 1) translateY(0%);
   opacity: 1; }
 
 .screen-backward-leave {
-  /*transform: translateX(0%);*/
+  /*transform: translateX(0%)*/
   z-index: +1;
   transform: scale(1, 1 translateY(0%));
   opacity: 1; }
 
 .screen-backward-leave.screen-backward-leave-active {
-  /*transform: translateX(100%);*/
+  /*transform: translateX(100%)*/
   transform: scale(1.3, 1.3) translateY(50%);
   opacity: 0; }
-
-.overlay-bottom-enter {
-  opacity: 0;
-  transform: translateY(100%); }
-
-.overlay-bottom-enter.overlay-bottom-enter-active {
-  opacity: 1;
-  transform: translateY(0%);
-  -webkit-transition: transform 225ms ease-in, opacity 225ms ease-in; }

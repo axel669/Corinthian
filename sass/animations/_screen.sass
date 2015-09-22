@@ -1,0 +1,57 @@
+.screen-forward-enter, .screen-forward-leave
+    position: absolute
+
+.screen-forward-enter-active, .screen-forward-leave-active
+    -webkit-transition: transform 250ms ease-in, opacity 250ms ease-in
+
+.screen-forward-enter
+    z-index: +1
+    /*transform: translateX(100%)*/
+    transform: scale(1.3, 1.3) translateY(50%)
+    opacity: 0
+
+.screen-forward-enter.screen-forward-enter-active
+    /*transform: translateX(0%)*/
+    transform: scale(1, 1) translateY(0%)
+    opacity: 1
+
+
+.screen-forward-leave
+    /*transform: translateX(0%)*/
+    transform: scale(1, 1) translateY(0%)
+    opacity: 1
+
+.screen-forward-leave.screen-forward-leave-active
+    /*transform: translateX(-100%)*/
+    transform: scale(0.5, 0.5) translateY(-50%)
+    opacity: 0
+
+
+
+.screen-backward-enter, .screen-backward-leave
+    position: absolute
+
+.screen-backward-enter-active, .screen-backward-leave-active
+    -webkit-transition: transform 250ms ease-in, opacity 250ms ease-in
+
+.screen-backward-enter
+    /*transform: translateX(-100%)*/
+    transform: scale(0.5, 0.5) translateY(-50%)
+    opacity: 0
+
+.screen-backward-enter.screen-backward-enter-active
+    /*transform: translateX(0%)*/
+    transform: scale(1, 1) translateY(0%)
+    opacity: 1
+
+
+.screen-backward-leave
+    /*transform: translateX(0%)*/
+    z-index: +1
+    transform: scale(1, 1 translateY(0%))
+    opacity: 1
+
+.screen-backward-leave.screen-backward-leave-active
+    /*transform: translateX(100%)*/
+    transform: scale(1.3, 1.3) translateY(50%)
+    opacity: 0

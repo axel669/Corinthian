@@ -82,8 +82,8 @@ Button = React.createClass({
     getDefaultProps () {
         return {
             onTap () {},
-            color: 'transparent',
-            textColor: 'black',
+            color: null,
+            textColor: null,
             shadow: false,
             style: {},
             className: "",
@@ -146,7 +146,8 @@ RaisedButton = React.createClass({
 
         props = {
             ...this.props,
-            ...RaisedButton.propValues
+            shadow: true,
+            className: `${this.props.className || ""} raised`
         };
 
         return <Button {...props} />;

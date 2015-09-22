@@ -525,15 +525,19 @@
 	"command_palette":
 	{
 		"height": 392.0,
-		"last_filter": "",
+		"last_filter": "gulp",
 		"selected_items":
 		[
 			[
-				"",
+				"gulp",
 				"Gulp"
 			],
 			[
-				"gulp",
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"",
 				"Gulp"
 			],
 			[
@@ -547,10 +551,6 @@
 			[
 				"rem",
 				"Package Control: Remove Package"
-			],
-			[
-				"insta",
-				"Package Control: Install Package"
 			],
 			[
 				"lint",
@@ -633,7 +633,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 416.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -655,6 +655,30 @@
 	},
 	"file_history":
 	[
+		"//card.com/Websites/Live/SkillsBrain.com/app.js",
+		"//ccweb01/inetpub/SkillsBrain.com/index.html",
+		"//card.com/Websites/Live/SkillsBrain.com/index.html",
+		"//stweb01/websites/SkillsBrain.com/index.html",
+		"//stweb01/websites/SkillsBrain.com/app.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/index.html",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/theme/_defualt.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_card.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/animations/_overlay.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/animations/_screen.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_flexbox.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_grid.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_overlay.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_radio.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_rangeinput.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_scrollable.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_combobox.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_switch.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_screen.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.css",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_button.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material-dark.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/index.html",
@@ -662,7 +686,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/index.html",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/style/material.css",
@@ -759,30 +782,7 @@
 		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/gulpfile.js",
 		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/ui.jsx",
 		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/app.jsx",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/corinthian.jsx",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/index.html",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/app.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/webpack.config.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/source/parser.js",
-		"/C/Source/BrainServer/BrainServer/app.xml",
-		"/C/Source/BrainServer/BrainServer/tool/index.html",
-		"/C/Source/BrainServer/BrainServer/meta.xaml",
-		"//stweb01/websites/SkillsBrain.com/Web.config",
-		"/C/Source/BrainServer/BrainServer/scripts/view/BrainCurriculumView.jsx",
-		"/C/Source/BrainServer/BrainServer/index.html",
-		"//stweb01/websites/SkillsBrain.com/index.html",
-		"/C/Source/BrainServer/BrainServer/data/lesson.json",
-		"/C/Source/BrainServer/BrainServer/data/region-groups.json",
-		"/C/Source/BrainServer/BrainServer/data/curriculum.json",
-		"/C/Source/BrainServer/BrainServer/data/curriculum-lesson.json",
-		"/C/Source/BrainServer/BrainServer/region-links.js",
-		"/C/Source/BrainServer/BrainServer/region-links.json",
-		"/C/Source/BrainServer/BrainServer/tool/old-index.htm",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/version.json",
-		"/C/Users/cmorgan2/Google Drive/calc-mini.jison",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/fs.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/Tappable.jsx",
-		"/C/Users/cmorgan2/Documents/programming/mobile/Corinthian/www/assets/material.css"
+		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/corinthian.jsx"
 	],
 	"find":
 	{
@@ -800,6 +800,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\\{|\\}|;",
+			";",
 			"-webkit-transform",
 			"style",
 			";\n",
@@ -925,9 +927,7 @@
 			"(\\w+)(,\\s+)?",
 			"->",
 			"},\n",
-			"(\\d+)\\s+(\\d+)",
-			"Console.WriteLine",
-			"]);\n"
+			"(\\d+)\\s+(\\d+)"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -935,6 +935,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"",
 			"transform",
 			"new Promise",
 			"let",
