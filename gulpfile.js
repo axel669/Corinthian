@@ -4,6 +4,10 @@ var source;
 var babelify;
 var uglify;
 var buffer;
+var concat;
+var sass;
+
+var footer;
 
 gulp = require("gulp");
 browserify = require("browserify");
@@ -11,6 +15,10 @@ source = require("vinyl-source-stream");
 babelify = require("babelify");
 uglify = require("gulp-uglify");
 buffer = require("vinyl-buffer");
+concat = require("gulp-concat-util");
+sass = require("gulp-sass");
+
+footer = "\nconsole.log('Build Time: ', '" + (new Date()).toString() + "');";
 
 gulp.task(
     "test-script",
@@ -56,6 +64,8 @@ gulp.task(
         }).
         bundle().
         pipe(source("corinthian.js")).
+        pipe(buffer()).
+        pipe(concat.footer(footer)).
         pipe(gulp.dest("."));
     }
 );
@@ -86,6 +96,16 @@ gulp.task(
         pipe(source("corinthian.min.js")).
         pipe(buffer()).
         pipe(uglify()).
+        pipe(concat.footer(footer)).
         pipe(gulp.dest("."));
+    }
+);
+
+gulp.task(
+    "css",
+    function () {
+        return gulp.src("sass/material.scss").
+        pipe(sass()).
+        pipe(gulp.dest("sass"));
     }
 );

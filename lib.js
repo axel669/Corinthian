@@ -273,6 +273,12 @@ App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) =
     );
 };
 
+let frameFunction = () => {
+    requestAnimationFrame(frameFunction);
+    PubSub.publishSync("system.framedraw");
+};
+requestAnimationFrame(frameFunction);
+
 App.transitionTo = url => appComponent.history.pushState(null, url);
 App.replaceWith = url => appComponent.history.replaceState(null, url, null);
 App.goBack = () => appComponent.history.goBack();

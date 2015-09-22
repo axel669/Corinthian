@@ -1,4 +1,5 @@
 let {Route} = ReactRouter;
+let {RaisedButton, Screen} = UI;
 
 let Wrapper = React.createClass({
     render () {
@@ -6,23 +7,20 @@ let Wrapper = React.createClass({
     }
 });
 
-let Demo = React.createClass({
-    getInitialState () {
-        return {time: Date.now()};
-    },
+const Main = React.createClass({
     render () {
-        console.log(this);
-        return <UI.Screen scrollable={true}>
-            <UI.Card>
-                Blah: {this.state.time}
-            </UI.Card>
-        </UI.Screen>
+        return (
+            <Screen title="Flashcards">
+                <RaisedButton text="Create Flashcards" />
+                <RaisedButton text="Use Flashcards" />
+                <UI.Checkbox checked={true} text="Woah" />
+            </Screen>
+        );
     }
 });
 
 App.start(
-    <Route component={Wrapper}>
-        <Route path="/" component={Demo} />
-        <Route path="/test" component={Demo} />
+    <Route>
+        <Route path="/" component={Main} />
     </Route>
 );

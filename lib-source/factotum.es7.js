@@ -124,22 +124,28 @@ group = (iterable, keyFunc) => {
     return groups;
 };
 
-ajaxBase = async(url, post, headers) => {
+ajaxBase = async (url, options = {}) => {
+    let {post = null, headers = {}, formData = null, timeout = 0, type = null} = options;
     let method;
     let request;
 
-    if (post === null || typeof post === 'undefined') {
+    if (post === null) {
         method = "GET";
-        post = null;
     } else {
         method = "POST";
         post = JSON.stringify(post);
     }
-    headers = headers || {};
+    if (formData !== null) {
+        method = "POST";
+        post = formData;
+    }
 
     return new Promise(
         (resolve, reject) => {
             request = new XMLHttpRequest();
+            if (type !== null) {
+                request.responseType = type;
+            }
 
             request.addEventListener(
                 'load',
@@ -148,16 +154,22 @@ ajaxBase = async(url, post, headers) => {
                         resolve({
                             status: request.status,
                             statusText: request.statusText,
-                            text: request.responseText
+                            response: request.response
                         });
                     } else {
                         reject(request);
                     }
                 }
             );
+            request.addEventListener(
+                "timeout",
+                reject
+            );
 
             try {
                 request.open(method, url, true);
+                console.log('timeout', timeout);
+                request.timeout = timeout;
                 Object.keys(headers).forEach(
                     header => request.setRequestHeader(header, headers[header])
                 );
@@ -172,11 +184,11 @@ ajaxBase = async(url, post, headers) => {
     );
 };
 ajax = {
-    async get (url, headers) {
-        return ajaxBase(url, null, headers);
+    get (url, options) {
+        return ajaxBase(url, options);
     },
-    async post (url, post, headers) {
-        return ajaxBase(url, post, headers);
+    post (url, post, options = {}) {
+        return ajaxBase(url, {post, ...options});
     }
 };
 
