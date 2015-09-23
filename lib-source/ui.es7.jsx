@@ -302,7 +302,7 @@ Checkbox = React.createClass({
 
         return (
             <Touchable component="div" onTap={this.toggle} className="material-checkbox" style={style}>
-                <div className="material-icon-area" style={{color: checkColor}}>{checkString}</div>
+                <div className="material-icon-area checkbox-check" style={{color: checkColor}}>{checkString}</div>
                 {text}
             </Touchable>
         );
@@ -314,7 +314,7 @@ RadioGroup = React.createClass({
         return {
             onChange () {},
             selectedIndex: 0,
-            radioColor: 'black',
+            radioColor: null,
             style: {}
         };
     },
@@ -355,7 +355,7 @@ RadioItem = React.createClass({
 
         return (
             <Touchable component="div" onTap={itemTapped} className="material-radio-item">
-                <div className="material-icon-area" style={{color: radioColor}}>{checkString}</div>
+                <div className="material-icon-area radio-item-check" style={{color: radioColor}}>{checkString}</div>
                 {this.props.children}
             </Touchable>
         );

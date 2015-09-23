@@ -28,6 +28,11 @@ const Main = React.createClass({
                 <UI.Checkbox checked={this.state.active} onChange={this.updateSetting('active')} text="Woah" />
                 <UI.Switch on={this.state.active} text="Testing" />
                 <UI.Button text="Save" onTap={this.save} />
+                <UI.RadioGroup selectedIndex={1}>
+                    <UI.RadioItem value={0}>0</UI.RadioItem>
+                    <UI.RadioItem value={1}>1</UI.RadioItem>
+                    <UI.RadioItem value={2}>2</UI.RadioItem>
+                </UI.RadioGroup>
             </Screen>
         );
     }

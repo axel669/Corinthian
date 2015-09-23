@@ -85,6 +85,9 @@ body, html {
   margin-top: -1px;
   position: relative; }
 
+.material-icon-area.checkbox-check {
+  color: black; }
+
 .material-icon-area {
   display: inline-block;
   font-family: "Ionicons";
@@ -100,8 +103,7 @@ body, html {
   width: 40px;
   text-align: center;
   position: absolute;
-  left: 0px;
-  color: black; }
+  left: 0px; }
 
 .material-container {
   width: 100%;
@@ -187,6 +189,9 @@ body, html {
   border-top: 1px solid lightgray;
   margin-top: -1px;
   position: relative; }
+
+.material-icon-area.radio-item-check {
+  color: black; }
 
 .material-range {
   position: relative;
