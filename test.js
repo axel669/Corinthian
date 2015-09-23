@@ -22,10 +22,11 @@ const Main = React.createClass({
     },
     render () {
         return (
-            <Screen title="Flashcards">
-                <RaisedButton text="Create Flashcards" />
-                <RaisedButton text="Use Flashcards" />
+            <Screen title="Flashcards" scrollable={true}>
+                <RaisedButton text="Create Flashcards" height={75} />
+                <RaisedButton text={"Use Flashcards\nCall Me Maybe"} color="teal" />
                 <UI.Checkbox checked={this.state.active} onChange={this.updateSetting('active')} text="Woah" />
+                <UI.Switch on={this.state.active} text="Testing" />
                 <UI.Button text="Save" onTap={this.save} />
             </Screen>
         );

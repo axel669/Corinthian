@@ -36,19 +36,21 @@ body, html {
   position: relative;
   text-align: center;
   min-height: 40px;
-  height: 40px;
   font-size: 18px;
   margin: 4px;
   font-weight: none;
   overflow: hidden;
   z-index: +0;
   background-color: transparent;
-  color: #000; }
+  color: #000;
+  white-space: pre; }
 
 .material-button-text {
   display: table;
   width: 100%;
-  height: 100%; }
+  min-height: 40px;
+  padding-top: 2px;
+  padding-bottom: 2px; }
 
 .material-button-overlay {
   width: 100%;
@@ -98,7 +100,8 @@ body, html {
   width: 40px;
   text-align: center;
   position: absolute;
-  left: 0px; }
+  left: 0px;
+  color: black; }
 
 .material-container {
   width: 100%;
@@ -312,12 +315,14 @@ input[type=range]::-webkit-slider-thumb {
 .material-switch-on {
   width: 50px;
   text-align: center;
-  background-color: cyan; }
+  background-color: #239FCB;
+  color: white; }
 
 .material-switch-off {
   width: 50%;
   text-align: center;
-  background-color: green;
+  background-color: gray;
+  color: white;
   margin-left: 50px; }
 
 .material-title {

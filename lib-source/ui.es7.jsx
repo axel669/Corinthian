@@ -88,11 +88,13 @@ Button = React.createClass({
             style: {},
             className: "",
             icon: null,
-            fillContainer: false
+            fillContainer: false,
+            width: null,
+            height: null
         };
     },
     render () {
-        let {className, color, textColor, shadow, style, onTap, text, icon, fillContainer} = this.props;
+        let {className, color, textColor, shadow, style, onTap, text, icon, fillContainer, width, height} = this.props;
 
         if (shadow === true) {
             shadow = "0px 1px 3px rgba(0, 0, 0, 0.35)";
@@ -105,7 +107,9 @@ Button = React.createClass({
             ...style,
             backgroundColor: color,
             color: textColor,
-            WebkitBoxShadow: shadow
+            WebkitBoxShadow: shadow,
+            width,
+            height
         };
 
         if (fillContainer === true) {
@@ -114,6 +118,7 @@ Button = React.createClass({
                 margin: 0,
                 height: '100%'
             };
+            height = '100%';
         }
 
         if (icon !== null) {
@@ -124,7 +129,7 @@ Button = React.createClass({
         return (
             <Touchable component="div" className={className} style={style} onTap={onTap}>
                 <div className="material-button-overlay" />
-                <div className="material-button-text">
+                <div className="material-button-text" style={{height}}>
                     <div style={{display: 'table-cell', verticalAlign: 'middle'}}>
                         {text}
                     </div>
@@ -137,8 +142,8 @@ RaisedButton = React.createClass({
     statics: {
         propValues: {
             shadow: true,
-            color: "#2FB1DF",
-            textColor: 'white'
+            color: null,
+            textColor: null
         }
     },
     render () {
@@ -277,7 +282,7 @@ Checkbox = React.createClass({
     getDefaultProps () {
         return {
             onChange () {},
-            checkColor: 'black'
+            checkColor: null
         };
     },
     toggle () {
@@ -526,8 +531,10 @@ Switch = React.createClass({
     getDefaultProps () {
         return {
             defaultState: false,
-            color: '#239FCB',
-            textColor: 'white',
+            color: null,
+            textColor: null,
+            colorOff: null,
+            textColorOff: null,
             on: false,
             onChange () {}
         };
@@ -536,7 +543,7 @@ Switch = React.createClass({
         this.props.onChange(!this.props.on);
     },
     render () {
-        let {on, text, textColor, color} = this.props;
+        let {on, text, textColor, color, textColorOff, colorOff} = this.props;
         let displayStyle;
         let statusText;
         let styleName;
@@ -552,8 +559,8 @@ Switch = React.createClass({
             statusText = "OFF";
             styleName = "material-switch-off";
             displayStyle = {
-                backgroundColor: 'gray',
-                color: 'white'
+                backgroundColor: colorOff,
+                color: textColorOff
             };
         }
         return (
