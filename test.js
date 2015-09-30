@@ -22,7 +22,7 @@ const Main = React.createClass({
     },
     render () {
         return (
-            <Screen title="Flashcards" scrollable={true}>
+            <Screen title="Testing" subtext="WOAH" scrollable={true}>
                 <RaisedButton text="Create Flashcards" height={75} />
                 <RaisedButton text={"Use Flashcards\nCall Me Maybe"} color="teal" />
                 <UI.Checkbox checked={this.state.active} onChange={this.updateSetting('active')} text="Woah" />

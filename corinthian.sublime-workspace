@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"Flex",
+				"Flexbox"
+			],
+			[
+				"Radio",
+				"RadioItem"
+			],
+			[
+				"Rad",
+				"RadioGroup"
+			],
+			[
+				"text",
+				"textColorOff"
+			],
+			[
+				"colo",
+				"colorOff"
+			],
+			[
+				"backgroun",
+				"backgroundColor"
+			],
+			[
 				"enc",
 				"encrypt"
 			],
@@ -128,10 +152,6 @@
 				"Screen"
 			],
 			[
-				"Rad",
-				"RadioItem"
-			],
-			[
 				"sele",
 				"selectChildren"
 			],
@@ -140,20 +160,12 @@
 				"ScrollContainer"
 			],
 			[
-				"Flex",
-				"FlexboxItem"
-			],
-			[
 				"scroll",
 				"scrollContainers"
 			],
 			[
 				"check",
 				"checkString"
-			],
-			[
-				"Radio",
-				"RadioGroup"
 			],
 			[
 				"chec",
@@ -226,14 +238,6 @@
 			[
 				"add",
 				"addLink"
-			],
-			[
-				"text",
-				"textAlign"
-			],
-			[
-				"backgroun",
-				"background-color"
 			],
 			[
 				"Less",
@@ -510,10 +514,6 @@
 			[
 				"soure",
 				"sourceID"
-			],
-			[
-				"temp",
-				"tempEdges"
 			]
 		]
 	},
@@ -633,7 +633,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 400.0
+		"width": 416.0
 	},
 	"console":
 	{
@@ -655,6 +655,37 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_button.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/card.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/switch.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/raisedbutton.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
+		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_radio.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/theme/_default.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_icon-area.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_checkbox.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_switch.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_combobox.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_screen.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/index.html",
 		"//card.com/Websites/Live/SkillsBrain.com/app.js",
 		"//ccweb01/inetpub/SkillsBrain.com/index.html",
 		"//card.com/Websites/Live/SkillsBrain.com/index.html",
@@ -681,10 +712,8 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material-dark.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/index.html",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js",
-		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
@@ -706,7 +735,6 @@
 		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.320/package.json",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/calc-lang.jison",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/calc-lang.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/calc-lang.jison",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material.css",
 		"/C/Users/Axel1/AppData/Roaming/Sublime Text 3/Packages/tern_for_sublime/Tern.sublime-settings",
@@ -754,35 +782,7 @@
 		"/C/Users/cmorgan2/Documents/programming/js/lib/factotum.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/js/lib/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/js/.eslintrc",
-		"/C/Users/cmorgan2/Documents/programming/js/app.jsx",
-		"/C/Users/cmorgan2/Documents/programming/js/scripts/gesture.js",
-		"/C/Users/Axel1/Documents/programming/js/lib/factotum.es7.js",
-		"/C/Users/Axel1/Documents/programming/js/gulpfile.js",
-		"/C/Users/Axel1/Documents/programming/js/index.html",
-		"/C/Users/Axel1/Documents/programming/js/index.htm",
-		"/C/Users/Axel1/Documents/programming/js/app.jsx",
-		"/C/Users/Axel1/Documents/programming/mobile/gameoflife/www/assets/material.css",
-		"/C/Users/Axel1/Documents/programming/js/app.js",
-		"/C/Users/Axel1/Documents/programming/js/scripts/react-router-browser.js",
-		"/C/Users/Axel1/Documents/programming/js/scripts/Tappable.jsx",
-		"/C/Users/Axel1/Documents/programming/js/scripts/react-with-addons.js",
-		"/C/Users/Axel1/Documents/programming/js/scripts/jszip.min.js",
-		"/C/Users/Axel1/Documents/programming/js/scripts/gesture.js",
-		"/C/Users/Axel1/Documents/programming/js/scripts/alertify.js",
-		"/C/Users/Axel1/Downloads/alertify.js-0.3.11/example/index.html",
-		"/C/Users/Axel1/Downloads/alertify.js-0.3.11/example/assets/css/main.css",
-		"/C/Users/Axel1/Downloads/alertify.js-0.3.11/Gruntfile.js",
-		"/C/Users/Axel1/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
-		"/C/Users/Axel1/Documents/programming/js/scripts/factotum.js",
-		"/C/Users/Axel1/Documents/programming/js/gulpin.sublime-project",
-		"/C/Users/cmorgan2/Documents/programming/js/gulpin.sublime-project",
-		"/C/Users/cmorgan2/Documents/programming/js/app.js",
-		"/C/Users/cmorgan2/Documents/programming/js/test.es6.js",
-		"/C/Users/cmorgan2/Documents/programming/js/test.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/gulpfile.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/ui.jsx",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/app.jsx",
-		"/C/Users/cmorgan2/Documents/programming/mobile/appcontainer/www/assets/scripts/corinthian.jsx"
+		"/C/Users/cmorgan2/Documents/programming/js/app.jsx"
 	],
 	"find":
 	{
@@ -800,6 +800,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"screen",
 			"\\{|\\}|;",
 			";",
 			"-webkit-transform",
@@ -926,8 +927,7 @@
 			"routehand",
 			"(\\w+)(,\\s+)?",
 			"->",
-			"},\n",
-			"(\\d+)\\s+(\\d+)"
+			"},\n"
 		],
 		"highlight": true,
 		"in_selection": false,
