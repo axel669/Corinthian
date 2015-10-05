@@ -11,7 +11,7 @@ let group;
 let ajax;
 
 arraySlice = Array.prototype.slice;
-arrayEach = Array.prototype.each;
+arrayEach = Array.prototype.forEach;
 
 if (Object.hasOwnProperty('assign') === false) {
     Object.assign = (dest, ...sources) => {

@@ -1,4 +1,4 @@
-import regex from "xregexp";
+import {XRegExp} from "xregexp";
 import PubSub from "pubsub-js";
 import React from "react/addons";
 import * as ReactRouter from "react-router";
@@ -22,8 +22,7 @@ let appContainer;
 
 window.factotum = factotum;
 window.alertify = alertify;
-window.regex = regex;
-window.regex = regex;
+window.regex = XRegExp;
 window.PubSub = PubSub;
 window.React = React;
 window.ReactRouter = ReactRouter;

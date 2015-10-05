@@ -43,7 +43,8 @@ var gesture = (function () {
             }),
             time: time,
             target: target,
-            ID: touch.identifier
+            ID: touch.identifier,
+            mouseTriggered: evt.mouseTriggered || false
         });
     };
 
@@ -171,6 +172,7 @@ var gesture = (function () {
                 }
                 // evt.preventDefault();
                 var test = gesture.createCustomEvent("touchstart", {changedTouches: {0: copyProps(evt), length: 1}});
+                test.mouseTriggered = true;
                 mouseIsDown = true;
                 evt.target.dispatchEvent(test);
             }
@@ -183,6 +185,7 @@ var gesture = (function () {
                 }
                 evt.preventDefault();
                 var test = gesture.createCustomEvent("touchmove", {changedTouches: {0: copyProps(evt), length: 1}});
+                test.mouseTriggered = true;
                 evt.target.dispatchEvent(test);
             }
         );
@@ -197,6 +200,7 @@ var gesture = (function () {
                 }
                 // evt.preventDefault();
                 var test = gesture.createCustomEvent("touchend", {changedTouches: {0: copyProps(evt), length: 1}});
+                test.mouseTriggered = true;
                 mouseIsDown = false;
                 evt.target.dispatchEvent(test);
             }
@@ -326,7 +330,7 @@ gesture.register(
                 //  If it takes too long, its not a tap. otherwise, fire the event
                 if (vars.valid === true && (touch.time - start.time) < 500) {
                     if (start.target !== document.activeElement && document.activeElement !== null) {
-                        if ('blur' in document.activeElement) {
+                        if (touch.mouseTriggered === false && ('blur' in document.activeElement)) {
                             document.activeElement.blur();
                         }
                     }
