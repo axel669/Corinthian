@@ -18,11 +18,13 @@ Button = React.createClass({
             icon: null,
             fillContainer: false,
             width: null,
-            height: null
+            height: null,
+            overrideMinHeight: false
         };
     },
     render () {
-        let {className, color, textColor, shadow, style, onTap, text, icon, fillContainer, width, height} = this.props;
+        let {className, color, textColor, shadow, style, onTap, text, icon, fillContainer, width, height, overrideMinHeight} = this.props;
+        let textStyle;
 
         if (shadow === true) {
             shadow = "0px 1px 3px rgba(0, 0, 0, 0.35)";
@@ -39,6 +41,11 @@ Button = React.createClass({
             width,
             height
         };
+        textStyle = {height};
+        if (overrideMinHeight === true) {
+            style.minHeight = 0;
+            textStyle.minHeight = 0;
+        }
 
         if (fillContainer === true) {
             style = {
@@ -57,7 +64,7 @@ Button = React.createClass({
         return (
             <Touchable component="div" className={className} style={style} onTap={onTap}>
                 <div className="material-button-overlay" />
-                <div className="material-button-text" style={{height}}>
+                <div className="material-button-text" style={textStyle}>
                     <div style={{display: 'table-cell', verticalAlign: 'middle'}}>
                         {text}
                     </div>

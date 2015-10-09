@@ -16,7 +16,8 @@ Screen = React.createClass({
             back: false,
             contentStyle: {},
             scrollable: false,
-            subtext: null
+            subtext: null,
+
         };
     },
     render () {

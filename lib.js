@@ -253,9 +253,17 @@ App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) =
         [width, height] = [height, width];
     }
 
+    if (typeof cordova !== 'undefined') {
+        width = '100%';
+        height = '100%';
+    } else {
+        width = `${width}px`;
+        height = `${height}px`;
+    }
+
     container = document.querySelector("#AppContainer");
-    container.style.width = `${width}px`;
-    container.style.height = `${height}px`;
+    container.style.width = width;
+    container.style.height = height;
 
     // ReactRouter.run(
     //     routes,

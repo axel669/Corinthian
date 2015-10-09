@@ -87,32 +87,42 @@ exists = (fs, name) => {
     );
 };
 
-read = (entry, type) => {
+read = (entry, type = null) => {
     return new Promise(
-        (resolve, reject) => {
-            entry.file(
-                file => {
-                    let reader;
-
-                    reader = new FileReader();
-                    type = type || 'text';
-
-                    reader.onloadend = () => resolve(reader.result);
-
-                    switch (type) {
-                        case "text":
-                            reader.readAsText(file);
-                            break;
-                        case "url":
-                            reader.readAsDataURL(file);
-                            break;
-                        default:
-                            throw new Error(`Unknown file read type: ${type}`);
-                    }
-                }
-            );
+        async (resolve, reject) => {
+            try {
+                let ajaxRes = await factotum.ajax.get(entry.nativeURL, {type});
+                resolve(ajaxRes.response);
+            } catch(e) {
+                reject(e);
+            }
         }
     );
+    // return new Promise(
+    //     (resolve, reject) => {
+    //         entry.file(
+    //             file => {
+    //                 let reader;
+
+    //                 reader = new FileReader();
+    //                 type = type || 'text';
+
+    //                 reader.onloadend = () => resolve(reader.result);
+
+    //                 switch (type) {
+    //                     case "text":
+    //                         reader.readAsText(file);
+    //                         break;
+    //                     case "url":
+    //                         reader.readAsDataURL(file);
+    //                         break;
+    //                     default:
+    //                         throw new Error(`Unknown file read type: ${type}`);
+    //                 }
+    //             }
+    //         );
+    //     }
+    // );
 };
 
 write = (entry, data, mode) => {
@@ -157,12 +167,24 @@ move = (entry, destFolder, destName) => {
     );
 };
 copy = (entry, destFolder, destName) => {
-    destName = destName || entry.name;
     return new Promise(
-        (resolve, reject) => {
-            entry.copyTo(destFolder, destName, resolve, reject);
+        async (resolve, reject) => {
+            try {
+                destName = destName || entry.name;
+                let fileBlob = await fs.file.read(entry, 'blob');
+                await write(await fs.file.create(destFolder.fullPath + destName), fileBlob, 'truncate');
+                resolve(true);
+            } catch(e) {
+                reject(e);
+            }
         }
     );
+    // destName = destName || entry.name;
+    // return new Promise(
+    //     (resolve, reject) => {
+    //         entry.copyTo(destFolder, destName, resolve, reject);
+    //     }
+    // );
 };
 
 removeFile = (entry) => {

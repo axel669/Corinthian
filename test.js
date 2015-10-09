@@ -7,6 +7,24 @@ let Wrapper = React.createClass({
     }
 });
 
+let CenterContent = React.createClass({
+    render () {
+        let {vertical = 'center', horizontal = 'center', width = '100%', height = '100%'} = this.props;
+
+        if (vertical === 'center') {
+            vertical = 'middle';
+        }
+
+        return (
+            <div style={{width, height, display: 'table'}}>
+                <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical}}>
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
+});
+
 const Main = React.createClass({
     getInitialState () {
         return {active: true};
@@ -22,17 +40,10 @@ const Main = React.createClass({
     },
     render () {
         return (
-            <Screen title="Testing" subtext="WOAH" scrollable={true} back="Yup">
-                <RaisedButton text="Create Flashcards" height={75} />
-                <RaisedButton text={"Use Flashcards\nCall Me Maybe"} color="teal" />
-                <UI.Checkbox checked={this.state.active} onChange={this.updateSetting('active')} text="Woah" />
-                <UI.Switch on={this.state.active} text="Testing" />
-                <UI.Button text="Save" onTap={this.save} />
-                <UI.RadioGroup selectedIndex={1}>
-                    <UI.RadioItem value={0}>0</UI.RadioItem>
-                    <UI.RadioItem value={1}>1</UI.RadioItem>
-                    <UI.RadioItem value={2}>2</UI.RadioItem>
-                </UI.RadioGroup>
+            <Screen title="Testing" subtext="WOAH" scrollable={true}>
+                <CenterContent height={100}>
+                    <div>Test content?</div>
+                </CenterContent>
             </Screen>
         );
     }
@@ -41,5 +52,6 @@ const Main = React.createClass({
 App.start(
     <Route>
         <Route path="/" component={Main} />
-    </Route>
+    </Route>,
+    {webApp: true}
 );

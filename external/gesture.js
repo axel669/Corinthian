@@ -151,6 +151,7 @@ var gesture = (function () {
 
     (function () {
         var copyProps, copyPropList, mouseIsDown;
+        var currentElem;
 
         copyPropList = ['pageX', 'pageY', 'screenX', 'screenY', 'altKey', 'ctrlKey', 'shiftKey', 'metaKey', 'clientX', 'clientY', 'layerX', 'layerY', 'x', 'y', 'target', 'sourceElement'];
         copyProps = function (src) {
@@ -174,7 +175,8 @@ var gesture = (function () {
                 var test = gesture.createCustomEvent("touchstart", {changedTouches: {0: copyProps(evt), length: 1}});
                 test.mouseTriggered = true;
                 mouseIsDown = true;
-                evt.target.dispatchEvent(test);
+                currentElem = evt.target;
+                currentElem.dispatchEvent(test);
             }
         );
         window.addEventListener(
@@ -186,7 +188,7 @@ var gesture = (function () {
                 evt.preventDefault();
                 var test = gesture.createCustomEvent("touchmove", {changedTouches: {0: copyProps(evt), length: 1}});
                 test.mouseTriggered = true;
-                evt.target.dispatchEvent(test);
+                currentElem.dispatchEvent(test);
             }
         );
         window.addEventListener(
@@ -202,7 +204,7 @@ var gesture = (function () {
                 var test = gesture.createCustomEvent("touchend", {changedTouches: {0: copyProps(evt), length: 1}});
                 test.mouseTriggered = true;
                 mouseIsDown = false;
-                evt.target.dispatchEvent(test);
+                currentElem.dispatchEvent(test);
             }
         );
     })();
