@@ -13,6 +13,7 @@ import fs from "lib-source/fs.es7.js";
 import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
+import microDB from "lib-source/microdb.js";
 
 let {Router} = ReactRouter;
 
@@ -31,6 +32,7 @@ window.fs = fs;
 window.Picture = Picture;
 window.ionic = icons;
 window.security = crypto;
+window.microDB = microDB;
 
 window.asyncChain = async funcs => {
     let caller = async (index, cb) => {

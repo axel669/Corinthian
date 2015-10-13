@@ -24,6 +24,7 @@ import ScrollContainer from "lib-source/ui/scrollcontainer.js";
 import Grid from "lib-source/ui/grid.js";
 import Flexbox from "lib-source/ui/flexbox.js";
 import {VSplit, HSplit} from "lib-source/ui/split.js";
+import CenterContent from "lib-source/ui/centercontent.js";
 
 React.initializeTouchEvents(true);
 
@@ -52,5 +53,6 @@ export default {
     Grid,
     Flexbox,
     VSplit,
-    HSplit
+    HSplit,
+    CenterContent
 };

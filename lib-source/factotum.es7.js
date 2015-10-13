@@ -150,7 +150,7 @@ ajaxBase = async (url, options = {}) => {
             request.addEventListener(
                 'load',
                 () => {
-                    if (request.status >= 200 && request.status < 300) {
+                    if (request.status === 0 || (request.status >= 200 && request.status < 300)) {
                         resolve({
                             status: request.status,
                             statusText: request.statusText,

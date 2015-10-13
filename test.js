@@ -7,24 +7,6 @@ let Wrapper = React.createClass({
     }
 });
 
-let CenterContent = React.createClass({
-    render () {
-        let {vertical = 'center', horizontal = 'center', width = '100%', height = '100%'} = this.props;
-
-        if (vertical === 'center') {
-            vertical = 'middle';
-        }
-
-        return (
-            <div style={{width, height, display: 'table'}}>
-                <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical}}>
-                    {this.props.children}
-                </div>
-            </div>
-        );
-    }
-});
-
 const Main = React.createClass({
     getInitialState () {
         return {active: true};
@@ -41,9 +23,9 @@ const Main = React.createClass({
     render () {
         return (
             <Screen title="Testing" subtext="WOAH" scrollable={true}>
-                <CenterContent height={100}>
+                <UI.CenterContent height={100}>
                     <div>Test content?</div>
-                </CenterContent>
+                </UI.CenterContent>
             </Screen>
         );
     }
@@ -52,6 +34,5 @@ const Main = React.createClass({
 App.start(
     <Route>
         <Route path="/" component={Main} />
-    </Route>,
-    {webApp: true}
+    </Route>
 );

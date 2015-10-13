@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"remove",
+				"removeID"
+			],
+			[
+				"remo",
+				"removedIDs"
+			],
+			[
+				"get",
+				"getItem"
+			],
+			[
+				"ro",
+				"rowKey"
+			],
+			[
 				"Flex",
 				"Flexbox"
 			],
@@ -360,10 +376,6 @@
 				"brainPoints"
 			],
 			[
-				"remove",
-				"removePoint"
-			],
-			[
 				"less",
 				"lessonUsed"
 			],
@@ -468,10 +480,6 @@
 				"messageListener"
 			],
 			[
-				"get",
-				"getParams"
-			],
-			[
 				"force",
 				"forceGraph"
 			],
@@ -506,14 +514,6 @@
 			[
 				"sour",
 				"sourceKeys"
-			],
-			[
-				"sel",
-				"selectAll"
-			],
-			[
-				"soure",
-				"sourceID"
 			]
 		]
 	},
@@ -655,6 +655,19 @@
 	},
 	"file_history":
 	[
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/microdb.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/external/gesture.js",
+		"/C/Users/cmorgan2/AppData/Roaming/Skype/My Skype Received Files/dataCenter.js",
+		"/C/Users/cmorgan2/AppData/Roaming/Skype/My Skype Received Files/.eslintrc",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/gulpfile.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/corinthian.min.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/adriana.jpg",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
@@ -715,11 +728,8 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/style/material.css",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/crypto.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainerp/www/index.html",
 		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainerp/config.xml",
@@ -728,7 +738,6 @@
 		"/C/Users/cmorgan2/Google Drive/Files/programming/js/calc/main.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/camera.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/zip.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/calc-lang.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ionic-icons.js",
 		"/C/Users/cmorgan2/Documents/programming/git/parent-portal/main.js",
@@ -773,16 +782,7 @@
 		"/C/Users/cmorgan2/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/cmorgan2/Documents/programming/js/gulpfile.js",
 		"/C/Users/cmorgan2/Documents/programming/js/test env/package.json",
-		"/C/Users/cmorgan2/Documents/programming/js/index.html",
-		"/C/Users/cmorgan2/Documents/programming/js/test env/gulpfile.js",
-		"/C/Users/cmorgan2/Downloads/ionicons-2.0.1/src/load-c.svg",
-		"/C/Users/cmorgan2/AppData/Roaming/npm/node_modules/cca/package.json",
-		"/C/Users/cmorgan2/AppData/Roaming/npm/node_modules/cca/src/cca.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/visualtimer/gulpfile.js",
-		"/C/Users/cmorgan2/Documents/programming/js/lib/factotum.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/js/lib/ui.es7.jsx",
-		"/C/Users/cmorgan2/Documents/programming/js/.eslintrc",
-		"/C/Users/cmorgan2/Documents/programming/js/app.jsx"
+		"/C/Users/cmorgan2/Documents/programming/js/index.html"
 	],
 	"find":
 	{
@@ -800,6 +800,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"atientList",
 			"XRegExp",
 			"fc",
 			"screen",
@@ -926,8 +927,7 @@
 			"-",
 			"handler",
 			"approuter",
-			"routehand",
-			"(\\w+)(,\\s+)?"
+			"routehand"
 		],
 		"highlight": true,
 		"in_selection": false,
