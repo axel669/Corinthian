@@ -43,7 +43,7 @@ table = name => {
         push: data => {
             let row;
 
-            push(info, data);
+            row = push(info, data);
             writeLocal(tableKey, info);
 
             return row;

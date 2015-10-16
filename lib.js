@@ -2,6 +2,7 @@ import {XRegExp} from "xregexp";
 import PubSub from "pubsub-js";
 import React from "react/addons";
 import * as ReactRouter from "react-router";
+import moment from "moment";
 import alertify from "external/alertify.js";
 import "external/zip.js";
 import "external/zip-ext.js";
@@ -33,6 +34,7 @@ window.Picture = Picture;
 window.ionic = icons;
 window.security = crypto;
 window.microDB = microDB;
+window.moment = moment;
 
 window.asyncChain = async funcs => {
     let caller = async (index, cb) => {
