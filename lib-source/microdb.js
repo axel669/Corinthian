@@ -2,6 +2,7 @@ import factotum from "lib-source/factotum.es7.js";
 
 let readLocal;
 let writeLocal;
+let removeLocal
 
 let tables;
 let push;
@@ -46,19 +47,96 @@ loadTable = name => {
         info.nextID += 1;
         info.entries.push(data.rowID);
 
-        queueUpdate(name, [data]);
+        queueUpdate(info, [data]);
+    };
+
+    filter = predicate => {
+        return info.entries.filter(rowID => predicate(rows[rowID])).map(id => rows[id]);
+    };
+
+    getID = id => {
+        if (rows.hasOwnProperty(id) === true) {
+            return rows[id];
+        }
+        return null;
+    };
+
+    update = (predicate, updateFunc) => {
+        let updates;
+
+        updates = [];
+        info.entries.forEach(rowID => {
+            let row;
+
+            row = rows[rowID];
+            if (predicate(row) === true) {
+                row = updateFunc({...row});
+                rows[rowID] = row;
+                updates.push(row);
+            }
+        });
+
+        queueUpdate(name, updates);
+
+        return updates;
+    };
+    updateID = (id, data) => {
+        let row;
+
+        row = {
+            ...rows[id],
+            ...data
+        };
+        rows[id] = row;
+        queueUpdate(info, [row]);
+        return row;
+    };
+
+    remove = predicate => {
+        let updates;
+        let entries;
+
+        updates = [];
+        info.entries = info.entries.filter(id => {
+            let row;
+
+            row = rows[id];
+            if (predicate(row) === true) {
+                updates.push(row);
+                return false;
+            }
+
+            return true;
+        });
+
+        queueUpdate(info, updates);
+        return updates;
     };
 
     return {
+        push,
+        filter,
+        getID,
+        update,
+        updateID,
+        remove
     };
 };
 
-queueUpdate = (name, rows) => {
-    let tableKey;
+queueUpdate = (info, rows, remove = false) => {
+    process.nextTick(() => {
+        let tableKey;
 
-    tableKey = `table:${name}`;
-    rows.forEach(row => {
-        writeLocal(`${tableKey}:${rowID}`, row);
+        tableKey = `table:${info.name}`;
+        rows.forEach(row => {
+            let {rowID} = row;
+            if (remove === true) {
+                removeLocal(`${tableKey}:${rowID}`);
+            } else {
+                writeLocal(`${tableKey}:${rowID}`, row);
+            }
+        });
+        writeLocal(tableKey, info);
     });
 };
 
@@ -78,6 +156,7 @@ readLocal = (key, def) => {
 writeLocal = (key, value) => {
     localStorage[key] = JSON.stringify(value);
 };
+removeLocal = key => localStorage.removeItem(key);
 
 tables = readLocal("microdb:tables", []);
 
@@ -205,6 +284,7 @@ createTable = name => {
 
 export default {
     table: name => createTable(name),
+    newTable: name => loadTable(name),
     get tableList () {
         return tables;
     }

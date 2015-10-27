@@ -38,7 +38,7 @@ window.specialMoment = (...args) => {
                 let intermediate;
 
                 intermediate = moment(momentObject)[funcName](...args);
-                if (intermediate._isAmomentObject === true) {
+                if (intermediate._isAMomentObject === true) {
                     intermediate = specialMoment(intermediate);
                 }
                 return intermediate;
