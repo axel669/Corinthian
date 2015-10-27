@@ -23,7 +23,7 @@ const Main = React.createClass({
     render () {
         return (
             <Screen title="Testing" subtext="WOAH" scrollable={true}>
-                <UI.CenterContent height={100}>
+                <UI.CenterContent height={100} width="70%" style={{backgroundColor: 'cyan'}}>
                     <div>Test content?</div>
                 </UI.CenterContent>
             </Screen>

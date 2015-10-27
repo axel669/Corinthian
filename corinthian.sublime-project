@@ -1,5 +1,22 @@
 {
     "folders": [
         {"path": "."}
+    ],
+    "build_systems": [
+        {
+            "name": "Build Library",
+            "shell_cmd": "gulp compile-js --source lib --dest corinthian",
+            "working_dir": "$project_path",
+            "variants": [
+                {
+                    "name": "Minified",
+                    "shell_cmd": "gulp compile-js-min --source lib --dest corinthian",
+                },
+                {
+                    "name": "Test Script",
+                    "shell_cmd": "gulp compile-js --source test --dest app --no-footer",
+                }
+            ]
+        }
     ]
 }

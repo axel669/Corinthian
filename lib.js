@@ -22,6 +22,35 @@ let App;
 let ScreenWrapper;
 let appContainer;
 
+window.specialMoment = (...args) => {
+    let momentProto;
+    let momentObject;
+
+    if (args.length > 0 && args[0]._isAmomentObject === true) {
+        momentObject = args[0];
+    } else {
+        momentObject = moment(...args);
+    }
+    momentProto = momentObject.constructor.prototype;
+    return Object.keys(momentProto).reduce(
+        (functional, funcName) => {
+            functional[funcName] = (...args) => {
+                let intermediate;
+
+                intermediate = moment(momentObject)[funcName](...args);
+                if (intermediate._isAmomentObject === true) {
+                    intermediate = specialMoment(intermediate);
+                }
+                return intermediate;
+            };
+            return functional;
+        },
+        {
+            get timeStamp() {return momentObject.valueOf();}
+        }
+    );
+};
+
 window.factotum = factotum;
 window.alertify = alertify;
 window.regex = XRegExp;
@@ -89,6 +118,7 @@ App.settings = Object.freeze({
         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
     }
 });
+App.storage = App.settings;
 
 App.session = Object.freeze({
     get (name, defaultValue) {
@@ -257,17 +287,17 @@ App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) =
         [width, height] = [height, width];
     }
 
-    if (typeof cordova !== 'undefined') {
-        width = '100%';
-        height = '100%';
-    } else {
-        width = `${width}px`;
-        height = `${height}px`;
-    }
+    // if (typeof cordova !== 'undefined') {
+    //     width = '100%';
+    //     height = '100%';
+    // } else {
+    //     width = `${width}px`;
+    //     height = `${height}px`;
+    // }
 
-    container = document.querySelector("#AppContainer");
-    container.style.width = width;
-    container.style.height = height;
+    // container = document.querySelector("#AppContainer");
+    // container.style.width = width;
+    // container.style.height = height;
 
     // ReactRouter.run(
     //     routes,

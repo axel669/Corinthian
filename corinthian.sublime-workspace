@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"moment",
+				"momentObject"
+			],
+			[
+				"momen",
+				"momentObject"
+			],
+			[
+				"mom",
+				"momentProto"
+			],
+			[
+				"brow",
+				"browserifyOptions"
+			],
+			[
 				"remove",
 				"removeID"
 			],
@@ -324,10 +340,6 @@
 				"WebkitBoxShadow"
 			],
 			[
-				"brow",
-				"browserified"
-			],
-			[
 				"Stop",
 				"Stopwatch"
 			],
@@ -502,26 +514,74 @@
 			[
 				"index",
 				"indexMap"
-			],
-			[
-				"de",
-				"destID"
-			],
-			[
-				"source",
-				"sourceLessons"
-			],
-			[
-				"sour",
-				"sourceKeys"
 			]
 		]
 	},
-	"build_system": "Compile App",
+	"build_system": "Build Library",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Build Library",
+					""
+				],
+				[
+					"Build Library",
+					"Minified"
+				],
+				[
+					"Build Library",
+					"Test Script"
+				],
+				[
+					"Packages/User/JSX.sublime-build",
+					""
+				]
+			],
+			[
+				"Build Library",
+				"Minified"
+			]
+		],
+		[
+			[
+				[
+					"Build Library",
+					""
+				],
+				[
+					"Build Library",
+					"Minified"
+				],
+				[
+					"Packages/User/JSX.sublime-build",
+					""
+				]
+			],
+			[
+				"Build Library",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Build Library",
+					""
+				],
+				[
+					"Packages/User/JSX.sublime-build",
+					""
+				]
+			],
+			[
+				"Build Library",
+				""
+			]
+		]
 	],
-	"build_varint": "",
+	"build_varint": "Minified",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -655,6 +715,18 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/compile.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/browserify/index.js",
+		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/compile.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/app.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/.sublime-gulp.cache",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.min.js",
+		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/secret cd.sublime-project",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/microdb.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/external/gesture.js",
@@ -673,7 +745,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/raisedbutton.js",
@@ -689,7 +760,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_button.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_radio.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/theme/_default.sass",
@@ -727,7 +797,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material-dark.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/style/material.css",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/crypto.es7.js",
@@ -773,16 +842,7 @@
 		"/C/Users/cmorgan2/Documents/programming/mobile/Corinthian/www/assets/scripts/fs.js",
 		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.302/app.js",
 		"/C/Users/cmorgan2/Documents/programming/js/base/external/zip.js",
-		"/C/Users/cmorgan2/Documents/programming/js/base/external/zip-ext.js",
-		"/C/Users/cmorgan2/Documents/programming/js/base/lib-source/fs.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/js/base/lib-source/ui.es7.jsx",
-		"/C/Source/BrainServer/BrainServer/tool/region-links.js",
-		"/C/Source/BrainServer/BrainServer/data/region-info.js",
-		"/C/Users/cmorgan2/Documents/programming/js/package.json",
-		"/C/Users/cmorgan2/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/cmorgan2/Documents/programming/js/gulpfile.js",
-		"/C/Users/cmorgan2/Documents/programming/js/test env/package.json",
-		"/C/Users/cmorgan2/Documents/programming/js/index.html"
+		"/C/Users/cmorgan2/Documents/programming/js/base/external/zip-ext.js"
 	],
 	"find":
 	{
@@ -800,6 +860,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"through",
+			"insertglobals",
+			"build time",
 			"atientList",
 			"XRegExp",
 			"fc",
@@ -924,10 +987,7 @@
 			"st\\d+",
 			"\"id\":\"(\\d+)\"",
 			",",
-			"-",
-			"handler",
-			"approuter",
-			"routehand"
+			"-"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1071,6 +1131,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 156.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0

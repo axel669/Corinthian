@@ -6,14 +6,14 @@ let CenterContent;
 
 CenterContent = React.createClass({
     render () {
-        let {vertical = 'center', horizontal = 'center', width = '100%', height = '100%'} = this.props;
+        let {vertical = 'center', horizontal = 'center', width = '100%', height = '100%', style = {}} = this.props;
 
         if (vertical === 'center') {
             vertical = 'middle';
         }
 
         return (
-            <div style={{width, height, display: 'table'}}>
+            <div style={{...style, width: '100%', maxWidth: width, margin: 'auto', height, display: 'table'}}>
                 <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical}}>
                     {this.props.children}
                 </div>

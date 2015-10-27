@@ -14,6 +14,55 @@ let createTable;
 let table;
 
 
+let loadTable;
+let queueUpdate;
+
+loadTable = name => {
+    let tableKey;
+    let rows;
+    let info;
+
+    let push;
+    let filter;
+    let getID;
+    let update;
+    let updateID;
+    let remove;
+    let removeID;
+
+    tableKey = `table:${name}`;
+    info = readLocal(tableKey);
+
+    rows = {};
+    for(let rowID of info.entries) {
+        rows[rowID] = readLocal(`${tableKey}:${rowID}`);
+    }
+
+    push = data => {
+        data = {
+            ...data,
+            rowID: info.nextID
+        };
+        info.nextID += 1;
+        info.entries.push(data.rowID);
+
+        queueUpdate(name, [data]);
+    };
+
+    return {
+    };
+};
+
+queueUpdate = (name, rows) => {
+    let tableKey;
+
+    tableKey = `table:${name}`;
+    rows.forEach(row => {
+        writeLocal(`${tableKey}:${rowID}`, row);
+    });
+};
+
+
 readLocal = (key, def) => {
     let value;
 
