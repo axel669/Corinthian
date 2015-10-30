@@ -168,7 +168,6 @@ ajaxBase = async (url, options = {}) => {
 
             try {
                 request.open(method, url, true);
-                console.log('timeout', timeout);
                 request.timeout = timeout;
                 Object.keys(headers).forEach(
                     header => request.setRequestHeader(header, headers[header])
