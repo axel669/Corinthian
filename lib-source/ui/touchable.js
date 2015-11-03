@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import fc from "lib-source/factotum.es7.js";
 import icons from "lib-source/ionic-icons.js";
 
@@ -13,15 +14,15 @@ Touchable = React.createClass({
         };
     },
     touchStart (evt) {
-        this.getDOMNode().classList.add("material-touch-active");
+        ReactDOM.findDOMNode(this).classList.add("material-touch-active");
         this.props.onTouchStart(evt);
     },
     touchEnd (evt) {
-        this.getDOMNode().classList.remove("material-touch-active");
+        ReactDOM.findDOMNode(this).classList.remove("material-touch-active");
         this.props.onTouchEnd(evt);
     },
     componentDidMount () {
-        this.getDOMNode().addEventListener(
+        ReactDOM.findDOMNode(this).addEventListener(
             'tap',
             evt => {
                 ::this.props.onTap(evt);

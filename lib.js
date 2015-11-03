@@ -1,20 +1,21 @@
-import {XRegExp} from "xregexp";
+// import {XRegExp} from "xregexp";
 import PubSub from "pubsub-js";
-import React from "react/addons";
+import React from "react";
+import ReactDOM from "react-dom";
 import * as ReactRouter from "react-router";
 import moment from "moment";
-import alertify from "external/alertify.js";
-import "external/zip.js";
-import "external/zip-ext.js";
+// import alertify from "external/alertify.js";
+// import "external/zip.js";
+// import "external/zip-ext.js";
 import "external/gesture.js";
 import UI from "lib-source/ui.es7.jsx";
 import factotum from "lib-source/factotum.es7.js";
-import {Zip} from "lib-source/zip.es7.js";
-import fs from "lib-source/fs.es7.js";
-import {Picture} from "lib-source/camera.es7.js";
+// import {Zip} from "lib-source/zip.es7.js";
+// import fs from "lib-source/fs.es7.js";
+// import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
-import crypto from "lib-source/crypto.es7.js";
-import microDB from "lib-source/microdb.js";
+// import crypto from "lib-source/crypto.es7.js";
+// import microDB from "lib-source/microdb.js";
 
 let {Router} = ReactRouter;
 
@@ -56,6 +57,7 @@ window.alertify = alertify;
 window.regex = XRegExp;
 window.PubSub = PubSub;
 window.React = React;
+window.ReactDOM = ReactDOM;
 window.ReactRouter = ReactRouter;
 window.UI = UI;
 window.fs = fs;
@@ -308,7 +310,7 @@ App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) =
     //         );
     //     }
     // );
-    appComponent = React.render(
+    appComponent = ReactDOM.render(
         <Router>{routes}</Router>,
         appContainer
     );

@@ -5,18 +5,18 @@
     "build_systems": [
         {
             "name": "Build Library",
-            "shell_cmd": "node test-compile.js --source lib --dest corinthian",
-            "working_dir": "$project_path"//,
-            // "variants": [
-            //     {
-            //         "name": "Minified",
-            //         "shell_cmd": "gulp compile-js-min --source lib --dest corinthian",
-            //     },
-            //     {
-            //         "name": "Test Script",
-            //         "shell_cmd": "gulp compile-js --source test --dest app --no-footer",
-            //     }
-            // ]
+            "shell_cmd": "node test-compile.js --source lib --output corinthian",
+            "working_dir": "$project_path",
+            "variants": [
+                {
+                    "name": "Minified",
+                    "shell_cmd": "node test-compile.js --source lib --output corinthian.min --minify",
+                },
+                {
+                    "name": "Test Script",
+                    "shell_cmd": "node test-compile.js --source test --output app",
+                }
+            ]
         }
     ]
 }

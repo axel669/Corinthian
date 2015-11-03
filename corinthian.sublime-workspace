@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Reac",
+				"ReactDOM"
+			],
+			[
 				"row",
 				"rowID"
 			],
@@ -510,10 +514,6 @@
 			[
 				"dest",
 				"destID"
-			],
-			[
-				"index",
-				"indexMap"
 			]
 		]
 	},
@@ -617,7 +617,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Minified",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -751,6 +751,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js",
 		"/C/Program Files/Sublime Text 3/test-compile.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/microdb.js",
@@ -758,7 +760,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/compile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/browserify/index.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
@@ -877,8 +878,7 @@
 		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainer/config.xml",
 		"/C/Users/cmorgan2/Documents/programming/mobile/Corinthian/www/assets/scripts/fs2.js",
 		"/C/Users/cmorgan2/Documents/programming/mobile/Corinthian/www/assets/scripts/fs.js",
-		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.302/app.js",
-		"/C/Users/cmorgan2/Documents/programming/js/base/external/zip.js"
+		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.302/app.js"
 	],
 	"find":
 	{

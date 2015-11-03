@@ -25,6 +25,7 @@ const Main = React.createClass({
             <Screen title="Testing" subtext="WOAH" scrollable={true}>
                 <UI.CenterContent height={100} width="70%" style={{backgroundColor: 'cyan'}}>
                     <div>Test content?</div>
+                    <UI.Button text="Working?" onTap={::console.log} />
                 </UI.CenterContent>
             </Screen>
         );

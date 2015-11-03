@@ -26,7 +26,7 @@ import Flexbox from "lib-source/ui/flexbox.js";
 import {VSplit, HSplit} from "lib-source/ui/split.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 
-React.initializeTouchEvents(true);
+// React.initializeTouchEvents(true);
 
 export default {
     Touchable,

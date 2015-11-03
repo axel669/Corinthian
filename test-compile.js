@@ -14,7 +14,7 @@ var uglify = require("uglify-js");
 var footer = "\nconsole.log('Build Time: ', '" + (new Date()).toString() + "');";
 
 var settings = {
-    entries: ["./lib.js"],
+    entries: ["./" + args.source + ".js"],
     debug: true,
     paths: ['.'],
     transform: [
@@ -41,14 +41,23 @@ var compiler = browserify(settings);
 compiler.exclude("ipc");
 console.log("compilng code...");
 compiler.bundle(function (err, buffer) {
+    if (args.minify === true) {
+        console.log("minifying code...");
+        var code = buffer.toString();
+        var minified = uglify.minify(code, {fromString: true});
+
+        buffer = minified.code;
+    }
+
     console.log("saving compiled code...");
     // buffer.write(footer);
+    var outputFile = args.output + ".js";
     fs.writeFile(
-        "corinthian.js",
+        outputFile,
         buffer,
         {encoding: 'utf8'},
         function () {
-            fs.appendFile("corinthian.js", footer, {encoding: 'utf8'});
+            fs.appendFile(outputFile, footer, {encoding: 'utf8'});
             console.log("Done")
         }
     );
