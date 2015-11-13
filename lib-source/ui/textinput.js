@@ -22,7 +22,7 @@ TextInput = React.createClass({
         this.props.onChange(evt.target.value);
     },
     focus () {
-        this.refs.input.getDOMNode().focus();
+        this.refs.input.focus();
     },
     render () {
         let {label, placeholder, value, icon, iconStyle, type, fillWidth} = this.props;

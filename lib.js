@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactRouter from "react-router";
 import moment from "moment";
-// import alertify from "external/alertify.js";
+import alertify from "external/alertify.js";
 // import "external/zip.js";
 // import "external/zip-ext.js";
 import "external/gesture.js";
@@ -54,17 +54,17 @@ window.specialMoment = (...args) => {
 
 window.factotum = factotum;
 window.alertify = alertify;
-window.regex = XRegExp;
+// window.regex = XRegExp;
 window.PubSub = PubSub;
 window.React = React;
 window.ReactDOM = ReactDOM;
 window.ReactRouter = ReactRouter;
 window.UI = UI;
-window.fs = fs;
-window.Picture = Picture;
+// window.fs = fs;
+// window.Picture = Picture;
 window.ionic = icons;
-window.security = crypto;
-window.microDB = microDB;
+// window.security = crypto;
+// window.microDB = microDB;
 window.moment = moment;
 
 window.asyncChain = async funcs => {
@@ -82,8 +82,8 @@ window.asyncChain = async funcs => {
     );
 };
 
-zip.download = Zip.download;
-zip.readArrayBuffer = Zip.readArrayBuffer;
+// zip.download = Zip.download;
+// zip.readArrayBuffer = Zip.readArrayBuffer;
 
 App = {
     transitionTime: 300

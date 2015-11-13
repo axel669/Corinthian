@@ -9,7 +9,10 @@ let Wrapper = React.createClass({
 
 const Main = React.createClass({
     getInitialState () {
-        return {active: true};
+        return {
+            check: true,
+            selectedIndex: 0
+        };
     },
     updateSetting (name) {
         return value => {
@@ -23,9 +26,18 @@ const Main = React.createClass({
     render () {
         return (
             <Screen title="Testing" subtext="WOAH" scrollable={true}>
-                <UI.CenterContent height={100} width="70%" style={{backgroundColor: 'cyan'}}>
+                <UI.CenterContent height={100} width={500}>
                     <div>Test content?</div>
                     <UI.Button text="Working?" onTap={::console.log} />
+                    <UI.Card>
+                        Testing
+                    </UI.Card>
+                    <UI.Checkbox text="Checkbox" checked={this.state.check} onChange={check => this.setState({check})} />
+
+                    <UI.Combobox selectedIndex={this.state.selectedIndex} onChange={selectedIndex => this.setState({selectedIndex})}>
+                        <UI.Option text="Test" />
+                        <UI.Option text="Testing" />
+                    </UI.Combobox>
                 </UI.CenterContent>
             </Screen>
         );

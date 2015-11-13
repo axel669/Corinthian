@@ -4,10 +4,12 @@ import icons from "lib-source/ionic-icons.js";
 
 let Card;
 
-Card = React.createClass({
-    render () {
-        return <div className="material-card" style={this.props.style || null}>{this.props.children}</div>;
-    }
-});
+// Card = React.createClass({
+//     render () {
+//         return <div className="material-card" style={this.props.style || null}>{this.props.children}</div>;
+//     }
+// });
+
+Card = ({style = null, children}) => <div className="material-card" style={style}>{children}</div>;
 
 export default Card;

@@ -4,22 +4,36 @@ import icons from "lib-source/ionic-icons.js";
 
 let CenterContent;
 
-CenterContent = React.createClass({
-    render () {
-        let {vertical = 'center', horizontal = 'center', width = '100%', height = '100%', style = {}} = this.props;
+// CenterContent = React.createClass({
+//     render () {
+//         let {vertical = 'center', horizontal = 'center', width = '100%', height = '100%', style = {}} = this.props;
 
-        if (vertical === 'center') {
+//         if (vertical === 'center') {
+//             vertical = 'middle';
+//         }
+
+//         return (
+//             <div style={{...style, width: '100%', maxWidth: width, margin: 'auto', height, display: 'table'}}>
+//                 <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical}}>
+//                     {this.props.children}
+//                 </div>
+//             </div>
+//         );
+//     }
+// });
+
+CenterContent = ({vertical = 'center', horizontal = 'center', width = '100%', height = '100%', style = {}, children} = {}) => {
+    if (vertical === 'center') {
             vertical = 'middle';
-        }
-
-        return (
-            <div style={{...style, width: '100%', maxWidth: width, margin: 'auto', height, display: 'table'}}>
-                <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical}}>
-                    {this.props.children}
-                </div>
-            </div>
-        );
     }
-});
+
+    return (
+        <div style={{...style, width: '100%', maxWidth: width, margin: 'auto', height, display: 'table'}}>
+            <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical}}>
+                {children}
+            </div>
+        </div>
+    );
+};
 
 export default CenterContent;
