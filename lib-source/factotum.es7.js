@@ -173,7 +173,11 @@ ajaxBase = async (url, options = {}) => {
                     header => request.setRequestHeader(header, headers[header])
                 );
                 if (post !== null) {
-                    request.setRequestHeader("Content-Type", "application/json");
+                    if (formData === null) {
+                        request.setRequestHeader("Content-Type", "application/json");
+                    } else {
+                        // request.setRequestHeader("Content-Type", "multipart/form-data");
+                    }
                 }
                 request.send(post);
             } catch(error) {

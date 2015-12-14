@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"bab",
+				"babelTransform"
+			],
+			[
+				"current",
+				"currentNode"
+			],
+			[
 				"ion",
 				"ion-android-checkbox-outline-blank"
 			],
@@ -506,14 +514,6 @@
 			[
 				"mar",
 				"markerHeight"
-			],
-			[
-				"mark",
-				"markerWidth"
-			],
-			[
-				"for",
-				"forceGraph"
 			]
 		]
 	},
@@ -677,7 +677,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Stripped",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -811,26 +811,39 @@
 	},
 	"file_history":
 	[
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/material.scss",
+		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-runtime/helpers/typeof.js",
+		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-preset-stage-0/node_modules/babel-preset-stage-1/node_modules/babel-preset-stage-2/node_modules/babel-preset-stage-3/package.json",
+		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-preset-stage-0/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/min-test.js",
+		"/C/Users/Axel1/Documents/programming/js/test/compiler/test-es7.js",
+		"/C/Users/Axel1/Documents/programming/js/test/compiler/test-compile.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/compiler.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/src/stringify.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/node_modules/html-minifier/cli.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/index.js",
+		"/C/Users/Axel1/Documents/programming/js/test/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_icon-area.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_checkbox.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/card.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.min.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/index.html",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js",
 		"/C/Program Files/Sublime Text 3/test-compile.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/microdb.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/browserify/index.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/compile.js",
@@ -919,26 +932,13 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material.css",
 		"/C/Users/Axel1/AppData/Roaming/Sublime Text 3/Packages/tern_for_sublime/Tern.sublime-settings",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/camera.es7.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
 		"/C/inetpub/wwwroot/page.xaml",
 		"/C/inetpub/wwwroot/iisstart.htm",
 		"/C/inetpub/wwwroot/datasource.js",
 		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/datasource.js",
 		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/page.xaml",
-		"/C/Source/Skillsbook/Core/CARD.Core.Utilities/CARD.Core.Utilities.csproj",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/.gitignore",
-		"/C/Program Files/Sublime Text 3/.gitignore",
-		"/C/Users/cmorgan2/Documents/programming/js/base/lib.js",
-		"/C/Users/cmorgan2/Documents/programming/js/base/test.js",
-		"/C/Users/cmorgan2/Documents/programming/js/base/app.jsx",
-		"/C/Users/cmorgan2/Documents/programming/js/base/index.html",
-		"/C/Users/cmorgan2/Documents/programming/js/base/lib-source/zip.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainer/platforms/android/AndroidManifest.xml",
-		"/C/Users/cmorgan2/Documents/programming/js/base/style/material.css",
-		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainer/www/manifest.mobile.json",
-		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainer/www/manifest.json",
-		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainer/config.xml"
+		"/C/Source/Skillsbook/Core/CARD.Core.Utilities/CARD.Core.Utilities.csproj"
 	],
 	"find":
 	{
@@ -956,6 +956,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"---dest",
+			"-output",
+			"babel-runtime/helpers/asyncToGenerator",
 			"zip",
 			"compile.js",
 			":",
@@ -1080,10 +1083,7 @@
 			"}\n",
 			"\\{.*\\}",
 			"class",
-			".\\w+\\{(fill:[^,]+).*",
-			"fill:(#[\\dA-F]{6});",
-			"\\\"st\\d+\\\"",
-			"st\\d+"
+			".\\w+\\{(fill:[^,]+).*"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1091,6 +1091,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"--dest",
 			"compile.js --type js",
 			" =",
 			"",

@@ -29,7 +29,7 @@ CenterContent = ({vertical = 'center', horizontal = 'center', width = '100%', he
 
     return (
         <div style={{...style, width: '100%', maxWidth: width, margin: 'auto', height, display: 'table'}}>
-            <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical}}>
+            <div style={{display: 'table-cell', textAlign: horizontal, verticalAlign: vertical, maxWidth: width}}>
                 {children}
             </div>
         </div>

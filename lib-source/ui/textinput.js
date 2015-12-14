@@ -25,7 +25,7 @@ TextInput = React.createClass({
         this.refs.input.focus();
     },
     render () {
-        let {label, placeholder, value, icon, iconStyle, type, fillWidth} = this.props;
+        let {label, placeholder, value, icon, iconStyle, type, fillWidth, align = 'left'} = this.props;
         let inputStyle;
 
         if (label !== null) {
@@ -33,7 +33,8 @@ TextInput = React.createClass({
         }
 
         inputStyle = {
-            width: fillWidth
+            width: fillWidth,
+            textAlign: align
         };
 
         if (icon !== null) {

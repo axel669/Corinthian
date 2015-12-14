@@ -30,8 +30,17 @@ Screen = React.createClass({
             top: (title !== null) ? 50 : 0,
             bottom: (footer !== null) ? 30 : 0,
             left: 0,
-            right: 0
+            right: 0,
+            overflowY: 'auto'
         };
+
+        if (/iP(hone|ad|od)/.test(navigator.platform.toString()) === true) {
+            contentStyle = {
+                ...contentStyle,
+                overflowY: 'scroll',
+                WebkitOverflowScrolling: 'touch'
+            };
+        }
 
         if (scrollable === false) {
             content = this.props.children;

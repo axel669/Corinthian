@@ -1,3 +1,9 @@
+var log = function () {
+    if (window.debugMode === true) {
+        console.log.apply(console, arguments);
+    }
+};
+
 //  Class-free design for custom gesture creation
 var gesture = (function () {
     "use strict";
@@ -285,12 +291,28 @@ var gesture = (function () {
                 evt.changedTouches,
                 function (touch) {
                     var touchData, startPos, tagName;
+                    var isEditable;
+                    var currentNode;
 
                     touchData = TouchData(touch, evt);
                     startPos = touchStartPosition[touchData.ID];
                     tagName = touchData.target.nodeName.toLowerCase();
 
-                    if (["input", "textarea", "select"].indexOf(tagName) === -1 && evt.cancelable === true) {
+                    isEditable = false;
+                    currentNode = touchData.target;
+                    while (true) {
+                        log(currentNode);
+                        if (currentNode.getAttribute("contenteditable") === 'true') {
+                            isEditable = true;
+                            break;
+                        }
+                        currentNode = currentNode.parentNode;
+                        if (currentNode === document) {
+                            break;
+                        }
+                    }
+
+                    if (["input", "textarea", "select"].indexOf(tagName) === -1 && isEditable === false && evt.cancelable === true) {
                         evt.preventDefault();
                     }
 

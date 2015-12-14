@@ -3,6 +3,7 @@ import PubSub from "pubsub-js";
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactRouter from "react-router";
+import {createHashHistory} from "history";
 import moment from "moment";
 import alertify from "external/alertify.js";
 // import "external/zip.js";
@@ -310,8 +311,9 @@ App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) =
     //         );
     //     }
     // );
+    let history = createHashHistory({queryKey: false});
     appComponent = ReactDOM.render(
-        <Router>{routes}</Router>,
+        <Router history={history}>{routes}</Router>,
         appContainer
     );
 };

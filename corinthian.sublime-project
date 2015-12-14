@@ -5,20 +5,20 @@
     "build_systems": [
         {
             "name": "Build Library",
-            "shell_cmd": "node test-compile.js --type js --source lib --output corinthian --build-time",
+            "shell_cmd": "node test-compile.js --type js --source lib --dest corinthian --build-time",
             "working_dir": "$project_path",
             "variants": [
                 {
                     "name": "Minified",
-                    "shell_cmd": "node test-compile.js --type js --source lib --output corinthian.min --minify --build-time",
+                    "shell_cmd": "node test-compile.js --type js --source lib --dest corinthian.min --minify --build-time",
                 },
                 {
                     "name": "Test Script",
-                    "shell_cmd": "node test-compile.js --type js --source test --output app",
+                    "shell_cmd": "node test-compile.js --type js --source test --dest app",
                 },
                 {
                     "name": "Stripped",
-                    "shell_cmd": "node test-compile.js --type js --source lib --output corinthian.stripped --minify --build-time"
+                    "shell_cmd": "node test-compile.js --type js --source lib --dest corinthian.stripped --minify --build-time"
                 },
                 {
                     "name": "CSS",

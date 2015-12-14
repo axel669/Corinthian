@@ -28,7 +28,7 @@ Flexbox = React.createClass({
 FlexboxItem = React.createClass({
     render () {
         return (
-            <div style={{WebkitFlex: `1 0 ${this.props.width}`, position: 'relative'}}>
+            <div style={{WebkitFlex: `1 0 ${this.props.width}`, flex: `1 0 ${this.props.width}`, position: 'relative'}}>
                 {this.props.children}
             </div>
         );
