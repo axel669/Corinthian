@@ -16,8 +16,7 @@ Screen = React.createClass({
             back: false,
             contentStyle: {},
             scrollable: false,
-            subtext: null,
-
+            subtext: null
         };
     },
     render () {
@@ -83,5 +82,10 @@ Screen = React.createClass({
         );
     }
 });
+
+// const Screen = ({chidren, title = null}) => {
+//     return (
+//     );
+// };
 
 export default Screen;

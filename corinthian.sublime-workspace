@@ -543,6 +543,50 @@
 					"CSS"
 				],
 				[
+					"Packages/User/CoffeeScript.sublime-build",
+					""
+				],
+				[
+					"Packages/User/JS.sublime-build",
+					""
+				],
+				[
+					"Packages/User/JS.sublime-build",
+					"Run JSX"
+				],
+				[
+					"Packages/User/JS.sublime-build",
+					"Build JSX"
+				]
+			],
+			[
+				"Build Library",
+				"Test Script"
+			]
+		],
+		[
+			[
+				[
+					"Build Library",
+					""
+				],
+				[
+					"Build Library",
+					"Minified"
+				],
+				[
+					"Build Library",
+					"Test Script"
+				],
+				[
+					"Build Library",
+					"Stripped"
+				],
+				[
+					"Build Library",
+					"CSS"
+				],
+				[
 					"Packages/User/JSX.sublime-build",
 					""
 				]
@@ -677,7 +721,7 @@
 			]
 		]
 	],
-	"build_varint": "Stripped",
+	"build_varint": "Test Script",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -811,6 +855,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/cmorgan2/Documents/programming/tunnel",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/material.scss",
@@ -855,7 +901,6 @@
 		"/C/Users/cmorgan2/AppData/Roaming/Skype/My Skype Received Files/.eslintrc",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/gulpfile.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
@@ -937,8 +982,7 @@
 		"/C/inetpub/wwwroot/iisstart.htm",
 		"/C/inetpub/wwwroot/datasource.js",
 		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/datasource.js",
-		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/page.xaml",
-		"/C/Source/Skillsbook/Core/CARD.Core.Utilities/CARD.Core.Utilities.csproj"
+		"/C/Source/Skillsbook/SkillsbookAndroid/CARD.Skillsbook.Api/Content/page.xaml"
 	],
 	"find":
 	{

@@ -26,19 +26,7 @@ const Main = React.createClass({
     render () {
         return (
             <Screen title="Testing" subtext="WOAH" scrollable={true}>
-                <UI.CenterContent height={100} width={500}>
-                    <div>Test content?</div>
-                    <UI.Button text="Working?" onTap={::console.log} />
-                    <UI.Card>
-                        Testing
-                    </UI.Card>
-                    <UI.Checkbox text="Checkbox" checked={this.state.check} onChange={check => this.setState({check})} />
-
-                    <UI.Combobox selectedIndex={this.state.selectedIndex} onChange={selectedIndex => this.setState({selectedIndex})}>
-                        <UI.Option text="Test" />
-                        <UI.Option text="Testing" />
-                    </UI.Combobox>
-                </UI.CenterContent>
+                {factotum.range(40, n => <div>{n}</div>)}
             </Screen>
         );
     }
