@@ -1,39 +1,36 @@
-let arraySlice;
-let arrayEach;
-let ajaxBase;
+// let arraySlice;
+// let arrayEach;
+// let ajaxBase;
 
-let remove;
-let range;
-let indexOf;
-let each;
-let find;
-let group;
-let ajax;
+// let remove;
+// let range;
+// let indexOf;
+// let each;
+// let find;
+// let group;
+// let ajax;
 
-arraySlice = Array.prototype.slice;
-arrayEach = Array.prototype.forEach;
+const arraySlice = Array.prototype.slice;
+const arrayEach = Array.prototype.forEach;
 
-if (Object.hasOwnProperty('assign') === false) {
-    Object.assign = (dest, ...sources) => {
-        sources.forEach(source =>
-            Object.keys(source).forEach(key =>
-                dest[key] = source[key]
-            )
-        );
+// if (Object.hasOwnProperty('assign') === false) {
+//     Object.assign = (dest, ...sources) => {
+//         sources.forEach(source =>
+//             Object.keys(source).forEach(key =>
+//                 dest[key] = source[key]
+//             )
+//         );
 
-        return dest;
-    };
-}
+//         return dest;
+//     };
+// }
 
-remove = (iterable, index, count) => {
-    count = count || 1;
-    return [
-        ...iterable::arraySlice(0, index),
-        ...iterable::arraySlice(index + count)
-    ];
-};
+const remove = (iterable, index, count = 1) => [
+    ...iterable::arraySlice(0, index),
+    ...iterable::arraySlice(index + count)
+];
 
-range = (size, value) => {
+const range = (size, value) => {
     let valueFunc;
     let array;
     let index;
@@ -66,44 +63,76 @@ range = (size, value) => {
     return array;
 };
 
-indexOf = (iterable, testFunc, start) => {
-    let index;
-    let length;
-
-    index = start || 0;
-    length = iterable.length;
-
-    while (true) {
-        if (index === length) {
-            break;
-        }
-
-        if (testFunc(iterable[index]) === true) {
-            return index;
-        }
-
-        index += 1;
+const count = ({from = 0, to, increment = 1} = {}, loop = null) => {
+    let reverse;
+    if (loop === null) {
+        throw new Error("Cannot call count without a function to execute");
     }
 
-    return -1;
+    if (increment === 0) {
+        throw new Error("Increment for count must be non-zero");
+    }
+
+    reverse = false;
+    if (increment < 0) {
+        increment = -increment;
+        reverse = true;
+        [to, from] = [from, to];
+    }
+
+    while (true) {
+        if (reverse === true) {
+            loop(to - from);
+        } else {
+            loop(from);
+        }
+
+        from += increment;
+
+        if (from >= to) {
+            break;
+        }
+    }
 };
 
-each = (iterable, func) => {
+// const indexOf = (iterable, testFunc, start = 0) => {
+//     let index;
+//     let length;
+
+//     index = start;
+//     length = iterable.length;
+
+//     while (true) {
+//         if (index === length) {
+//             break;
+//         }
+
+//         if (testFunc(iterable[index]) === true) {
+//             return index;
+//         }
+
+//         index += 1;
+//     }
+
+//     return -1;
+// };
+
+const each = (iterable, func) => {
     iterable::arrayEach(func);
 };
 
-find = (iterable, testFunc, start) => {
-    let index;
+// find = (iterable, testFunc, start) => {
+//     let index;
 
-    index = indexOf(iterable, testFunc, start);
-    if (index === -1) {
-        return;
-    }
+//     index = indexOf(iterable, testFunc, start);
+//     if (index === -1) {
+//         return;
+//     }
 
-    return iterable[index];
-};
+//     return iterable[index];
+// };
 
-group = (iterable, keyFunc) => {
+const group = (iterable, keyFunc) => {
     let groups;
 
     groups = {};
@@ -124,8 +153,7 @@ group = (iterable, keyFunc) => {
     return groups;
 };
 
-ajaxBase = async (url, options = {}) => {
-    let {post = null, headers = {}, formData = null, timeout = 0, type = null} = options;
+const ajax = async (url, {post = null, headers = {}, formData = null, timeout = 0, type = null} = {}) => {
     let method;
     let request;
 
@@ -154,12 +182,17 @@ ajaxBase = async (url, options = {}) => {
                         resolve({
                             status: request.status,
                             statusText: request.statusText,
-                            response: request.response
+                            response: request.response,
+                            request
                         });
                     } else {
                         reject(request);
                     }
                 }
+            );
+            request.addEventListener(
+                "error",
+                reject
             );
             request.addEventListener(
                 "timeout",
@@ -175,41 +208,20 @@ ajaxBase = async (url, options = {}) => {
                 if (post !== null) {
                     if (formData === null) {
                         request.setRequestHeader("Content-Type", "application/json");
-                    } else {
-                        // request.setRequestHeader("Content-Type", "multipart/form-data");
                     }
                 }
                 request.send(post);
-            } catch(error) {
+            } catch (error) {
                 reject(error);
             }
         }
     );
 };
-ajax = {
-    get (url, options) {
-        return ajaxBase(url, options);
-    },
-    post (url, post, options = {}) {
-        return ajaxBase(url, {post, ...options});
-    }
-};
-
-export {
+export default Object.freeze({
     remove,
     range,
-    indexOf,
     each,
-    find,
     group,
-    ajax
-};
-export default {
-    remove,
-    range,
-    indexOf,
-    each,
-    find,
-    group,
-    ajax
-};
+    ajax,
+    count
+});

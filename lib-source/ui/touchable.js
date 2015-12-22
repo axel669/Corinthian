@@ -14,11 +14,11 @@ Touchable = React.createClass({
         };
     },
     touchStart (evt) {
-        ReactDOM.findDOMNode(this).classList.add("material-touch-active");
+        ReactDOM.findDOMNode(this).classList.add("cor-touch-active");
         this.props.onTouchStart(evt);
     },
     touchEnd (evt) {
-        ReactDOM.findDOMNode(this).classList.remove("material-touch-active");
+        ReactDOM.findDOMNode(this).classList.remove("cor-touch-active");
         this.props.onTouchEnd(evt);
     },
     componentDidMount () {

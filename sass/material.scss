@@ -39,6 +39,19 @@ body, html {
     @include prefix(transform, translate3d(0, 0, 0));
 }
 
+.cor-center-content {
+    display: table;
+    white-space: pre-wrap;
+}
+.cor-center-content > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.cor-icon {
+    font-family: "Ionicons";
+}
+
 @import "components/button";
 @import "components/card";
 @import "components/checkbox";

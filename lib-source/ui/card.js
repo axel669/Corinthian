@@ -10,6 +10,6 @@ let Card;
 //     }
 // });
 
-Card = ({style = null, children}) => <div className="material-card" style={style}>{children}</div>;
+Card = ({style = null, children}) => <div className="cor-card" style={style}>{children}</div>;
 
 export default Card;

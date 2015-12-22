@@ -3,8 +3,9 @@ import fc from "lib-source/factotum.es7.js";
 import icons from "lib-source/ionic-icons.js";
 
 import Touchable from "lib-source/ui/touchable.js";
+import CenterContent from "lib-source/ui/centercontent.js";
 
-let Button;
+// let Button;
 
 // Button = React.createClass({
 //     getDefaultProps () {
@@ -74,67 +75,49 @@ let Button;
 //     }
 // });
 
-Button = props => {
-    let {
-        onTap = () => {},
-        color = null,
-        textColor = null,
-        shadow = false,
-        style = {},
-        className = "",
-        icon = null,
-        fillContainer = false,
-        width = null,
-        height = null,
-        overrideMinHeight = false,
-        children,
-        text
-    } = props;
+const Button = ({onTap = () => {}, color = null, textColor = null, width = null, height = null, fill = false, raised = false, padding = null, cornerRadius = null, text} = {}) => {
+    let style;
     let textStyle;
+    let className;
+    let shadow;
 
-    if (shadow === true) {
-        shadow = "0px 1px 3px rgba(0, 0, 0, 0.35)";
+    if (raised === true) {
+        shadow = "1px 2px 5px rgba(0, 0, 0, 0.6)";
     } else {
         shadow = null;
     }
 
-    className = `material-button ${className}`.trim();
+    className = "cor-button";
+    if (raised === true) {
+        className += " raised";
+    }
+
     style = {
-        ...style,
         backgroundColor: color,
         color: textColor,
         WebkitBoxShadow: shadow,
-        width,
-        height
+        MozBoxShadow: shadow,
+        boxShadow: shadow,
+        borderRadius: cornerRadius,
+        width
     };
-    textStyle = {height};
-    if (overrideMinHeight === true) {
-        style.minHeight = 0;
-        textStyle.minHeight = 0;
-    }
 
-    if (fillContainer === true) {
+    if (fill === true) {
         style = {
             ...style,
-            margin: 0,
-            height: '100%'
+            margin: 0
         };
         height = '100%';
     }
-
-    if (icon !== null) {
-        style.fontFamily = "Ionicons";
-        text = icons[icon];
-    }
+    textStyle = {padding};
 
     return (
         <Touchable component="div" className={className} style={style} onTap={onTap}>
-            <div className="material-button-overlay" />
-            <div className="material-button-text" style={textStyle}>
-                <div style={{display: 'table-cell', verticalAlign: 'middle'}}>
-                    {text}
-                </div>
-            </div>
+            <div className="cor-button-overlay" />
+            {/*<div className="cor-button-text cor-center-content" style={textStyle}>
+                <div>{text}</div>
+            </div>*/}
+            <CenterContent className="cor-button-text" style={textStyle} height={height}>{text}</CenterContent>
         </Touchable>
     );
 };

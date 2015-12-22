@@ -31,11 +31,20 @@ body, html {
   -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0); }
 
-.material-button {
-  border-radius: 2px;
+.cor-center-content {
+  display: table;
+  white-space: pre-wrap; }
+
+.cor-center-content > div {
+  display: table-cell;
+  vertical-align: middle; }
+
+.cor-icon {
+  font-family: "Ionicons"; }
+
+.cor-button {
   position: relative;
   text-align: center;
-  min-height: 40px;
   font-size: 18px;
   margin: 4px;
   font-weight: none;
@@ -45,29 +54,29 @@ body, html {
   color: #000;
   white-space: pre; }
 
-.material-button-text {
-  display: table;
+.cor-button-text {
   width: 100%;
-  min-height: 40px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  white-space: pre-wrap; }
+  padding-top: 5px;
+  padding-bottom: 5px; }
 
-.material-button-overlay {
-  width: 100%;
-  height: 100%;
+.cor-button-overlay {
   position: absolute;
   top: 0px;
-  left: 0px; }
+  left: 0px;
+  bottom: 0px;
+  right: 0px; }
 
-.material-touch-active > .material-button-overlay {
-  background-color: rgba(0, 0, 0, 0.1); }
+.desktop .cor-button-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.07); }
 
-.material-button.raised {
+.cor-touch-active > .cor-button-overlay, .desktop .cor-touch-active > .cor-button-overlay {
+  background-color: rgba(0, 0, 0, 0.2); }
+
+.cor-button.raised {
   background-color: #2FB1DF;
   color: white; }
 
-.material-card {
+.cor-card {
   margin: 10px;
   padding: 7px;
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
@@ -115,14 +124,16 @@ body, html {
   padding: 0px;
   margin: 0px; }
 
-.material-flexbox {
+.cor-flexbox {
   display: -webkit-flex;
-  -webkit-flex-wrap: wrap; }
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
 
-.material-grid {
+.cor-grid {
   position: relative; }
 
-.material-grid-item {
+.cor-grid-item {
   position: absolute; }
 
 .material-input {
@@ -334,6 +345,17 @@ input[type=range]::-webkit-slider-thumb {
   color: white;
   margin-left: 50px; }
 
+.cor-screen-title {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  color: white;
+  background-color: #2FB1DF;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  z-index: +100; }
+
 .material-title {
   position: absolute;
   top: 0px;
@@ -344,7 +366,7 @@ input[type=range]::-webkit-slider-thumb {
   font-size: 20px;
   color: white;
   background-color: #2FB1DF;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.45);
   z-index: +10;
   display: table; }
 

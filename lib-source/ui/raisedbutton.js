@@ -4,27 +4,36 @@ import icons from "lib-source/ionic-icons.js";
 
 import Button from "lib-source/ui/button.js";
 
-let RaisedButton;
+// let RaisedButton;
 
-RaisedButton = React.createClass({
-    statics: {
-        propValues: {
-            shadow: true,
-            color: null,
-            textColor: null
-        }
-    },
-    render () {
-        let props;
+// RaisedButton = React.createClass({
+//     statics: {
+//         propValues: {
+//             shadow: true,
+//             color: null,
+//             textColor: null
+//         }
+//     },
+//     render () {
+//         let props;
 
-        props = {
-            ...this.props,
-            shadow: true,
-            className: `${this.props.className || ""} raised`
-        };
+//         props = {
+//             ...this.props,
+//             shadow: true,
+//             className: `${this.props.className || ""} raised`
+//         };
 
-        return <Button {...props} />;
-    }
-});
+//         return <Button {...props} />;
+//     }
+// });
+
+const RaisedButton = (props = {}) => {
+    props = {
+        ...props,
+        shadow: true
+    };
+
+    return <Button {...props} />;
+};
 
 export default RaisedButton;

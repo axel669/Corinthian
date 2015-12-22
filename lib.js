@@ -1,3 +1,5 @@
+import "babel-polyfill";
+
 import {XRegExp} from "xregexp";
 import PubSub from "pubsub-js";
 import React from "react";
@@ -5,17 +7,18 @@ import ReactDOM from "react-dom";
 import * as ReactRouter from "react-router";
 import {createHashHistory} from "history";
 import moment from "moment";
-import alertify from "external/alertify.js";
+// import alertify from "external/alertify.js";
 // import "external/zip.js";
 // import "external/zip-ext.js";
-import "external/gesture.js";
+// import "external/gesture.js";
 import UI from "lib-source/ui.es7.jsx";
 import factotum from "lib-source/factotum.es7.js";
-import {Zip} from "lib-source/zip.es7.js";
+// import {Zip} from "lib-source/zip.es7.js";
 import fs from "lib-source/fs.es7.js";
 import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
+import "lib-source/gesture.es7.js";
 // import microDB from "lib-source/microdb.js";
 
 let {Router} = ReactRouter;
@@ -24,7 +27,7 @@ let App;
 let ScreenWrapper;
 let appContainer;
 
-window.specialMoment = (...args) => {
+window.moment = (...args) => {
     let momentProto;
     let momentObject;
 
@@ -54,19 +57,19 @@ window.specialMoment = (...args) => {
 };
 
 window.factotum = factotum;
-window.alertify = alertify;
-// window.regex = XRegExp;
+// window.alertify = alertify;
+window.regex = XRegExp;
 window.PubSub = PubSub;
 window.React = React;
 window.ReactDOM = ReactDOM;
 window.ReactRouter = ReactRouter;
 window.UI = UI;
-// window.fs = fs;
-// window.Picture = Picture;
+window.fs = fs;
+window.Picture = Picture;
 window.ionic = icons;
 // window.security = crypto;
 // window.microDB = microDB;
-window.moment = moment;
+// window.moment = moment;
 
 // zip.download = Zip.download;
 // zip.readArrayBuffer = Zip.readArrayBuffer;
@@ -262,7 +265,10 @@ App.session = Object.freeze({
 
 let appComponent;
 appContainer = document.querySelector("#AppContainer");
-App.start = (routes, {hiddenStatusBar = false, orientation = 'portrait'} = {}) => {
+App.start = (routes, {hiddenStatusBar = false} = {}) => {
+    if (typeof orientation === 'undefined') {
+        appContainer.className = "desktop";
+    }
     // let bbox;
     // let container;
 

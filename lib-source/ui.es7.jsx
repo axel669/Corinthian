@@ -5,6 +5,7 @@ import Touchable from "lib-source/ui/touchable.js";
 import Button from "lib-source/ui/button.js";
 import RaisedButton from "lib-source/ui/raisedbutton.js";
 import ImageButton from "lib-source/ui/imagebutton.js";
+import IconButton from "lib-source/ui/iconbutton.js";
 
 import Image from "lib-source/ui/image.js";
 import Spinner from "lib-source/ui/spinner.js";
@@ -28,11 +29,12 @@ import CenterContent from "lib-source/ui/centercontent.js";
 
 // React.initializeTouchEvents(true);
 
-export default {
+export default Object.freeze({
     Touchable,
     Button,
     RaisedButton,
     ImageButton,
+    IconButton,
 
     Image,
     Spinner,
@@ -54,5 +56,7 @@ export default {
     Flexbox,
     VSplit,
     HSplit,
-    CenterContent
-};
+    CenterContent,
+
+    Item: props => null
+});

@@ -83,7 +83,7 @@ switch (args.type) {
                     if (args.buildTime === true) {
                         fs.appendFile(outputFile, footer, {encoding: 'utf8'});
                     }
-                    console.log("Done")
+                    console.log("Finished at", new Date());
                 }
             );
         }).on(
@@ -101,6 +101,11 @@ switch (args.type) {
                 file: "sass/material.scss"
             },
             function (err, result) {
+                if (err !== null) {
+                    console.log(err.message);
+                    console.log(err.file, "@line", err.line, 'column', err.column);
+                    return;
+                }
                 console.log("saving css...");
                 fs.writeFile(
                     "sass/material.css",
