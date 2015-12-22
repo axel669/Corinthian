@@ -114,9 +114,6 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
     return (
         <Touchable component="div" className={className} style={style} onTap={onTap}>
             <div className="cor-button-overlay" />
-            {/*<div className="cor-button-text cor-center-content" style={textStyle}>
-                <div>{text}</div>
-            </div>*/}
             <CenterContent className="cor-button-text" style={textStyle} height={height}>{text}</CenterContent>
         </Touchable>
     );

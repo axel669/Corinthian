@@ -11,7 +11,7 @@ import Image from "lib-source/ui/image.js";
 import Spinner from "lib-source/ui/spinner.js";
 
 import Checkbox from "lib-source/ui/checkbox.js";
-import {RadioGroup, RadioItem} from "lib-source/ui/radio.js";
+import RadioGroup from "lib-source/ui/radio.js";
 
 import TextInput from "lib-source/ui/textinput.js";
 import Switch from "lib-source/ui/switch.js";
@@ -41,12 +41,10 @@ export default Object.freeze({
 
     Checkbox,
     RadioGroup,
-    RadioItem,
     TextInput,
     Switch,
     RangeInput,
     Combobox,
-    Option,
 
     Card,
     ScrollContainer,
@@ -58,5 +56,6 @@ export default Object.freeze({
     HSplit,
     CenterContent,
 
-    Item: props => null
+    Item: props => null,
+    Option: props => null
 });
