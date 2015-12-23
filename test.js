@@ -25,6 +25,7 @@ const Main = React.createClass({
         console.log(this.state);
     },
     render () {
+        const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
         // console.log(this.state);
         return (
             <UI.Screen title="Testing" subtext="WOAH" scrollable={true}>
@@ -45,7 +46,37 @@ const Main = React.createClass({
                 <UI.Checkbox checked={this.state.check} label="Checkbox?" onChange={this.updateSetting('check')} />
                 <UI.Checkbox checked={this.state.check} label="Checkbox?" onChange={this.updateSetting('check')} checkSide="right" />
                 <UI.Checkbox checked={this.state.check} label="Favourite" onChange={this.updateSetting('check')} onIcon="ion-android-star" offIcon="ion-android-star-outline" />*/}
-                <UI.TextInput value="123456789012345678901234567890123456789012345678901234567890" label="Email" icon="ion-home" />
+                <UI.Image source={url} height={150} />
+                <UI.Image source={url} height={150} display={{type: 'clip'}} />
+                <UI.Image source={url} height={150} display={{fill: {width: '100%', height: '100%'}}} />
+
+                <UI.Grid colCount={4} rowCount={3} height="100%">
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                    <UI.Image source={url} height={150} />
+                </UI.Grid>
+
+                <UI.Split.Vertical boundaries={[100, -200, '90%']} height="100%">
+                    <UI.Image source={url} height="100%" />
+                    <UI.Image source={url} height="100%" />
+                    <UI.Image source={url} height="100%" />
+                    <UI.Image source={url} height="100%" />
+                </UI.Split.Vertical>
+
+                <UI.Split.Horizontal dimensions={['25%', '10%', '40%', '25%']} height="100%">
+                    <UI.Image source={url} height="100%" />
+                    <UI.Image source={url} height="100%" />
+                    <UI.Image source={url} height="100%" />
+                    <UI.Image source={url} height="100%" />
+                </UI.Split.Horizontal>
             </UI.Screen>
         );
     }

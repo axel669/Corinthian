@@ -88,7 +88,8 @@ body, html {
   position: relative; }
 
 .cor-checkbox-label {
-  padding: 3px; }
+  padding: 3px;
+  color: black; }
 
 .material-icon-area {
   display: inline-block;
@@ -128,8 +129,7 @@ body, html {
   font-size: 13px;
   font-weight: bold;
   color: #2FB1DF;
-  padding: 5px;
-  padding-left: 15px; }
+  padding: 5px; }
 
 .cor-textinput-input {
   height: 40px;
@@ -380,6 +380,16 @@ body, html {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+.cor-split-vertical-child {
+  position: absolute;
+  right: 0px;
+  left: 0px; }
+
+.cor-split-horizontal-child {
+  position: absolute;
+  top: 0px;
+  bottom: 0px; }
 
 .screen-forward-enter, .screen-forward-leave {
   position: absolute; }

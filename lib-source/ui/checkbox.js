@@ -50,7 +50,7 @@ const Checkbox = ({height = 40, onChange = () => {}, checkColor = 'black', onIco
             <CenterContent style={{position: 'absolute', top: 0, [checkSide]: 0, color: checkColor}} width={30} height="100%" className="cor-icon">
                 {checkString}
             </CenterContent>
-            <CenterContent className="cor-checkbox-label" height="100%" width="100%" style={{textAlign: 'left', [`padding${capitalize(checkSide)}`]: 30}}>
+            <CenterContent className="cor-checkbox-label" height="100%" width="100%" style={{textAlign: 'left', [`padding${capitalize(checkSide)}`]: 45}}>
                 {label}
             </CenterContent>
         </Touchable>

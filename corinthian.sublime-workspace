@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"icon",
+				"iconArea"
+			],
+			[
+				"checkS",
+				"checkSide"
+			],
+			[
+				"label",
+				"labelArea"
+			],
+			[
+				"chec",
+				"checked"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"cor",
+				"cor-rangeinput"
+			],
+			[
+				"che",
+				"checked"
+			],
+			[
+				"ion-",
+				"ion-android-radio-button-off"
+			],
+			[
 				"text",
 				"textStyle"
 			],
@@ -188,10 +220,6 @@
 				"library-min"
 			],
 			[
-				"back",
-				"backspace"
-			],
-			[
 				"line",
 				"lineNum"
 			],
@@ -298,10 +326,6 @@
 			[
 				"scroll",
 				"scrollContainers"
-			],
-			[
-				"chec",
-				"checkString"
 			],
 			[
 				"onTouch",
@@ -490,36 +514,44 @@
 			[
 				"less",
 				"lessonUsed"
-			],
-			[
-				"proce",
-				"processQueue"
-			],
-			[
-				"run",
-				"runQueue"
-			],
-			[
-				"Inset",
-				"InsertPoint"
-			],
-			[
-				"ViewPot",
-				"ViewPositionID"
-			],
-			[
-				"Upda",
-				"UpdatePoint"
-			],
-			[
-				"Fle",
-				"FlexProperty"
 			]
 		]
 	},
 	"build_system": "Build Library",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Build Library",
+					""
+				],
+				[
+					"Build Library",
+					"Minified"
+				],
+				[
+					"Build Library",
+					"Test Script"
+				],
+				[
+					"Build Library",
+					"Stripped"
+				],
+				[
+					"Build Library",
+					"CSS"
+				],
+				[
+					"Packages/User/CoffeeScript.sublime-build",
+					""
+				]
+			],
+			[
+				"Build Library",
+				"CSS"
+			]
+		],
 		[
 			[
 				[
@@ -561,7 +593,7 @@
 			],
 			[
 				"Build Library",
-				"Test Script"
+				""
 			]
 		],
 		[
@@ -721,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "CSS",
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -855,6 +887,28 @@
 	},
 	"file_history":
 	[
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/gesture.es7.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/iconbutton.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/raisedbutton.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/card.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/image.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_rangeinput.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_button.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_radio.sass",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/index.html",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_icon-area.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
@@ -880,7 +934,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/babel-polyfill/browser.js",
 		"/C/Users/cmorgan2/Documents/programming/tunnel",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
 		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-runtime/helpers/typeof.js",
 		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-preset-stage-0/node_modules/babel-preset-stage-1/node_modules/babel-preset-stage-2/node_modules/babel-preset-stage-3/package.json",
@@ -919,8 +972,6 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/gulpfile.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/corinthian.min.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/adriana.jpg",
@@ -943,7 +994,6 @@
 		"//card.com/Websites/Live/SkillsBrain.com/index.html",
 		"//stweb01/websites/SkillsBrain.com/index.html",
 		"//stweb01/websites/SkillsBrain.com/app.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/index.html",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/theme/_defualt.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_card.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/animations/_overlay.sass",
@@ -952,37 +1002,19 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_grid.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_overlay.sass",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_radio.sass",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_rangeinput.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_scrollable.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_combobox.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_switch.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_screen.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.css",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_button.sass",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material-dark.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/style/material.css",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/crypto.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainerp/www/index.html",
-		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainerp/config.xml",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/corinthian.js",
-		"/C/Users/cmorgan2/Google Drive/Files/programming/js/calc/calc-lang.js",
-		"/C/Users/cmorgan2/Google Drive/Files/programming/js/calc/main.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/camera.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/zip.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/calc-lang.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ionic-icons.js",
-		"/C/Users/cmorgan2/Documents/programming/git/parent-portal/main.js",
-		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.931/gulpfile.js",
-		"/C/Users/cmorgan2/AppData/Local/Temp/Rar$DIa0.320/package.json",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/calc-lang.jison",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/calc-lang.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/calc-lang.jison",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material.css"
+		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainerp/config.xml"
 	],
 	"find":
 	{
