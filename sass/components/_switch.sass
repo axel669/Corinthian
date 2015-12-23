@@ -1,34 +1,70 @@
-.material-switch
-    position: relative
-    min-height: 40px
-    line-height: 40px
-    border-top: 1px solid lightgray
-    border-bottom: 1px solid lightgray
-    margin-top: -1px
+// .material-switch
+//     position: relative
+//     min-height: 40px
+//     line-height: 40px
+//     border-top: 1px solid lightgray
+//     border-bottom: 1px solid lightgray
+//     margin-top: -1px
 
-.material-switch-toggle
+// .material-switch-toggle
+//     position: absolute
+//     top: 50%
+//     right: 0px
+//     transform: translateY(-50%)
+//     width: 100px
+//     border: 1px solid lightgray
+
+// .material-switch-toggle > div
+//     height: 25px
+//     line-height: 25px
+//     font-size: 14px
+//     font-weight: bold
+
+// .material-switch-on
+//     width: 50px
+//     text-align: center
+//     background-color: $switchOnColor
+//     color: $switchOnTextColor
+
+// .material-switch-off
+//     width: 50%
+//     text-align: center
+//     background-color: $switchOffColor
+//     color: $switchOffTextColor
+//     margin-left: 50px
+
+.cor-switch
+    position: relative
+.cor-switch-visual
+    position: absolute
+    top: 0
+    right: 0
+    width: 55px
+    height: 40px
+
+.cor-switch-track
+    position: absolute
+    top: 18px
+    left: 15px
+    right: 15px
+    height: 4px
+    border-radius: 2px
+.cor-switch-on .cor-switch-track
+    background-color: $buttonColor
+.cor-switch-off .cor-switch-track
+    background-color: #ccc
+
+.cor-switch-thumb
     position: absolute
     top: 50%
-    right: 0px
-    transform: translateY(-50%)
-    width: 100px
-    border: 1px solid lightgray
-
-.material-switch-toggle > div
-    height: 25px
-    line-height: 25px
-    font-size: 14px
-    font-weight: bold
-
-.material-switch-on
-    width: 50px
-    text-align: center
-    background-color: $switchOnColor
-    color: $switchOnTextColor
-
-.material-switch-off
-    width: 50%
-    text-align: center
-    background-color: $switchOffColor
-    color: $switchOffTextColor
-    margin-left: 50px
+    width: 16px
+    height: 16px
+    border-radius: 50%
+    background-color: white
+    border: 1px solid #ccc
+    @include prefix(box-shadow, 1px 1px 1px rgba(0, 0, 0, 0.45))
+    @include prefix(transform, translate(-50%, -50%))
+.cor-switch-off .cor-switch-thumb
+    left: 15px
+.cor-switch-on .cor-switch-thumb
+    left: 40px

@@ -41,10 +41,11 @@ const Main = React.createClass({
                         <UI.Image source="https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg" height={150} />
                     </UI.Item>
                     <UI.Item value={200} height={40}>Some Text</UI.Item>
-                </UI.RadioGroup>*/}
+                </UI.RadioGroup>
                 <UI.Checkbox checked={this.state.check} label="Checkbox?" onChange={this.updateSetting('check')} />
                 <UI.Checkbox checked={this.state.check} label="Checkbox?" onChange={this.updateSetting('check')} checkSide="right" />
-                <UI.Checkbox checked={this.state.check} label="Favourite" onChange={this.updateSetting('check')} onIcon="ion-android-star" offIcon="ion-android-star-outline" />
+                <UI.Checkbox checked={this.state.check} label="Favourite" onChange={this.updateSetting('check')} onIcon="ion-android-star" offIcon="ion-android-star-outline" />*/}
+                <UI.TextInput value="123456789012345678901234567890123456789012345678901234567890" label="Email" icon="ion-home" />
             </UI.Screen>
         );
     }
