@@ -28,11 +28,9 @@ const Main = React.createClass({
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
         // console.log(this.state);
         return (
-            <UI.Screen title="Testing" subtext="WOAH" scrollable={false}>
-                <UI.ScrollContainer>
-                    <UI.Button onTap={() => App.transitionTo("/test")} text="Test" />
-                    {factotum.range(40, n => <div>{n}</div>)}
-                </UI.ScrollContainer>
+            <UI.Screen title="Testing" subtext="WOAH" backText="Testing">
+                <UI.Button onTap={() => App.transitionTo("/test")} text="Test" />
+                {factotum.range(40, n => <div>{n}</div>)}
             </UI.Screen>
         );
     }
