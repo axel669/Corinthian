@@ -16,7 +16,7 @@ import RadioGroup from "lib-source/ui/radio.js";
 import TextInput from "lib-source/ui/textinput.js";
 import Switch from "lib-source/ui/switch.js";
 import RangeInput from "lib-source/ui/rangeinput.js";
-import {Combobox, Option} from "lib-source/ui/combobox.js";
+import Combobox from "lib-source/ui/combobox.js";
 
 import Card from "lib-source/ui/card.js";
 import Screen from "lib-source/ui/screen.js";

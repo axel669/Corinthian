@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"sele",
+				"selectedIndex"
+			],
+			[
+				"selected",
+				"selectedIndex"
+			],
+			[
+				"selec",
+				"selectedIndex"
+			],
+			[
 				"icon",
 				"iconArea"
 			],
@@ -42,14 +54,6 @@
 			[
 				"cor-bu",
 				"cor-button-text"
-			],
-			[
-				"sele",
-				"selectedIndex"
-			],
-			[
-				"selec",
-				"selectItem"
 			],
 			[
 				"child",
@@ -510,10 +514,6 @@
 			[
 				"brain",
 				"brainPoints"
-			],
-			[
-				"less",
-				"lessonUsed"
 			]
 		]
 	},
@@ -625,7 +625,7 @@
 			],
 			[
 				"Build Library",
-				"CSS"
+				""
 			]
 		],
 		[
@@ -887,6 +887,13 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_checkbox.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/material.scss",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
@@ -917,10 +924,8 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_screen.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/card.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_button.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_grid.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
@@ -931,7 +936,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/gesture.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/external/gesture.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_card.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/babel-polyfill/browser.js",
 		"/C/Users/cmorgan2/Documents/programming/tunnel",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
@@ -952,7 +956,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_checkbox.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.min.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/index.html",
@@ -979,13 +982,10 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/switch.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_radio.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_switch.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_combobox.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/index.html",

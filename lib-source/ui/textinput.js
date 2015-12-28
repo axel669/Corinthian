@@ -76,7 +76,7 @@ const TextInput = ({icon = null, type = 'text', onChange = () => {}, placeholder
 
     return (
         <div style={{position: 'relative'}}>
-            <div className="cor-textinput-label" style={inputStyle}>{label}</div>
+            <div className="cor-component-label" style={inputStyle}>{label}</div>
             <div stlye={{position: 'relative'}}>
                 {iconArea}
                 <input type={type} value={value} style={inputStyle} onChange={evt => onChange(evt.target.value)} className="cor-textinput-input" placeholder={placeholder} />

@@ -53,6 +53,13 @@ body, html {
     font-family: "Ionicons";
 }
 
+.cor-component-label {
+    font-size: 13px;
+    font-weight: bold;
+    color: $buttonColor;
+    padding: 5px;
+}
+
 @import "components/button";
 @import "components/card";
 @import "components/checkbox";

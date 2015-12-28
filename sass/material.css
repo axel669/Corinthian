@@ -43,6 +43,12 @@ body, html {
 .cor-icon {
   font-family: "Ionicons"; }
 
+.cor-component-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #2FB1DF;
+  padding: 5px; }
+
 .cor-button {
   position: relative;
   text-align: center;
@@ -124,12 +130,6 @@ body, html {
 
 .cor-grid-item {
   position: absolute; }
-
-.cor-textinput-label {
-  font-size: 13px;
-  font-weight: bold;
-  color: #2FB1DF;
-  padding: 5px; }
 
 .cor-textinput-input {
   height: 40px;
@@ -240,42 +240,13 @@ body, html {
   overflow: auto;
   -webkit-overflow-scrolling: touch; }
 
-.material-select {
-  border: 1px solid lightgray;
-  margin-top: -1px;
-  border-radius: 2px;
-  background-position: right center;
-  background-size: 20px 20px;
-  background-repeat: no-repeat;
-  min-height: 40px; }
-
-.material-select-option {
-  padding-left: 5px;
-  padding-right: 5px;
-  text-align: center;
-  line-height: 40px; }
-
-.material-combobox {
-  position: relative;
-  top: 0px;
-  left: 0px;
-  height: 40px;
-  border: 1px solid lightgray;
-  border-radius: 2px; }
-
-.material-combobox-display {
-  width: 100%;
-  height: 100%;
-  line-height: 40px;
-  font-size: 18px;
-  text-align: center; }
-
-.material-combobox-internal {
+.cor-combobox-select {
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
+  margin: 0px;
   opacity: 0; }
 
 .cor-switch {
