@@ -15,21 +15,15 @@
 
 body, html {
   width: 100%;
-  height: 100%;
   padding: 0px;
   margin: 0px;
-  overflow: hidden;
   font-family: Roboto-Light;
   background-color: white;
   color: #747474;
   text-align: left;
   -webkit-user-select: none;
   touch-events: none;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0); }
+  -webkit-text-size-adjust: 100%; }
 
 .cor-center-content {
   display: table;
@@ -73,7 +67,7 @@ body, html {
   right: 0px; }
 
 .desktop .cor-button-overlay:hover {
-  background-color: rgba(0, 0, 0, 0.07); }
+  background-color: rgba(0, 0, 0, 0.11); }
 
 .cor-touch-active > .cor-button-overlay, .desktop .cor-touch-active > .cor-button-overlay {
   background-color: rgba(0, 0, 0, 0.2); }
@@ -93,8 +87,7 @@ body, html {
   position: relative; }
 
 .cor-checkbox-label {
-  padding: 3px;
-  color: black; }
+  padding: 3px; }
 
 .material-icon-area {
   display: inline-block;
@@ -295,8 +288,7 @@ body, html {
 .cor-switch-on .cor-switch-thumb {
   left: 40px; }
 
-.cor-screen-title {
-  position: absolute;
+.cor-screen-title-base, .cor-screen-title, .cor-screen-title-web {
   top: 0px;
   left: 0px;
   width: 100%;
@@ -307,6 +299,12 @@ body, html {
   background-color: #2FB1DF;
   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.45);
   z-index: +10; }
+
+.cor-screen-title {
+  position: absolute; }
+
+.cor-screen-title-web {
+  position: fixed; }
 
 .cor-screen-title-subtext {
   font-size: 14px; }

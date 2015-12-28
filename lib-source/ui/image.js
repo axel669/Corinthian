@@ -72,6 +72,9 @@ import icons from "lib-source/ionic-icons.js";
 // });
 
 const Image = ({source, width, height = null, display = {type: "fit"}, slice = null}) => {
+    if (height === null) {
+        throw new Error("Need to give image height");
+    }
     let style;
 
     if (slice === null) {

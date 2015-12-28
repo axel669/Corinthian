@@ -88,7 +88,7 @@ const Combobox = ({width, height = 40, children, onChange = () => {}, selectedIn
             if (text === null) {
                 text = children;
             }
-            return <option value={index}>{text}</option>;
+            return <option value={index} key={index}>{text}</option>;
         }
     );
 

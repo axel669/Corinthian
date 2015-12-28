@@ -27,8 +27,7 @@
 //     font-size: 20px
 //     color: $titleTextColor
 
-.cor-screen-title
-    position: absolute
+.cor-screen-title-base
     top: 0px
     left: 0px
     width: 100%
@@ -39,6 +38,13 @@
     background-color: $titleColor
     box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.45)
     z-index: +10
+
+.cor-screen-title
+    @extend .cor-screen-title-base
+    position: absolute
+.cor-screen-title-web
+    @extend .cor-screen-title-base
+    position: fixed
 
 .cor-screen-title-subtext
     font-size: 14px;

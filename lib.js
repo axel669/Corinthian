@@ -19,6 +19,8 @@ import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
 import "lib-source/gesture.es7.js";
+
+import Environment from "lib-source/environment.js";
 // import microDB from "lib-source/microdb.js";
 
 let {Router} = ReactRouter;
@@ -264,10 +266,12 @@ App.session = Object.freeze({
 // App.ScreenTransition = ScreenWrapper;
 
 let appComponent;
+
 appContainer = document.querySelector("#AppContainer");
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
-    if (typeof orientation === 'undefined') {
-        appContainer.className = "desktop";
+    if (Environment.mobile === false) {
+        appContainer.style.position = null;
+        document.body.className = (document.body.className + " desktop").trim();
     }
     // let bbox;
     // let container;
@@ -320,4 +324,3 @@ App.replaceWith = url => appComponent.history.replaceState(null, url, null);
 App.goBack = () => appComponent.history.goBack();
 
 window.App = App;
-window.createComponent = React.createClass;

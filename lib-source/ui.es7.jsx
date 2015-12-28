@@ -26,6 +26,7 @@ import Grid from "lib-source/ui/grid.js";
 import Flexbox from "lib-source/ui/flexbox.js";
 import Split from "lib-source/ui/split.js";
 import CenterContent from "lib-source/ui/centercontent.js";
+import Form from "lib-source/ui/form.js";
 
 // React.initializeTouchEvents(true);
 
@@ -54,6 +55,7 @@ export default Object.freeze({
     Flexbox,
     Split,
     CenterContent,
+    Form,
 
     Item: props => null,
     Option: props => null

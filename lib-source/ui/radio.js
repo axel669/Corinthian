@@ -73,9 +73,7 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
 
     children = React.Children.toArray(children);
     children = children.map(
-        (child, index) => {
-            let {props} = child;
-
+        ({props}, index) => {
             props = {
                 ...props,
                 parentIconColor: iconColor,
