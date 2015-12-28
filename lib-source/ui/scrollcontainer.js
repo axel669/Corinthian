@@ -1,42 +1,40 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import fc from "lib-source/factotum.es7.js";
 import icons from "lib-source/ionic-icons.js";
 
-let ScrollContainer;
-let scrollContainers;
-
-scrollContainers = {};
-ScrollContainer = React.createClass({
+const ScrollContainer = React.createClass({
     componentDidMount () {
-        let node;
+        const node = this.refs.scroller;
         let scrollInfo;
 
-        node = ReactDOM.findDOMNode(this);
         scrollInfo = (scrollContainers.hasOwnProperty(this._rootNodeID) === true) ? scrollContainers[this._rootNodeID] : {scrollX: 0, scrollY: 0};
 
         node.scrollLeft = scrollInfo.scrollX;
         node.scrollTop = scrollInfo.scrollY;
 
-        delete scrollContainers[this._rootNodeID];
-        // console.log(this.state, node);
+        // delete scrollContainers[this._rootNodeID];
     },
     componentWillUnmount () {
-        let node;
+        const node = this.refs.scroller;
 
-        node = ReactDOM.findDOMNode(this);
         scrollContainers[this._rootNodeID] = {
             scrollX: node.scrollLeft,
             scrollY: node.scrollTop
         };
     },
     render () {
+        const {style = {}, children} = this.props;
+
         return (
-            <div className="material-scrollable material-container" style={this.props.style || {}}>
-                {this.props.children}
+            <div className="cor-scrollcontainer" style={style} ref="scroller">
+                {children}
             </div>
         );
     }
 });
+let scrollContainers;
+
+scrollContainers = {};
 
 export default ScrollContainer;

@@ -28,21 +28,25 @@ const Main = React.createClass({
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
         // console.log(this.state);
         return (
-            <UI.Screen title="Testing" subtext="WOAH" scrollable={true}>
-                <UI.TextInput label="Email" />
-                <UI.Combobox selectedIndex={0} onChange={::console.log} label="Bayonetta Sexy?">
-                    <UI.Option text="yes" value={100}>
-                        <UI.Image height="100%" source={url} />
-                    </UI.Option>
-                    <UI.Option text="always" value={200} />
-                </UI.Combobox>
+            <UI.Screen title="Testing" subtext="WOAH" scrollable={false}>
+                <UI.ScrollContainer>
+                    <UI.Button onTap={() => App.transitionTo("/test")} text="Test" />
+                    {factotum.range(40, n => <div>{n}</div>)}
+                </UI.ScrollContainer>
             </UI.Screen>
         );
+    }
+});
+
+const Test = React.createClass({
+    render () {
+        return <div>Nope</div>;
     }
 });
 
 App.start(
     <Route>
         <Route path="/" component={Main} />
+        <Route path="/test" component={Test} />
     </Route>
 );

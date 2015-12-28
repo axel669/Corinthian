@@ -113,12 +113,6 @@ body, html {
   text-align: center;
   position: absolute; }
 
-.material-container {
-  width: 100%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px; }
-
 .cor-flexbox {
   display: -webkit-flex;
   display: flex;
@@ -236,9 +230,13 @@ body, html {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
 
-.material-scrollable {
+.cor-scrollcontainer {
   overflow: auto;
-  -webkit-overflow-scrolling: touch; }
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px; }
 
 .cor-combobox-select {
   position: absolute;
