@@ -46,7 +46,7 @@ const Form = React.createClass({
         };
     },
     submit () {
-        console.log(this.state);
+        this.props.onSubmit(this.state);
     },
     render () {
         const {submitText, children} = this.props;

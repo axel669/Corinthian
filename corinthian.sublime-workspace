@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"pos",
+				"position"
+			],
+			[
+				"content",
+				"contentStyle"
+			],
+			[
+				"Back",
+				"backIcon"
+			],
+			[
+				"back",
+				"backButton"
+			],
+			[
 				"sele",
 				"selectedIndex"
 			],
@@ -30,10 +46,6 @@
 			[
 				"chec",
 				"checked"
-			],
-			[
-				"back",
-				"background-color"
 			],
 			[
 				"cor",
@@ -502,18 +514,6 @@
 			[
 				"Lesson",
 				"LessonID"
-			],
-			[
-				"ex",
-				"exemplarID"
-			],
-			[
-				"Generate",
-				"GenerateExemplarEdges"
-			],
-			[
-				"brain",
-				"brainPoints"
 			]
 		]
 	},
@@ -625,7 +625,7 @@
 			],
 			[
 				"Build Library",
-				""
+				"CSS"
 			]
 		],
 		[
@@ -753,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "CSS",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -887,11 +887,17 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_container.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_scrollable.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_checkbox.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
@@ -918,7 +924,6 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/index.html",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_icon-area.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/iconbutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/raisedbutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
@@ -954,7 +959,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.min.js",
@@ -981,7 +985,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/switch.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
@@ -1011,10 +1014,7 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material-dark.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/style/material.css",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/crypto.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainerp/www/index.html",
-		"/C/Users/cmorgan2/Documents/programming/mobile/debugcontainerp/config.xml"
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/style/material.css"
 	],
 	"find":
 	{
