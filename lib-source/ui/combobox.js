@@ -66,30 +66,36 @@ const Combobox = ({width, height = 40, children, onChange = () => {}, selectedIn
     }
     const changeHandler = evt => {
         const newIndex = evt.target.selectedIndex;
-        const value = children[newIndex].props.value;
+        let value;
+
+        value = children[newIndex].props.value;
+        if (value === undefined) {
+            value = children[newIndex].props.label;
+        }
 
         onChange(newIndex, value);
     };
     const style = {
         position: 'relative',
-        border: "1px solid #ccc",
+        border: "1px solid #e2e2e2",
         width,
         height
     };
     let selectChildren;
+    let displayedChild;
 
     children = React.Children.toArray(children);
     if (selectedIndex < 0 || selectedIndex >= children.length) {
         throw new Error("selectedIndex is out of valid range");
     }
 
+    displayedChild = children[selectedIndex].props.children;
+    if (displayedChild === undefined || displayedChild.length === 0) {
+        displayedChild = children[selectedIndex].props.label;
+    }
     selectChildren = children.map(
-        ({props: {text = null, children}}, index) => {
-            if (text === null) {
-                text = children;
-            }
-            return <option value={index} key={index}>{text}</option>;
-        }
+        ({props: {label = null, children}}, index) =>
+            <option value={index} key={index}>{label}</option>
     );
 
     return (
@@ -99,7 +105,7 @@ const Combobox = ({width, height = 40, children, onChange = () => {}, selectedIn
             </div>
             <div style={style}>
                 <CenterContent width="100%" height="100%">
-                    {children[selectedIndex].props.children}
+                    {displayedChild}
                 </CenterContent>
                 <CenterContent style={{position: 'absolute', top: 0, right: 0}} width={40} height="100%" className="cor-icon">
                     {icons["ion-arrow-down-b"]}

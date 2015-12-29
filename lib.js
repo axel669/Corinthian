@@ -18,6 +18,7 @@ import fs from "lib-source/fs.es7.js";
 import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
+import Dialog from "lib-source/dialog.js";
 import "lib-source/gesture.es7.js";
 
 import Environment from "lib-source/environment.js";
@@ -69,6 +70,7 @@ window.UI = UI;
 window.fs = fs;
 window.Picture = Picture;
 window.ionic = icons;
+window.Dialog = Dialog;
 // window.security = crypto;
 // window.microDB = microDB;
 // window.moment = moment;
@@ -269,6 +271,7 @@ let appComponent;
 
 appContainer = document.querySelector("#AppContainer");
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
+    document.body.appendChild(Dialog.container);
     if (Environment.mobile === false) {
         appContainer.style.position = null;
         document.body.className = (document.body.className + " desktop").trim();
@@ -311,6 +314,8 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         <Router history={history}>{routes}</Router>,
         appContainer
     );
+
+    Dialog.alert(<div>{factotum.range(50, n => <div>{n}</div>)}</div>);
 };
 
 let frameFunction = () => {

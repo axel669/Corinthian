@@ -6,13 +6,17 @@ import TextInput from "lib-source/ui/textinput.js";
 import RangeInput from "lib-source/ui/rangeinput.js";
 import Switch from "lib-source/ui/switch.js";
 import Checkbox from "lib-source/ui/checkbox.js";
+import Combobox from "lib-source/ui/combobox.js";
+import RadioGroup from "lib-source/ui/radio.js";
 
 const defaultValueFunc = {
     text: () => '',
     number: () => 0,
     range: ({min = 0}) => min,
     switch: () => false,
-    checkbox: () => false
+    checkbox: () => false,
+    combobox: ({defaultIndex = 0, defaultValue = null}) => ({index: defaultIndex, value: defaultValue}),
+    radio: ({defaultIndex = 0, defaultValue = null}) => ({index: defaultIndex, value: defaultValue})
 };
 
 const Form = React.createClass({
@@ -38,6 +42,8 @@ const Form = React.createClass({
         return (index, value = null) => {
             if (value === null) {
                 value = index;
+            } else {
+                value = {index, value};
             }
 
             value = format(value);
@@ -46,6 +52,7 @@ const Form = React.createClass({
         };
     },
     submit () {
+        // let values = {...this.state};
         this.props.onSubmit(this.state);
     },
     render () {
@@ -70,6 +77,12 @@ const Form = React.createClass({
 
                     case 'checkbox':
                         return <Checkbox {...props} checked={value} onChange={update} key={index} />;
+
+                    case 'combobox':
+                        return <Combobox {...props} selectedIndex={value.index} onChange={update} key={index} />;
+
+                    case 'radio':
+                        return <RadioGroup {...props} selectedIndex={value.index} onChange={update} key={index} />;
                 }
 
                 return <div key={index} />;

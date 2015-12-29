@@ -227,7 +227,9 @@ window.addEventListener(
                 }
             );
 
-            evt.preventDefault();
+            if (evt.target.tagName.toLowerCase() !== 'input' || evt.target.type !== 'range') {
+                evt.preventDefault();
+            }
             currentElement.dispatchEvent(event);
         }
     );

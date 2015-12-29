@@ -58,7 +58,7 @@ import CenterContent from "lib-source/ui/centercontent.js";
 
 const Switch = ({on, onChange = () => {}, color = null, label}) => (
     <Touchable component="div" className="cor-switch" onTap={() => onChange(on !== true)}>
-        <CenterContent style={{textAlign: 'left', padding: 5}} height={40}>
+        <CenterContent style={{textAlign: 'left', padding: 5}} height={40} className="cor-switch-label">
             {label}
         </CenterContent>
         <div className={`cor-switch-${(on === true) ? 'on' : 'off'} cor-switch-visual`}>

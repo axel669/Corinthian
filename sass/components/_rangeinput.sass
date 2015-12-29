@@ -1,3 +1,7 @@
+=cor-rangeinput-thumb-size
+    width: 18px
+    height: 18px
+
 .cor-rangeinput input[type=range]
     -webkit-appearance: none
     position: absolute;
@@ -9,10 +13,9 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 
 .cor-rangeinput input[type=range]::-webkit-slider-thumb
+    +cor-rangeinput-thumb-size
     -webkit-appearance: none
     border: none
-    height: 26px
-    width: 26px
     border-radius: 50%
     margin-top: -11px
 
@@ -25,24 +28,25 @@
     left: 15px
     bottom: 0px
     right: 15px
-.cor-rangeinput-track
-    position: absolute
-    top: 14px
-    height: 4px
-    background-color: #ccc
-    width: 100%
-.cor-rangeinput-valuetrack
-    position: absolute
-    top: 14px
-    height: 4px
-    background-color: $buttonColor
+
 .cor-rangeinput-thumb
+    +cor-rangeinput-thumb-size
     position: absolute
     top: 50%
-    width: 20px
-    height: 20px
     border-radius: 50%
     background-color: white
     border: 1px solid #ccc
     @include prefix(box-shadow, 1px 1px 1px rgba(0, 0, 0, 0.45))
     @include prefix(transform, translate(-50%, -50%))
+
+=cor-rangeinput-track-base
+    position: absolute
+    top: 15px
+    height: 2px
+.cor-rangeinput-track
+    +cor-rangeinput-track-base
+    background-color: #ccc
+    width: 100%
+.cor-rangeinput-valuetrack
+    +cor-rangeinput-track-base
+    background-color: $buttonColor

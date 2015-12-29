@@ -1,6 +1,13 @@
 .cor-radio-item
     position: relative
-.cor-radio-item.cor-touch-active
-    background-color: $buttonActiveColor
 .cor-radio-item-content
     padding-left: 30px
+    cursor: default;
+
+.cor-radio-icon
+    width: 30px
+    height: 30px
+    border-radius: 50%
+    line-height: 30px
+.cor-radio-item.cor-touch-active .cor-radio-icon
+    background-color: $buttonActiveColor

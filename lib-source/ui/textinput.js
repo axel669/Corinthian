@@ -60,26 +60,50 @@ import CenterContent from "lib-source/ui/centercontent.js";
 const TextInput = ({icon = null, type = 'text', onChange = () => {}, placeholder, value, label}) => {
     let iconArea;
     let inputStyle;
+    let labelOffset;
 
     inputStyle = {
+    };
+    labelOffset = {
+        position: 'absolute',
+        bottom: '100%'
     };
 
     if (icon === null) {
         iconArea = null;
+        // content = (
+        //     <div style={{position: 'relative'}}>
+        //         <div className="cor-component-label" style={{color: 'transparent'}}>{label}</div>
+        //         <input type={type} value={value} onChange={evt => onChange(evt.target.value)} className="cor-textinput-input" placeholder={placeholder} />
+        //         <div className="cor-component-label" style={{position: 'absolute'}}>{label}</div>
+        //     </div>
+        // );
     } else {
-        iconArea = <CenterContent style={{position: 'absolute'}} width={40} height={40} className="cor-icon">{icons[icon]}</CenterContent>;
+        iconArea = <CenterContent style={{position: 'absolute', top: 0}} width={40} height={40} className="cor-icon">{icons[icon]}</CenterContent>;
         inputStyle = {
             marginLeft: 40,
             width: "calc(100% - 40px)"
         };
+        labelOffset = {
+            ...labelOffset,
+            ...inputStyle
+        };
+
+        // content = (
+        //     <div style={{position: 'relative'}}>
+        //         <input type={type} value={value} style={inputStyle} onChange={evt => onChange(evt.target.value)} className="cor-textinput-input" placeholder={placeholder} />
+        //         {iconArea}
+        //     </div>
+        // );
     }
 
     return (
         <div style={{position: 'relative'}}>
-            <div className="cor-component-label" style={inputStyle}>{label}</div>
-            <div stlye={{position: 'relative'}}>
-                {iconArea}
+            <div className="cor-component-label" style={{color: 'transparent'}}>{label}</div>
+            <div style={{position: 'relative'}}>
                 <input type={type} value={value} style={inputStyle} onChange={evt => onChange(evt.target.value)} className="cor-textinput-input" placeholder={placeholder} />
+                {iconArea}
+                <div className="cor-component-label" style={labelOffset}>{label}</div>
             </div>
         </div>
     );

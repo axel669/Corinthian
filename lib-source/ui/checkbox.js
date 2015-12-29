@@ -38,6 +38,13 @@ const ionOffIcon = "ion-android-checkbox-outline-blank";
 
 const Checkbox = ({height = 40, onChange = () => {}, checkColor = 'black', onIcon = ionOnIcon, checkSide = 'left', offIcon = ionOffIcon, checked, label}) => {
     const checkString = (checked === true) ? icons[onIcon] : icons[offIcon];
+    const iconStyle = {
+        position: 'absolute',
+        top: 0,
+        [checkSide]: 0,
+        color: checkColor,
+        fontSize: 22
+    };
 
     // return (
     //     <Touchable component="div" onTap={() => onChange(checked !== true)} className="material-checkbox" style={style}>
@@ -47,8 +54,8 @@ const Checkbox = ({height = 40, onChange = () => {}, checkColor = 'black', onIco
     // );
     return (
         <Touchable component="div" className="cor-checkbox" style={{height}} onTap={() => onChange(checked !== true)}>
-            <CenterContent style={{position: 'absolute', top: 0, [checkSide]: 0, color: checkColor, fontSize: 22}} width={45} height="100%" className="cor-icon">
-                {checkString}
+            <CenterContent style={iconStyle} width={45} height="100%" className="cor-icon">
+                <div className="cor-checkbox-check">{checkString}</div>
             </CenterContent>
             <CenterContent className="cor-checkbox-label" height="100%" width="100%" style={{textAlign: 'left', [`padding${capitalize(checkSide)}`]: 45}}>
                 {label}

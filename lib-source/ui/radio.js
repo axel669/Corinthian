@@ -61,7 +61,7 @@ import CenterContent from "lib-source/ui/centercontent.js";
 //     }
 // });
 
-const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children}) => {
+const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children, label}) => {
     if (selectedIndex === null || selectedIndex < 0) {
         throw new Error(`selectedIndex not valid (given ${selectedIndex})`);
     }
@@ -74,10 +74,11 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
     children = React.Children.toArray(children);
     children = children.map(
         ({props}, index) => {
+            const {value = index} = props;
             props = {
                 ...props,
                 parentIconColor: iconColor,
-                onTap: () => selectItem(index, props.value),
+                onTap: () => selectItem(index, value),
                 checked: index === selectedIndex
             };
 
@@ -85,7 +86,12 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
         }
     );
 
-    return <div>{children}</div>;
+    return (
+        <div>
+            <div className="cor-component-label">{label}</div>
+            {children}
+        </div>
+    );
 };
 
 const RadioItem = ({checked, children, iconColor = null, parentIconColor, height = 40, onTap}) => {
@@ -94,7 +100,7 @@ const RadioItem = ({checked, children, iconColor = null, parentIconColor, height
     return (
         <Touchable component="div" className="cor-radio-item" style={{height}} onTap={onTap}>
             <CenterContent style={{position: 'absolute', top: 0, left: 0, color: iconColor}} width={30} height="100%" className="cor-icon">
-                {iconText}
+                <div className="cor-radio-icon">{iconText}</div>
             </CenterContent>
             <CenterContent className="cor-radio-item-content" height="100%" width="100%" style={{textAlign: 'left'}}>
                 {children}

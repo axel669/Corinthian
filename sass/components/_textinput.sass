@@ -31,6 +31,12 @@
 .cor-textinput-input
     height: 40px
     border-width: 0px
-    border-bottom: 2px solid $buttonColor
     width: 100%
     padding: 5px
+    border-bottom: 1px solid #DDD
+.cor-textinput-input:focus
+    border-bottom: 2px solid $buttonColor
+    outline: none;
+
+.cor-textinput-input:focus ~ .cor-icon, .cor-textinput-input:focus ~ .cor-component-label
+    color: $buttonColor

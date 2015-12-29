@@ -2,6 +2,8 @@ import React from "react";
 import fc from "lib-source/factotum.es7.js";
 import icons from "lib-source/ionic-icons.js";
 
+import CenterContent from "lib-source/ui/centercontent.js";
+
 // let RangeInput;
 
 // RangeInput = React.createClass({
@@ -58,7 +60,7 @@ import icons from "lib-source/ionic-icons.js";
 //     }
 // });
 
-const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, onChange = () => {}}) => {
+const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, onChange = () => {}, label = null, showValue = false, icon = null}) => {
     const range = max - min;
     const position = ((value - min) / range) * 100;
     const changeHandler = evt => {
@@ -67,14 +69,32 @@ const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, 
             onChange(newValue);
         }
     };
+    let rangeStyle;
+    let displayValue;
+    let iconDisplay;
+
+    rangeStyle = {};
+    if (showValue === true) {
+        rangeStyle.right = 60;
+        displayValue = value;
+    }
+    if (icon !== null) {
+        rangeStyle.left = 40;
+        iconDisplay = <CenterContent className="cor-icon" style={{position: 'absolute', left: 0, top: 0}} width={25} height="100%">{icons[icon]}</CenterContent>
+    }
 
     return (
-        <div className="cor-rangeinput">
-            <div className="cor-rangeinput-content">
-                <div className="cor-rangeinput-track" />
-                <div className="cor-rangeinput-valuetrack" style={{width: `${position}%`, backgroundColor: trackColor}} />
-                <div className="cor-rangeinput-thumb" style={{left: `${position}%`}} />
-                <input type="range" value={value} min={min} max={max} step={step} onChange={changeHandler} />
+        <div>
+            <div className="cor-component-label">{label}</div>
+            <div className="cor-rangeinput">
+                {iconDisplay}
+                <CenterContent style={{position: 'absolute', right: 0, top: 0, textAlign: 'left', cursor: 'default'}} width={45} height="100%">{displayValue}</CenterContent>
+                <div className="cor-rangeinput-content" style={rangeStyle}>
+                    <div className="cor-rangeinput-track" />
+                    <div className="cor-rangeinput-valuetrack" style={{width: `${position}%`, backgroundColor: trackColor}} />
+                    <div className="cor-rangeinput-thumb" style={{left: `${position}%`}} />
+                    <input type="range" value={value} min={min} max={max} step={step} onChange={changeHandler} />
+                </div>
             </div>
         </div>
     );
