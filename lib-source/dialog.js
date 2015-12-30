@@ -13,19 +13,17 @@ const AlertDialog = ({message, title = "Alert"}) => {
         left: '50%',
         WebkitTransform: 'translate(-50%, -65%)',
         transform: 'translate(-50%, -65%)',
-        backgroundColor: 'white',
         width: '70%',
+        height: '70%',
         maxWidth: 360,
-        maxHeight: '70%',
         WebkitBoxShadow: '0px 0px 35px rgba(0, 0, 0, 0.6)',
-        overflow: 'auto'
     };
     return (
         <div style={alertStyle}>
-            <div>
+            <div style={{height: 40, width: '100%', backgroundColor: 'cyan'}}>
                 {title}
             </div>
-             <div>
+             <div style={{paddingTop: 40, maxHeight: '70%', backgroundColor: 'white', overflow: 'auto'}}>
                 {message}
             </div>
         </div>
