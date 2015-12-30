@@ -41,8 +41,6 @@ body {
     color: $textColor;
     text-align: left;
     -webkit-user-select: none;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
     touch-events: none;
     -webkit-text-size-adjust: 100%;
     // @include prefix(transform, translate3d(0, 0, 0));
@@ -51,6 +49,10 @@ body {
 body.desktop {
     // overflow: auto;
     // height: none;
+}
+body.web {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .cor-center-content {
@@ -98,3 +100,5 @@ body.desktop {
 
 @import "animations/screen";
 // @import "animations/overlay";
+
+@import "dialog";

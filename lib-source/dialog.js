@@ -1,66 +1,77 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Environment from "lib-source/environment.js";
 
 import CenterContent from "lib-source/ui/centercontent.js";
 
 const dialogContainer = document.createElement("div");
+dialogContainer.className = "cor-dialog-overlay";
 
-const AlertDialog = ({message, title = "Alert"}) => {
-        // <CenterContent style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
-    const alertStyle = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        WebkitTransform: 'translate(-50%, -65%)',
-        transform: 'translate(-50%, -65%)',
-        width: '70%',
-        height: '70%',
-        maxWidth: 360,
-        WebkitBoxShadow: '0px 0px 35px rgba(0, 0, 0, 0.6)',
-    };
-    return (
-        <div style={alertStyle}>
-            <div style={{height: 40, width: '100%', backgroundColor: 'cyan'}}>
-                {title}
-            </div>
-             <div style={{paddingTop: 40, maxHeight: '70%', backgroundColor: 'white', overflow: 'auto'}}>
-                {message}
-            </div>
-        </div>
-    );
-        // </CenterContent>
+const canScroll = node => {
+    while (true) {
+        if (node === dialogContainer) {
+            return false;
+        }
+        if (node.className.indexOf("cor-scrollfree") !== -1) {
+            return true;
+        }
+        node = node.parentNode;
+    }
 };
 
-dialogContainer.style.position = 'fixed';
-dialogContainer.style.top = 0;
-dialogContainer.style.left = 0;
-dialogContainer.style.bottom = 0;
-dialogContainer.style.right = 0;
-dialogContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-dialogContainer.style.display = 'none';
-dialogContainer.style.zIndex = '+100';
-// dialogContainer.addEventListener(
-//     "touchstart",
-//     evt => {
-//         if (evt.target === dialogContainer) {
-//             evt.preventDefault();
-//         }
-//     }
-// );
+const AlertDialog = ({message, title = "Alert"}) => (
+    <div className="cor-dialog-wrapper">
+        <div style={{height: 35, width: '100%', backgroundColor: 'cyan'}}>
+            {title}
+        </div>
+        <div style={{overflow: 'auto', maxHeight: '40vh', WebkitOverflowScrolling: 'touch'}} className="cor-dialog-content cor-scrollfree">
+            {message}
+        </div>
+        <div style={{height: 35, width: '100%', backgroundColor: 'cyan'}}>
+            {title}
+        </div>
+    </div>
+);
+
+dialogContainer.addEventListener(
+    "touchmove",
+    evt => {
+        if (canScroll(evt.target) === false) {
+            evt.preventDefault();
+            evt.stopPropagation();
+        }
+    }
+);
+dialogContainer.addEventListener(
+    "tap",
+    evt => {
+        if (evt.target === dialogContainer) {
+            Dialog.close();
+        }
+    }
+);
+// console.log({a: () => Environment});
+if (Environment.mobile === false) {
+    console.log('adding key event');
+    window.addEventListener(
+        "keydown",
+        evt => {
+            if (evt.keyCode === 27) {
+                Dialog.close();
+            }
+        }
+    );
+}
 
 export default {
     get container () {
         return dialogContainer;
     },
     alert (message, {title} = {}) {
-        // document.body.style.overflow = 'hidden';
-        // document.body.style.WebkitOverflowScrolling = 'auto';
         ReactDOM.render(<AlertDialog message={message} title={title} />, dialogContainer);
-        dialogContainer.style.display = '';
+        dialogContainer.style.display = 'block';
     },
     close () {
-        // document.body.style.overflow = '';
-        // document.body.style.WebkitOverflowScrolling = '';
-        dialogContainer.style.display = 'none';
+        dialogContainer.style.display = '';
     }
 };

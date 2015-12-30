@@ -92,7 +92,7 @@ const Form = React.createClass({
         return (
             <div style={{padding: 5}}>
                 {content}
-                <UI.Button raised={true} text={submitText} onTap={this.submit} />
+                <UI.Button raised={true} text={submitText} onTap={this.submit} block={true} />
             </div>
         );
     }

@@ -271,11 +271,20 @@ let appComponent;
 
 appContainer = document.querySelector("#AppContainer");
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
+    let bodyMods;
+
     document.body.appendChild(Dialog.container);
+
+    bodyMods = [];
     if (Environment.mobile === false) {
         appContainer.style.position = null;
-        document.body.className = (document.body.className + " desktop").trim();
+        bodyMods.push("desktop");
+        // document.body.className = (document.body.className + " desktop").trim();
     }
+    if (Environment.app === false) {
+        bodyMods.push("web");
+    }
+    document.body.className = [document.body.className, ...bodyMods].join(' ');
     // let bbox;
     // let container;
 
@@ -315,7 +324,7 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         appContainer
     );
 
-    Dialog.alert(<div>{factotum.range(50, n => <div>{n}</div>)}</div>);
+    // Dialog.alert(<div>{factotum.range(2, n => <div>{n}</div>)}</div>);
 };
 
 let frameFunction = () => {

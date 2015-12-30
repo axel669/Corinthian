@@ -75,7 +75,7 @@ import CenterContent from "lib-source/ui/centercontent.js";
 //     }
 // });
 
-const Button = ({onTap = () => {}, color = null, textColor = null, width = null, height = null, fill = false, raised = false, padding = null, cornerRadius = null, text} = {}) => {
+const Button = ({onTap = () => {}, color = null, textColor = null, width = null, height = null, flush = false, block = false, fill = false, raised = false, padding = null, cornerRadius = null, text} = {}) => {
     let style;
     let textStyle;
     let className;
@@ -91,6 +91,10 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
     if (raised === true) {
         className += " raised";
     }
+    if (fill === true) {
+        width = '100%';
+        height = '100%';
+    }
 
     style = {
         backgroundColor: color,
@@ -102,12 +106,14 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
         width
     };
 
-    if (fill === true) {
+    if (block === true) {
+        style.display = 'block';
+    }
+    if (flush === true) {
         style = {
             ...style,
             margin: 0
         };
-        height = '100%';
     }
     textStyle = {padding};
 
