@@ -28,6 +28,7 @@ html {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    // position: relative;
 }
 body {
     position: relative;
@@ -43,6 +44,7 @@ body {
     -webkit-user-select: none;
     touch-events: none;
     -webkit-text-size-adjust: 100%;
+    overflow: hidden;
     // @include prefix(transform, translate3d(0, 0, 0));
 }
 
@@ -51,6 +53,7 @@ body.desktop {
     // height: none;
 }
 body.web {
+    // height: 100%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }

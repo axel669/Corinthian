@@ -269,15 +269,18 @@ App.session = Object.freeze({
 
 let appComponent;
 
-appContainer = document.querySelector("#AppContainer");
+// appContainer = document.querySelector("#AppContainer");
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
+    const appContainer = document.createElement("div");
     let bodyMods;
 
+    document.body.appendChild(appContainer);
     document.body.appendChild(Dialog.container);
 
     bodyMods = [];
     if (Environment.mobile === false) {
         appContainer.style.position = null;
+        appContainer.style.overflow = 'visible';
         bodyMods.push("desktop");
         // document.body.className = (document.body.className + " desktop").trim();
     }

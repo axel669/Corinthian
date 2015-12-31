@@ -168,24 +168,26 @@ const WebScreen = ({children, title = null, subtext = null, backText = null, wid
 
         contentStyle.paddingTop = 50;
         titleElement = (
-            <CenterContent className="cor-screen-title-web">
-                {title}
-                <div className="cor-screen-title-subtext">
-                    {subtext}
-                </div>
-                <div style={{position: 'absolute', top: 0, left: '50%', width: '100%', maxWidth: width, height: 50, WebkitTransform: 'translateX(-50%)', transform: 'translateX(-50%)'}}>
-                    {backButton}
-                </div>
-            </CenterContent>
+            <div className="cor-screen-title-web">
+                <CenterContent height={50} width="100%" style={{position: 'relative'}}>
+                    {title}
+                    <div className="cor-screen-title-subtext">
+                        {subtext}
+                    </div>
+                    <div style={{position: 'absolute', top: 0, left: '50%', width: '100%', maxWidth: width, height: 50, WebkitTransform: 'translateX(-50%)', transform: 'translateX(-50%)'}}>
+                        {backButton}
+                    </div>
+                </CenterContent>
+            </div>
         );
     }
 
     return (
-        <div>
-            {titleElement}
+        <div style={{position: 'relative'}}>
             <div style={contentStyle}>
                 {children}
             </div>
+            {titleElement}
         </div>
     );
 };

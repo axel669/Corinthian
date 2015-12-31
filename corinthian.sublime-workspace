@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"cor-",
+				"cor-screen-title-web"
+			],
+			[
+				"cor-sc",
+				"cor-screen-title"
+			],
+			[
+				"re",
+				"relative"
+			],
+			[
 				"dialog",
 				"dialogResolve"
 			],
@@ -170,10 +182,6 @@
 			[
 				"abs",
 				"absDif"
-			],
-			[
-				"cor-",
-				"cor-button-overlay"
 			],
 			[
 				"bab",
@@ -506,14 +514,6 @@
 			[
 				"Genera",
 				"GenerateSDEdges"
-			],
-			[
-				"patient",
-				"patientExemplarEdges"
-			],
-			[
-				"Strin",
-				"stringify"
 			]
 		]
 	},
@@ -593,7 +593,7 @@
 			],
 			[
 				"Build Library",
-				""
+				"Test Script"
 			]
 		],
 		[
@@ -753,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Test Script",
 	"command_palette":
 	{
 		"height": 392.0,

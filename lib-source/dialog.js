@@ -13,7 +13,7 @@ const canScroll = node => {
             return false;
         }
         if (node.className.indexOf("cor-scrollfree") !== -1) {
-            return true;
+            return node.offsetHeight !== node.scrollHeight;
         }
         node = node.parentNode;
     }
@@ -21,8 +21,7 @@ const canScroll = node => {
 
 const AlertDialog = ({message, title = "Alert", resolve}) => {
     const close = () => {
-        closeDialog();
-        resolve(100);
+        closeDialog(null);
     };
     return (
         <div className="cor-dialog-wrapper">
@@ -44,8 +43,12 @@ const showDialog = (DialogComponent, options) => new Promise(resolve => {
     ReactDOM.render(<DialogComponent {...options} resolve={resolve} />, dialogContainer);
     dialogContainer.style.display = 'block';
 });
-const closeDialog = () => {
+const closeDialog = (resolveValue = undefined) => {
     dialogContainer.style.display = '';
+    // if (resolve === true) {
+    dialogResolve(resolveValue);
+    dialogResolve = null;
+    // }
 };
 
 let dialogResolve;
@@ -55,7 +58,7 @@ dialogContainer.addEventListener(
     evt => {
         if (canScroll(evt.target) === false) {
             evt.preventDefault();
-            evt.stopPropagation();
+            // evt.stopPropagation();
         }
     }
 );
@@ -64,7 +67,6 @@ dialogContainer.addEventListener(
     evt => {
         if (evt.target === dialogContainer) {
             closeDialog();
-            dialogResolve(undefined);
         }
     }
 );
@@ -75,7 +77,6 @@ if (Environment.mobile === false) {
         evt => {
             if (evt.keyCode === 27) {
                 closeDialog();
-                dialogResolve(undefined);
             }
         }
     );
@@ -85,8 +86,8 @@ export default {
     get container () {
         return dialogContainer;
     },
-    async alert (message, options = {}) {
-        return await showDialog(AlertDialog, options);
+    alert (message, options = {}) {
+        return showDialog(AlertDialog, {message, ...options});
     },
     close () {
         dialogContainer.style.display = '';
