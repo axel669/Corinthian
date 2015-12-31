@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"dialog",
+				"dialogResolve"
+			],
+			[
+				"dial",
+				"dialogPromise"
+			],
+			[
+				"diao",
+				"dialogPromise"
+			],
+			[
+				"Dial",
+				"DialogComponent"
+			],
+			[
 				"pos",
 				"position"
 			],
@@ -498,22 +514,6 @@
 			[
 				"Strin",
 				"stringify"
-			],
-			[
-				"group",
-				"groupNum"
-			],
-			[
-				"Gener",
-				"GenerateLessonEdges"
-			],
-			[
-				"uncom",
-				"uncompressedLessonEdges"
-			],
-			[
-				"Lesson",
-				"LessonID"
 			]
 		]
 	},
@@ -887,6 +887,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
@@ -922,7 +923,6 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_radio.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/index.html",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_icon-area.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/iconbutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/raisedbutton.js",

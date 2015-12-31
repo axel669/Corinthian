@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Environment from "lib-source/environment.js";
 
-import CenterContent from "lib-source/ui/centercontent.js";
+import Button from "lib-source/ui/button.js";
 
 const dialogContainer = document.createElement("div");
 dialogContainer.className = "cor-dialog-overlay";
@@ -19,19 +19,36 @@ const canScroll = node => {
     }
 };
 
-const AlertDialog = ({message, title = "Alert"}) => (
-    <div className="cor-dialog-wrapper">
-        <div style={{height: 35, width: '100%', backgroundColor: 'cyan'}}>
-            {title}
+const AlertDialog = ({message, title = "Alert", resolve}) => {
+    const close = () => {
+        closeDialog();
+        resolve(100);
+    };
+    return (
+        <div className="cor-dialog-wrapper">
+            <div className="cor-dialog-title">
+                {title}
+            </div>
+            <div className="cor-dialog-content cor-scrollfree">
+                {message}
+            </div>
+            <div className="cor-dialog-buttons">
+                <Button flush={true} height="100%" text="OK" width={75} onTap={close} />
+            </div>
         </div>
-        <div style={{overflow: 'auto', maxHeight: '40vh', WebkitOverflowScrolling: 'touch'}} className="cor-dialog-content cor-scrollfree">
-            {message}
-        </div>
-        <div style={{height: 35, width: '100%', backgroundColor: 'cyan'}}>
-            {title}
-        </div>
-    </div>
-);
+    );
+};
+
+const showDialog = (DialogComponent, options) => new Promise(resolve => {
+    dialogResolve = resolve;
+    ReactDOM.render(<DialogComponent {...options} resolve={resolve} />, dialogContainer);
+    dialogContainer.style.display = 'block';
+});
+const closeDialog = () => {
+    dialogContainer.style.display = '';
+};
+
+let dialogResolve;
 
 dialogContainer.addEventListener(
     "touchmove",
@@ -46,18 +63,19 @@ dialogContainer.addEventListener(
     "tap",
     evt => {
         if (evt.target === dialogContainer) {
-            Dialog.close();
+            closeDialog();
+            dialogResolve(undefined);
         }
     }
 );
 // console.log({a: () => Environment});
 if (Environment.mobile === false) {
-    console.log('adding key event');
     window.addEventListener(
         "keydown",
         evt => {
             if (evt.keyCode === 27) {
-                Dialog.close();
+                closeDialog();
+                dialogResolve(undefined);
             }
         }
     );
@@ -67,9 +85,8 @@ export default {
     get container () {
         return dialogContainer;
     },
-    alert (message, {title} = {}) {
-        ReactDOM.render(<AlertDialog message={message} title={title} />, dialogContainer);
-        dialogContainer.style.display = 'block';
+    async alert (message, options = {}) {
+        return await showDialog(AlertDialog, options);
     },
     close () {
         dialogContainer.style.display = '';

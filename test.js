@@ -26,12 +26,16 @@ const Main = React.createClass({
     save () {
         console.log(this.state);
     },
+    async testAlert () {
+        console.log(await Dialog.alert("This is a test"));
+        console.log('wat');
+    },
     render () {
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
         // console.log(this.state);
         return (
             <UI.Screen title="Testing" subtext="WOAH" width={600}>
-                <UI.Button block={true} text="Dialog" onTap={() => Dialog.alert("test")} raised={true} />
+                <UI.Button block={true} text="Dialog" onTap={this.testAlert} raised={true} />
             </UI.Screen>
         );
     }
