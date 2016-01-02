@@ -27,7 +27,7 @@ const Main = React.createClass({
         console.log(this.state);
     },
     async testAlert () {
-        console.log(await Dialog.alert(<div>{factotum.range(40, n => <div>{n}</div>)}</div>));
+        console.log(await Dialog.prompt(<div>{factotum.range(4, n => <div>{n}</div>)}</div>));
     },
     render () {
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";

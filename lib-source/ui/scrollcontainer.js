@@ -4,7 +4,7 @@ import fc from "lib-source/factotum.es7.js";
 import icons from "lib-source/ionic-icons.js";
 
 const ScrollContainer = React.createClass({
-    componentDidMount () {
+    componentDidMount() {
         const node = this.refs.scroller;
         let scrollInfo;
 
@@ -15,7 +15,7 @@ const ScrollContainer = React.createClass({
 
         // delete scrollContainers[this._rootNodeID];
     },
-    componentWillUnmount () {
+    componentWillUnmount() {
         const node = this.refs.scroller;
 
         scrollContainers[this._rootNodeID] = {
@@ -23,7 +23,7 @@ const ScrollContainer = React.createClass({
             scrollY: node.scrollTop
         };
     },
-    render () {
+    render() {
         const {style = {}, children} = this.props;
 
         return (

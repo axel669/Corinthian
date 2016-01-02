@@ -71,9 +71,13 @@ window.fs = fs;
 window.Picture = Picture;
 window.ionic = icons;
 window.Dialog = Dialog;
-// window.security = crypto;
+window.security = crypto;
 // window.microDB = microDB;
 // window.moment = moment;
+
+window.schedule = (time, func, ...args) => {
+    setTimeout(() => func(...args), time);
+};
 
 // zip.download = Zip.download;
 // zip.readArrayBuffer = Zip.readArrayBuffer;
@@ -116,7 +120,7 @@ App.settings = Object.freeze({
 App.storage = App.settings;
 
 App.session = Object.freeze({
-    get (name, defaultValue) {
+    get(name, defaultValue) {
         let value;
 
         value = sessionStorage.getItem(name);
@@ -125,10 +129,10 @@ App.session = Object.freeze({
         }
         return JSON.parse(value);
     },
-    set (name, value) {
+    set(name, value) {
         sessionStorage.setItem(name, JSON.stringify(value));
     },
-    getObject (...names) {
+    getObject(...names) {
         return names.reduce(
             (settings, name) => {
                 let defaultValue;
@@ -142,7 +146,7 @@ App.session = Object.freeze({
             {}
         );
     },
-    setObject (obj) {
+    setObject(obj) {
         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
     }
 });

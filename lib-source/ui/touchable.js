@@ -6,22 +6,22 @@ import icons from "lib-source/ionic-icons.js";
 let Touchable;
 
 Touchable = React.createClass({
-    getDefaultProps () {
+    getDefaultProps() {
         return {
             onTap () {},
             onTouchStart () {},
             onTouchEnd () {}
         };
     },
-    touchStart (evt) {
+    touchStart(evt) {
         ReactDOM.findDOMNode(this).classList.add("cor-touch-active");
         this.props.onTouchStart(evt);
     },
-    touchEnd (evt) {
+    touchEnd(evt) {
         ReactDOM.findDOMNode(this).classList.remove("cor-touch-active");
         this.props.onTouchEnd(evt);
     },
-    componentDidMount () {
+    componentDidMount() {
         ReactDOM.findDOMNode(this).addEventListener(
             'tap',
             evt => {
@@ -29,7 +29,7 @@ Touchable = React.createClass({
             }
         );
     },
-    render () {
+    render() {
         let Component;
         let props;
 
