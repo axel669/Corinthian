@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Gri",
+				"GridRadioItem"
+			],
+			[
 				"cor-",
 				"cor-screen-title-web"
 			],
@@ -510,10 +514,6 @@
 			[
 				"pati",
 				"patientExemplarEdges"
-			],
-			[
-				"Genera",
-				"GenerateSDEdges"
 			]
 		]
 	},
@@ -625,7 +625,7 @@
 			],
 			[
 				"Build Library",
-				""
+				"Minified"
 			]
 		],
 		[
@@ -753,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "Test Script",
+	"build_varint": "Minified",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -887,19 +887,24 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_container.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_scrollable.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_checkbox.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/material.scss",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
@@ -929,13 +934,11 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_screen.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/card.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_button.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_grid.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
 		"/C/Users/Axel1/Documents/autohotkey.ahk",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_flexbox.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/theme/_default.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/gesture.es7.js",
@@ -957,7 +960,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/index.js",
 		"/C/Users/Axel1/Documents/programming/js/test/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
@@ -984,7 +986,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/adriana.jpg",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/switch.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
@@ -1013,8 +1014,7 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material-dark.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/style/material.css"
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md"
 	],
 	"find":
 	{
@@ -1032,6 +1032,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"console.log",
 			"} ",
 			"100",
 			"console",
@@ -1158,8 +1159,7 @@
 			" {4}",
 			"DBType",
 			">;\n",
-			"DeletePoint",
-			"UpdatePoint"
+			"DeletePoint"
 		],
 		"highlight": true,
 		"in_selection": false,

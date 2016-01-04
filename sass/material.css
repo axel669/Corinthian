@@ -199,8 +199,12 @@ body.web {
   border-radius: 50%;
   line-height: 30px; }
 
-.cor-radio-item.cor-touch-active .cor-radio-icon {
+.cor-radio-item.cor-touch-active .cor-radio-icon, .cor-touch-active .cor-radio-inner {
   background-color: rgba(0, 0, 0, 0.2); }
+
+.cor-grid-radio-item-true {
+  background-color: #2FB1DF;
+  color: white; }
 
 .cor-rangeinput input[type=range] {
   -webkit-appearance: none;

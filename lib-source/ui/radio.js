@@ -2,6 +2,8 @@ import React from "react";
 // import clone from "react-addons-clone-with-props";
 import icons from "lib-source/ionic-icons.js";
 
+import Grid from "lib-source/ui/grid.js";
+import Button from "lib-source/ui/button.js";
 import Touchable from "lib-source/ui/touchable.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 
@@ -61,7 +63,7 @@ import CenterContent from "lib-source/ui/centercontent.js";
 //     }
 // });
 
-const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children, label}) => {
+const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children, label, layout = "radio", ...gridProps}) => {
     if (selectedIndex === null || selectedIndex < 0) {
         throw new Error(`selectedIndex not valid (given ${selectedIndex})`);
     }
@@ -70,8 +72,19 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
             onChange(index, value);
         }
     };
+    let Container;
+    let ChildComponent;
 
     children = React.Children.toArray(children);
+
+    if (layout === 'radio') {
+        Container = 'div';
+        ChildComponent = RadioItem;
+    } else {
+        Container = Grid;
+        ChildComponent = GridRadioItem;
+    }
+
     children = children.map(
         ({props}, index) => {
             const {value = index} = props;
@@ -82,14 +95,16 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
                 checked: index === selectedIndex
             };
 
-            return <RadioItem key={index} {...props} />;
+            return <ChildComponent key={index} {...props} />;
         }
     );
 
     return (
         <div>
             <div className="cor-component-label">{label}</div>
-            {children}
+            <Container {...gridProps}>
+                {children}
+            </Container>
         </div>
     );
 };
@@ -107,6 +122,18 @@ const RadioItem = ({checked, children, iconColor = null, parentIconColor, height
             </CenterContent>
         </Touchable>
     );
+};
+const GridRadioItem = ({checked, children, onTap}) => {
+    const className = `cor-grid-radio-item cor-grid-radio-item-${checked}`;
+
+    return (
+        <Touchable component="div" style={{width: '100%', height: '100%'}} onTap={onTap} className={className}>
+            <CenterContent width="100%" height="100%" className="cor-radio-inner">
+                {children}
+            </CenterContent>
+        </Touchable>
+    );
+    // return <UI.Button flush fill color={checked === true ? 'blue' : ''} text={children} onTap={onTap} />;
 };
 
 export default RadioGroup;

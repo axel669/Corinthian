@@ -56,6 +56,7 @@ const ConfirmDialog = ({message, title = "Confirm", resolve, confirmText = "Conf
 };
 const PromptDialog = React.createClass({
     getInitialState() {
+        return {value: ""};
     },
     componentDidMount() {
         schedule(
@@ -65,6 +66,7 @@ const PromptDialog = React.createClass({
     },
     render() {
         const {message, title = "Prompt", resolve, confirmText = "Confirm", cancelText = "Cancel", placeholder = ""} = this.props;
+        const {value} = this.state;
         return (
             <div className="cor-dialog-wrapper">
                 <div className="cor-dialog-title">
@@ -72,11 +74,11 @@ const PromptDialog = React.createClass({
                 </div>
                 <div className="cor-dialog-content cor-scrollfree">
                     {message}
-                    <TextInput ref="input" placeholder={placeholder} />
+                    <TextInput ref="input" placeholder={placeholder} value={value} onChange={value => this.setState({value})} />
                 </div>
                 <div className="cor-dialog-buttons">
                     <Button flush={true} height="100%" text={cancelText} onTap={() => closeDialog(null)} />
-                    <Button flush={true} height="100%" text={confirmText} onTap={() => {}} />
+                    <Button flush={true} height="100%" text={confirmText} onTap={() => closeDialog(value)} />
                 </div>
             </div>
         );

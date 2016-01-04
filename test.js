@@ -35,7 +35,18 @@ const Main = React.createClass({
         return (
             <UI.Screen title="Testing" subtext="WOAH" width={700}>
                 <UI.Button block={true} text="Dialog" onTap={this.testAlert} raised={true} />
-                {factotum.range(40, n => <div>{n}</div>)}
+
+                <UI.RadioGroup selectedIndex={0}>
+                    <UI.Option>First</UI.Option>
+                    <UI.Option>Second</UI.Option>
+                    <UI.Option>Third</UI.Option>
+                </UI.RadioGroup>
+
+                <UI.RadioGroup selectedIndex={this.state.selectedIndex} onChange={selectedIndex => this.setState({selectedIndex})} layout="grid" height={40} rowCount={1} colCount={4} label="Horizontal Test">
+                    <UI.Option>First</UI.Option>
+                    <UI.Option>Second</UI.Option>
+                    <UI.Option>Third</UI.Option>
+                </UI.RadioGroup>
             </UI.Screen>
         );
     }

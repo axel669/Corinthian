@@ -94,15 +94,22 @@ const Combobox = ({width, height = 40, children, onChange = () => {}, selectedIn
         displayedChild = children[selectedIndex].props.label;
     }
     selectChildren = children.map(
-        ({props: {label = null, children}}, index) =>
-            <option value={index} key={index}>{label}</option>
+        ({props: {label = null, children, hidden = false}}, index) => {
+            const style = (hidden === true) ? {display: 'none'} : null;
+            return <option value={index} key={index} style={style}>{label}</option>;
+        }
     );
-
-    return (
-        <div>
+    if (label !== null) {
+        label = (
             <div className="cor-component-label">
                 {label}
             </div>
+        );
+    }
+
+    return (
+        <div>
+            {label}
             <div style={style}>
                 <CenterContent width="100%" height="100%">
                     {displayedChild}

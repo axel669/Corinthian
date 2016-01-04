@@ -226,6 +226,9 @@ const Split = ({width, height = null, boundaries = null, dimensions = null, anch
     if (height === null) {
         throw new Error("Cannot create split without defined height");
     }
+    if (boundaries === null && dimensions === null) {
+        throw new Error("Must specify either 'dimensions' or 'boundaries'");
+    }
     let style;
     let positions;
 
@@ -279,7 +282,7 @@ const Split = ({width, height = null, boundaries = null, dimensions = null, anch
         // dimensions = sum(boundaries.reverse()).reverse();
     }
 
-    console.log(positions, dimensions);
+    // console.log(positions, dimensions);
 
     return [style, positions, dimensions];
 };
@@ -317,7 +320,7 @@ Split.Vertical = ({children, ...props}) => {
             childStyle = {top, bottom};
         }
 
-        return <div className="cor-split-vertical-child" style={childStyle}>{child}</div>;
+        return <div className="cor-split-vertical-child" style={childStyle} key={index}>{child}</div>;
     });
 
     return <div style={style}>{children}</div>;
@@ -356,7 +359,7 @@ Split.Horizontal = ({children, ...props}) => {
             childStyle = {left, right};
         }
 
-        return <div className="cor-split-horizontal-child" style={childStyle}>{child}</div>;
+        return <div className="cor-split-horizontal-child" style={childStyle} key={index}>{child}</div>;
     });
 
     return <div style={style}>{children}</div>;
