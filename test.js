@@ -13,7 +13,7 @@ const Main = React.createClass({
     getInitialState () {
         return {
             check: true,
-            selectedIndex: 0,
+            selectedIndex: -1,
             inputValue: 50
         };
     },

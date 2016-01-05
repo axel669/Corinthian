@@ -64,7 +64,7 @@ import CenterContent from "lib-source/ui/centercontent.js";
 // });
 
 const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children, label, layout = "radio", ...gridProps}) => {
-    if (selectedIndex === null || selectedIndex < 0) {
+    if (selectedIndex === null || selectedIndex < -1) {
         throw new Error(`selectedIndex not valid (given ${selectedIndex})`);
     }
     const selectItem = (index, value) => {
