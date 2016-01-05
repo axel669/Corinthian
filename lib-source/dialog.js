@@ -64,6 +64,10 @@ const PromptDialog = React.createClass({
             () => this.refs.input.focus()
         );
     },
+    finish(evt) {
+        evt.preventDefault();
+        closeDialog(this.state.value);
+    },
     render() {
         const {message, title = "Prompt", resolve, confirmText = "Confirm", cancelText = "Cancel", placeholder = ""} = this.props;
         const {value} = this.state;
@@ -74,11 +78,13 @@ const PromptDialog = React.createClass({
                 </div>
                 <div className="cor-dialog-content cor-scrollfree">
                     {message}
-                    <TextInput ref="input" placeholder={placeholder} value={value} onChange={value => this.setState({value})} />
+                    <form onSubmit={this.finish}>
+                        <TextInput ref="input" placeholder={placeholder} value={value} onChange={value => this.setState({value})} />
+                    </form>
                 </div>
                 <div className="cor-dialog-buttons">
-                    <Button flush={true} height="100%" text={cancelText} onTap={() => closeDialog(null)} />
-                    <Button flush={true} height="100%" text={confirmText} onTap={() => closeDialog(value)} />
+                    <Button flush height="100%" text={cancelText} onTap={() => closeDialog(null)} />
+                    <Button flush height="100%" text={confirmText} onTap={() => closeDialog(value)} />
                 </div>
             </div>
         );

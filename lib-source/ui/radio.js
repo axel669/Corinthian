@@ -63,7 +63,7 @@ import CenterContent from "lib-source/ui/centercontent.js";
 //     }
 // });
 
-const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children, label, layout = "radio", ...gridProps}) => {
+const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children, label = null, layout = "radio", ...gridProps}) => {
     if (selectedIndex === null || selectedIndex < -1) {
         throw new Error(`selectedIndex not valid (given ${selectedIndex})`);
     }
@@ -74,6 +74,7 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
     };
     let Container;
     let ChildComponent;
+    let title;
 
     children = React.Children.toArray(children);
 
@@ -83,6 +84,10 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
     } else {
         Container = Grid;
         ChildComponent = GridRadioItem;
+    }
+
+    if (label !== null) {
+        title = <div className="cor-component-label">{label}</div>;
     }
 
     children = children.map(
@@ -101,7 +106,7 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
 
     return (
         <div>
-            <div className="cor-component-label">{label}</div>
+            {title}
             <Container {...gridProps}>
                 {children}
             </Container>

@@ -15,8 +15,20 @@ const defaultValueFunc = {
     range: ({min = 0}) => min,
     switch: () => false,
     checkbox: () => false,
-    combobox: ({defaultIndex = 0, defaultValue = null}) => ({index: defaultIndex, value: defaultValue}),
-    radio: ({defaultIndex = 0, defaultValue = null}) => ({index: defaultIndex, value: defaultValue})
+    combobox: ({defaultIndex = 0, defaultValue = null, children}) => {
+        if (defaultIndex >= 0) {
+            children = React.Children.toArray(children);
+            defaultValue = children[defaultIndex].props.value;
+        }
+        return {index: defaultIndex, value: defaultValue};
+    },
+    radio: ({defaultIndex = 0, defaultValue = null, children}) => {
+        if (defaultIndex >= 0) {
+            children = React.Children.toArray(children);
+            defaultValue = children[defaultIndex].props.value;
+        }
+        return {index: defaultIndex, value: defaultValue};
+    }
 };
 
 const Form = React.createClass({
@@ -56,7 +68,7 @@ const Form = React.createClass({
         this.props.onSubmit(this.state);
     },
     render () {
-        const {submitText, children} = this.props;
+        const {submitText = "Submit", children} = this.props;
         const state = this.state;
         let content;
 

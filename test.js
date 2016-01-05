@@ -27,14 +27,15 @@ const Main = React.createClass({
         console.log(this.state);
     },
     async testAlert () {
-        console.log(await Dialog.prompt(<div>{factotum.range(4, n => <div>{n}</div>)}</div>));
+        console.log(await Dialog.prompt("Input?", {placeholder: 'woah'}));
     },
     render () {
+        const {selectedIndex} = this.state;
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
         // console.log(this.state);
         return (
             <UI.Screen title="Testing" subtext="WOAH" width={700}>
-                <UI.Button block={true} text="Dialog" onTap={this.testAlert} raised={true} />
+                <UI.Button block raised text="Dialog" onTap={this.testAlert} />
 
                 <UI.RadioGroup selectedIndex={0}>
                     <UI.Option>First</UI.Option>
@@ -42,11 +43,23 @@ const Main = React.createClass({
                     <UI.Option>Third</UI.Option>
                 </UI.RadioGroup>
 
-                <UI.RadioGroup selectedIndex={this.state.selectedIndex} onChange={selectedIndex => this.setState({selectedIndex})} layout="grid" height={40} rowCount={1} colCount={4} label="Horizontal Test">
+                <UI.RadioGroup selectedIndex={selectedIndex} onChange={this.updateSetting('selectedIndex')} layout="grid" height={40} rowCount={1} colCount={3} label="Horizontal Test">
                     <UI.Option>First</UI.Option>
                     <UI.Option>Second</UI.Option>
                     <UI.Option>Third</UI.Option>
                 </UI.RadioGroup>
+
+                <UI.Card>
+                    <UI.Form onSubmit={::console.log}>
+                        <UI.Item inputType="text" name="blah" />
+                        <UI.Item inputType="text" name="woah" />
+                        <UI.Item name="radio" inputType="radio" layout="grid" height={40} rowCount={1} colCount={3} label="Horizontal Test" defaultIndex={-1}>
+                            <UI.Option value={100}>First</UI.Option>
+                            <UI.Option value={110}>Second</UI.Option>
+                            <UI.Option value={120}>Third</UI.Option>
+                        </UI.Item>
+                    </UI.Form>
+                </UI.Card>
             </UI.Screen>
         );
     }

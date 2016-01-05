@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"def",
+				"defaultValue"
+			],
+			[
+				"defa",
+				"defaultValue"
+			],
+			[
+				"defau",
+				"defaultIndex"
+			],
+			[
 				"Gri",
 				"GridRadioItem"
 			],
@@ -296,10 +308,6 @@
 				"ReactRouter"
 			],
 			[
-				"defa",
-				"getDefaultProps"
-			],
-			[
 				"background",
 				"backgroundSize"
 			],
@@ -506,14 +514,6 @@
 			[
 				"Web",
 				"WebkitBoxShadow"
-			],
-			[
-				"Stop",
-				"Stopwatch"
-			],
-			[
-				"pati",
-				"patientExemplarEdges"
 			]
 		]
 	},
@@ -593,7 +593,7 @@
 			],
 			[
 				"Build Library",
-				"Test Script"
+				"Minified"
 			]
 		],
 		[
