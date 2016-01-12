@@ -117,6 +117,10 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
     }
     textStyle = {padding};
 
+    if (fill === true) {
+        style.height = '100%';
+    }
+
     return (
         <Touchable component="div" className={className} style={style} onTap={onTap}>
             <div className="cor-button-overlay" />
