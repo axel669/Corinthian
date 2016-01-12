@@ -33,7 +33,7 @@ const defaultValueFunc = {
 
 const Form = React.createClass({
     getInitialState () {
-        const {children} = this.props;
+        const children = React.Children.toArray(this.props.children);
 
         return children.reduce(
             (state, {props}) => {
@@ -68,7 +68,8 @@ const Form = React.createClass({
         this.props.onSubmit(this.state);
     },
     render () {
-        const {submitText = "Submit", children} = this.props;
+        const {submitText = "Submit"} = this.props;
+        const children = React.Children.toArray(this.props.children);
         const state = this.state;
         let content;
 

@@ -131,7 +131,9 @@ const AppScreen = ({children, title = null, subtext = null, scrollable = true, b
     }
 
     if (scrollable === true) {
-        content = <ScrollContainer>{children}</ScrollContainer>;
+        content = <ScrollContainer style={{paddingTop: 5}}>{children}</ScrollContainer>;
+    } else {
+        contentStyle.paddingTop = 5;
     }
 
     return (

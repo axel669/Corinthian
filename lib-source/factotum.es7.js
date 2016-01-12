@@ -153,7 +153,7 @@ const group = (iterable, keyFunc) => {
     return groups;
 };
 
-const ajax = async (url, {post = null, headers = {}, formData = null, timeout = 0, type = null} = {}) => {
+const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, type = null} = {}) => {
     let method;
     let request;
 
