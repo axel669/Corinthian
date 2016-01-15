@@ -98,31 +98,6 @@ read = (entry, type = null) => {
             }
         }
     );
-    // return new Promise(
-    //     (resolve, reject) => {
-    //         entry.file(
-    //             file => {
-    //                 let reader;
-
-    //                 reader = new FileReader();
-    //                 type = type || 'text';
-
-    //                 reader.onloadend = () => resolve(reader.result);
-
-    //                 switch (type) {
-    //                     case "text":
-    //                         reader.readAsText(file);
-    //                         break;
-    //                     case "url":
-    //                         reader.readAsDataURL(file);
-    //                         break;
-    //                     default:
-    //                         throw new Error(`Unknown file read type: ${type}`);
-    //                 }
-    //             }
-    //         );
-    //     }
-    // );
 };
 
 write = (entry, data, mode) => {

@@ -32,6 +32,12 @@ var babelTransform = [
             compact: false,
             ignore: /(lib|node_modules|external)\/.*/
         }
+    ],
+    [
+        'stringify',
+        {
+            extensions: ['.txt', '.html', '.source']
+        }
     ]
 ];
 if (args.transforms !== null) {

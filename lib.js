@@ -7,13 +7,9 @@ import ReactDOM from "react-dom";
 import * as ReactRouter from "react-router";
 import {createHashHistory} from "history";
 import moment from "moment";
-// import alertify from "external/alertify.js";
-// import "external/zip.js";
-// import "external/zip-ext.js";
-// import "external/gesture.js";
 import UI from "lib-source/ui.es7.jsx";
 import factotum from "lib-source/factotum.es7.js";
-// import {Zip} from "lib-source/zip.es7.js";
+import Zip from "lib-source/zip.es7.js";
 import fs from "lib-source/fs.es7.js";
 import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
@@ -22,7 +18,6 @@ import Dialog from "lib-source/dialog.js";
 import "lib-source/gesture.es7.js";
 
 import Environment from "lib-source/environment.js";
-// import microDB from "lib-source/microdb.js";
 
 let {Router} = ReactRouter;
 
@@ -74,6 +69,7 @@ window.Dialog = Dialog;
 window.security = crypto;
 // window.microDB = microDB;
 // window.moment = moment;
+window.Zip = Zip;
 
 window.schedule = (time, func, ...args) => {
     setTimeout(() => func(...args), time);
