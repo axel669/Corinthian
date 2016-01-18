@@ -107,16 +107,31 @@ window.zip = null;
 //     );
 // };
 
-const download = url => new Promise(
+// const download = url => new Promise(
+//     (resolve, reject) => {
+//         zipLib.createReader(
+//             new zipLib.HttpReader(url),
+//             reader => {
+//                 reader.getEntries(entries => resolve([entries, reader]));
+//             }
+//         );
+//     }
+// );
+
+const readArrayBuffer = buffer => new Promise(
     (resolve, reject) => {
         zipLib.createReader(
-            new zipLib.HttpReader(url),
+            new zipLib.ArrayBufferReader(buffer),
             reader => {
                 reader.getEntries(entries => resolve([entries, reader]));
             }
         );
     }
 );
+const download = async (url, onProgress) => {
+    const buffer = await factotum.ajax(url, {type: 'arraybuffer', onProgress});
+    return await readArrayBuffer(buffer.response);
+};
 
 const zipFile = ([entries, reader]) => {
     const entrySort = (first, second) => {
@@ -134,7 +149,7 @@ const zipFile = ([entries, reader]) => {
     console.log(entries);
 
     return {
-        getFile(
+        // getFile(
         close() {
             reader.close();
         }
@@ -142,8 +157,8 @@ const zipFile = ([entries, reader]) => {
 };
 
 export default {
-    async download(url) {
-        const zipInfo = await download(url);
+    async download(url, onProgress) {
+        const zipInfo = await download(url, onProgress);
         return zipFile(zipInfo);
     }
 };

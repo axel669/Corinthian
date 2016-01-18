@@ -153,7 +153,7 @@ const group = (iterable, keyFunc) => {
     return groups;
 };
 
-const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, type = null} = {}) => {
+const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, type = null, onProgress = () => {}} = {}) => {
     let method;
     let request;
 
@@ -197,6 +197,10 @@ const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, typ
             request.addEventListener(
                 "timeout",
                 reject
+            );
+            request.addEventListener(
+                "progress",
+                onProgress
             );
 
             try {
