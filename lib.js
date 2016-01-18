@@ -147,6 +147,16 @@ App.session = Object.freeze({
     }
 });
 
+window.test = async () => {
+    const zipFile = await Zip.download(
+        `http://axel669.ngrok.io/app-base.zip?t=${Date.now()}`,
+        evt => console.log(`downloaded: ${evt.loaded / evt.total}`)
+    );
+    const appDir = await fs.dir.entry(".");
+
+    await zipFile.extractTo(appDir, ::console.log);
+};
+
 
 // App.initHistory = (...backLog) => {
 //     history.replaceState(null, "", "#/");

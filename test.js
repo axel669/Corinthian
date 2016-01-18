@@ -75,6 +75,13 @@ const Test = React.createClass({
     }
 });
 
+// (async () => {
+//     let rootDir = await fs.appFileSystem;
+//     console.log(rootDir);
+//     rootDir.getFile("app-base/", null, ::console.log, ::console.error);
+//     rootDir.getDirectory("app-base/", null, ::console.log, ::console.error);
+// })();
+
 App.start(
     <Route>
         <Route path="/" component={Main} />

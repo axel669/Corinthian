@@ -118,6 +118,23 @@ window.zip = null;
 //     }
 // );
 
+const readEntry = (entry, writer) => new Promise(
+    resolve => entry.getData(writer, resolve)
+);
+const zipEntry = entry => {
+    return {
+        readText() {
+            return readEntry(entry, new zipLib.TextWriter());
+        },
+        readBlob() {
+            return readEntry(entry, new zipLib.BlobWriter());
+        },
+        get entry() {
+            return entry;
+        }
+    };
+};
+
 const readArrayBuffer = buffer => new Promise(
     (resolve, reject) => {
         zipLib.createReader(
@@ -143,13 +160,38 @@ const zipFile = ([entries, reader]) => {
         }
         return 0;
     };
-
-    entries = entries.sort(entrySort);
-
-    console.log(entries);
+    const files = entries.sort(entrySort).reduce(
+        (collection, entry) => {
+            collection[entry.filename] = entry;
+            return collection;
+        },
+        {}
+    );
 
     return {
-        // getFile(
+        getFile(name) {
+            if (files.hasOwnProperty(name) === true) {
+                return zipEntry(files[name]);
+            }
+            return null;
+        },
+        async extractTo(directoryEntry, onProgress = () => {}) {
+            for(let filename of Object.keys(files)) {
+                const entry = files[filename];
+                const fileName = `${directoryEntry.fullPath}${entry.filename}`;
+                if (entry.directory === true) {
+                    await fs.dir.create(fileName);
+                } else {
+                    const fileEntry = await fs.file.create(fileName);
+                    await fs.file.write(
+                        fileEntry,
+                        await zipEntry(entry).readBlob()
+                    );
+                }
+                onProgress(entry);
+            }
+            return null;
+        },
         close() {
             reader.close();
         }
