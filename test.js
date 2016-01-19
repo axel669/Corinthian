@@ -35,31 +35,9 @@ const Main = React.createClass({
         // console.log(this.state);
         return (
             <UI.Screen title="Testing" subtext="WOAH" width={700}>
-                <UI.Button block raised text="Dialog" onTap={this.testAlert} />
-
-                <UI.RadioGroup selectedIndex={0}>
-                    <UI.Option>First</UI.Option>
-                    <UI.Option>Second</UI.Option>
-                    <UI.Option>Third</UI.Option>
-                </UI.RadioGroup>
-
-                <UI.RadioGroup selectedIndex={selectedIndex} onChange={this.updateSetting('selectedIndex')} layout="grid" height={40} rowCount={1} colCount={3} label="Horizontal Test">
-                    <UI.Option>First</UI.Option>
-                    <UI.Option>Second</UI.Option>
-                    <UI.Option>Third</UI.Option>
-                </UI.RadioGroup>
-
-                <UI.Card>
-                    <UI.Form onSubmit={::console.log}>
-                        <UI.Item inputType="text" name="blah" />
-                        <UI.Item inputType="text" name="woah" />
-                        <UI.Item name="radio" inputType="radio" layout="grid" height={40} rowCount={1} colCount={3} label="Horizontal Test" defaultIndex={-1}>
-                            <UI.Option value={100}>First</UI.Option>
-                            <UI.Option value={110}>Second</UI.Option>
-                            <UI.Option value={120}>Third</UI.Option>
-                        </UI.Item>
-                    </UI.Form>
-                </UI.Card>
+                <UI.Image source={"file:///data/data/com.centerforautism.libtest/files/files/test.jpg"} height={400} />
+                <UI.Image source={"content://media/external/images/media/130"} height={400} />
+                {/*<UI.Image source="http://www.eonline.com/eol_images/Entire_Site/2015030/rs_560x415-150130085841-1024.Charlotte2-jmd-013015_copy.jpg" height={400} />*/}
             </UI.Screen>
         );
     }

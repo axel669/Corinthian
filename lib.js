@@ -157,6 +157,8 @@ window.test = async () => {
     await zipFile.extractTo(appDir, ::console.log);
 };
 
+window.cblog = ::console.log;
+
 
 // App.initHistory = (...backLog) => {
 //     history.replaceState(null, "", "#/");

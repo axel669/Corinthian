@@ -15,11 +15,15 @@ let Picture = {
             (resolve, reject) => {
                 camera.getPicture(
                     async uri => {
+                        // console.log(uri);
                         if (uri.search("com.android") !== -1) {
                             uri = "content://media/external/images/media/" + uri.split("%3A")[1];
                         }
 
-                        resolve(await fs.resolveURL(uri));
+                        resolve(uri);
+                        // console.log(uri);
+
+                        // resolve(await fs.resolveURL(uri));
                     },
                     () => resolve(null),
                     {
