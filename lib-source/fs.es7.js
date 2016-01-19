@@ -330,43 +330,108 @@ const fsType = {
     file: "getFile",
     dir: "getDirectory"
 };
-const get = (root, type, fileName) => new Promise(
-    (resolve, reject) => root.[type](fileName, null, resolve, reject)
+// const create = (root, type, fileName) => new Promise(
+//     (resolve, reject) => root[type](fileName, {create: true}, resolve, reject)
+// );
+const get = (type, fileName, options = null) => new Promise(
+    async (resolve, reject) => {
+        const protocol = getPrototcol(fileName);
+        const root = await ((protocol === 'app') ? appFileSystem : tempFileSystem);
+
+        root[type](
+            fileName.slice(protocol.length + 3),
+            options,
+            resolve,
+            reject
+        );
+    }
 );
-const exists = (root, type, fileName) => new Promise(
-    (resolve, reject) => root[type](
-        fileName,
-        {create: false},
-        () => resolve(true),
-        err => {
-            if (err.code === 1) {
-                resolve(false);
-            } else {
-                reject(err);
+const exists = (type, fileName) => new Promise(
+    async (resolve, reject) => {
+        const protocol = getPrototcol(fileName);
+        const root = await ((protocol === 'app') ? appFileSystem : tempFileSystem);
+
+        console.log(root, fileName.slice(protocol.length + 3));
+
+        root[type](
+            fileName.slice(protocol.length + 3),
+            {create: false},
+            () => resolve(true),
+            err => {
+                if (err.code === 1) {
+                    resolve(false);
+                } else {
+                    reject(err);
+                }
             }
-        }
-    )
+        );
+    }
 );
 const getNativeURL = async (name, isFile) => {
     const protocol = getPrototcol(name);
 
-    switch (protocol) {
-        case 'app': {
-            const file = await get(await appFileSystem, fsType.file, name.slice(6));
-            return file.nativeURL;
-        }
-        case 'temp': {
-            const file = await getFile(await tempFileSystem, fsType.file, name.slice(7));
-            return file.nativeURL;
-        }
-        default: {
-            return name;
+    if (protocol === 'app' || protocol === 'temp') {
+        const file = get(fsType.file, name);
+        return file.nativeURL;
+    }
+
+    return name;
+
+    // switch (protocol) {
+    //     case 'app': {
+    //         const file = await get(fsType.file, name);
+    //         return file.nativeURL;
+    //     }
+    //     case 'temp': {
+    //         const file = await getFile(fsType.file, name);
+    //         return file.nativeURL;
+    //     }
+    //     default: {
+    //         return name;
+    //     }
+    // }
+};
+
+const getFileWriter = entry => new Promise((resolve, reject) => entry.createWriter(resolve, reject));
+const writeFile = (fileEntry, data, mode) => new Promise(
+    async (resolve, reject) => {
+        const fileWriter = await getFileWriter(fileEntry);
+        const writeData = () => {
+            fileWriter.onwriteend = () => resolve(null);
+            fileWriter.write(data);
+        };
+
+        if (mode === 'truncate' && fileWriter.length !== 0) {
+            fileWriter.seek(0);
+            fileWriter.onwriteend = writeData;
+            fileWriter.truncate(0);
+        } else {
+            if (mode === 'append') {
+                fileWriter.seek(fileWriter.length);
+            }
+            writeData();
         }
     }
-};
+);
 
 export default {
     file: {
+        async exists(fileName) {
+            const protocol = getPrototcol(fileName);
+
+            if (protocol !== 'app' && protocol !== 'temp') {
+                throw new Error("Should not be checking for external file existence");
+            }
+
+            return await exists(fsType.file, name);
+
+            // if (protocol === 'app') {
+            //     return await exists(await appFileSystem, fsType.file, fileName.slice(6));
+            // }
+            // if (protocol === 'temp') {
+            //     return await exists(await tempFileSystem, fsType.file, fileName.slice(7));
+            // }
+        },
         async read(fileName, type = 'text') {
             const nativeURL = await getNativeURL(fileName, true);
 
@@ -376,17 +441,25 @@ export default {
 
             return (await factotum.ajax(nativeURL, {type})).response;
         },
-        async exists(fileName) {
+        async write(fileName, data, mode = 'truncate') {
             const protocol = getPrototcol(fileName);
 
-            if (protocol === 'app') {
-                return await exists(await appFileSystem, fsType.file, fileName.slice(6));
-            }
-            if (protocol === 'temp') {
-                return await exists(await tempFileSystem, fsType.file, fileName.slice(7));
+            // if (protocol === 'app') {
+            //     fileEntry = await create(await appFileSystem, fsType.file, fileName.slice(6));
+            // }
+            // if (protocol === 'temp') {
+            //     fileEntry = await create(await tempFileSystem, fsType.file, fileName.slice(7));
+            // }
+
+            if (protocol !== 'app' && protocol !== 'temp') {
+                throw new Error("Should not be writing to ecternal files directly");
             }
 
-            throw new Error("Should not be checking for external file existence");
+            if (typeof data === 'string') {
+                data = new Blob([data], {type: 'text/plain'});
+            }
+
+            return writeFile(await get(fsType.file, name, {create: true}), data, mode);
         }
     },
     resolveURL

@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"pto",
+				"protocol"
+			],
+			[
+				"proto",
+				"protocol"
+			],
+			[
+				"wri",
+				"writeData"
+			],
+			[
+				"pro",
+				"protocol"
+			],
+			[
+				"promise",
+				"Promise"
+			],
+			[
 				"def",
 				"defaultValue"
 			],
@@ -494,26 +514,6 @@
 			[
 				"Respo",
 				"ResponseIsList"
-			],
-			[
-				"ser",
-				"services"
-			],
-			[
-				"q",
-				"query"
-			],
-			[
-				"pro",
-				"processButton"
-			],
-			[
-				"progre",
-				"progressLoad"
-			],
-			[
-				"Web",
-				"WebkitBoxShadow"
 			]
 		]
 	},
