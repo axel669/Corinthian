@@ -175,18 +175,25 @@ const zipFile = ([entries, reader]) => {
             }
             return null;
         },
-        async extractTo(directoryEntry, onProgress = () => {}) {
+        async extractTo(dest, onProgress = () => {}) {
             for(let filename of Object.keys(files)) {
                 const entry = files[filename];
-                const fileName = `${directoryEntry.fullPath}${entry.filename}`;
+                // const fileName = `${directoryEntry.fullPath}${entry.filename}`;
+                console.log(`${dest}${filename}`);
                 if (entry.directory === true) {
-                    await fs.dir.create(fileName);
+                    // await fs.dir.create(fileName);
+                    await fs.dirCreate(`${dest}${filename}`);
                 } else {
-                    const fileEntry = await fs.file.create(fileName);
-                    await fs.file.write(
-                        fileEntry,
-                        await zipEntry(entry).readBlob()
+                    await fs.fileWrite(
+                        `${dest}${filename}`,
+                        await zipEntry(entry).readBlob
                     );
+                    // console.log(entry);
+                    // const fileEntry = await fs.file.create(fileName);
+                    // await fs.file.write(
+                    //     fileEntry,
+                    //     await zipEntry(entry).readBlob()
+                    // );
                 }
                 onProgress(entry);
             }
