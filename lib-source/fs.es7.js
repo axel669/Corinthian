@@ -321,29 +321,50 @@ const tempFileSystem = new Promise(
     }
 );
 
-const getPrototcol = fileName => fileName.slice(0, fileName.indexOf("://"));
-const getFilePath = fileName => fileName.slice(fileName.indexOf("://") + 3);
-const resolveURL = url => new Promise(
-    resolve => resolveLocalFileSystemURL(url, resolve, () => resolve(null))
-);
-
+const protoSeparater = "::";
 const fsType = {
     file: "getFile",
     dir: "getDirectory"
 };
-// const create = (root, type, fileName) => new Promise(
-//     (resolve, reject) => root[type](fileName, {create: true}, resolve, reject)
-// );
-const get = (type, fileName, options = null) => new Promise(
+// const getPrototcol = name => name.slice(0, name.indexOf(protoSeparater));
+// const getPath = name => name.slice(name.indexOf(protoSeparater) + protoSeparater.length);
+const getInfo = name => {
+    const info = name.split(protoSeparater);
+
+    if (info.length === 1) {
+        return [null, info[0]];
+    }
+    return info;
+};
+const isFile = name => name.slice(-1) !== '/';
+const getName = name => {
+    if (isFile(name) === false) {
+        name = name.slice(0, -1);
+        return name.slice(name.lastIndexOf('/')) + '/';
+    }
+
+    return name.slice(name.lastIndexOf('/'));
+};
+const getType = name => {
+    const
+};
+
+const resolveURL = url => new Promise(
+    resolve => resolveLocalFileSystemURL(url, resolve, () => resolve(null))
+);
+
+const get = (fileName, options = null) => new Promise(
     async (resolve, reject) => {
-        const protocol = getPrototcol(fileName);
+        const [protocol, fullPath] = getInfo(fileName);
+
         if (protocol !== 'app' && protocol !== 'temp') {
-            resolve(await resolveURL(fileName));
+            resolve(await resolveURL(fullPath));
         } else {
             const root = await ((protocol === 'app') ? appFileSystem : tempFileSystem);
+            const type = (isFile(fullPath) === true) ? fsType.file : fsType.dir;
 
             root[type](
-                fileName.slice(protocol.length + 3),
+                getName(fullPath),
                 options,
                 resolve,
                 reject
@@ -490,13 +511,11 @@ export default {
         read(dirName) {
             return new Promise(
                 async (resolve, reject) => {
-                    const entry = await get(fsType.dir, dirName, {create: false});
+                    const entry = await get(dirName, {create: false});
                     const dirReader = entry.createReader();
 
                     dirReader.readEntries(
-                        entries => {
-                            console.log(entries);
-                        },
+                        entries => resolve(entries.map(entry => entry.fullPath)),
                         reject
                     );
                 }

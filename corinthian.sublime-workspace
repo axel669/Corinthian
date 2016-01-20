@@ -1032,6 +1032,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"fileName",
 			"reduce",
 			"console.log",
 			"} ",
@@ -1158,8 +1159,7 @@
 			"\\bTo\\b",
 			"To",
 			" {4}",
-			"DBType",
-			">;\n"
+			"DBType"
 		],
 		"highlight": true,
 		"in_selection": false,
