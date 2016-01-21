@@ -167,6 +167,7 @@ const zipFile = ([entries, reader]) => {
         },
         {}
     );
+    entries = entries.sort(entrySort);
 
     return {
         getFile(name) {
@@ -176,28 +177,29 @@ const zipFile = ([entries, reader]) => {
             return null;
         },
         async extractTo(dest, onProgress = () => {}) {
-            for(let filename of Object.keys(files)) {
-                const entry = files[filename];
-                // const fileName = `${directoryEntry.fullPath}${entry.filename}`;
-                console.log(`${dest}${filename}`);
+            let index;
+
+            index = 0;
+            for(const entry of entries) {
+                const {filename} = entry;
+
                 if (entry.directory === true) {
-                    // await fs.dir.create(fileName);
                     await fs.dirCreate(`${dest}${filename}`);
                 } else {
                     await fs.fileWrite(
                         `${dest}${filename}`,
                         await zipEntry(entry).readBlob
                     );
-                    // console.log(entry);
-                    // const fileEntry = await fs.file.create(fileName);
-                    // await fs.file.write(
-                    //     fileEntry,
-                    //     await zipEntry(entry).readBlob()
-                    // );
                 }
-                onProgress(entry);
+                index += 1;
+                onProgress({
+                    extracted: index,
+                    total: entries.length,
+                    currentFile: zipEntry(entry),
+                    nextFile: (index < entries.length) ? zipEntry(entries[index]) : null
+                });
             }
-            return null;
+            return true;
         },
         close() {
             reader.close();

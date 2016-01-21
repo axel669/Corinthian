@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"enrt",
+				"entrySort"
+			],
+			[
 				"pto",
 				"protocol"
 			],
@@ -510,10 +514,6 @@
 			[
 				"Ke",
 				"KeyProperty"
-			],
-			[
-				"Respo",
-				"ResponseIsList"
 			]
 		]
 	},
