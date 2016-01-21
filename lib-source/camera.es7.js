@@ -15,15 +15,11 @@ let Picture = {
             (resolve, reject) => {
                 camera.getPicture(
                     async uri => {
-                        // console.log(uri);
                         if (uri.search("com.android") !== -1) {
                             uri = "content://media/external/images/media/" + uri.split("%3A")[1];
                         }
 
                         resolve(uri);
-                        // console.log(uri);
-
-                        // resolve(await fs.resolveURL(uri));
                     },
                     () => resolve(null),
                     {
@@ -40,7 +36,7 @@ let Picture = {
         return new Promise(
             (resolve, reject) => {
                 camera.getPicture(
-                    async uri => resolve(await fs.resolveURL(uri)),
+                    async uri => resolve(uri),
                     () => resolve(null),
                     {
                         quality: 100,

@@ -53,6 +53,9 @@ window.moment = (...args) => {
         }
     );
 };
+Object.keys(moment).forEach(key => {
+    window.moment[key] = moment[key];
+});
 
 window.factotum = factotum;
 // window.alertify = alertify;
