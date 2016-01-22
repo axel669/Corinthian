@@ -288,6 +288,10 @@ const Main = React.createClass({
     render () {
         const {selectedIndex} = this.state;
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
+
+        const bs = document.createElement("style");
+        bs.innerHTML=".test{width: 100%; height: 100%; background-color: cyan;} .Test{width: 100%; height: 100%; background-color: green;}";
+        document.querySelector("head").appendChild(bs);
         // console.log(this.state);
         return (
             <UI.Screen title="BIP" subtext="Johnny" width={700}>
@@ -298,6 +302,7 @@ const Main = React.createClass({
                 <UI.Button text="Show BIPs" onTap={() => console.log(bips)} />
                 <div className="test" />
                 <span className="test" />
+                <div className="Test" />
                 <div>test</div>
             </UI.Screen>
         );
@@ -314,13 +319,75 @@ const Test = React.createClass({
     }
 });
 
+// Style.create(
+//     "corinthian",
+//     {element: "div", className: 'test'},
+//     {
+//         width: 100,
+//         height: 100,
+//         backgroundColor: 'cyan'
+//     }
+// );
+const theme = {
+    button: {
+        color: null,
+        textColor: null,
+        hoverColor: null,
+        activeColor: null
+    }
+};
 Style.create(
-    "corinthian",
-    {element: "div", className: 'test'},
+    "core/button",
     {
-        width: 100,
-        height: 100,
-        backgroundColor: 'cyan'
+        '.wrapper': {
+            position: 'relative',
+            textAlign: 'center',
+            fontSize: 18,
+            margin: 4,
+            overflow: 'hidden',
+            zIndex: "+0",
+            backgroundColor: 'transparent',
+            color: theme.button.color,
+            fontWeight: 'bold',
+            whiteSpace: 'pre',
+            display: 'inline-block'
+        },
+        ".wrapper + .raised": {
+            backgroundColor: theme.button.color,
+            color: theme.button.textColor
+        },
+        '.text': {
+            width: '100%',
+            padding: 5,
+            paddingLeft: 15,
+            paddingRight: 15
+        },
+        '.overlay': {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+        },
+        "$ core:desktop": {
+            '.overlay': {
+                ": hover": {
+                    backgroundColor: theme.button.hoverColor
+                }
+            }
+        },
+        "~ touch-active": {
+            "> .overlay": {
+                backgroundColor: theme.button.activeColor
+            }
+        },
+        "$ core:dsktop": {
+            "~ .touch-active": {
+                "> .overlay": {
+                    backgroundColor: theme.button.activeColor
+                }
+            }
+        }
     }
 );
 
