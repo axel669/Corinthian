@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"proce",
+				"processDefHelper"
+			],
+			[
+				"pr",
+				"processDefHelper"
+			],
+			[
+				"define",
+				"definedStyles"
+			],
+			[
+				"styl",
+				"styleTag"
+			],
+			[
+				"par",
+				"parseKey"
+			],
+			[
+				"parseKey",
+				"parseKeyPiece"
+			],
+			[
 				"enrt",
 				"entrySort"
 			],
@@ -490,30 +514,6 @@
 			[
 				"Key",
 				"KeyProperty"
-			],
-			[
-				"respon",
-				"ResponseClassName"
-			],
-			[
-				"Insert",
-				"InsertPoint"
-			],
-			[
-				"Inser",
-				"InsertLink"
-			],
-			[
-				"respo",
-				"ResponseClassName"
-			],
-			[
-				"requ",
-				"RequestClassName"
-			],
-			[
-				"Ke",
-				"KeyProperty"
 			]
 		]
 	},
@@ -887,6 +887,14 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_button.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/card.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_card.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/theme/_default.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
+		"/C/Users/Axel1/Documents/autohotkey.ahk",
+		"/C/Users/Axel1/Downloads/parser.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
@@ -898,8 +906,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_container.sass",
@@ -935,17 +941,12 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/raisedbutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/image.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_screen.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/card.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_button.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_grid.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
-		"/C/Users/Axel1/Documents/autohotkey.ahk",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_flexbox.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/theme/_default.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/gesture.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/external/gesture.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_card.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/babel-polyfill/browser.js",
 		"/C/Users/cmorgan2/Documents/programming/tunnel",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
@@ -1013,8 +1014,7 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.css",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/style/material-dark.css",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/README.md"
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/.htaccess"
 	],
 	"find":
 	{
@@ -1032,6 +1032,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"classDef",
+			"App",
+			"AppStyle",
+			"AppTheme",
+			"while",
+			"\\w+",
 			"fileName",
 			"reduce",
 			"console.log",
@@ -1153,13 +1159,7 @@
 			";\n",
 			"getroute",
 			"  ",
-			"int",
-			"db.trial",
-			"filter",
-			"\\bTo\\b",
-			"To",
-			" {4}",
-			"DBType"
+			"int"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1167,6 +1167,9 @@
 		"regex": true,
 		"replace_history":
 		[
+			"Style",
+			"Theme",
+			"\"$0\",",
 			"startTouch",
 			"touchDataLast",
 			"touchDataStart",
@@ -1281,7 +1284,7 @@
 	},
 	"incremental_find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"input":
 	{

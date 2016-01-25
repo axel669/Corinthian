@@ -16,6 +16,7 @@ import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
 import Dialog from "lib-source/dialog.js";
 import "lib-source/gesture.es7.js";
+import {Style, Theme} from "lib-source/style.js";
 
 import Environment from "lib-source/environment.js";
 
@@ -58,7 +59,6 @@ Object.keys(moment).forEach(key => {
 });
 
 window.factotum = factotum;
-// window.alertify = alertify;
 window.regex = XRegExp;
 window.PubSub = PubSub;
 window.React = React;
@@ -73,6 +73,8 @@ window.security = crypto;
 // window.microDB = microDB;
 // window.moment = moment;
 window.Zip = Zip;
+window.Style = Style;
+window.Theme = Theme;
 
 window.schedule = (time, func, ...args) => {
     setTimeout(() => func(...args), time);
@@ -284,9 +286,25 @@ window.cblog = ::console.log;
 
 let appComponent;
 
+Style.create(
+    "core",
+    {
+        ".desktop": {},
+        ".web": {
+            overflowY: 'scroll',
+            WebkitOverflowScrolling: 'touch'
+        }
+    }
+);
+
 // appContainer = document.querySelector("#AppContainer");
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
     const appContainer = document.createElement("div");
+    const bodyClasses = document.body.className;
+    const additionalClasses = Style.getClassNames({
+        "core:desktop": Environment.mobile === false,
+        "core:web": Environment.app === false
+    });
     let bodyMods;
 
     document.body.appendChild(appContainer);
@@ -296,13 +314,9 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
     if (Environment.mobile === false) {
         appContainer.style.position = null;
         appContainer.style.overflow = 'visible';
-        bodyMods.push("desktop");
-        // document.body.className = (document.body.className + " desktop").trim();
     }
-    if (Environment.app === false) {
-        bodyMods.push("web");
-    }
-    document.body.className = [document.body.className, ...bodyMods].join(' ');
+    document.body.className = `${bodyClasses} ${additionalClasses}`.trim();
+    // document.body.className = [document.body.className, ...bodyMods].join(' ');
     // let bbox;
     // let container;
 

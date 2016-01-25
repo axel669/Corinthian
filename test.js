@@ -1,4 +1,4 @@
-import Style from "lib-source/style.js";
+// import Style from "lib-source/style.js";
 
 const {Route} = ReactRouter;
 // let {RaisedButton, Screen} = UI;
@@ -288,10 +288,6 @@ const Main = React.createClass({
     render () {
         const {selectedIndex} = this.state;
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
-
-        const bs = document.createElement("style");
-        bs.innerHTML=".test{width: 100%; height: 100%; background-color: cyan;} .Test{width: 100%; height: 100%; background-color: green;}";
-        document.querySelector("head").appendChild(bs);
         // console.log(this.state);
         return (
             <UI.Screen title="BIP" subtext="Johnny" width={700}>
@@ -300,9 +296,7 @@ const Main = React.createClass({
                 <BIP.Duration id={2} />
                 <BIP.Oppurtunity id={3} />
                 <UI.Button text="Show BIPs" onTap={() => console.log(bips)} />
-                <div className="test" />
-                <span className="test" />
-                <div className="Test" />
+                <div className={Style.getClassName("test/Main:test")} />
                 <div>test</div>
             </UI.Screen>
         );
@@ -330,66 +324,70 @@ const Test = React.createClass({
 // );
 const theme = {
     button: {
-        color: null,
-        textColor: null,
-        hoverColor: null,
-        activeColor: null
+        color: 'red',
+        textColor: 'white',
+        hoverColor: 'blue',
+        activeColor: 'green'
     }
 };
-Style.create(
-    "core/button",
-    {
-        '.wrapper': {
-            position: 'relative',
-            textAlign: 'center',
-            fontSize: 18,
-            margin: 4,
-            overflow: 'hidden',
-            zIndex: "+0",
-            backgroundColor: 'transparent',
-            color: theme.button.color,
-            fontWeight: 'bold',
-            whiteSpace: 'pre',
-            display: 'inline-block'
-        },
-        ".wrapper + .raised": {
-            backgroundColor: theme.button.color,
-            color: theme.button.textColor
-        },
-        '.text': {
-            width: '100%',
-            padding: 5,
-            paddingLeft: 15,
-            paddingRight: 15
-        },
-        '.overlay': {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0
-        },
-        "$ core:desktop": {
-            '.overlay': {
-                ": hover": {
-                    backgroundColor: theme.button.hoverColor
-                }
-            }
-        },
-        "~ touch-active": {
-            "> .overlay": {
-                backgroundColor: theme.button.activeColor
-            }
-        },
-        "$ core:dsktop": {
-            "~ .touch-active": {
-                "> .overlay": {
-                    backgroundColor: theme.button.activeColor
-                }
-            }
-        }
+
+Theme.define({
+    app: {
+        backgroundColor: 'white',
+        textColor: '#747474'
+    },
+    button: {
+        color: '#2FB1DF',
+        textColor: 'white',
+        hoverColor: 'rgba(0, 0, 0, 0.11)',
+        activeColor: 'rgba(0, 0, 0, 0.2)'
+    },
+    title: {
+    },
+    switch: {
     }
-);
+});
+
+// $backgroundColor: white
+// $textColor: #747474
+
+// $titleColor: #2FB1DF
+// $titleTextColor: white
+
+// $componentTextColor: black
+// $componentIconColor: black
+
+// $buttonColor: $titleColor
+// $buttonTextColor: $titleTextColor
+// $buttonHoverColor: rgba(0, 0, 0, 0.11)
+// $buttonActiveColor: rgba(0, 0, 0, 0.2);
+
+// $switchOnColor: #239FCB
+// $switchOnTextColor: $titleTextColor
+// $switchOffColor: gray
+// $switchOffTextColor: $titleTextColor
+
+// AppTheme.define({
+//     test: {
+//         main: {
+//             backgroundColor: 'cyan'
+//         }
+//     }
+// });
+
+// AppStyle.create(
+//     "test/Main",
+//     {
+//         ".test": {
+//             backgroundColor: AppTheme.get("test/main/backgroundColor"),
+//             width: 100,
+//             height: 200
+//         }
+//     }
+// );
+
+console.log('ready?');
+Style.renderCSS();
 
 App.start(
     <Route>
