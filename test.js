@@ -1,4 +1,7 @@
 // import Style from "lib-source/style.js";
+// import fontTest from "sass/fonts/ionicons.ttf.source";
+
+// console.log(fontTest);
 
 const {Route} = ReactRouter;
 // let {RaisedButton, Screen} = UI;
@@ -291,13 +294,7 @@ const Main = React.createClass({
         // console.log(this.state);
         return (
             <UI.Screen title="BIP" subtext="Johnny" width={700}>
-                <BIP.Rate id={0} />
-                <BIP.Frequency id={1} />
-                <BIP.Duration id={2} />
-                <BIP.Oppurtunity id={3} />
-                <UI.Button text="Show BIPs" onTap={() => console.log(bips)} />
-                <div className={Style.getClassName("test/Main:test")} />
-                <div>test</div>
+                <UI.Checkbox checked={this.state.check} onChange={check => this.setState({check})} label="test?" />
             </UI.Screen>
         );
     }
@@ -313,24 +310,6 @@ const Test = React.createClass({
     }
 });
 
-// Style.create(
-//     "corinthian",
-//     {element: "div", className: 'test'},
-//     {
-//         width: 100,
-//         height: 100,
-//         backgroundColor: 'cyan'
-//     }
-// );
-const theme = {
-    button: {
-        color: 'red',
-        textColor: 'white',
-        hoverColor: 'blue',
-        activeColor: 'green'
-    }
-};
-
 Theme.define({
     app: {
         backgroundColor: 'white',
@@ -343,8 +322,8 @@ Theme.define({
         activeColor: 'rgba(0, 0, 0, 0.2)'
     },
     title: {
-    },
-    switch: {
+        color: '#2FB1DF',
+        textColor: 'white'
     }
 });
 
@@ -366,25 +345,6 @@ Theme.define({
 // $switchOnTextColor: $titleTextColor
 // $switchOffColor: gray
 // $switchOffTextColor: $titleTextColor
-
-// AppTheme.define({
-//     test: {
-//         main: {
-//             backgroundColor: 'cyan'
-//         }
-//     }
-// });
-
-// AppStyle.create(
-//     "test/Main",
-//     {
-//         ".test": {
-//             backgroundColor: AppTheme.get("test/main/backgroundColor"),
-//             width: 100,
-//             height: 200
-//         }
-//     }
-// );
 
 console.log('ready?');
 Style.renderCSS();
