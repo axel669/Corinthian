@@ -1,4 +1,5 @@
 const definedStyles = {};
+const rawStyles = {};
 
 const getClassName = (name) => {
     return name.replace(/\//g, "_")
@@ -64,14 +65,18 @@ const cssNoMeasurement = new Set([
     "zoom"
 ]);
 const getCSSValue = (name, value) => {
-    if (typeof value === 'function') {
-        value = value();
-    }
+    if (Array.isArray(value) === true) {
+        return value.map(cssValue => getCSSValue(name, cssValue));
+    } else {
+        if (typeof value === 'function') {
+            value = value();
+        }
 
-    if (typeof value === 'number' && cssNoMeasurement.has(name) === false) {
-        return `${value}px`;
+        if (typeof value === 'number' && cssNoMeasurement.has(name) === false) {
+            return `${value}px`;
+        }
+        return value;
     }
-    return value;
 };
 
 const testRegex = {
@@ -93,7 +98,11 @@ const processDefHelper = (name, key, def, rules, path) => {
             const cssValue = getCSSValue(defName, def[defName]);
             const cssName = defName.replace(/[A-Z]/g, s => `-${s.toLowerCase()}`);
             if (cssValue !== null) {
-                defs.push(`  ${cssName}: ${cssValue};`);
+                if (Array.isArray(cssValue) === true) {
+                    cssValue.forEach(value => defs.push(`  ${cssName}: ${value};`));
+                } else {
+                    defs.push(`  ${cssName}: ${cssValue};`);
+                }
             }
         } else {
             processDefHelper(name, defName, def[defName], nestedDefs, [...path, className]);
@@ -121,9 +130,7 @@ const processDef = (name, def) => {
 
     return rules;
 };
-const renderCSS = () => {
-    const head = document.querySelector("head");
-
+const renderDefinedCSS = head => {
     Object.keys(definedStyles).forEach(
         lib => {
             const styleTag = document.createElement("style");
@@ -137,6 +144,30 @@ const renderCSS = () => {
             head.appendChild(styleTag);
         }
     );
+};
+const renderRawCSS = head => {
+    Object.keys(rawStyles).forEach(
+        lib => {
+            const declarations = rawStyles[lib];
+
+            declarations.forEach(::console.log);
+        }
+    );
+    // console.log(
+    //     rawStyles.map(
+    //         declaration => {
+    //             const styleTag = document.createElement("style");
+
+    //             return [declaration.name, declaration.rules];
+    //         }
+    //     )
+    // );
+};
+const renderCSS = () => {
+    const head = document.querySelector("head");
+
+    renderRawCSS(head);
+    renderDefinedCSS(head);
 };
 
 const Theme = (() => {
@@ -179,12 +210,15 @@ export default {
             )
             .join(' ');
         },
-        globalStyle(globalCSS) {
+        rawCSS(name, css) {
             const globalElem = document.createElement("style");
-            globalElem.innerHTML = globalCSS;
-            globalElem.setAttribute("data-library", "global styles");
+            globalElem.innerHTML = css;
+            globalElem.setAttribute("data-library", `raw/${name}`);
 
             document.querySelector("head").appendChild(globalElem);
+        },
+        __rawCSS(name, ...ruleList) {
+            rawStyles[name] = ruleList;
         }
     },
     Theme

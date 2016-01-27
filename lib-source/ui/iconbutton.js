@@ -1,4 +1,3 @@
-import React from "react";
 import icons from "lib-source/ionic-icons.js";
 
 import Button from "lib-source/ui/button.js";

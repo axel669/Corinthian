@@ -3,7 +3,6 @@ import React from 'react';
 import Touchable from "lib-source/ui/touchable.js";
 
 import Button from "lib-source/ui/button.js";
-import RaisedButton from "lib-source/ui/raisedbutton.js";
 import ImageButton from "lib-source/ui/imagebutton.js";
 import IconButton from "lib-source/ui/iconbutton.js";
 
@@ -33,7 +32,6 @@ import Form from "lib-source/ui/form.js";
 export default Object.freeze({
     Touchable,
     Button,
-    RaisedButton,
     ImageButton,
     IconButton,
 

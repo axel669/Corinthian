@@ -301,10 +301,15 @@ const Main = React.createClass({
         // console.log(this.state);
         return (
             <UI.Screen title="BIP" subtext="Johnny" width={700}>
-                <UI.Checkbox checked={this.state.check} onChange={check => this.setState({check})} label="test?" />
-                <UI.Button raised block text="Test" height={100} />
-                <input type="file" value="" onChange={this.loadFile} />
-                {factotum.range(20, n => <div>{n}</div>)}
+                <UI.RadioGroup selectedIndex={0}>
+                    <UI.Option>Test</UI.Option>
+                    <UI.Option>Another Test</UI.Option>
+                </UI.RadioGroup>
+
+                <UI.RadioGroup selectedIndex={0} layout="grid" height={30} rowCount={1} colCount={2}>
+                    <UI.Option>Test</UI.Option>
+                    <UI.Option>Another Test</UI.Option>
+                </UI.RadioGroup>
             </UI.Screen>
         );
     }
@@ -329,35 +334,17 @@ Theme.define({
         color: '#2FB1DF',
         textColor: 'white',
         hoverColor: 'rgba(0, 0, 0, 0.11)',
-        activeColor: 'rgba(0, 0, 0, 0.2)'
+        activeColor: 'rgba(0, 0, 0, 0.2)',
+        raised: {
+            color: '#2FB1DF',
+            textColor: 'white'
+        }
     },
     title: {
         color: '#2FB1DF',
         textColor: 'white'
     }
 });
-
-// $backgroundColor: white
-// $textColor: #747474
-
-// $titleColor: #2FB1DF
-// $titleTextColor: white
-
-// $componentTextColor: black
-// $componentIconColor: black
-
-// $buttonColor: $titleColor
-// $buttonTextColor: $titleTextColor
-// $buttonHoverColor: rgba(0, 0, 0, 0.11)
-// $buttonActiveColor: rgba(0, 0, 0, 0.2);
-
-// $switchOnColor: #239FCB
-// $switchOnTextColor: $titleTextColor
-// $switchOffColor: gray
-// $switchOffTextColor: $titleTextColor
-
-// console.log('ready?');
-// Style.renderCSS();
 
 App.start(
     <Route>

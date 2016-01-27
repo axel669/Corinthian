@@ -6,8 +6,11 @@ import CenterContent from "lib-source/ui/centercontent.js";
 
 import Environment from "lib-source/environment.js";
 
+import {Style, Theme} from "lib-source/style.js";
+
 Style.create(
-    "core/screen/web": {
+    "core/screen/web",
+    {
     }
 );
 

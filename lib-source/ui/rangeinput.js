@@ -1,64 +1,67 @@
-import React from "react";
-import fc from "lib-source/factotum.es7.js";
 import icons from "lib-source/ionic-icons.js";
 
 import CenterContent from "lib-source/ui/centercontent.js";
+import {Style, Theme} from "lib-source/style.js";
 
-// let RangeInput;
+const wat = `
+=cor-rangeinput-thumb-size
+    width: 18px
+    height: 18px
 
-// RangeInput = React.createClass({
-//     getDefaultProps () {
-//         return {
-//             min: 0,
-//             max: 100,
-//             step: 1,
-//             color: '#2FB1DF',
-//             value: 0,
-//             onChange () {}
-//         };
-//     },
-//     updateValue (evt) {
-//         let value;
+.cor-rangeinput input[type=range]
+    -webkit-appearance: none
+    position: absolute;
+    width: 100%
+    height: 100%
+    margin: 0px
+    opacity: 0
+.cor-rangeinput input[type=range]:active
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 
-//         value = parseInt(evt.target.value);
-//         if (this.props.value !== value) {
-//             this.props.onChange(value);
-//         }
-//     },
-//     render () {
-//         let {value} = this.props;
-//         let {min, max, step, color} = this.props;
-//         let range;
+.cor-rangeinput input[type=range]::-webkit-slider-thumb
+    +cor-rangeinput-thumb-size
+    -webkit-appearance: none
+    border: none
+    border-radius: 50%
+    margin-top: -11px
 
-//         range = max - min;
+.cor-rangeinput
+    position: relative
+    height: 32px
+.cor-rangeinput-content
+    position: absolute
+    top: 0px
+    left: 15px
+    bottom: 0px
+    right: 15px
 
-//         return (
-//             <div className="material-range">
-//                 <div className="material-range-container">
-//                     <div style={{width: '100%', backgroundColor: "#ccc"}}
-//                         className="material-range-background" />
-//                     <div
-//                         style={{
-//                             width: (((value - min) / range) * 100) + '%',
-//                             backgroundColor: color
-//                         }}
-//                         className="material-range-background" />
-//                     <div
-//                         style={{left: (((value - min) / range) * 100) + '%'}}
-//                         className="material-range-slider" />
-//                     <input
-//                         type="range"
-//                         min={min}
-//                         max={max}
-//                         step={step}
-//                         className="material-range-input"
-//                         onChange={this.updateValue}
-//                         value={this.props.value} />
-//                 </div>
-//             </div>
-//         );
-//     }
-// });
+.cor-rangeinput-thumb
+    +cor-rangeinput-thumb-size
+    position: absolute
+    top: 50%
+    border-radius: 50%
+    background-color: white
+    border: 1px solid #ccc
+    @include prefix(box-shadow, 1px 1px 1px rgba(0, 0, 0, 0.45))
+    @include prefix(transform, translate(-50%, -50%))
+
+=cor-rangeinput-track-base
+    position: absolute
+    top: 15px
+    height: 2px
+.cor-rangeinput-track
+    +cor-rangeinput-track-base
+    background-color: #ccc
+    width: 100%
+.cor-rangeinput-valuetrack
+    +cor-rangeinput-track-base
+    background-color: $buttonColor
+`;
+
+Style.rawCSS(
+    "core/rangeInput",
+    wat
+);
 
 const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, onChange = () => {}, label = null, showValue = false, icon = null}) => {
     const range = max - min;

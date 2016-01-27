@@ -350,6 +350,18 @@ html {
     overflow: hidden;
 }
 `;
+Style.__rawCSS(
+    "core",
+    {
+        selector: "@font-face",
+        rules: {
+            fontFamily: `"Roboto"`,
+            src: `url(${RobotoURI}) format("truetype")`,
+            fontWeight: 'normal',
+            fontStyle: 'normal'
+        }
+    }
+);
 
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
     const appContainer = document.createElement("div");
@@ -359,15 +371,13 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         "core:desktop": Environment.mobile === false,
         "core:web": Environment.app === false
     });
-    let bodyMods;
 
-    Style.globalStyle(globalCSS);
+    Style.rawCSS("core", globalCSS);
     Style.renderCSS();
 
     document.body.appendChild(appContainer);
     document.body.appendChild(Dialog.container);
 
-    bodyMods = [];
     if (Environment.mobile === false) {
         appContainer.style.position = null;
         appContainer.style.overflow = 'visible';

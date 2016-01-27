@@ -1,5 +1,4 @@
 import React from "react";
-// import clone from "react-addons-clone-with-props";
 import icons from "lib-source/ionic-icons.js";
 
 import Grid from "lib-source/ui/grid.js";
@@ -7,61 +6,40 @@ import Button from "lib-source/ui/button.js";
 import Touchable from "lib-source/ui/touchable.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 
-// let RadioGroup;
-// let RadioItem;
+import {Style, Theme} from "lib-source/style.js";
 
-// RadioGroup = React.createClass({
-//     getDefaultProps () {
-//         return {
-//             onChange () {},
-//             selectedIndex: 0,
-//             radioColor: null,
-//             style: {}
-//         };
-//     },
-//     selectItem (index, value) {
-//         if (index !== this.props.selectedIndex) {
-//             this.props.onChange(index, value);
-//         }
-//     },
-//     render () {
-//         let {radioColor, selectedIndex, style} = this.props;
-//         let children;
-
-//         children = React.Children.map(
-//             this.props.children,
-//             (child, index) => React.cloneElement(
-//                 child,
-//                 {
-//                     itemTapped: this.selectItem.bind(this, index, child.props.value),
-//                     checked: index === selectedIndex,
-//                     radioColor
-//                 }
-//             )
-//         );
-
-//         return <div style={style}>{children}</div>;
-//     }
-// });
-// RadioItem = React.createClass({
-//     render () {
-//         let {checked, itemTapped, radioColor} = this.props;
-//         let checkString;
-
-//         if (checked === true) {
-//             checkString = icons["ion-android-radio-button-on"];
-//         } else {
-//             checkString = icons["ion-android-radio-button-off"];
-//         }
-
-//         return (
-//             <Touchable component="div" onTap={itemTapped} className="material-radio-item">
-//                 <div className="material-icon-area radio-item-check" style={{color: radioColor}}>{checkString}</div>
-//                 {this.props.children}
-//             </Touchable>
-//         );
-//     }
-// });
+Style.create(
+    "core/radio",
+    {
+        ".item": {
+            position: 'relative'
+        },
+        ".itemContent": {
+            paddingLeft: 30,
+            cursor: 'default'
+        },
+        ".icon": {
+            width: 30,
+            height: 30,
+            borderRadius: '50%',
+            lineHeight: '30px'
+        },
+        ".item + ~.cor-touch-active": {
+            ".icon": {
+                backgroundColor: Theme.get("button/activeColor")
+            }
+        },
+        "~.cor-touch-active": {
+            ".gridOverlay": {
+                backgroundColor: Theme.get("button/activeColor")
+            }
+        },
+        ".gridItemChecked": {
+            color: 'white',
+            backgroundColor: Theme.get("button/raised/color")
+        }
+    }
+);
 
 const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, children, label = null, layout = "radio", ...gridProps}) => {
     if (selectedIndex === null || selectedIndex < -1) {
@@ -87,7 +65,7 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
     }
 
     if (label !== null) {
-        title = <div className="cor-component-label">{label}</div>;
+        title = <div className={Style.getClass("core:componentLabel")}>{label}</div>;
     }
 
     children = children.map(
@@ -118,27 +96,29 @@ const RadioItem = ({checked, children, iconColor = null, parentIconColor, height
     const iconText = checked === true ? icons["ion-android-radio-button-on"] : icons["ion-android-radio-button-off"];
 
     return (
-        <Touchable component="div" className="cor-radio-item" style={{height}} onTap={onTap}>
-            <CenterContent style={{position: 'absolute', top: 0, left: 0, color: iconColor}} width={30} height="100%" className="cor-icon">
-                <div className="cor-radio-icon">{iconText}</div>
+        <Touchable component="div" className={Style.getClassName("core/radio:item")} style={{height}} onTap={onTap}>
+            <CenterContent style={{position: 'absolute', top: 0, left: 0, color: iconColor}} width={30} height="100%" className={Style.getClassName("core:icon")}>
+                <div className={Style.getClassName("core/radio:icon")}>{iconText}</div>
             </CenterContent>
-            <CenterContent className="cor-radio-item-content" height="100%" width="100%" style={{textAlign: 'left'}}>
+            <CenterContent className={Style.getClassName("core/radio:itemContent")} height="100%" width="100%" style={{textAlign: 'left'}}>
                 {children}
             </CenterContent>
         </Touchable>
     );
 };
 const GridRadioItem = ({checked, children, onTap}) => {
-    const className = `cor-grid-radio-item cor-grid-radio-item-${checked}`;
+    // const className = `cor-grid-radio-item cor-grid-radio-item-${checked}`;
+    const gridClassName = Style.getClassNames({
+        "core/radio:gridItemChecked": checked
+    });
 
     return (
-        <Touchable component="div" style={{width: '100%', height: '100%'}} onTap={onTap} className={className}>
-            <CenterContent width="100%" height="100%" className="cor-radio-inner">
+        <Touchable component="div" style={{width: '100%', height: '100%'}} onTap={onTap} className={gridClassName}>
+            <CenterContent width="100%" height="100%" className={Style.getClassName("core/radio:gridOverlay")}>
                 {children}
             </CenterContent>
         </Touchable>
     );
-    // return <UI.Button flush fill color={checked === true ? 'blue' : ''} text={children} onTap={onTap} />;
 };
 
 export default RadioGroup;

@@ -1,6 +1,4 @@
 import React from "react";
-import fc from "lib-source/factotum.es7.js";
-import icons from "lib-source/ionic-icons.js";
 
 import TextInput from "lib-source/ui/textinput.js";
 import RangeInput from "lib-source/ui/rangeinput.js";
