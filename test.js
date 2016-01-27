@@ -1,10 +1,4 @@
-// import Style from "lib-source/style.js";
-// import fontTest from "sass/fonts/ionicons.ttf.source";
-
-// console.log(fontTest);
-
 const {Route} = ReactRouter;
-// let {RaisedButton, Screen} = UI;
 
 const Wrapper = React.createClass({
     render () {
@@ -288,6 +282,19 @@ const Main = React.createClass({
     async testAlert () {
         console.log(await Dialog.prompt("Input?", {placeholder: 'woah'}));
     },
+    loadFile(evt) {
+        // console.log(evt, evt.target.files);
+        const reader = new FileReader();
+
+        reader.addEventListener(
+            "load",
+            () => {
+                console.log(reader.result);
+            }
+        );
+
+        reader.readAsDataURL(evt.target.files[0]);
+    },
     render () {
         const {selectedIndex} = this.state;
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
@@ -295,6 +302,9 @@ const Main = React.createClass({
         return (
             <UI.Screen title="BIP" subtext="Johnny" width={700}>
                 <UI.Checkbox checked={this.state.check} onChange={check => this.setState({check})} label="test?" />
+                <UI.Button raised block text="Test" height={100} />
+                <input type="file" value="" onChange={this.loadFile} />
+                {factotum.range(20, n => <div>{n}</div>)}
             </UI.Screen>
         );
     }
@@ -346,8 +356,8 @@ Theme.define({
 // $switchOffColor: gray
 // $switchOffTextColor: $titleTextColor
 
-console.log('ready?');
-Style.renderCSS();
+// console.log('ready?');
+// Style.renderCSS();
 
 App.start(
     <Route>

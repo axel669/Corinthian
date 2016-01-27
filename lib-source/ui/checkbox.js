@@ -1,37 +1,35 @@
-import React from "react";
-import fc from "lib-source/factotum.es7.js";
 import icons from "lib-source/ionic-icons.js";
 
 import Touchable from "lib-source/ui/touchable.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 
-// let Checkbox;
+import {Style, Theme} from "lib-source/style.js";
 
-// Checkbox = props => {
-//     let {
-//         onChange = () => {},
-//         style = null,
-//         checkColor = null,
-//         text = "",
-//         onIcon = "ion-android-checkbox",
-//         offIcon = "ion-android-checkbox-outline-blank",
-//         checked = false
-//     } = props;
-//     let checkString;
+Style.create(
+    "core/checkbox",
+    {
+        ".wrapper": {
+            position: 'relative'
+        },
+        ".label": {
+            padding: 3,
+            color: 'black',
+            cursor: 'default'
+        },
+        ".check": {
+            width: 35,
+            height: 35,
+            borderRadius: '50%',
+            lineHeight: '35px'
+        },
+        ".wrapper + ~.cor-touch-active": {
+            ".check": {
+                backgroundColor: Theme.get("button/activeColor")
+            }
+        }
+    }
+);
 
-//     if (checked === true) {
-//         checkString = icons[onIcon];
-//     } else {
-//         checkString = icons[offIcon];
-//     }
-
-//     return (
-//         <Touchable component="div" onTap={() => onChange(checked !== true)} className="material-checkbox" style={style}>
-//             <div className="material-icon-area checkbox-check" style={{color: checkColor}}>{checkString}</div>
-//             {text}
-//         </Touchable>
-//     );
-// };
 const capitalize = str => `${str.charAt(0).toUpperCase()}${str.substr(1)}`;
 const ionOnIcon = "ion-android-checkbox";
 const ionOffIcon = "ion-android-checkbox-outline-blank";
@@ -46,18 +44,12 @@ const Checkbox = ({height = 40, onChange = () => {}, checkColor = 'black', onIco
         fontSize: 22
     };
 
-    // return (
-    //     <Touchable component="div" onTap={() => onChange(checked !== true)} className="material-checkbox" style={style}>
-    //         <div className="material-icon-area checkbox-check" style={{color: checkColor}}>{checkString}</div>
-    //         {text}
-    //     </Touchable>
-    // );
     return (
-        <Touchable component="div" className="cor-checkbox" style={{height}} onTap={() => onChange(checked !== true)}>
-            <CenterContent style={iconStyle} width={45} height="100%" className="cor-icon">
-                <div className="cor-checkbox-check">{checkString}</div>
+        <Touchable component="div" className={Style.getClassName("core/checkbox:wrapper")} style={{height}} onTap={() => onChange(checked !== true)}>
+            <CenterContent style={iconStyle} width={45} height="100%" className={Style.getClassName("core:icon")}>
+                <div className={Style.getClassName("core/checkbox:check")}>{checkString}</div>
             </CenterContent>
-            <CenterContent className="cor-checkbox-label" height="100%" width="100%" style={{textAlign: 'left', [`padding${capitalize(checkSide)}`]: 45}}>
+            <CenterContent className={Style.getClassName("core/checkbox:label")} height="100%" width="100%" style={{textAlign: 'left', [`padding${capitalize(checkSide)}`]: 45}}>
                 {label}
             </CenterContent>
         </Touchable>

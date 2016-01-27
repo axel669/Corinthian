@@ -178,6 +178,13 @@ export default {
                 []
             )
             .join(' ');
+        },
+        globalStyle(globalCSS) {
+            const globalElem = document.createElement("style");
+            globalElem.innerHTML = globalCSS;
+            globalElem.setAttribute("data-library", "global styles");
+
+            document.querySelector("head").appendChild(globalElem);
         }
     },
     Theme

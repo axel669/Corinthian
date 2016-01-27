@@ -1,7 +1,20 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-import fc from "lib-source/factotum.es7.js";
-import icons from "lib-source/ionic-icons.js";
+
+import {Style, Theme} from "lib-source/style.js";
+
+Style.create(
+    "core/scrollContainer",
+    {
+        ".container": {
+            overflow: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            width: '100%',
+            height: '100%',
+            padding: 0,
+            margin: 0
+        }
+    }
+);
 
 const ScrollContainer = React.createClass({
     componentDidMount() {
@@ -12,8 +25,6 @@ const ScrollContainer = React.createClass({
 
         node.scrollLeft = scrollInfo.scrollX;
         node.scrollTop = scrollInfo.scrollY;
-
-        // delete scrollContainers[this._rootNodeID];
     },
     componentWillUnmount() {
         const node = this.refs.scroller;
@@ -27,7 +38,7 @@ const ScrollContainer = React.createClass({
         const {style = {}, children} = this.props;
 
         return (
-            <div className="cor-scrollcontainer" style={style} ref="scroller">
+            <div className={Style.getClassName("core/scrollContainer:container")} style={style} ref="scroller">
                 {children}
             </div>
         );

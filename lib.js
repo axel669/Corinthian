@@ -20,6 +20,9 @@ import {Style, Theme} from "lib-source/style.js";
 
 import Environment from "lib-source/environment.js";
 
+import RobotoURI from "lib-source/data-uri/roboto-light.ttf.source";
+import IonicURI from "lib-source/data-uri/ionicons.ttf.source";
+
 let {Router} = ReactRouter;
 
 let App;
@@ -293,19 +296,73 @@ Style.create(
         ".web": {
             overflowY: 'scroll',
             WebkitOverflowScrolling: 'touch'
+        },
+        ".app": {
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            padding: '0px',
+            margin: '0px',
+            fontFamily: 'Roboto',
+            backgroundColor: Theme.get("app/backgroundColor"),
+            color: Theme.get("app/textColor"),
+            textAlign: 'left',
+            WebkitUserSelect: 'none',
+            touchEvents: 'none',
+            WebkitTextSizeAdjust: '100%',
+            overflow: 'hidden'
+        },
+        ".icon": {
+            fontFamily: "Ionic",
+            cursor: 'default'
+        },
+        ".componentLabel": {
+            fontSize: 15,
+            color: 'black',
+            padding: 5,
+            paddingLeft: 8,
+            cursor: 'default'
         }
     }
 );
 
-// appContainer = document.querySelector("#AppContainer");
+const globalCSS = `
+@font-face {
+    font-family: "Roboto";
+    src: url(${RobotoURI}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Ionic";
+    src: url("${IonicURI}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+`;
+
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
     const appContainer = document.createElement("div");
     const bodyClasses = document.body.className;
     const additionalClasses = Style.getClassNames({
+        "core:app": true,
         "core:desktop": Environment.mobile === false,
         "core:web": Environment.app === false
     });
     let bodyMods;
+
+    Style.globalStyle(globalCSS);
+    Style.renderCSS();
 
     document.body.appendChild(appContainer);
     document.body.appendChild(Dialog.container);
