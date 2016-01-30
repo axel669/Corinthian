@@ -1,71 +1,66 @@
-import React from "react";
-import fc from "lib-source/factotum.es7.js";
-import icons from "lib-source/ionic-icons.js";
-
 import Touchable from "lib-source/ui/touchable.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 
-// let Switch;
+import {Style, Theme} from "lib-source/style.js";
 
-// Switch = React.createClass({
-//     getDefaultProps () {
-//         return {
-//             defaultState: false,
-//             color: null,
-//             textColor: null,
-//             colorOff: null,
-//             textColorOff: null,
-//             on: false,
-//             onChange () {}
-//         };
-//     },
-//     toggle () {
-//         this.props.onChange(!this.props.on);
-//     },
-//     render () {
-//         let {on, text, textColor, color, textColorOff, colorOff} = this.props;
-//         let displayStyle;
-//         let statusText;
-//         let styleName;
-
-//         if (on === true) {
-//             statusText = "ON";
-//             styleName = "material-switch-on";
-//             displayStyle = {
-//                 backgroundColor: color,
-//                 color: textColor
-//             };
-//         } else {
-//             statusText = "OFF";
-//             styleName = "material-switch-off";
-//             displayStyle = {
-//                 backgroundColor: colorOff,
-//                 color: textColorOff
-//             };
-//         }
-//         return (
-//             <div className="material-switch">
-//                 <div style={{marginRight: 100}}>{text}</div>
-//                 <Touchable component="div" className="material-switch-toggle" onTap={this.toggle}>
-//                     <div className={styleName} style={displayStyle}>
-//                         {statusText}
-//                     </div>
-//                 </Touchable>
-//             </div>
-//         );
-//     }
-// });
-
-const Switch = ({on, onChange = () => {}, color = null, label}) => (
-    <Touchable component="div" className="cor-switch" onTap={() => onChange(on !== true)}>
-        <CenterContent style={{textAlign: 'left', padding: 5}} height={40} className="cor-switch-label">
-            {label}
-        </CenterContent>
-        <div className={`cor-switch-${(on === true) ? 'on' : 'off'} cor-switch-visual`}>
-            <div className="cor-switch-track" />
-            <div className="cor-switch-thumb" />
-        </div>
-    </Touchable>
+Style.create(
+    "core/switch",
+    {
+        ".wrapper": {
+            position: 'relative'
+        },
+        ".label": {
+            color: 'black',
+            padding: 3,
+            cursor: 'default'
+        },
+        ".visual": {
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            height: 40,
+            width: 55
+        },
+        ".track": {
+            position: 'absolute',
+            top: 18,
+            left: 15,
+            right: 15,
+            height: 4,
+            borderRadius: 2
+        },
+        ".thumb": {
+            position: 'absolute',
+            top: '50%',
+            width: 16,
+            height: 16,
+            borderRadius: '50%',
+            backgroundColor: 'white',
+            border: '1px solid #CCC',
+            boxShadow: '1px 1px 1px rgba(0, 0, 0, 0.45)',
+            transform: 'translate(-50%, -50%)'
+        }
+    }
 );
+
+const Switch = ({on, onChange = () => {}, color = null, label}) => {
+    const thumbPosition = {
+        left: (on === true) ? 40 : 15
+    };
+    const trackColor = {
+        backgroundColor: (on === true) ? Theme.runtime.switch.track.color : "#CCC"
+    };
+    return (
+        <Touchable component="div" className={Style.getClassName("core/switch:wrapper")} onTap={() => onChange(on !== true)}>
+            <CenterContent style={{textAlign: 'left', padding: 5}} height={40} className={Style.getClassName("core/switch:label")}>
+                {label}
+            </CenterContent>
+            <div className={Style.getClassName("core/switch:visual")}>
+                <div className={Style.getClassName("core/switch:track")} style={trackColor} />
+                <div className={Style.getClassName("core/switch:thumb")} style={thumbPosition} />
+            </div>
+        </Touchable>
+    );
+};
 
 export default Switch;

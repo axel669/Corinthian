@@ -64,6 +64,7 @@ const cssNoMeasurement = new Set([
     "zIndex",
     "zoom"
 ]);
+const getCSSName = name => name.replace(/[A-Z]/g, s => `-${s.toLowerCase()}`);
 const getCSSValue = (name, value) => {
     if (Array.isArray(value) === true) {
         return value.map(cssValue => getCSSValue(name, cssValue));
@@ -79,9 +80,7 @@ const getCSSValue = (name, value) => {
     }
 };
 
-const testRegex = {
-    singleClass: /^\.(\w+)$/
-};
+
 const create = (name, def, rules = [], path = []) => {
     definedStyles[name] = def;
 };
@@ -146,22 +145,30 @@ const renderDefinedCSS = head => {
     );
 };
 const renderRawCSS = head => {
+    // console.log(rawStyles);
     Object.keys(rawStyles).forEach(
         lib => {
+            const styleTag = document.createElement("style");
             const declarations = rawStyles[lib];
+            const cssRules = declarations.map(
+                declaration => {
+                    const {selector} = declaration;
+                    const ruleText = Object.keys(declaration.rules).map(
+                        ruleName => {
+                            return `  ${getCSSName(ruleName)}: ${getCSSValue(ruleName, declaration.rules[ruleName])};`;
+                        }
+                    );
 
-            declarations.forEach(::console.log);
+                    return `${selector} {\n${ruleText.join('\n')}\n}`;
+                }
+            );
+
+            styleTag.setAttribute("data-library", `raw/${lib}`);
+            styleTag.innerHTML = `\n${cssRules.join('\n\n')}\n`;
+
+            head.appendChild(styleTag);
         }
     );
-    // console.log(
-    //     rawStyles.map(
-    //         declaration => {
-    //             const styleTag = document.createElement("style");
-
-    //             return [declaration.name, declaration.rules];
-    //         }
-    //     )
-    // );
 };
 const renderCSS = () => {
     const head = document.querySelector("head");
@@ -189,6 +196,12 @@ const Theme = (() => {
 
                 return current;
             };
+        },
+        format(text) {
+            return () => text.replace(/\$([\w|\/]+)/g, (full, path) => Theme.get(path)());
+        },
+        get runtime() {
+            return themeValues;
         }
     };
 })();
@@ -210,15 +223,23 @@ export default {
             )
             .join(' ');
         },
-        rawCSS(name, css) {
-            const globalElem = document.createElement("style");
-            globalElem.innerHTML = css;
-            globalElem.setAttribute("data-library", `raw/${name}`);
-
-            document.querySelector("head").appendChild(globalElem);
-        },
         __rawCSS(name, ...ruleList) {
             rawStyles[name] = ruleList;
+        },
+        addFonts(lib, ...fonts) {
+            rawStyles[`${lib}/font`] = fonts.map(
+                ({name, dataURI}) => {
+                    return {
+                        selector: "@font-face",
+                        rules: {
+                            fontFamily: `"${name}"`,
+                            src: `url("${dataURI}")`,
+                            fontWeight: "normal",
+                            fontStyle: "normal"
+                        }
+                    };
+                }
+            );
         }
     },
     Theme

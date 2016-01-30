@@ -3,64 +3,81 @@ import icons from "lib-source/ionic-icons.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 import {Style, Theme} from "lib-source/style.js";
 
-const wat = `
-=cor-rangeinput-thumb-size
-    width: 18px
-    height: 18px
+const wrapperName = Style.getClassName("core/rangeInput:wrapper");
+const thumbSize = {
+    width: 18,
+    height: 18
+};
+const trackBase = {
+    position: 'absolute',
+    top: 15,
+    height: 2
+};
 
-.cor-rangeinput input[type=range]
-    -webkit-appearance: none
-    position: absolute;
-    width: 100%
-    height: 100%
-    margin: 0px
-    opacity: 0
-.cor-rangeinput input[type=range]:active
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-
-.cor-rangeinput input[type=range]::-webkit-slider-thumb
-    +cor-rangeinput-thumb-size
-    -webkit-appearance: none
-    border: none
-    border-radius: 50%
-    margin-top: -11px
-
-.cor-rangeinput
-    position: relative
-    height: 32px
-.cor-rangeinput-content
-    position: absolute
-    top: 0px
-    left: 15px
-    bottom: 0px
-    right: 15px
-
-.cor-rangeinput-thumb
-    +cor-rangeinput-thumb-size
-    position: absolute
-    top: 50%
-    border-radius: 50%
-    background-color: white
-    border: 1px solid #ccc
-    @include prefix(box-shadow, 1px 1px 1px rgba(0, 0, 0, 0.45))
-    @include prefix(transform, translate(-50%, -50%))
-
-=cor-rangeinput-track-base
-    position: absolute
-    top: 15px
-    height: 2px
-.cor-rangeinput-track
-    +cor-rangeinput-track-base
-    background-color: #ccc
-    width: 100%
-.cor-rangeinput-valuetrack
-    +cor-rangeinput-track-base
-    background-color: $buttonColor
-`;
-
-Style.rawCSS(
+Style.create(
     "core/rangeInput",
-    wat
+    {
+        ".wrapper": {
+            position: 'relative',
+            height: 32
+        },
+        ".sliderWrapper": {
+            position: 'absolute',
+            top: 0,
+            left: 15,
+            right: 15,
+            bottom: 0
+        },
+        ".thumb": {
+            ...thumbSize,
+            position: 'absolute',
+            top: '50%',
+            borderRadius: '50%',
+            backgroundColor: 'white',
+            boxShadow: '1px 1px 1px rgba(0, 0, 0, 0.45)',
+            transform: 'translate(-50%, -50%)'
+        },
+
+        ".trackBackground": {
+            ...trackBase,
+            backgroundColor: '#CCC',
+            width: '100%'
+        },
+        ".track": {
+            ...trackBase,
+            backgroundColor: Theme.get("rangeInput/track/color")
+        }
+    }
+);
+Style.__rawCSS(
+    "core/rangeInput",
+    {
+        selector: `.${wrapperName} input[type="range"]`,
+        rules: {
+            WebkitAppearance: 'none',
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            opacity: 0
+        }
+    },
+    {
+        selector: `.${wrapperName} input[type="range"]:active`,
+        rules: {
+            WebkitTapHighlightcolor: 'rgba(0, 0, 0, 0)'
+        }
+    },
+    {
+        selector: `.${wrapperName} input[type="range"]::-webkit-slider-thumb`,
+        rules: {
+            ...thumbSize,
+            WebkitAppearance: 'none',
+            border: 'none',
+            borderRadius: '50%',
+            marginTop: -11
+        }
+    }
 );
 
 const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, onChange = () => {}, label = null, showValue = false, icon = null}) => {
@@ -88,14 +105,14 @@ const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, 
 
     return (
         <div>
-            <div className="cor-component-label">{label}</div>
-            <div className="cor-rangeinput">
+            <div className={Style.getClassName("core:componentLabel")}>{label}</div>
+            <div className={Style.getClassName("core/rangeInput:wrapper")}>
                 {iconDisplay}
                 <CenterContent style={{position: 'absolute', right: 0, top: 0, textAlign: 'left', cursor: 'default'}} width={45} height="100%">{displayValue}</CenterContent>
-                <div className="cor-rangeinput-content" style={rangeStyle}>
-                    <div className="cor-rangeinput-track" />
-                    <div className="cor-rangeinput-valuetrack" style={{width: `${position}%`, backgroundColor: trackColor}} />
-                    <div className="cor-rangeinput-thumb" style={{left: `${position}%`}} />
+                <div className={Style.getClassName("core/rangeInput:sliderWrapper")} style={rangeStyle}>
+                    <div className={Style.getClassName("core/rangeInput:trackBackground")} />
+                    <div className={Style.getClassName("core/rangeInput:track")} style={{width: `${position}%`, backgroundColor: trackColor}} />
+                    <div className={Style.getClassName("core/rangeInput:thumb")} style={{left: `${position}%`}} />
                     <input type="range" value={value} min={min} max={max} step={step} onChange={changeHandler} />
                 </div>
             </div>

@@ -5,57 +5,26 @@ import icons from "lib-source/ionic-icons.js";
 import Touchable from "lib-source/ui/touchable.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 
-// let TextInput;
+import {Style, Theme} from "lib-source/style.js";
 
-// TextInput = React.createClass({
-//     getDefaultProps () {
-//         return {
-//             label: null,
-//             value: "",
-//             icon: null,
-//             iconStyle: null,
-//             type: "text",
-//             fillWidth: null,
-//             onChange () {}
-//         };
-//     },
-//     update (evt) {
-//         this.props.onChange(evt.target.value);
-//     },
-//     focus () {
-//         this.refs.input.focus();
-//     },
-//     render () {
-//         let {label, placeholder, value, icon, iconStyle, type, fillWidth, align = 'left'} = this.props;
-//         let inputStyle;
-
-//         if (label !== null) {
-//             label = <div>{label}</div>;
-//         }
-
-//         inputStyle = {
-//             width: fillWidth,
-//             textAlign: align
-//         };
-
-//         if (icon !== null) {
-//             icon = <div className="material-input-icon" style={iconStyle}>{icons[icon]}</div>;
-//             inputStyle = {
-//                 paddingLeft: 35
-//             };
-//         }
-
-//         return (
-//             <Touchable component="div" onTap={this.focus} className="material-input">
-//                 {label}
-//                 <div style={{position: 'relative', width: fillWidth, margin: 'auto'}}>
-//                     {icon}
-//                     <input type={type} ref="input" style={inputStyle} placeholder={placeholder} className="material-input-elem" value={value} onChange={this.update} />
-//                 </div>
-//             </Touchable>
-//         );
-//     }
-// });
+Style.create(
+    "core/userInput",
+    {
+        ".textField": {
+            height: 40,
+            fontSize: 15,
+            borderWidth: 0,
+            width: '100%',
+            padding: 5,
+            color: Theme.get("userInput/textColor"),
+            borderBottom: '1px solid #DDD',
+            marginBottom: 1,
+            ": focus": {
+                borderBottom: Theme.format('2px solid $userInput/activeColor')
+            }
+        }
+    }
+);
 
 const TextInput = React.createClass({
     focus() {
@@ -71,7 +40,8 @@ const TextInput = React.createClass({
         };
         labelOffset = {
             position: 'absolute',
-            bottom: '100%'
+            bottom: '100%',
+            width: '100%'
         };
 
         if (icon === null) {
@@ -90,11 +60,17 @@ const TextInput = React.createClass({
 
         return (
             <div style={{position: 'relative'}}>
-                <div className="cor-component-label" style={{color: 'transparent'}}>{label}</div>
+                <div className={Style.getClassName("core:componentLabel")} style={{color: 'transparent'}}>{label}</div>
                 <div style={{position: 'relative'}}>
-                    <input type={type} value={value} style={inputStyle} onChange={evt => onChange(evt.target.value)} className="cor-textinput-input" placeholder={placeholder} ref="input" />
+                    <input
+                        type={type} value={value} style={inputStyle}
+                        onChange={evt => onChange(evt.target.value)}
+                        className={Style.getClassName("core/userInput:textField")}
+                        placeholder={placeholder} ref="input" />
                     {iconArea}
-                    <div className="cor-component-label" style={labelOffset}>{label}</div>
+                    <Touchable component="div" className={Style.getClassName("core:componentLabel")} style={labelOffset} onTap={this.focus}>
+                        {label}
+                    </Touchable>
                 </div>
             </div>
         );

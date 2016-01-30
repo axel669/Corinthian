@@ -8,66 +8,113 @@ import Environment from "lib-source/environment.js";
 
 import {Style, Theme} from "lib-source/style.js";
 
+const titleBase = {
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: 50,
+    overflow: 'visible',
+    fontSize: 20,
+    color: Theme.get("title/textColor"),
+    backgroundColor: Theme.get("title/backgroundColor"),
+    zIndex: '+10',
+    boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.45)'
+};
+Style.create(
+    "core/screen",
+    {
+        ".backButton": {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%'
+        }
+    }
+);
 Style.create(
     "core/screen/web",
     {
     }
 );
+Style.create(
+    "core/screen/app",
+    {
+        ".title": {
+            position: 'absolute',
+            ...titleBase
+        },
+        ".titleExtended": {
+            position: 'absolute',
+            top: 50
+        }
+    }
+);
 
-const AppScreen = ({children, title = null, subtext = null, scrollable = true, backText = null}) => {
-    let backButton;
-    let contentStyle;
-    let content;
-    let titleElement;
+const AppScreen = React.createClass({
+    getInitialState() {
+        return {
+            expanded: false
+        };
+    },
+    render() {
+        const {children, title = null, subtext = null, scrollable = true, backText = null, expansion = null} = this.props;
+        let backButtonText;
+        let backButton;
+        let contentStyle;
+        let content;
+        let titleElement;
 
-    contentStyle = {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0
-    };
-    titleElement = null;
-    backButton = null;
-    content = children;
+        contentStyle = {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0
+        };
+        titleElement = null;
+        backButton = null;
+        content = children;
 
-    if (title !== null) {
-        if (backText !== null) {
-            backText = <span style={{fontSize: 14, padding: 5}}>{backText}</span>;
-            backButton = (
-                <div className="cor-screen-back-button">
-                    <IconButton text={backText} icon="ion-chevron-left" onTap={() => App.goBack()} height="100%" fill={true} textColor="white" cornerRadius={5} />
-                </div>
+        if (title !== null) {
+            if (backText !== null) {
+                backButtonText = <span style={{fontSize: 12, padding: 3}}>{backText}</span>;
+                backButton = (
+                    <div className={Style.getClassName("core/screen:backButton")}>
+                        <IconButton flush text={backButtonText} icon="ion-chevron-left" onTap={() => App.goBack()} height="100%" textColor="white" cornerRadius={5} />
+                    </div>
+                );
+            }
+
+            contentStyle.top = 50;
+            titleElement = (
+                <CenterContent height={50} width="100%">
+                    {title}
+                    <div style={{fontSize: 14}}>
+                        {subtext}
+                    </div>
+                    {backButton}
+                </CenterContent>
             );
         }
 
-        contentStyle.top = 50;
-        titleElement = (
-            <CenterContent className="cor-screen-title">
-                {title}
-                <div className="cor-screen-title-subtext">
-                    {subtext}
+        if (scrollable === true) {
+            content = <ScrollContainer style={{paddingTop: 5}}>{children}</ScrollContainer>;
+        } else {
+            contentStyle.paddingTop = 5;
+        }
+
+        return (
+            <div>
+                <div className={Style.getClassName("core/screen/app:title")}>
+                    {titleElement}
                 </div>
-                {backButton}
-            </CenterContent>
+                <div style={contentStyle}>
+                    {content}
+                </div>
+            </div>
         );
     }
-
-    if (scrollable === true) {
-        content = <ScrollContainer style={{paddingTop: 5}}>{children}</ScrollContainer>;
-    } else {
-        contentStyle.paddingTop = 5;
-    }
-
-    return (
-        <div>
-            {titleElement}
-            <div style={contentStyle}>
-                {content}
-            </div>
-        </div>
-    );
-};
+});
 const WebScreen = ({children, title = null, subtext = null, backText = null, width = 800}) => {
     let backButton;
     let contentStyle;

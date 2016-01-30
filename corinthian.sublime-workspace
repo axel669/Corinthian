@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"touch",
+				"Touchable"
+			],
+			[
+				"text",
+				"textField"
+			],
+			[
+				"th",
+				"thumb"
+			],
+			[
+				"thum",
+				"thumbPosition"
+			],
+			[
+				"track",
+				"trackBackground"
+			],
+			[
+				"tub",
+				"thumbSize"
+			],
+			[
+				"range",
+				"rangeInput"
+			],
+			[
+				"trackb",
+				"trackBase"
+			],
+			[
+				"robot",
+				"RobotoURI"
+			],
+			[
+				"font",
+				"fontWeight"
+			],
+			[
+				"getCSS",
+				"getCSSName"
+			],
+			[
+				"decl",
+				"declaration"
+			],
+			[
 				"globa",
 				"globalElem"
 			],
@@ -168,10 +216,6 @@
 				"ion-android-radio-button-off"
 			],
 			[
-				"text",
-				"textStyle"
-			],
-			[
 				"cor-bu",
 				"cor-button-text"
 			],
@@ -222,10 +266,6 @@
 			[
 				"touchP",
 				"touchPositionLast"
-			],
-			[
-				"touch",
-				"touchPositionStart"
 			],
 			[
 				"start",
@@ -474,46 +514,6 @@
 			[
 				"Delete",
 				"DeleteLinkClass"
-			],
-			[
-				"io",
-				"ion-chevron-down"
-			],
-			[
-				"class",
-				"className"
-			],
-			[
-				"exp",
-				"expandable-content"
-			],
-			[
-				"clas",
-				"className"
-			],
-			[
-				"bor",
-				"border-width"
-			],
-			[
-				"rea",
-				"React"
-			],
-			[
-				"curr",
-				"curriculumID"
-			],
-			[
-				"add",
-				"addLink"
-			],
-			[
-				"Less",
-				"LessonName"
-			],
-			[
-				"lesson",
-				"curriculumLesson"
 			]
 		]
 	},
@@ -625,7 +625,7 @@
 			],
 			[
 				"Build Library",
-				""
+				"Test Script"
 			]
 		],
 		[
@@ -753,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Test Script",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -887,6 +887,14 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_switch.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_container.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/material.scss",
@@ -902,24 +910,18 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_card.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/theme/_default.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/autohotkey.ahk",
 		"/C/Users/Axel1/Downloads/parser.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_scrollable.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_textinput.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
@@ -963,7 +965,6 @@
 		"/C/Users/Axel1/Documents/programming/js/test/compiler/test-es7.js",
 		"/C/Users/Axel1/Documents/programming/js/test/compiler/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/compiler.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/src/stringify.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/node_modules/html-minifier/cli.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/index.js",
@@ -995,7 +996,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/switch.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_radio.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_switch.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_combobox.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/index.html",
 		"//card.com/Websites/Live/SkillsBrain.com/app.js",
@@ -1032,6 +1032,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"    ",
+			" (am|pm)",
+			"    ",
 			"icons",
 			": ",
 			";",
@@ -1156,10 +1159,7 @@
 			"fc.promise",
 			"DLRoutes",
 			"}\n",
-			"tappable",
-			"component-svg",
-			"button = ",
-			"'click'"
+			"tappable"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1167,6 +1167,9 @@
 		"regex": true,
 		"replace_history":
 		[
+			"  ",
+			"$1",
+			" - ",
 			": '",
 			"'",
 			"Style",

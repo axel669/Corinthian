@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import fc from "lib-source/factotum.es7.js";
-import icons from "lib-source/ionic-icons.js";
 
 let Touchable;
 

@@ -326,39 +326,31 @@ Style.create(
     }
 );
 
-const globalCSS = `
-@font-face {
-    font-family: "Roboto";
-    src: url(${RobotoURI}) format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: "Ionic";
-    src: url("${IonicURI}") format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-`;
+Style.addFonts(
+    "core",
+    {
+        name: "Roboto",
+        dataURI: RobotoURI
+    },
+    {
+        name: "Ionic",
+        dataURI: IonicURI
+    }
+);
 Style.__rawCSS(
     "core",
     {
-        selector: "@font-face",
+        selector: "*",
         rules: {
-            fontFamily: `"Roboto"`,
-            src: `url(${RobotoURI}) format("truetype")`,
-            fontWeight: 'normal',
-            fontStyle: 'normal'
+            boxSizing: "border-box"
+        }
+    },
+    {
+        selector: "html",
+        rules: {
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden'
         }
     }
 );
@@ -372,7 +364,6 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         "core:web": Environment.app === false
     });
 
-    Style.rawCSS("core", globalCSS);
     Style.renderCSS();
 
     document.body.appendChild(appContainer);

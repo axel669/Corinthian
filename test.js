@@ -267,7 +267,8 @@ const Main = React.createClass({
         return {
             check: true,
             selectedIndex: -1,
-            inputValue: 50
+            inputValue: 50,
+            textValue: 'test'
         };
     },
     updateSetting (name) {
@@ -300,16 +301,21 @@ const Main = React.createClass({
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
         // console.log(this.state);
         return (
-            <UI.Screen title="BIP" subtext="Johnny" width={700}>
+            <UI.Screen title="BIP" subtext="Johnny" width={700} backText="Testing?">
                 <UI.RadioGroup selectedIndex={0}>
-                    <UI.Option>Test</UI.Option>
-                    <UI.Option>Another Test</UI.Option>
+                    {factotum.range(20, n => <UI.Option>Option #{n}</UI.Option>)}
                 </UI.RadioGroup>
 
                 <UI.RadioGroup selectedIndex={0} layout="grid" height={30} rowCount={1} colCount={2}>
                     <UI.Option>Test</UI.Option>
                     <UI.Option>Another Test</UI.Option>
                 </UI.RadioGroup>
+
+                <UI.RangeInput label="Testing" min={0} max={100} value={this.state.inputValue} onChange={inputValue => this.setState({inputValue})} />
+                <UI.Switch label="Test Switch" on={this.state.check} onChange={check => this.setState({check})} />
+
+                <UI.TextInput label="Test Text Input" value={this.state.textValue} onChange={textValue => this.setState({textValue})} />
+                <UI.TextInput label="Test Text Input" value={this.state.textValue} />
             </UI.Screen>
         );
     }
@@ -341,8 +347,22 @@ Theme.define({
         }
     },
     title: {
-        color: '#2FB1DF',
+        backgroundColor: '#2FB1DF',
         textColor: 'white'
+    },
+    rangeInput: {
+        track: {
+            color: "#2FB1DF"
+        }
+    },
+    switch: {
+        track: {
+            color: '#2FB1DF'
+        }
+    },
+    userInput: {
+        activeColor: '#2FB1DF',
+        textColor: 'black'
     }
 });
 

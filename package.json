@@ -21,7 +21,7 @@
     "react-router": "^1.0.0-rc1",
     "stringify": "^3.2.0",
     "uglify-js": "^2.5.0",
-    "xregexp": "^2.0.0",
+    "xregexp": "^3.0.0",
     "zipjs-browserify": "^1.0.1"
   }
 }
