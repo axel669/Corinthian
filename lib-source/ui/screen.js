@@ -29,6 +29,9 @@ Style.create(
             top: 0,
             left: 0,
             height: '100%'
+        },
+        ".expander": {
+            height: 0
         }
     }
 );
@@ -51,6 +54,18 @@ Style.create(
     }
 );
 
+Style.addAnimations(
+    {
+        name: "screen_expansion",
+        from: {
+            height: 0
+        },
+        to: {
+            height: 200
+        }
+    }
+);
+
 const AppScreen = React.createClass({
     getInitialState() {
         return {
@@ -60,6 +75,18 @@ const AppScreen = React.createClass({
     render() {
         const {children, title = null, subtext = null, scrollable = true, backText = null, expansion = null} = this.props;
         const {expanded} = this.state;
+        const styleTest = {
+            position: 'absolute',
+            top: 50,
+            width: '100%',
+            left: 0,
+            height: 200,
+            backgroundColor: Theme.runtime.button.raised.color,
+            boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.45)',
+            WebkitTransition: 'height 0.5s'
+            // animationName: 'screen_expansion',
+            // animationDuration: '0.5s'
+        };
         let backButtonText;
         let backButton;
         let contentStyle;
@@ -96,25 +123,15 @@ const AppScreen = React.createClass({
                     </div>
                 );
 
-                if (expanded === true) {
-                    const styleTest = {
-                        position: 'absolute',
-                        top: 50,
-                        width: '100%',
-                        left: 0,
-                        height: 200,
-                        backgroundColor: Theme.runtime.button.raised.color,
-                        boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.45)',
-                        animationName: 'test',
-                        animationDuration: '0.5s'
-                    };
-                    expansionContainer = (
-                        <div style={styleTest}>
-                            Woah
-                        </div>
-                    );
+                if (expanded === false) {
+                    styleTest.height = 0;
                 }
             }
+            expansionContainer = (
+                <div style={styleTest}>
+                    Woah
+                </div>
+            );
 
             contentStyle.top = 50;
             titleElement = (

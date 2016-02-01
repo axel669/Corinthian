@@ -31,7 +31,7 @@ const TextInput = React.createClass({
         this.refs.input.focus();
     },
     render() {
-        const {icon = null, type = 'text', onChange = () => {}, placeholder, value, label} = this.props;
+        const {icon = null, type = 'text', onChange = () => {}, placeholder, value, label, autoCapitalize = false, autoComplete = true} = this.props;
         let iconArea;
         let inputStyle;
         let labelOffset;
@@ -66,7 +66,9 @@ const TextInput = React.createClass({
                         type={type} value={value} style={inputStyle}
                         onChange={evt => onChange(evt.target.value)}
                         className={Style.getClassName("core/userInput:textField")}
-                        placeholder={placeholder} ref="input" />
+                        placeholder={placeholder} ref="input"
+                        autoComplete={autoComplete}
+                        autoCapitalize={autoCapitalize} />
                     {iconArea}
                     <Touchable component="div" className={Style.getClassName("core:componentLabel")} style={labelOffset} onTap={this.focus}>
                         {label}

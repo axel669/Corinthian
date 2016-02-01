@@ -71,10 +71,6 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
         shadow = null;
     }
 
-    // className = "cor-button";
-    // if (raised === true) {
-    //     className += " raised";
-    // }
     className = Style.getClassNames({
         "core/button:wrapper": true,
         "core/button:raised": raised
@@ -105,8 +101,9 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
     }
     textStyle = {padding};
 
-    if (fill === true) {
+    if (typeof height === 'string' && height.slice(-1) === "%") {
         style.height = '100%';
+        height = '100%';
     }
 
     return (

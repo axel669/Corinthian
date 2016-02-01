@@ -303,7 +303,7 @@ const Main = React.createClass({
         return (
             <UI.Screen title="BIP" subtext="Johnny" width={700} backText="Testing?" expansion="what">
                 <UI.RadioGroup selectedIndex={0}>
-                    {factotum.range(20, n => <UI.Option>Option #{n}</UI.Option>)}
+                    {factotum.range(4, n => <UI.Option>Option #{n}</UI.Option>)}
                 </UI.RadioGroup>
 
                 <UI.RadioGroup selectedIndex={0} layout="grid" height={30} rowCount={1} colCount={2}>
@@ -311,7 +311,27 @@ const Main = React.createClass({
                     <UI.Option>Another Test</UI.Option>
                 </UI.RadioGroup>
 
-                <UI.RangeInput label="Testing" min={0} max={100} value={this.state.inputValue} onChange={inputValue => this.setState({inputValue})} />
+                {/*<UI.RangeInput label="Testing" min={0} max={255} value={this.state.inputValue} onChange={inputValue => this.setState({inputValue})} />*/}
+                <UI.Card>
+                    <UI.Form onSubmit={::console.log}>
+                        <UI.Item name="radio" inputType="radio" layout="grid" height={60} rowCount={2} colCount={2} label="Radio 1">
+                            {factotum.range(4, n => <UI.Option key={n}>Option #{n}</UI.Option>)}
+                        </UI.Item>
+
+                        <UI.Item name="radio2" inputType="radio" label="Radio 2">
+                            {factotum.range(4, n => <UI.Option key={n}>Option #{n}</UI.Option>)}
+                        </UI.Item>
+
+                        <UI.Item name="range" inputType="range" label="Range" min={0} max={255} />
+
+                        <UI.Item name="switch" inputType="switch" label="Form Switch" />
+                        <UI.Item name="checkbox" inputType="checkbox" label="Checkbox?" />
+
+                        <UI.Item name="text1" inputType="text" label="Test 1" />
+                        <UI.Item name="text2" inputType="text" label="Test 2" />
+                    </UI.Form>
+                </UI.Card>
+
                 <UI.Switch label="Test Switch" on={this.state.check} onChange={check => this.setState({check})} />
 
                 <UI.TextInput label="Test Text Input" value={this.state.textValue} onChange={textValue => this.setState({textValue})} />

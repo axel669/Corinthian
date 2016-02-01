@@ -65,7 +65,7 @@ const RadioGroup = ({selectedIndex = null, onChange = () => {}, iconColor, child
     }
 
     if (label !== null) {
-        title = <div className={Style.getClass("core:componentLabel")}>{label}</div>;
+        title = <div className={Style.getClassName("core:componentLabel")}>{label}</div>;
     }
 
     children = children.map(

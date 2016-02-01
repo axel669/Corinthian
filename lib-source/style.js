@@ -1,6 +1,6 @@
 const definedStyles = {};
 const rawStyles = {};
-const animations = {};
+const animations = [];
 
 const getClassName = (name) => {
     return name.replace(/\//g, "_")
@@ -91,6 +91,15 @@ const getCSSValue = (name, value) => {
         return value;
     }
 };
+const getCSSDef = (name, value) => {
+    const cssName = getCSSName(name);
+    const cssValue = getCSSValue(name, value);
+
+    if (Array.isArray(cssValue) === true) {
+        return cssValue.map(value => `  ${cssName[0]}: ${value};`);
+    }
+    return cssName.map(prefixName => `  ${prefixName}: ${cssValue};`);
+};
 
 
 const create = (name, def, rules = [], path = []) => {
@@ -102,24 +111,21 @@ const processDefHelper = (name, key, def, rules, path) => {
     let defs;
     let nestedDefs;
 
-    defs = [];
     nestedDefs = [];
-    for(const defName of Object.keys(def)) {
-        if (/^\w/.test(defName) === true) {
-            const cssValue = getCSSValue(defName, def[defName]);
-            const cssName = getCSSName(defName);
-            if (cssValue !== null) {
-                if (Array.isArray(cssValue) === true) {
-                    cssValue.forEach(value => defs.push(`  ${cssName[0]}: ${value};`));
-                } else {
-                    cssName.forEach(name => defs.push(`  ${name}: ${cssValue};`));
-                    // defs.push(`  ${cssName}: ${cssValue};`);
-                }
+    defs = Object.keys(def).reduce(
+        (defs, defName) => {
+            if (/^\w/.test(defName) === true) {
+                defs = [
+                    ...defs,
+                    ...getCSSDef(defName, def[defName])
+                ];
+            } else {
+                processDefHelper(name, defName, def[defName], nestedDefs, [...path, className]);
             }
-        } else {
-            processDefHelper(name, defName, def[defName], nestedDefs, [...path, className]);
-        }
-    }
+            return defs;
+        },
+        []
+    );
 
     if (defs.length > 0) {
         rules.push({
@@ -158,7 +164,6 @@ const renderDefinedCSS = head => {
     );
 };
 const renderRawCSS = head => {
-    // console.log(rawStyles);
     Object.keys(rawStyles).forEach(
         lib => {
             const styleTag = document.createElement("style");
@@ -166,10 +171,16 @@ const renderRawCSS = head => {
             const cssRules = declarations.map(
                 declaration => {
                     const {selector} = declaration;
-                    const ruleText = Object.keys(declaration.rules).map(
-                        ruleName => {
-                            return `  ${getCSSName(ruleName)[0]}: ${getCSSValue(ruleName, declaration.rules[ruleName])};`;
-                        }
+                    const ruleText = Object.keys(declaration.rules).reduce(
+                        (ruleDefs, ruleName) => {
+                            const ruleValue = declaration.rules[ruleName];
+
+                            return [
+                                ...ruleDefs,
+                                ...getCSSDef(ruleName, ruleValue)
+                            ];
+                        },
+                        []
                     );
 
                     return `${selector} {\n${ruleText.join('\n')}\n}`;
@@ -184,6 +195,34 @@ const renderRawCSS = head => {
     );
 };
 const renderAnimationCSS = head => {
+    animations.forEach(animation => {
+        const styleTag = document.createElement("style");
+        const fromDefs = Object.keys(animation.from).reduce(
+            (defs, defName) => {
+                return [
+                    ...defs,
+                    ...getCSSDef(defName, animation.from[defName])
+                ];
+            },
+            []
+        );
+        const toDefs = Object.keys(animation.to).reduce(
+            (defs, defName) => {
+                return [
+                    ...defs,
+                    ...getCSSDef(defName, animation.to[defName])
+                ];
+            },
+            []
+        );
+
+        styleTag.setAttribute("data-library", "animations");
+        styleTag.innerHTML = `@keyframes ${animation.name} {\nfrom {\n${fromDefs.join('\n')}\n}\nto {\n${toDefs.join('\n')}\n}\n}`;
+
+        head.appendChild(styleTag);
+
+        // console.log(fromDefs);
+    });
 };
 const renderCSS = () => {
     const head = document.querySelector("head");
@@ -256,6 +295,9 @@ export default {
                     };
                 }
             );
+        },
+        addAnimations(...customAnimations) {
+            customAnimations.forEach(animation => animations.push(animation));
         }
     },
     Theme

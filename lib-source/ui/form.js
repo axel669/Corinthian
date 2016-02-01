@@ -29,11 +29,106 @@ const defaultValueFunc = {
     }
 };
 
+const sharedCode = {
+    inputInitialState() {
+        return {value: this.props.initialValue};
+    },
+    inputUpdate(value) {
+        const {format = i => i, update} = this.props;
+
+        value = format(value);
+        this.setState({value});
+        update(value);
+    },
+    indexedInitialState() {
+        return this.props.initialValue;
+    },
+    indexedUpdate(index, value) {
+        const {format = (a, b) => [a, b], update} = this.props;
+
+        [index, value] = format(index, value);
+        this.setState({index, value});
+        update({index, value});
+    }
+};
+const IsolatedComponents = {
+    text: React.createClass({
+        getInitialState: sharedCode.inputInitialState,
+        update: sharedCode.inputUpdate,
+        render() {
+            const {format, initialValue, update, ...inputProps} = this.props;
+            const {value} = this.state;
+            return <TextInput value={value} onChange={this.update} {...inputProps} />;
+        }
+    }),
+    range: React.createClass({
+        getInitialState: sharedCode.inputInitialState,
+        update: sharedCode.inputUpdate,
+        render() {
+            const {format, initialValue, update, ...inputProps} = this.props;
+            const {value} = this.state;
+            return <RangeInput value={value} onChange={this.update} {...inputProps} />;
+        }
+    }),
+    switch: React.createClass({
+        getInitialState() {
+            return {on: this.props.initialValue};
+        },
+        update(on) {
+            const {format = i => i, update} = this.props;
+
+            on = format(on);
+            this.setState({on});
+            update(on);
+        },
+        render() {
+            const {format, initialValue, update, ...switchProps} = this.props;
+            const {on} = this.state;
+            return <Switch on={on} onChange={this.update} {...switchProps} />;
+        }
+    }),
+    checkbox: React.createClass({
+        getInitialState() {
+            return {checked: this.props.initialValue};
+        },
+        update(checked) {
+            const {format = i => i, update} = this.props;
+
+            checked = format(checked);
+            this.setState({checked});
+            update(checked);
+        },
+        render() {
+            const {format, initialValue, update, ...switchProps} = this.props;
+            const {checked} = this.state;
+            return <Checkbox checked={checked} onChange={this.update} {...switchProps} />;
+        }
+    }),
+    combobox: React.createClass({
+        getInitialState: sharedCode.indexedInitialState,
+        update: sharedCode.indexedUpdate,
+        render() {
+            const {format, initialValue, update, children, ...comboboxProps} = this.props;
+            const {index} = this.state;
+            return <Combobox selectedIndex={index} onChange={this.update} {...comboboxProps}>{children}</Combobox>
+        }
+    }),
+    radio: React.createClass({
+        getInitialState: sharedCode.indexedInitialState,
+        update: sharedCode.indexedUpdate,
+        render() {
+            const {format, initialValue, update, children, ...comboboxProps} = this.props;
+            const {index} = this.state;
+            return <RadioGroup selectedIndex={index} onChange={this.update} {...comboboxProps}>{children}</RadioGroup>
+        }
+    })
+};
+
 const Form = React.createClass({
     getInitialState () {
         const children = React.Children.toArray(this.props.children);
 
-        return children.reduce(
+        this.values = children.reduce(
             (state, {props}) => {
                 let {name, inputType, defaultValue = null} = props;
 
@@ -47,56 +142,33 @@ const Form = React.createClass({
             },
             {}
         );
+
+        return null;
     },
-    updateValue (name, format = i => i) {
-        return (index, value = null) => {
-            if (value === null) {
-                value = index;
-            } else {
-                value = {index, value};
-            }
-
-            value = format(value);
-
-            this.setState({[name]: value});
+    updateValue(name) {
+        return updatedValue => {
+            this.values[name] = updatedValue;
         };
     },
     submit () {
-        // let values = {...this.state};
-        this.props.onSubmit(this.state);
+        this.props.onSubmit(this.values);
     },
     render () {
         const {submitText = "Submit"} = this.props;
         const children = React.Children.toArray(this.props.children);
-        const state = this.state;
         let content;
 
         content = children.map(
-            ({props}, index) => {
-                const update = this.updateValue(props.name, props.format);
-                const value = state[props.name];
+            ({props: {name, format, inputType, ...itemProps}}, index) => {
+                const initialValue = this.values[name];
+                const updateFunction = this.updateValue(name);
+                const Isolated = IsolatedComponents[inputType];
 
-                switch (props.inputType) {
-                    case 'text':
-                        return <TextInput {...props} value={value} key={index} onChange={update} />;
-
-                    case 'range':
-                        return <RangeInput {...props} value={value} key={index} onChange={update} />;
-
-                    case 'switch':
-                        return <Switch {...props} on={value} onChange={update} key={index} />;
-
-                    case 'checkbox':
-                        return <Checkbox {...props} checked={value} onChange={update} key={index} />;
-
-                    case 'combobox':
-                        return <Combobox {...props} selectedIndex={value.index} onChange={update} key={index} />;
-
-                    case 'radio':
-                        return <RadioGroup {...props} selectedIndex={value.index} onChange={update} key={index} />;
+                if (Isolated === undefined) {
+                    return null;
                 }
 
-                return <div key={index} />;
+                return <Isolated initialValue={initialValue} update={updateFunction} key={index} {...itemProps} />;
             }
         );
 
