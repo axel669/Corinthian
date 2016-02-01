@@ -1,5 +1,6 @@
 const definedStyles = {};
 const rawStyles = {};
+const animations = {};
 
 const getClassName = (name) => {
     return name.replace(/\//g, "_")
@@ -64,7 +65,18 @@ const cssNoMeasurement = new Set([
     "zIndex",
     "zoom"
 ]);
-const getCSSName = name => name.replace(/[A-Z]/g, s => `-${s.toLowerCase()}`);
+const cssPrefixNames = new Set([
+    'transform',
+    'box-shadow'
+]);
+const cssPrefixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
+const getCSSName = name => {
+    name = name.replace(/[A-Z]/g, s => `-${s.toLowerCase()}`);
+    if (cssPrefixNames.has(name) === true) {
+        return cssPrefixes.map(prefix => `${prefix}${name}`);
+    }
+    return [name];
+};
 const getCSSValue = (name, value) => {
     if (Array.isArray(value) === true) {
         return value.map(cssValue => getCSSValue(name, cssValue));
@@ -95,12 +107,13 @@ const processDefHelper = (name, key, def, rules, path) => {
     for(const defName of Object.keys(def)) {
         if (/^\w/.test(defName) === true) {
             const cssValue = getCSSValue(defName, def[defName]);
-            const cssName = defName.replace(/[A-Z]/g, s => `-${s.toLowerCase()}`);
+            const cssName = getCSSName(defName);
             if (cssValue !== null) {
                 if (Array.isArray(cssValue) === true) {
-                    cssValue.forEach(value => defs.push(`  ${cssName}: ${value};`));
+                    cssValue.forEach(value => defs.push(`  ${cssName[0]}: ${value};`));
                 } else {
-                    defs.push(`  ${cssName}: ${cssValue};`);
+                    cssName.forEach(name => defs.push(`  ${name}: ${cssValue};`));
+                    // defs.push(`  ${cssName}: ${cssValue};`);
                 }
             }
         } else {
@@ -155,7 +168,7 @@ const renderRawCSS = head => {
                     const {selector} = declaration;
                     const ruleText = Object.keys(declaration.rules).map(
                         ruleName => {
-                            return `  ${getCSSName(ruleName)}: ${getCSSValue(ruleName, declaration.rules[ruleName])};`;
+                            return `  ${getCSSName(ruleName)[0]}: ${getCSSValue(ruleName, declaration.rules[ruleName])};`;
                         }
                     );
 
@@ -170,9 +183,12 @@ const renderRawCSS = head => {
         }
     );
 };
+const renderAnimationCSS = head => {
+};
 const renderCSS = () => {
     const head = document.querySelector("head");
 
+    renderAnimationCSS(head);
     renderRawCSS(head);
     renderDefinedCSS(head);
 };

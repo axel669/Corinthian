@@ -1,5 +1,6 @@
 import React from "react";
 
+import Button from "lib-source/ui/button.js";
 import IconButton from "lib-source/ui/iconbutton.js";
 import ScrollContainer from "lib-source/ui/scrollcontainer.js";
 import CenterContent from "lib-source/ui/centercontent.js";
@@ -58,11 +59,14 @@ const AppScreen = React.createClass({
     },
     render() {
         const {children, title = null, subtext = null, scrollable = true, backText = null, expansion = null} = this.props;
+        const {expanded} = this.state;
         let backButtonText;
         let backButton;
         let contentStyle;
         let content;
         let titleElement;
+        let expansionContainer;
+        let expansionButton;
 
         contentStyle = {
             position: 'absolute',
@@ -85,6 +89,33 @@ const AppScreen = React.createClass({
                 );
             }
 
+            if (expansion !== null) {
+                expansionButton = (
+                    <div style={{position: 'absolute', top: 0, right: 0}}>
+                        <IconButton flush raised cornerRadius={5} height={50} icon="ion-navicon-round" onTap={() => this.setState({expanded: !expanded})} />
+                    </div>
+                );
+
+                if (expanded === true) {
+                    const styleTest = {
+                        position: 'absolute',
+                        top: 50,
+                        width: '100%',
+                        left: 0,
+                        height: 200,
+                        backgroundColor: Theme.runtime.button.raised.color,
+                        boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.45)',
+                        animationName: 'test',
+                        animationDuration: '0.5s'
+                    };
+                    expansionContainer = (
+                        <div style={styleTest}>
+                            Woah
+                        </div>
+                    );
+                }
+            }
+
             contentStyle.top = 50;
             titleElement = (
                 <CenterContent height={50} width="100%">
@@ -93,6 +124,9 @@ const AppScreen = React.createClass({
                         {subtext}
                     </div>
                     {backButton}
+
+                    {expansionButton}
+                    {expansionContainer}
                 </CenterContent>
             );
         }

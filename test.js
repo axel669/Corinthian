@@ -301,7 +301,7 @@ const Main = React.createClass({
         const url = "https://s-media-cache-ak0.pinimg.com/736x/89/aa/35/89aa35dbf42e2abd5a9b8082ebc4a3c3.jpg";
         // console.log(this.state);
         return (
-            <UI.Screen title="BIP" subtext="Johnny" width={700} backText="Testing?">
+            <UI.Screen title="BIP" subtext="Johnny" width={700} backText="Testing?" expansion="what">
                 <UI.RadioGroup selectedIndex={0}>
                     {factotum.range(20, n => <UI.Option>Option #{n}</UI.Option>)}
                 </UI.RadioGroup>

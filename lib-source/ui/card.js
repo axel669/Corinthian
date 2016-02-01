@@ -6,7 +6,7 @@ Style.create(
         ".card": {
             margin: 10,
             padding: 7,
-            WebkitBoxShadow: '1px 2px 4px rgba(0, 0, 0, 0.25)',
+            boxShadow: '1px 2px 4px rgba(0, 0, 0, 0.25)',
             border: '1px solid #e9e9e9',
             backgroundColor: Theme.get("app/backgroundColor")
         }
