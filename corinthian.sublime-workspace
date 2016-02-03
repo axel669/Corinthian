@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"repl",
+				"replaceState"
+			],
+			[
+				"app",
+				"appComponent"
+			],
+			[
 				"ex",
 				"expanded"
 			],
@@ -506,14 +514,6 @@
 			[
 				"value",
 				"valueFunc"
-			],
-			[
-				"update",
-				"updateAge"
-			],
-			[
-				"grid",
-				"gridHeight"
 			]
 		]
 	},
@@ -1032,6 +1032,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\\bthis(,|\\))",
 			"    ",
 			" (am|pm)",
 			"    ",
@@ -1158,8 +1159,7 @@
 			"done = ",
 			"fc.promise",
 			"DLRoutes",
-			"}\n",
-			"tappable"
+			"}\n"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1167,6 +1167,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"this._rootNodeID$1",
 			"  ",
 			"$1",
 			" - ",

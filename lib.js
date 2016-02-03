@@ -423,8 +423,41 @@ let frameFunction = () => {
 };
 requestAnimationFrame(frameFunction);
 
-App.transitionTo = url => appComponent.history.pushState(null, url);
-App.replaceWith = url => appComponent.history.replaceState(null, url, null);
-App.goBack = () => appComponent.history.goBack();
+
+let history = ['/'];
+let navVars = {'0': {}};
+App.navigation = {
+    push(url) {
+        navVars[history.length] = {};
+        history.push(url);
+        appComponent.history.replaceState(null, url, null);
+    },
+    pop(n = 1) {
+        if (n >= history.length) {
+            throw new Error(`Cannot pop ${n} screens off the history`);
+        }
+        const max = history.length;
+
+        history = history.slice(0, -n);
+        factotum.count(
+            {from: history.length, to: max},
+            n => {
+                navVars[n] = null;
+            }
+        );
+        appComponent.history.replaceState(null, history.slice(-1)[0], null);
+    },
+    replace(url) {
+        history[history.length - 1] = url;
+        navVars[history.length - 1] = {};
+        appComponent.history.replaceState(null, url, null);
+    },
+    get vars() {
+        return navVars[history.length - 1];
+    }
+};
+// App.transitionTo = url => appComponent.history.pushState(null, url);
+// App.replaceWith = url => appComponent.history.replaceState(null, url, null);
+// App.goBack = () => appComponent.history.goBack();
 
 window.App = App;

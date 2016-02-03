@@ -67,7 +67,8 @@ const cssNoMeasurement = new Set([
 ]);
 const cssPrefixNames = new Set([
     'transform',
-    'box-shadow'
+    'box-shadow',
+    'transition'
 ]);
 const cssPrefixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
 const getCSSName = name => {

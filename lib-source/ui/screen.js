@@ -83,9 +83,8 @@ const AppScreen = React.createClass({
             height: 200,
             backgroundColor: Theme.runtime.button.raised.color,
             boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.45)',
-            WebkitTransition: 'height 0.5s'
-            // animationName: 'screen_expansion',
-            // animationDuration: '0.5s'
+            transition: 'height 0.5s',
+            overflow: 'hidden'
         };
         let backButtonText;
         let backButton;
@@ -111,7 +110,7 @@ const AppScreen = React.createClass({
                 backButtonText = <span style={{fontSize: 12, padding: 3}}>{backText}</span>;
                 backButton = (
                     <div className={Style.getClassName("core/screen:backButton")}>
-                        <IconButton flush text={backButtonText} icon="ion-chevron-left" onTap={() => App.goBack()} height="100%" textColor="white" cornerRadius={5} />
+                        <IconButton flush text={backButtonText} icon="ion-chevron-left" onTap={() => App.navigation.pop()} height="100%" textColor="white" cornerRadius={5} />
                     </div>
                 );
             }
@@ -119,19 +118,22 @@ const AppScreen = React.createClass({
             if (expansion !== null) {
                 expansionButton = (
                     <div style={{position: 'absolute', top: 0, right: 0}}>
-                        <IconButton flush raised cornerRadius={5} height={50} icon="ion-navicon-round" onTap={() => this.setState({expanded: !expanded})} />
+                        <IconButton flush textColor="white" cornerRadius={5} height={50} icon="ion-navicon-round" iconSize={24} onTap={() => this.setState({expanded: !expanded})} />
                     </div>
                 );
 
                 if (expanded === false) {
                     styleTest.height = 0;
                 }
+
+                expansionContainer = (
+                    <div style={styleTest}>
+                        <div style={{width: '100%', height: 200, position: 'absolute'}}>
+                            {expansion}
+                        </div>
+                    </div>
+                );
             }
-            expansionContainer = (
-                <div style={styleTest}>
-                    Woah
-                </div>
-            );
 
             contentStyle.top = 50;
             titleElement = (

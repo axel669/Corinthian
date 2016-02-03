@@ -19,17 +19,25 @@ Style.create(
 const ScrollContainer = React.createClass({
     componentDidMount() {
         const node = this.refs.scroller;
+        const id = this._reactInternalInstance._rootNodeID;
+        const vars = App.navigation.vars;
         let scrollInfo;
 
-        scrollInfo = (scrollContainers.hasOwnProperty(this._rootNodeID) === true) ? scrollContainers[this._rootNodeID] : {scrollX: 0, scrollY: 0};
+        if (vars.hasOwnProperty(id) === true) {
+            scrollInfo = App.navigation.vars[id];
+        } else {
+            scrollInfo = {scrollX: 0, scrollY: 0};
+        }
 
         node.scrollLeft = scrollInfo.scrollX;
         node.scrollTop = scrollInfo.scrollY;
+        this.vars = vars;
     },
     componentWillUnmount() {
         const node = this.refs.scroller;
+        const id = this._reactInternalInstance._rootNodeID;
 
-        scrollContainers[this._rootNodeID] = {
+        this.vars[id] = {
             scrollX: node.scrollLeft,
             scrollY: node.scrollTop
         };
@@ -44,8 +52,5 @@ const ScrollContainer = React.createClass({
         );
     }
 });
-let scrollContainers;
-
-scrollContainers = {};
 
 export default ScrollContainer;
