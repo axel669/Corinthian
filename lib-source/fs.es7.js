@@ -168,7 +168,7 @@ const readdir = name => new Promise(
 );
 
 const removeEntry = (name, functionName) => new Promise(
-    async (resove, reject) => {
+    async (resolve, reject) => {
         const entry = await get(name);
         entry[functionName](
             () => resolve(true),
@@ -277,6 +277,12 @@ export default {
             throw new TypeError("Files can only be moved into other files");
         }
         return await copyEntry(source, dest);
+    },
+    async dirMove(source, dest) {
+        if (isFile(source) !== isFile(dest)) {
+            throw new TypeError("Directories can only be moved into other files");
+        }
+        return await moveEntry(source, dest);
     },
     async dirTree(name, files = []) {
         const list = await fs.dirRead(name);

@@ -137,7 +137,7 @@ const AppScreen = React.createClass({
 
             contentStyle.top = 50;
             titleElement = (
-                <CenterContent height={50} width="100%">
+                <CenterContent className={Style.getClassName("core/screen/app:title")}>
                     {title}
                     <div style={{fontSize: 14}}>
                         {subtext}
@@ -158,9 +158,7 @@ const AppScreen = React.createClass({
 
         return (
             <div>
-                <div className={Style.getClassName("core/screen/app:title")}>
-                    {titleElement}
-                </div>
+                {titleElement}
                 <div style={contentStyle}>
                     {content}
                 </div>

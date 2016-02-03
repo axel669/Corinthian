@@ -13,6 +13,20 @@ Style.create(
     }
 );
 
-const Card = ({style = null, children}) => <div className={Style.getClassName("core/card:card")} style={style}>{children}</div>;
+const Card = ({style = null, children, title = null}) => {
+    let content;
+
+    if (title !== null) {
+        content = (
+            <div>
+                <div style={{fontSize: 20, padding: 3, color: 'black'}}>{title}</div>
+                {children}
+            </div>
+        );
+    } else {
+        content = children;
+    }
+    return <div className={Style.getClassName("core/card:card")} style={style}>{content}</div>;
+}
 
 export default Card;

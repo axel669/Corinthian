@@ -355,7 +355,7 @@ Style.__rawCSS(
     }
 );
 
-App.start = (routes, {hiddenStatusBar = false} = {}) => {
+App.init = () => {
     const appContainer = document.createElement("div");
     const bodyClasses = document.body.className;
     const additionalClasses = Style.getClassNames({
@@ -363,8 +363,6 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         "core:desktop": Environment.mobile === false,
         "core:web": Environment.app === false
     });
-
-    Style.renderCSS();
 
     document.body.appendChild(appContainer);
     document.body.appendChild(Dialog.container);
@@ -374,6 +372,10 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         appContainer.style.overflow = 'visible';
     }
     document.body.className = `${bodyClasses} ${additionalClasses}`.trim();
+
+    Style.renderCSS();
+};
+App.start = (routes, {hiddenStatusBar = false} = {}) => {
     // document.body.className = [document.body.className, ...bodyMods].join(' ');
     // let bbox;
     // let container;
@@ -411,7 +413,7 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
     let history = createHashHistory({queryKey: false});
     appComponent = ReactDOM.render(
         <Router history={history}>{routes}</Router>,
-        appContainer
+        document.querySelector("div")
     );
 
     // Dialog.alert(<div>{factotum.range(2, n => <div>{n}</div>)}</div>);

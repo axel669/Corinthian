@@ -17,6 +17,8 @@ import Switch from "lib-source/ui/switch.js";
 import RangeInput from "lib-source/ui/rangeinput.js";
 import Combobox from "lib-source/ui/combobox.js";
 
+import ProgressBar from "lib-source/ui/progressbar.js";
+
 import Card from "lib-source/ui/card.js";
 import Screen from "lib-source/ui/screen.js";
 import ScrollContainer from "lib-source/ui/scrollcontainer.js";
@@ -44,6 +46,8 @@ export default Object.freeze({
     Switch,
     RangeInput,
     Combobox,
+
+    ProgressBar,
 
     Card,
     ScrollContainer,

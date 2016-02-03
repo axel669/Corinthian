@@ -10,7 +10,7 @@ require('http').createServer(function (request, response) {
     request.addListener('end', function () {
         console.log("serving:", request.url);
         if (/\.js/.test(request.url) === true) {
-            console.log('gzipping js');
+            // console.log('gzipping js');
             response.setHeader("Content-Encoding", "gzip");
             response.end(
                 zlib.gzipSync(

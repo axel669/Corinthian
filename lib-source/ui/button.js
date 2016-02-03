@@ -59,7 +59,7 @@ Style.create(
     }
 );
 
-const Button = ({onTap = () => {}, color = null, textColor = null, width = null, height = null, flush = false, block = false, fill = false, raised = false, padding = null, cornerRadius = null, text} = {}) => {
+const Button = ({onTap = () => {}, color = null, textColor = null, width = null, height = null, flush = false, block = false, fill = false, raised = false, padding = null, cornerRadius = null, text, animation = null} = {}) => {
     let style;
     let textStyle;
     let className;
@@ -87,7 +87,8 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
         MozBoxShadow: shadow,
         boxShadow: shadow,
         borderRadius: cornerRadius,
-        width
+        width,
+        ...(animation || {})
     };
 
     if (block === true) {
