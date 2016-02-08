@@ -188,7 +188,7 @@ const zipFile = ([entries, reader]) => {
                 } else {
                     await fs.fileWrite(
                         `${dest}${filename}`,
-                        await zipEntry(entry).readBlob
+                        await zipEntry(entry).readBlob()
                     );
                 }
                 index += 1;

@@ -5,6 +5,8 @@ import Environment from "lib-source/environment.js";
 import Button from "lib-source/ui/button.js";
 import TextInput from "lib-source/ui/textinput.js";
 
+import {Style, Theme} from "lib-source/style.js";
+
 const dialogContainer = document.createElement("div");
 dialogContainer.className = "cor-dialog-overlay";
 
