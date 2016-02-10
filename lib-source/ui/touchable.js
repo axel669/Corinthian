@@ -1,22 +1,53 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+const forEach = Array.prototype.forEach;
+const {sqrt} = Math;
+
 let Touchable;
 
 Touchable = React.createClass({
     getDefaultProps() {
         return {
-            onTap () {},
-            onTouchStart () {},
-            onTouchEnd () {}
+            onTap() {},
+            onTouchStart() {},
+            onTouchMove() {},
+            onTouchEnd() {}
         };
     },
     touchStart(evt) {
+        const [touch] = evt.changedTouches;
+
         ReactDOM.findDOMNode(this).classList.add("cor-touch-active");
         this.props.onTouchStart(evt);
+
+        this.info = {
+            id: touch.identifier,
+            x: touch.pageX,
+            y: touch.pageY
+        };
+    },
+    touchMove(evt) {
+        this.props.onTouchMove(evt);
+
+        evt.changedTouches::forEach(touch => {
+            if (touch.identifier !== this.info.id) {
+                return;
+            }
+
+            if (sqrt((touch.pageX - this.info.x) ** 2 + (touch.pageY - this.info.y) ** 2) > 25) {
+                ReactDOM.findDOMNode(this).classList.remove("cor-touch-active");
+            }
+        });
     },
     touchEnd(evt) {
-        ReactDOM.findDOMNode(this).classList.remove("cor-touch-active");
+        evt.changedTouches::forEach(touch => {
+            if (touch.identifier !== this.info.id) {
+                return;
+            }
+
+            ReactDOM.findDOMNode(this).classList.remove("cor-touch-active");
+        });
         this.props.onTouchEnd(evt);
     },
     componentDidMount() {
@@ -35,6 +66,7 @@ Touchable = React.createClass({
         props = {
             ...this.props,
             onTouchStart: this.touchStart,
+            onTouchMove: this.touchMove,
             onTouchEnd: this.touchEnd,
             onTouchCancel: this.touchEnd
         };

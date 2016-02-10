@@ -20,7 +20,8 @@ Style.create(
             borderBottom: '1px solid #DDD',
             marginBottom: 1,
             ": focus": {
-                borderBottom: Theme.format('2px solid $userInput/activeColor')
+                borderBottom: Theme.format('2px solid $userInput/activeColor'),
+                outline: 'none'
             }
         }
     }

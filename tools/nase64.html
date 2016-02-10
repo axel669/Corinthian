@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, user-scalable=0, width=device-width" />
+        <title>Base64 Encode</title>
+    </head>
+    <body>
+        <input type="file" />
+        <script>
+        var file = document.querySelector("input");
+        file.addEventListener(
+            "change",
+            function (evt) {
+                var reader = new FileReader();
+                reader.addEventListener(
+                    "load",
+                    function (evt) {
+                        console.log(reader.result);
+                    }
+                );
+                reader.readAsDataURL(evt.target.files[0]);
+
+                file.value = "";
+            }
+        );
+        </script>
+    </body>
+</html>

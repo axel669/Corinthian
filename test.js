@@ -140,10 +140,46 @@ const Main = React.createClass({
 // );
 
 const DialogTest = React.createClass({
+    dialogTest(type) {
+        return async () => {
+            console.log(
+                await (() => {
+                    switch (type) {
+                        case 'alert': return Dialog.alert(factotum.range(100, n => <div>{n}</div>));
+                        case 'confirm': return Dialog.confirm("Confirm Test?");
+                        case 'prompt': return Dialog.prompt("Enter your hogwarts house");
+                    }
+                })()
+            );
+        }
+    },
+    spinnerTest() {
+        const spinner = Dialog.spinner("Loading");
+        schedule(2000, () => spinner.dismiss());
+    },
+    async customTest() {
+        const value = await Dialog.__custom(
+            close => {
+                return {
+                    content: "This is a test",
+                    buttons: [
+                        {text: "Test", width: '50%'},
+                        {text: "Nope", value: 100, width: '50%'}
+                    ],
+                    title: "Wat"
+                };
+            }
+        );
+        console.log(value);
+    },
     render() {
         return (
             <UI.Screen title="Dialog Test">
-                <UI.Button raised block text="Alert" onTap={() => Dialog.alert("Test")} />
+                <UI.Button raised block text="Alert" onTap={this.dialogTest('alert')} />
+                <UI.Button raised block text="Confirm" onTap={this.dialogTest('confirm')} />
+                <UI.Button raised block text="Prompt" onTap={this.dialogTest('prompt')} />
+                <UI.Button raised block text="Loading" onTap={this.spinnerTest} />
+                <UI.Button raised block text="Custom" onTap={this.customTest} />
             </UI.Screen>
         );
     }
