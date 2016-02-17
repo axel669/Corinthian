@@ -38,18 +38,32 @@ Style.create(
 Style.create(
     "core/screen/web",
     {
+        ".contentInner": {
+            position: 'relative',
+            top: 0,
+            left: '50%',
+            width: '100%',
+            transform: 'translateX(-50%)'
+        }
     }
 );
 Style.create(
     "core/screen/app",
     {
         ".title": {
-            position: 'absolute',
+            position: 'fixed',
             ...titleBase
         },
         ".titleExtended": {
             position: 'absolute',
             top: 50
+        },
+        ".content": {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0
         }
     }
 );
@@ -73,7 +87,7 @@ const AppScreen = React.createClass({
         };
     },
     render() {
-        const {children, title = null, subtext = null, scrollable = true, backText = null, expansion = null} = this.props;
+        const {children, title = null, subtext = null, scrollable = true, backText = null, expansion = null, width = 800} = this.props;
         const {expanded} = this.state;
         const styleTest = {
             position: 'absolute',
@@ -86,24 +100,26 @@ const AppScreen = React.createClass({
             transition: 'height 0.5s',
             overflow: 'hidden'
         };
+        const contentStyle = {};
+
         let backButtonText;
         let backButton;
-        let contentStyle;
+        let contentName;
         let content;
         let titleElement;
         let expansionContainer;
         let expansionButton;
 
-        contentStyle = {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0
-        };
         titleElement = null;
         backButton = null;
         content = children;
+
+        // if (Environment.app === true) {
+        //     contentName = "core/screen/app:content";
+        // } else {
+        //     contentName = "core/screen/web:content";
+        //     contentStyle.maxWidth = width;
+        // }
 
         if (title !== null) {
             if (backText !== null) {
@@ -150,16 +166,18 @@ const AppScreen = React.createClass({
             );
         }
 
+        if (Environment.app === false) {
+            content = <div style={{maxWidth: width}} className={Style.getClassName("core/screen/web:contentInner")}>{content}</div>;
+        }
+
         if (scrollable === true) {
-            content = <ScrollContainer style={{paddingTop: 5}}>{children}</ScrollContainer>;
-        } else {
-            contentStyle.paddingTop = 5;
+            content = <ScrollContainer>{content}</ScrollContainer>;
         }
 
         return (
             <div>
                 {titleElement}
-                <div style={contentStyle}>
+                <div style={contentStyle} className={Style.getClassName("core/screen/app:content")}>
                     {content}
                 </div>
             </div>
@@ -215,12 +233,14 @@ const WebScreen = ({children, title = null, subtext = null, backText = null, wid
     );
 };
 
-let Screen;
+// let Screen;
 
-if (Environment.app === true) {
-    Screen = AppScreen;
-} else {
-    Screen = WebScreen;
-}
+// if (Environment.app === true) {
+//     Screen = AppScreen;
+// } else {
+//     Screen = WebScreen;
+// }
 
-export default Screen;
+// export default Screen;
+
+export default AppScreen;

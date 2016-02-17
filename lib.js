@@ -355,7 +355,7 @@ Style.__rawCSS(
     }
 );
 
-App.init = () => {
+const init = () => {
     const appContainer = document.createElement("div");
     const bodyClasses = document.body.className;
     const additionalClasses = Style.getClassNames({
@@ -376,40 +376,8 @@ App.init = () => {
     Style.renderCSS();
 };
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
-    // document.body.className = [document.body.className, ...bodyMods].join(' ');
-    // let bbox;
-    // let container;
+    init();
 
-    // bbox = document.body.getBoundingClientRect();
-    // if (hiddenStatusBar === true) {
-    //     bbox = screen;
-    // }
-    // let {width, height} = bbox;
-    // if (orientation === 'landscape' && width < height) {
-    //     [width, height] = [height, width];
-    // }
-
-    // if (typeof cordova !== 'undefined') {
-    //     width = '100%';
-    //     height = '100%';
-    // } else {
-    //     width = `${width}px`;
-    //     height = `${height}px`;
-    // }
-
-    // container = document.querySelector("#AppContainer");
-    // container.style.width = width;
-    // container.style.height = height;
-
-    // ReactRouter.run(
-    //     routes,
-    //     (Handler, changeInfo) => {
-    //         React.render(
-    //             <Handler action={changeInfo.action} />,
-    //             appContainer
-    //         );
-    //     }
-    // );
     let history = createHashHistory({queryKey: false});
     appComponent = ReactDOM.render(
         <Router history={history}>{routes}</Router>,
@@ -426,38 +394,55 @@ let frameFunction = () => {
 requestAnimationFrame(frameFunction);
 
 
-let history = ['/'];
-let navVars = {'0': {}};
-App.navigation = {
-    push(url) {
-        navVars[history.length] = {};
-        history.push(url);
-        appComponent.history.replaceState(null, url, null);
-    },
-    pop(n = 1) {
-        if (n >= history.length) {
-            throw new Error(`Cannot pop ${n} screens off the history`);
-        }
-        const max = history.length;
-
-        history = history.slice(0, -n);
-        factotum.count(
-            {from: history.length, to: max},
-            n => {
-                navVars[n] = null;
+if (Environment.app === true) {
+    let history = ['/'];
+    let navVars = {'0': {}};
+    App.navigation = {
+        push(url) {
+            navVars[history.length] = {};
+            history.push(url);
+            appComponent.history.replaceState(null, url, null);
+        },
+        pop(n = 1) {
+            if (n >= history.length) {
+                throw new Error(`Cannot pop ${n} screens off the history`);
             }
-        );
-        appComponent.history.replaceState(null, history.slice(-1)[0], null);
-    },
-    replace(url) {
-        history[history.length - 1] = url;
-        navVars[history.length - 1] = {};
-        appComponent.history.replaceState(null, url, null);
-    },
-    get vars() {
-        return navVars[history.length - 1];
-    }
-};
+            const max = history.length;
+
+            history = history.slice(0, -n);
+            factotum.count(
+                {from: history.length, to: max},
+                n => {
+                    navVars[n] = null;
+                }
+            );
+            appComponent.history.replaceState(null, history.slice(-1)[0], null);
+        },
+        replace(url) {
+            history[history.length - 1] = url;
+            navVars[history.length - 1] = {};
+            appComponent.history.replaceState(null, url, null);
+        },
+        get vars() {
+            return navVars[history.length - 1];
+        }
+    };
+} else {
+    App.navigation = {
+        push(url) {
+            appComponent.history.pushState(null, url);
+        },
+        pop() {
+            appComponent.history.goBack();
+        },
+        replace(url) {
+            appComponent.history.replaceState(null, url, null);
+        },
+        get vars() {
+            return {};
+        }
+    };
+}
 // App.transitionTo = url => appComponent.history.pushState(null, url);
 // App.replaceWith = url => appComponent.history.replaceState(null, url, null);
 // App.goBack = () => appComponent.history.goBack();

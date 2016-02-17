@@ -43,7 +43,8 @@ Style.create(
             maxHeight: '40vh',
             WebkitOverflowScrolling: 'touch',
             overflow: 'auto',
-            padding: 15
+            padding: 15,
+            transform: 'translateZ(0)'
         },
         ".title": {
             lineHeight: '30px',
@@ -132,7 +133,7 @@ const ConfirmDialog = ({message, title = "Confirm", resolve, confirmText = "Conf
 };
 const PromptDialog = React.createClass({
     getInitialState() {
-        return {value: ""};
+        return {value: this.props.startValue};
     },
     componentDidMount() {
         schedule(
@@ -184,12 +185,12 @@ const CustomDialog = ({content, buttons = [{text: "Display", value: null}], titl
             </div>
             <div className={Style.getClassName("core/dialog:buttons")}>
                 {buttons.map(
-                    ({text, value = undefined, width = 75}) => {
+                    ({text, value = undefined, width = 75}, index) => {
                         if (typeof value !== 'function') {
                             const wrapped = value;
                             value = () => wrapped;
                         }
-                        return <Button flush height="100%" width={width} text={smallText(text)} onTap={() => closeDialog(value())} />;
+                        return <Button flush height="100%" width={width} text={smallText(text)} onTap={() => closeDialog(value())} key={index} />;
                     }
                 )}
             </div>

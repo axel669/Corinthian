@@ -130,7 +130,7 @@ const processDefHelper = (name, key, def, rules, path) => {
 
     if (defs.length > 0) {
         rules.push({
-            name: [...path, className].join(' ').replace(/\s+:\s+/g, ":"),
+            name: [...path, className].join(' ').replace(/\s+(:+)\s+/g, (ignore, s) => s),
             defs
         });
     }

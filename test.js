@@ -139,6 +139,11 @@ const Main = React.createClass({
 //     document.querySelector("div")
 // );
 
+// const Calendar = ({selectedDate, month, year}) => {
+//     return (
+//     );
+// };
+
 const DialogTest = React.createClass({
     dialogTest(type) {
         return async () => {
@@ -175,14 +180,32 @@ const DialogTest = React.createClass({
     render() {
         return (
             <UI.Screen title="Dialog Test">
-                <UI.Button raised block text="Alert" onTap={this.dialogTest('alert')} />
+                {/*<UI.Button raised block text="Alert" onTap={this.dialogTest('alert')} />
                 <UI.Button raised block text="Confirm" onTap={this.dialogTest('confirm')} />
                 <UI.Button raised block text="Prompt" onTap={this.dialogTest('prompt')} />
                 <UI.Button raised block text="Loading" onTap={this.spinnerTest} />
                 <UI.Button raised block text="Custom" onTap={this.customTest} />
+
+                <hr />
+                {factotum.range(100, n => <div>{n}</div>)}*/}
+                <UI.Button onTap={() => App.navigation.push("/test")} text="Wat" />
             </UI.Screen>
         );
     }
 });
 
-App.start(<Route path="/" component={DialogTest} />);
+const Test = () => {
+    console.log(History.state);
+    return (
+        <UI.Screen title="Test Screen" backText="Back">
+            Hey there
+        </UI.Screen>
+    );
+};
+
+App.start(
+    <Route>
+        <Route path="/" component={DialogTest} />
+        <Route path="/test" component={Test} />
+    </Route>
+);

@@ -1,3 +1,5 @@
+import Environment from "lib-source/environment.js";
+
 const forEach = Array.prototype.forEach;
 const schedule = (time, func) => setTimeout(func, time);
 
@@ -172,6 +174,9 @@ window.addEventListener(
 );
 
 (() => {
+    if (Environment.mobile === true) {
+        return;
+    }
     const copyPropList = ['pageX', 'pageY', 'screenX', 'screenY', 'altKey', 'ctrlKey', 'shiftKey', 'metaKey', 'clientX', 'clientY', 'layerX', 'layerY', 'x', 'y'];
     const createTouch = (evt, target) => copyPropList.reduce(
         (synthTouch, propertyName) => {

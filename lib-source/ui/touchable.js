@@ -10,6 +10,7 @@ Touchable = React.createClass({
     getDefaultProps() {
         return {
             onTap() {},
+            onHold() {},
             onTouchStart() {},
             onTouchMove() {},
             onTouchEnd() {}
@@ -55,6 +56,12 @@ Touchable = React.createClass({
             'tap',
             evt => {
                 ::this.props.onTap(evt);
+            }
+        );
+        ReactDOM.findDOMNode(this).addEventListener(
+            'hold',
+            evt => {
+                ::this.props.onHold(evt);
             }
         );
     },
