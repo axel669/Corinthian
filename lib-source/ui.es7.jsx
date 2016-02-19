@@ -28,6 +28,8 @@ import Flexbox from "lib-source/ui/flexbox.js";
 import Split from "lib-source/ui/split.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 import Form from "lib-source/ui/form.js";
+import Divider from "lib-source/ui/divider.js";
+import PinBoard from "lib-source/ui/pinboard.js";
 
 // React.initializeTouchEvents(true);
 
@@ -58,7 +60,10 @@ export default Object.freeze({
     Split,
     CenterContent,
     Form,
+    Divider,
+    PinBoard,
 
     Item: props => null,
-    Option: props => null
+    Option: props => null,
+    Pin: props => null
 });

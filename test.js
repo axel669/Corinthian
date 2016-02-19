@@ -107,7 +107,7 @@ Theme.define({
     }
 });
 
-App.init();
+// App.init();
 
 const Main = React.createClass({
     getInitialState() {
@@ -189,6 +189,24 @@ const DialogTest = React.createClass({
                 <hr />
                 {factotum.range(100, n => <div>{n}</div>)}*/}
                 <UI.Button onTap={() => App.navigation.push("/test")} text="Wat" />
+                <UI.Divider.Horizontal height={200}>
+                    <UI.Item size={10}>
+                        <div style={{width: '100%', height: '100%', backgroundColor: 'cyan'}} />
+                    </UI.Item>
+
+                    <UI.Item size={40}>
+                        <div style={{width: '100%', height: '100%', backgroundColor: 'green'}} />
+                    </UI.Item>
+                </UI.Divider.Horizontal>
+                <UI.PinBoard height={200}>
+                    <UI.Pin detail={{width: 50, height: '100%'}}>
+                        <div style={{width: '100%', height: '100%', backgroundColor: 'cyan'}} />
+                    </UI.Pin>
+
+                    <UI.Pin detail={{left: 50, right: 50, height: '80%'}}>
+                        <div style={{width: '100%', height: '100%', backgroundColor: 'green'}} />
+                    </UI.Pin>
+                </UI.PinBoard>
             </UI.Screen>
         );
     }
