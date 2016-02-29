@@ -322,6 +322,14 @@ Style.create(
             padding: 5,
             paddingLeft: 8,
             cursor: 'default'
+        },
+        ".viewport": {
+            position: 'absolute',
+            width: '100vw',
+            height: '100vh',
+            left: '-100vw',
+            top: '-100vh',
+            opacity: 0
         }
     }
 );
@@ -357,6 +365,7 @@ Style.__rawCSS(
 
 const init = () => {
     const appContainer = document.createElement("div");
+    const viewportContainer = document.createElement("div");
     const bodyClasses = document.body.className;
     const additionalClasses = Style.getClassNames({
         "core:app": true,
@@ -364,8 +373,20 @@ const init = () => {
         "core:web": Environment.app === false
     });
 
+    viewportContainer.className = Style.getClassName("core:viewport");
+
     document.body.appendChild(appContainer);
     document.body.appendChild(Dialog.container);
+    document.body.appendChild(viewportContainer);
+
+    App.viewport = {
+        get width() {
+            return viewportContainer.offsetWidth;
+        },
+        get height() {
+            return viewportContainer.offsetHeight;
+        }
+    };
 
     if (Environment.mobile === false) {
         appContainer.style.position = null;

@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"viewport",
+				"viewportContainer"
+			],
+			[
+				"view",
+				"viewportContainer"
+			],
+			[
+				"create",
+				"createElement"
+			],
+			[
 				"replace",
 				"replaceState"
 			],
@@ -502,18 +514,6 @@
 			[
 				"React",
 				"ReactRouter"
-			],
-			[
-				"Scree",
-				"ScreenWrapper"
-			],
-			[
-				"split",
-				"splitRaw"
-			],
-			[
-				"has",
-				"hasOwnProperty"
 			]
 		]
 	},
@@ -887,14 +887,18 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
+		"/C/Users/Axel1/Documents/IISExpress/config/aspnet.config",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
+		"/C/Users/Axel1/Documents/IISExpress/config/applicationhost.config",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/environment.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/iconbutton.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/style.js",
 		"/C/Users/Axel1/Documents/programming/js/apps/app-base/AppProject.sublime-project",
 		"/C/Users/Axel1/Documents/programming/js/apps/app-base/compile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
 		"/C/Users/Axel1/Documents/programming/js/apps/app-base/source/compile.js",
 		"/C/Users/Axel1/Documents/programming/js/apps/app-base/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/scrollcontainer.js",
@@ -932,14 +936,12 @@
 		"/C/Users/Axel1/Downloads/parser.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_spinner.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_scrollable.sass",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
@@ -1012,9 +1014,7 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_radio.sass",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_combobox.sass",
 		"//card.com/Websites/Live/SkillsBrain.com/app.js",
-		"//ccweb01/inetpub/SkillsBrain.com/index.html",
-		"//card.com/Websites/Live/SkillsBrain.com/index.html",
-		"//stweb01/websites/SkillsBrain.com/index.html"
+		"//ccweb01/inetpub/SkillsBrain.com/index.html"
 	],
 	"find":
 	{
@@ -1032,6 +1032,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Clr4IntegratedAppPool",
 			"replace",
 			":\\s",
 			"flush={true}",
@@ -1158,8 +1159,7 @@
 			" {4}",
 			"\\n {4}",
 			"xc",
-			"class",
-			" {2}"
+			"class"
 		],
 		"highlight": true,
 		"in_selection": false,

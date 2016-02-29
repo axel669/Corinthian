@@ -17,7 +17,7 @@ var babelify = require("babelify");
 // var stringify = require("stringify");
 var fs = require("fs");
 var uglify = require("uglify-js");
-var sass = require("node-sass");
+// var sass = require("node-sass");
 
 var footer = "\nconsole.log('Build Time: ', '" + (new Date()).toString() + "');";
 
