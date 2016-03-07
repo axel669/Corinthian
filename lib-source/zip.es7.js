@@ -176,6 +176,9 @@ const zipFile = ([entries, reader]) => {
             }
             return null;
         },
+        getEntries() {
+            return entries.map(zipEntry);
+        },
         async extractTo(dest, onProgress = () => {}) {
             let index;
 
