@@ -73,8 +73,6 @@ window.Picture = Picture;
 window.ionic = icons;
 window.Dialog = Dialog;
 window.security = crypto;
-// window.microDB = microDB;
-// window.moment = moment;
 window.Zip = Zip;
 window.Style = Style;
 window.Theme = Theme;
@@ -82,9 +80,15 @@ window.Theme = Theme;
 window.schedule = (time, func, ...args) => {
     setTimeout(() => func(...args), time);
 };
-
-// zip.download = Zip.download;
-// zip.readArrayBuffer = Zip.readArrayBuffer;
+window.API = {
+    create(baseURL) {
+        return {
+            request(url, options) {
+                return factotum.ajax(`${baseURL}${url}`, options);
+            }
+        };
+    }
+};
 
 App = {
     transitionTime: 300
@@ -155,27 +159,7 @@ App.session = Object.freeze({
     }
 });
 
-window.test = async () => {
-    const zipFile = await Zip.download(
-        `http://axel669.ngrok.io/app-base.zip?t=${Date.now()}`,
-        evt => console.log(`downloaded: ${evt.loaded / evt.total}`)
-    );
-    const appDir = await fs.dir.entry(".");
-
-    await zipFile.extractTo(appDir, ::console.log);
-};
-
 window.cblog = ::console.log;
-
-
-// App.initHistory = (...backLog) => {
-//     history.replaceState(null, "", "#/");
-//     backLog.forEach(route => {
-//         history.pushState(null, "", "#" + route);
-//         // ReactRouter.HashLocation.push("#" + route);
-//         ReactRouter.History.length += 1;
-//     });
-// };
 
 // let animator = (component, done, func, time) => {
 //     let progress;
@@ -464,8 +448,5 @@ if (Environment.app === true) {
         }
     };
 }
-// App.transitionTo = url => appComponent.history.pushState(null, url);
-// App.replaceWith = url => appComponent.history.replaceState(null, url, null);
-// App.goBack = () => appComponent.history.goBack();
 
 window.App = App;
