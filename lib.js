@@ -6,12 +6,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactRouter from "react-router";
 import {createHashHistory} from "history";
-import moment from "moment";
+// import moment from "moment";
+import chrono from "lib-source/chrono.js";
 import UI from "lib-source/ui.es7.jsx";
 import factotum from "lib-source/factotum.es7.js";
 import Zip from "lib-source/zip.es7.js";
 import fs from "lib-source/fs.es7.js";
-import {Picture} from "lib-source/camera.es7.js";
 import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
 import Dialog from "lib-source/dialog.js";
@@ -29,37 +29,37 @@ let App;
 let ScreenWrapper;
 let appContainer;
 
-window.moment = (...args) => {
-    let momentProto;
-    let momentObject;
+// window.moment = (...args) => {
+//     let momentProto;
+//     let momentObject;
 
-    if (args.length > 0 && args[0]._isAmomentObject === true) {
-        momentObject = args[0];
-    } else {
-        momentObject = moment(...args);
-    }
-    momentProto = momentObject.constructor.prototype;
-    return Object.keys(momentProto).reduce(
-        (functional, funcName) => {
-            functional[funcName] = (...args) => {
-                let intermediate;
+//     if (args.length > 0 && args[0]._isAmomentObject === true) {
+//         momentObject = args[0];
+//     } else {
+//         momentObject = moment(...args);
+//     }
+//     momentProto = momentObject.constructor.prototype;
+//     return Object.keys(momentProto).reduce(
+//         (functional, funcName) => {
+//             functional[funcName] = (...args) => {
+//                 let intermediate;
 
-                intermediate = moment(momentObject)[funcName](...args);
-                if (intermediate._isAMomentObject === true) {
-                    intermediate = specialMoment(intermediate);
-                }
-                return intermediate;
-            };
-            return functional;
-        },
-        {
-            get timeStamp() {return momentObject.valueOf();}
-        }
-    );
-};
-Object.keys(moment).forEach(key => {
-    window.moment[key] = moment[key];
-});
+//                 intermediate = moment(momentObject)[funcName](...args);
+//                 if (intermediate._isAMomentObject === true) {
+//                     intermediate = specialMoment(intermediate);
+//                 }
+//                 return intermediate;
+//             };
+//             return functional;
+//         },
+//         {
+//             get timeStamp() {return momentObject.valueOf();}
+//         }
+//     );
+// };
+// Object.keys(moment).forEach(key => {
+//     window.moment[key] = moment[key];
+// });
 
 window.factotum = factotum;
 window.regex = XRegExp;
@@ -69,13 +69,13 @@ window.ReactDOM = ReactDOM;
 window.ReactRouter = ReactRouter;
 window.UI = UI;
 window.fs = fs;
-window.Picture = Picture;
 window.ionic = icons;
 window.Dialog = Dialog;
 window.security = crypto;
 window.Zip = Zip;
 window.Style = Style;
 window.Theme = Theme;
+window.chrono = chrono;
 
 window.schedule = (time, func, ...args) => {
     setTimeout(() => func(...args), time);
@@ -388,8 +388,6 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         <Router history={history}>{routes}</Router>,
         document.querySelector("div")
     );
-
-    // Dialog.alert(<div>{factotum.range(2, n => <div>{n}</div>)}</div>);
 };
 
 let frameFunction = () => {
