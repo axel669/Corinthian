@@ -100,7 +100,7 @@ const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, 
     }
     if (icon !== null) {
         rangeStyle.left = 40;
-        iconDisplay = <CenterContent className="cor-icon" style={{position: 'absolute', left: 0, top: 0}} width={25} height="100%">{icons[icon]}</CenterContent>
+        iconDisplay = <CenterContent className={Style.getClassName("core:icon")} style={{position: 'absolute', left: 0, top: 0}} width={25} height="100%">{icons[icon]}</CenterContent>
     }
 
     return (

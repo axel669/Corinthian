@@ -1,6 +1,7 @@
 import React from "react";
 
 import TextInput from "lib-source/ui/textinput.js";
+import MultilineInput from "lib-source/ui/multilineinput.js";
 import RangeInput from "lib-source/ui/rangeinput.js";
 import Switch from "lib-source/ui/switch.js";
 import Checkbox from "lib-source/ui/checkbox.js";
@@ -9,6 +10,7 @@ import RadioGroup from "lib-source/ui/radio.js";
 
 const defaultValueFunc = {
     text: () => '',
+    multiline: () => '',
     number: () => 0,
     range: ({min = 0}) => min,
     switch: () => false,
@@ -59,6 +61,15 @@ const IsolatedComponents = {
             const {format, initialValue, update, ...inputProps} = this.props;
             const {value} = this.state;
             return <TextInput value={value} onChange={this.update} {...inputProps} />;
+        }
+    }),
+    multiline: React.createClass({
+        getInitialState: sharedCode.inputInitialState,
+        update: sharedCode.inputUpdate,
+        render() {
+            const {format, initialValue, update, ...inputProps} = this.props;
+            const {value} = this.state;
+            return <MultilineInput value={value} onChange={this.update} {...inputProps} />;
         }
     }),
     range: React.createClass({
@@ -154,8 +165,9 @@ const Form = React.createClass({
         this.props.onSubmit(this.values);
     },
     render () {
-        const {submitText = "Submit"} = this.props;
+        const {submitText = "Submit", itemContainer = "div"} = this.props;
         const children = React.Children.toArray(this.props.children);
+        const Container = itemContainer;
         let content;
 
         content = children.map(
@@ -168,7 +180,11 @@ const Form = React.createClass({
                     return null;
                 }
 
-                return <Isolated initialValue={initialValue} update={updateFunction} key={index} {...itemProps} />;
+                return (
+                    <Container key={index}>
+                        <Isolated initialValue={initialValue} update={updateFunction} {...itemProps} />
+                    </Container>
+                );
             }
         );
 

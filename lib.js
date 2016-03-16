@@ -90,72 +90,139 @@ window.API = {
     }
 };
 
-App = {
-    transitionTime: 300
+// App.settings = Object.freeze({
+//     get (name, defaultValue) {
+//         let value;
+
+//         value = localStorage.getItem(name);
+//         if (value === null) {
+//             return defaultValue;
+//         }
+//         return JSON.parse(value);
+//     },
+//     set (name, value) {
+//         localStorage.setItem(name, JSON.stringify(value));
+//     },
+//     getObject (...names) {
+//         return names.reduce(
+//             (settings, name) => {
+//                 let defaultValue;
+
+//                 if (typeof name !== 'string') {
+//                     [name, defaultValue] = name;
+//                 }
+//                 settings[name] = App.settings.get(name, defaultValue);
+//                 return settings;
+//             },
+//             {}
+//         );
+//     },
+//     setObject (obj) {
+//         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
+//     }
+// });
+// App.storage = App.settings;
+
+// App.session = Object.freeze({
+//     get(name, defaultValue) {
+//         let value;
+
+//         value = sessionStorage.getItem(name);
+//         if (value === null) {
+//             return defaultValue;
+//         }
+//         return JSON.parse(value);
+//     },
+//     set(name, value) {
+//         sessionStorage.setItem(name, JSON.stringify(value));
+//     },
+//     getObject(...names) {
+//         return names.reduce(
+//             (settings, name) => {
+//                 let defaultValue;
+
+//                 if (typeof name !== 'string') {
+//                     [name, defaultValue] = name;
+//                 }
+//                 settings[name] = App.settings.get(name, defaultValue);
+//                 return settings;
+//             },
+//             {}
+//         );
+//     },
+//     setObject(obj) {
+//         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
+//     }
+// });
+
+App = {};
+
+const readSetting = (storage, key, name, defaultValue) => {
+    const value = storage.getItem(`${key}:${name}`);
+
+    if (value === null) {
+        return defaultValue;
+    }
+
+    return JSON.parse(value);
+};
+const writeSetting = (storage, key, name, value) => {
+    storage.setItem(`${key}:${name}`, JSON.stringify(value));
 };
 
-App.settings = Object.freeze({
-    get (name, defaultValue) {
-        let value;
-
-        value = localStorage.getItem(name);
-        if (value === null) {
-            return defaultValue;
-        }
-        return JSON.parse(value);
+App.createSettings = key => ({
+    read(name, defaultValue) {
+        return readSetting(localStorage, key, name, defaultValue);
     },
-    set (name, value) {
-        localStorage.setItem(name, JSON.stringify(value));
-    },
-    getObject (...names) {
+    readObject(...names) {
         return names.reduce(
-            (settings, name) => {
-                let defaultValue;
-
-                if (typeof name !== 'string') {
-                    [name, defaultValue] = name;
+            (result, item) => {
+                if (typeof item === 'string') {
+                    item = [item, undefined];
                 }
-                settings[name] = App.settings.get(name, defaultValue);
-                return settings;
+                const [name, defaultValue] = item;
+
+                result[name] = readSetting(localStorage, key, name, defaultValue);
+                return result;
             },
             {}
         );
     },
-    setObject (obj) {
-        Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
+    write(name, value) {
+        writeSetting(localStorage, key, name, value);
+    },
+    writeObject(settings) {
+        for (const [name, value] of Object.entries(settings)) {
+            writeSetting(localStorage, key, name, value);
+        }
     }
 });
-App.storage = App.settings;
 
-App.session = Object.freeze({
-    get(name, defaultValue) {
-        let value;
-
-        value = sessionStorage.getItem(name);
-        if (value === null) {
-            return defaultValue;
-        }
-        return JSON.parse(value);
+App.createSession = key => ({
+    read(name, defaultValue) {
+        return readSetting(sessionStorage, key, name, defaultValue);
     },
-    set(name, value) {
-        sessionStorage.setItem(name, JSON.stringify(value));
-    },
-    getObject(...names) {
+    readObject(...names) {
         return names.reduce(
-            (settings, name) => {
-                let defaultValue;
-
-                if (typeof name !== 'string') {
-                    [name, defaultValue] = name;
+            (result, item) => {
+                if (typeof item === 'string') {
+                    item = [item, undefined];
                 }
-                settings[name] = App.settings.get(name, defaultValue);
-                return settings;
+                const [name, defaultValue] = item;
+
+                result[name] = readSetting(sessionStorage, key, name, defaultValue);
+                return result;
             },
             {}
         );
     },
-    setObject(obj) {
-        Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
+    write(name, value) {
+        writeSetting(sessionStorage, key, name, value);
+    },
+    writeObject(settings) {
+        for (const [name, value] of Object.entries(settings)) {
+            writeSetting(sessionStorage, key, name, value);
+        }
     }
 });
 

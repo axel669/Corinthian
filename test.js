@@ -180,6 +180,9 @@ const DialogTest = React.createClass({
     render() {
         return (
             <UI.Screen title="Dialog Test">
+                <UI.Form submitText="Test" itemContainer={UI.Card} onSubmit={({wat}) => cblog(wat)}>
+                    <UI.Item inputType="multiline" name="wat" placeholder="Testing" label="Wat" height="4l" />
+                </UI.Form>
                 {/*<UI.Button raised block text="Alert" onTap={this.dialogTest('alert')} />
                 <UI.Button raised block text="Confirm" onTap={this.dialogTest('confirm')} />
                 <UI.Button raised block text="Prompt" onTap={this.dialogTest('prompt')} />
@@ -187,7 +190,7 @@ const DialogTest = React.createClass({
                 <UI.Button raised block text="Custom" onTap={this.customTest} />
 
                 <hr />
-                {factotum.range(100, n => <div>{n}</div>)}*/}
+                {factotum.range(100, n => <div>{n}</div>)}
                 <UI.Button onTap={() => App.navigation.push("/test")} text="Wat" />
                 <UI.Divider.Horizontal height={200}>
                     <UI.Item size={10}>
@@ -206,7 +209,7 @@ const DialogTest = React.createClass({
                     <UI.Pin detail={{left: 50, right: 50, height: '80%'}}>
                         <div style={{width: '100%', height: '100%', backgroundColor: 'green'}} />
                     </UI.Pin>
-                </UI.PinBoard>
+                </UI.PinBoard>*/}
             </UI.Screen>
         );
     }

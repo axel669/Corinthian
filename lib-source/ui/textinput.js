@@ -48,7 +48,7 @@ const TextInput = React.createClass({
         if (icon === null) {
             iconArea = null;
         } else {
-            iconArea = <CenterContent style={{position: 'absolute', top: 0}} width={40} height={40} className="cor-icon">{icons[icon]}</CenterContent>;
+            iconArea = <CenterContent style={{position: 'absolute', top: 0}} width={40} height={40} className={Style.getClassName("core:icon")}>{icons[icon]}</CenterContent>;
             inputStyle = {
                 marginLeft: 40,
                 width: "calc(100% - 40px)"

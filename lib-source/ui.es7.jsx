@@ -16,6 +16,7 @@ import TextInput from "lib-source/ui/textinput.js";
 import Switch from "lib-source/ui/switch.js";
 import RangeInput from "lib-source/ui/rangeinput.js";
 import Combobox from "lib-source/ui/combobox.js";
+import MultilineInput from "lib-source/ui/multilineinput.js";
 
 import ProgressBar from "lib-source/ui/progressbar.js";
 
@@ -48,6 +49,7 @@ export default Object.freeze({
     Switch,
     RangeInput,
     Combobox,
+    MultilineInput,
 
     ProgressBar,
 
