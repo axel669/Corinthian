@@ -1,0 +1,82 @@
+{
+    "project": {
+        "name": "Corinthian Docs",
+        "version": "1.0.0"
+    },
+    "files": {
+        "lib-source\\ui\\button.js": {
+            "name": "lib-source\\ui\\button.js",
+            "modules": {
+                "UI": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "UI": {
+            "name": "UI",
+            "submodules": {},
+            "elements": {
+                "Button": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib-source\\ui\\button.js",
+            "line": 62
+        }
+    },
+    "classes": {},
+    "elements": {
+        "Button": {
+            "name": "Button",
+            "attributes": [
+                {
+                    "name": "onTap",
+                    "description": "The function to call when the button is tapped (mobile) or pressed (desktop).",
+                    "type": " Function",
+                    "default": " () => {}"
+                },
+                {
+                    "name": "color",
+                    "description": "The color of the button.",
+                    "type": " String",
+                    "default": " \"transparent\""
+                },
+                {
+                    "name": "textColor",
+                    "description": "The color of the text inside the button.",
+                    "type": " String",
+                    "default": " Theme.button.color"
+                },
+                {
+                    "name": "width",
+                    "description": "The width of the button.",
+                    "type": " Number|String",
+                    "default": " null (wraps button content)"
+                },
+                {
+                    "name": "height",
+                    "description": "The height of the button.",
+                    "type": " Number|String",
+                    "default": " null (wraps button content)"
+                },
+                {
+                    "name": "flush",
+                    "description": "Makes the button take the width and height of its container. Overwrites `width` and `height`.",
+                    "type": " Boolean",
+                    "default": " false"
+                }
+            ],
+            "module": "UI",
+            "file": "lib-source\\ui\\button.js",
+            "line": 66,
+            "description": "Displays a button on screen."
+        }
+    },
+    "classitems": [],
+    "warnings": []
+}

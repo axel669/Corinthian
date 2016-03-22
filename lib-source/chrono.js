@@ -321,6 +321,19 @@ const chrono = (arg = null) => {
         }
     };
 };
+chrono.diff = (first, second) => {
+    const internalDate = new Date(first.unixTimestamp - second.unixTimestamp);
+
+    return {
+        milliseconds: internalDate.getMilliseconds(),
+        seconds: internalDate.getSeconds(),
+        minutes: internalDate.getMinutes(),
+        hours: internalDate.getHours(),
+        days: internalDate.getDate() - 2,
+        months: internalDate.getMonth(),
+        years: internalDate.getFullYear() - 1970
+    };
+};
 chrono.now = () => chrono(Date.now());
 chrono.trigger = (delay, func, ...args) => {
     const id = setTimeout(

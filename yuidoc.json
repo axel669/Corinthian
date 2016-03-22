@@ -1,0 +1,7 @@
+{
+    "name": "Corinthian Docs",
+    "options": {
+        "outdir": "./docs",
+        "theme": "simple"
+    }
+}

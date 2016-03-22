@@ -164,6 +164,11 @@ const Form = React.createClass({
     submit () {
         this.props.onSubmit(this.values);
     },
+    reset () {
+        for (const item of Object.values(this.refs)) {
+            item.setState(item.getInitialState());
+        }
+    },
     render () {
         const {submitText = "Submit", itemContainer = "div"} = this.props;
         const children = React.Children.toArray(this.props.children);
@@ -182,7 +187,7 @@ const Form = React.createClass({
 
                 return (
                     <Container key={index}>
-                        <Isolated initialValue={initialValue} update={updateFunction} {...itemProps} />
+                        <Isolated ref={index} initialValue={initialValue} update={updateFunction} {...itemProps} />
                     </Container>
                 );
             }
