@@ -148,19 +148,26 @@ const chronoInfo = {
 const chronoFormat = {
     ms: {
         base: date => date.getMilliseconds(),
-        padded: date => `00${date.getMilliseconds}`.slice(-3)
+        padded: date => `00${date.getMilliseconds()}`.slice(-3)
     },
     second: {
         base: date => date.getSeconds(),
-        padded: date => `00${date.getSeconds}`.slice(-3)
+        padded: date => `0${date.getSeconds()}`.slice(-2)
     },
     minute: {
         base: date => date.getMinutes(),
-        padded: date => `00${date.getMinutes}`.slice(-3)
+        padded: date => `0${date.getMinutes()}`.slice(-2)
     },
     hour: {
         base: date => date.getHours(),
-        padded: date => `00${date.getHours}`.slice(-3)
+        padded: date => `0${date.getHours()}`.slice(-2),
+        "12": date => {
+            const hour = date.getHours() % 12;
+            if (hour === 0) {
+                return 12;
+            }
+            return hour
+        }
     },
     weekday: {
         base: date => date.getDay(),
@@ -172,7 +179,7 @@ const chronoFormat = {
         padded: date => `0${date.getDate()}`.slice(-2)
     },
     month: {
-        base: date => date.getMonth(),
+        base: date => date.getMonth() + 1,
         short: date => chronoInfo.months[date.getDate()].slice(0, 3),
         full: date => chronoInfo.months[date.getDate()]
     },
@@ -303,15 +310,10 @@ const chrono = (arg = null) => {
                 return internalDate.toLocaleString();
             }
 
-            console.log(formatString.replace(
-                /\{(\w+)(\/(\w+))?\}/,
-                (full, prop, skip, type = 'base') => {
-                    console.log(prop, type);
-                    return chronoFormat[prop][type](internalDate);
-                }
-            ));
-
-            return null;
+            return formatString.replace(
+                /\{(\w+)(\/(\w+))?\}/g,
+                (full, prop, skip, type = 'base') => chronoFormat[prop][type](internalDate)
+            );
         },
         toString() {
             return internalDate.toString();

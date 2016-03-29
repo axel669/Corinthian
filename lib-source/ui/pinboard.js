@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PinBoard = ({children, width, height = null}) => {
+const Pinboard = ({children, width, height = null}) => {
     if (height === null) {
-        throw new Error("PinBoard requires a height");
+        throw new Error("Pinboard requires a height");
     }
     children = React.Children.toArray(children);
 
@@ -15,4 +15,4 @@ const PinBoard = ({children, width, height = null}) => {
     return <div style={{position: 'relative', top: 0, left: 0, width, height}}>{children}</div>;
 };
 
-export default PinBoard;
+export default Pinboard;

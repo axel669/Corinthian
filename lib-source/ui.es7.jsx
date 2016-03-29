@@ -30,7 +30,7 @@ import Split from "lib-source/ui/split.js";
 import CenterContent from "lib-source/ui/centercontent.js";
 import Form from "lib-source/ui/form.js";
 import Divider from "lib-source/ui/divider.js";
-import PinBoard from "lib-source/ui/pinboard.js";
+import Pinboard from "lib-source/ui/pinboard.js";
 
 // React.initializeTouchEvents(true);
 
@@ -63,7 +63,7 @@ export default Object.freeze({
     CenterContent,
     Form,
     Divider,
-    PinBoard,
+    Pinboard,
 
     Item: props => null,
     Option: props => null,

@@ -154,8 +154,8 @@ const group = (iterable, keyFunc) => {
 };
 
 const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, type = null, onProgress = () => {}} = {}) => {
+    const request = new XMLHttpRequest();;
     let method;
-    let request;
 
     if (post === null) {
         method = "GET";
@@ -168,9 +168,8 @@ const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, typ
         post = formData;
     }
 
-    return new Promise(
+    const promise = new Promise(
         (resolve, reject) => {
-            request = new XMLHttpRequest();
             if (type !== null) {
                 request.responseType = type;
             }
@@ -199,6 +198,10 @@ const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, typ
                 reject
             );
             request.addEventListener(
+                "abort",
+                () => resolve(null)
+            );
+            request.addEventListener(
                 "progress",
                 onProgress
             );
@@ -209,6 +212,8 @@ const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, typ
                 Object.keys(headers).forEach(
                     header => request.setRequestHeader(header, headers[header])
                 );
+                request.setRequestHeader("Accept", "");
+                request.setRequestHeader("Accept", "*/*");
                 if (post !== null) {
                     if (formData === null) {
                         request.setRequestHeader("Content-Type", "application/json");
@@ -220,7 +225,11 @@ const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, typ
             }
         }
     );
+    promise.abort = () => request.abort();
+
+    return promise;
 };
+
 export default Object.freeze({
     remove,
     range,

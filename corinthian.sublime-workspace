@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"prom",
+				"promise"
+			],
+			[
 				"time",
 				"unixTimestamp"
 			],
@@ -510,10 +514,6 @@
 			[
 				"background",
 				"backgroundSize"
-			],
-			[
-				"bound",
-				"boundaries"
 			]
 		]
 	},
@@ -887,6 +887,13 @@
 	},
 	"file_history":
 	[
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/form.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
+		"/C/Users/cmorgan2/Downloads/Basic Docs.html",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/pinboard.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/chrono.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/camera.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
@@ -937,7 +944,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/theme/_default.sass",
 		"/C/Users/Axel1/Documents/autohotkey.ahk",
 		"/C/Users/Axel1/Downloads/parser.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
@@ -948,7 +954,6 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/gesture.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
@@ -959,7 +964,6 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/card.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/image.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_rangeinput.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_button.sass",
@@ -1010,11 +1014,7 @@
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/corinthian.min.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/adriana.jpg",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/switch.js",
-		"/C/Users/Axel1/Documents/programming/js/mobile/flashcards/index.html",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_radio.sass"
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/screen.js"
 	],
 	"find":
 	{
