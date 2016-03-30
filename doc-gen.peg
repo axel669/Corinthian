@@ -1,10 +1,50 @@
+{
+    var groupItems = (items, keyFunction, valueFunction = i => i) => items.reduce(
+        (groups, item) => {
+            var key = keyFunction(item);
+            var value = valueFunction(item);
+            var groupValue;
+
+            if (groups.hasOwnProperty(key) === true) {
+                groupValue = groups[key];
+                if (Array.isArray(groupValue) === true) {
+                    groupValue.push(value);
+                } else {
+                    groupValue = [groupValue, value];
+                }
+            } else {
+                groupValue = value;
+            }
+
+            groups[key] = groupValue;
+            return groups;
+        },
+        {}
+    );
+
+    var group = (items, keyFunction, valueFunction = i => i) => items.reduce(
+        (groups, item) => {
+            var key = keyFunction(item);
+            var value = valueFunction(item);
+
+            if (groups.hasOwnProperty(key) === false) {
+                groups[key] = [];
+            }
+
+            groups[key].push(value);
+            return groups;
+        },
+        {}
+    );
+}
+
 Modules
     = _ modules:(Module _)* {
         return modules.map(module => module[0]);
     }
 
 Module
-    = _ "module" _ name:Word _ "{" _ stuff:((Function / ObjectThing) _)* "}" {
+    = _ "module" _ name:Word _ "{" _ stuff:((Function / GenericObject) _)* "}" {
         stuff = stuff.map(item => item[0]).reduce(
             (groups, group) => {
                 if (groups.hasOwnProperty(group.type) === false) {
@@ -23,23 +63,54 @@ Module
     }
 
 Function
-    = type:"function" _ name:Word _ "{" _ props:(Property _)* "}" {
-        props = props.map(prop => prop[0]);
-        return {
-            type,
-            name,
+    = type:"function" _ name:Word _ "{" _ props:((FunctionSignature / Parameter) _)* "}" {
+        props = group(
+            props.map(prop => prop[0]),
+            prop => {
+                if (prop.hasOwnProperty("type") === true) {
+                    return prop.type;
+                }
+                return "params";
+            }
+        );
+        if (props.hasOwnProperty("params") === true) {
+            props.params = groupItems(props.params, param => param.name, param => param.value);
+        }
+        return Object.assign(
+            {
+                type,
+                name
+            },
             props
-        };
+        );
     }
 
-ObjectThing
-    = type:$[a-zA-Z]+ _ name:Word _ "{" _ props:(Property _)* "}" {
-        props = props.map(prop => prop[0]);
-        return {
-            type,
-            name,
-            props
-        };
+FunctionSignature
+    = "@args" _ args:FunctionArgumentSet {
+        return {type: "signature", args};
+    }
+
+FunctionArgumentSet
+    = "{" _ args:(FunctionArgument _)* "}" {
+        return args.map(arg => arg[0]);
+    }
+FunctionArgument
+    = "@arg" optional:"*"? _ name:Word type:(_ "[" WordList "]")? desc: (_ Sentence)? {
+        type = (type === null) ? [] : type[2];
+        desc = (desc === null) ? "" : desc[1];
+        optional = optional !== null;
+        return {name, type, desc, optional};
+    }
+
+GenericObject
+    = type:$[a-zA-Z]+ _ name:Word _ props:ItemDescription {
+        return Object.assign(
+          {
+              type,
+              name
+          },
+          props
+        );
     }
 
 Object
@@ -51,9 +122,19 @@ Object
         };
     }
 
+ItemDescription
+    = "{" _ details:((Function / Property) _)* "}" {
+        return (
+            group(
+                details.map(detail => detail[0]),
+                detail => detail.type
+            )
+        );
+    }
+
 Property
-    = "@" type:$[a-zA-Z]+ _ name:Word? _ "{" _ params:(Parameter _)* "}" {
-        params = params.map(param => param[0]);
+    = "@" type:$[a-zA-Z_]+ _ name:Word? _ params:ParameterSet {
+        //params = params.map(param => param[0]);
         return {
             type,
             name,
@@ -61,27 +142,48 @@ Property
         }
     }
 
-Sentence
-    = words:$(Word (_ (Word / BracketedSequence))*) {
-        return words;
+ParameterSet
+    = "{" _ params:(Parameter _)* "}" {
+        params = params.map(param => param[0]);
+        return groupItems(
+            params,
+            param => param.name,
+            param => param.value || true
+        );
     }
 
-Word
-    = word:$[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,]+ {
-        return word;
+Parameter
+    = "@" name:Word value:(_ Sentence)? {
+        if (value !== null) {
+            value = value[1];
+        }
+        return {name, value};
     }
 
 BracketedSequence
     = $("{" Sentence "}")
     / $("{" _ "}")
 
-Parameter
-    = "@" param:Word value:(_ Sentence)? {
-        if (value !== null) {
-            value = value[1];
-        }
-        return {param, value};
+Sentence
+    = words:$(AnyWord (_ (AnyWord / BracketedSequence))*) {
+        return words;
     }
+
+WordList
+    = first:Word rest:(_ "," _ WordList)? {
+        if (rest === null) {
+            rest = [];
+        } else {
+            rest = rest[3];
+        }
+        return [first, ...rest];
+    }
+
+AnyWord
+    = $[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,]+
+
+Word
+    = $[a-zA-Z_]+
 
 _ "whitespace"
   = [ \t\n\r]*

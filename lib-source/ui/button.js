@@ -59,130 +59,31 @@ Style.create(
     }
 );
 
-/**
-    @module UI
-*/
-
-/**
-    Displays a button on screen.
-    @element Button
-*/
-/**
-    The function to call when the button is tapped (mobile) or pressed (desktop).
-    @attribute
-        onTap
-    @optional
-    @type Function
-    @default () => {}
-*/
-/**
-    The color of the button.
-    @attribute color
-    @optional
-    @type String
-    @default "transparent"
-*/
-/**
-    The color of the text inside the button.
-    @attribute textColor
-    @optional
-    @type String
-    @default Theme.button.color
-*/
-/**
-    The width of the button.
-    @attribute width
-    @optional
-    @type Number|CSS String
-    @default null (wraps button content)
-*/
-/**
-    The height of the button.
-    @attribute height
-    @optional
-    @type Number|CSS String
-    @default null (wraps button content)
-*/
-/**
-    Makes the button flish with the elements around it (removes the margin).
-    @attribute flush
-    @optional
-    @type Boolean
-    @default false
-*/
-/**
-    Makes the button display as a block element.
-    @attribute block
-    @optional
-    @type Boolean
-    @default false
-*/
-/**
-    Makes the button take the width and height of its container. Overwrites `width` and `height`.
-    @attribute fill
-    @optional
-    @type Boolean
-    @default false
-*/
-/**
-    Changes the button style to a "raised" style. Changes color to `Theme.button.color` and textColor to `Theme.button.textColor` and adds a box-shadow.
-    @attribute raised
-    @optional
-    @type Boolean
-    @default false
-*/
-/**
-    Adjusts the padding around the button text.
-    @attribute padding
-    @optional
-    @type Number|CSS String
-    @default "5px"
-*/
-/**
-    Adjust the rounding of the button's corners.
-    @attribute cornerRadius
-    @optional
-    @type Number|CSS String
-    @default 0
-*/
-/**
-    Sets the css class to control property animations on the button.
-    @attribute animation
-    @optional
-    @type String
-    @default null
-*/
-/**
-    The button text.
-    @attribute text
-    @required
-    @type String
-*/
 /* -AxelDoc-
 module UI {
     element Button {
-        @prop onTap {
+        prop onTap {
             @desc The function to call when the button is tapped (mobile) or pressed (desktop).
             @type function
             @optional
             @default `() => {}`
         }
 
-        @prop color {
+        prop color {
             @desc The color of the button.
             @type CSS String
             @optional
             @default `"transparent"`
         }
 
-        @prop textColor {
+        prop textColor {
             @desc The color of the text inside the button.
             @type CSS String
             @optional
             @default $Theme.button.color
         }
 
-        @prop width {
+        prop width {
             @desc The width of the button.
             @type Number
             @type CSS String
@@ -190,12 +91,69 @@ module UI {
             @default `null` (wraps button content)
         }
 
-        @prop height {
+        prop height {
             @desc The height of the button.
             @type Number
             @type CSS String
             @optional
             @default `null` (wraps button content)
+        }
+
+        prop flush {
+            @desc Makes the button flish with the elements around it (removes the margin).
+            @type boolean
+            @optional
+            @default `false`
+        }
+
+        prop block {
+            @desc Makes the button display as a block element.
+            @type boolean
+            @optional
+            @default `false`
+        }
+
+        prop fill {
+            @desc Makes the button take the width and height of its container. Overwrites `width` and `height`.
+            @type boolean
+            @optional
+            @default `false`
+        }
+
+        prop raised {
+            @desc Changes the button style to a "raised" style. Changes `color` to `Theme.button.color` and `textColor` to `Theme.button.textColor` and adds a box-shadow.
+            @type boolean
+            @optional
+            @default false
+        }
+
+        prop padding {
+            @desc Adjusts the padding around the button text.
+            @type Number
+            @type CSS String
+            @optional
+            @default `"5px"`
+        }
+
+        prop cornerRadius {
+            @desc Adjust the rounding of the button's corners.
+            @type Number
+            @type CSS String
+            @optional
+            @default 0
+        }
+
+        prop animation {
+            @desc Sets the css class to control property animations on the button.
+            @type string
+            @optional
+            @default null
+        }
+
+        prop text {
+            @desc The button text.
+            @type string
+            @required
         }
     }
 }
