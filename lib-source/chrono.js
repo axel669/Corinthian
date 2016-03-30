@@ -193,6 +193,16 @@ const chronoCheckUnit = unit => {
         throw new Error(`Unrecognized unit: ${unit}`);
     }
 };
+
+/* -AxelDoc-
+module global {
+    function chrono {
+        @args {
+            @arg dateTime [Date]
+        }
+    }
+}
+*/
 const chrono = (arg = null) => {
     const internalDate = (() => {
         if (arg === null) {
@@ -337,6 +347,8 @@ chrono.diff = (first, second) => {
     };
 };
 chrono.now = () => chrono(Date.now());
+chrono.parse = string => chrono(Date.parse(string));
+chrono.parseMS = string => chrono(Date.parse(string.replace("T", " ")));
 chrono.trigger = (delay, func, ...args) => {
     const id = setTimeout(
         () => {

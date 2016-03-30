@@ -69,7 +69,8 @@ Style.create(
 */
 /**
     The function to call when the button is tapped (mobile) or pressed (desktop).
-    @attribute onTap
+    @attribute
+        onTap
     @optional
     @type Function
     @default () => {}
@@ -156,6 +157,48 @@ Style.create(
     @attribute text
     @required
     @type String
+*/
+/* -AxelDoc-
+module UI {
+    element Button {
+        @prop onTap {
+            @desc The function to call when the button is tapped (mobile) or pressed (desktop).
+            @type function
+            @optional
+            @default `() => {}`
+        }
+
+        @prop color {
+            @desc The color of the button.
+            @type CSS String
+            @optional
+            @default `"transparent"`
+        }
+
+        @prop textColor {
+            @desc The color of the text inside the button.
+            @type CSS String
+            @optional
+            @default $Theme.button.color
+        }
+
+        @prop width {
+            @desc The width of the button.
+            @type Number
+            @type CSS String
+            @optional
+            @default `null` (wraps button content)
+        }
+
+        @prop height {
+            @desc The height of the button.
+            @type Number
+            @type CSS String
+            @optional
+            @default `null` (wraps button content)
+        }
+    }
+}
 */
 
 const Button = ({onTap = () => {}, color = null, textColor = null, width = null, height = null, flush = false, block = false, fill = false, raised = false, padding = null, cornerRadius = null, text, animation = null} = {}) => {

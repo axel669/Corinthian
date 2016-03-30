@@ -1,29 +1,5 @@
-// let arraySlice;
-// let arrayEach;
-// let ajaxBase;
-
-// let remove;
-// let range;
-// let indexOf;
-// let each;
-// let find;
-// let group;
-// let ajax;
-
 const arraySlice = Array.prototype.slice;
 const arrayEach = Array.prototype.forEach;
-
-// if (Object.hasOwnProperty('assign') === false) {
-//     Object.assign = (dest, ...sources) => {
-//         sources.forEach(source =>
-//             Object.keys(source).forEach(key =>
-//                 dest[key] = source[key]
-//             )
-//         );
-
-//         return dest;
-//     };
-// }
 
 const remove = (iterable, index, count = 1) => [
     ...iterable::arraySlice(0, index),
@@ -95,42 +71,9 @@ const count = ({from = 0, to, increment = 1} = {}, loop = null) => {
     }
 };
 
-// const indexOf = (iterable, testFunc, start = 0) => {
-//     let index;
-//     let length;
-
-//     index = start;
-//     length = iterable.length;
-
-//     while (true) {
-//         if (index === length) {
-//             break;
-//         }
-
-//         if (testFunc(iterable[index]) === true) {
-//             return index;
-//         }
-
-//         index += 1;
-//     }
-
-//     return -1;
-// };
-
 const each = (iterable, func) => {
     iterable::arrayEach(func);
 };
-
-// find = (iterable, testFunc, start) => {
-//     let index;
-
-//     index = indexOf(iterable, testFunc, start);
-//     if (index === -1) {
-//         return;
-//     }
-
-//     return iterable[index];
-// };
 
 const group = (iterable, keyFunc) => {
     let groups;
