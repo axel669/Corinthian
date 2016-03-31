@@ -63,7 +63,7 @@ Module
     }
 
 Function
-    = type:"function" _ name:Word _ "{" _ props:((FunctionSignature / Parameter) _)* "}" {
+    = "@" type:"function" _ name:Word _ "{" _ props:((Function / FunctionSignature / Parameter) _)* "}" {
         props = group(
             props.map(prop => prop[0]),
             prop => {
@@ -180,7 +180,7 @@ WordList
     }
 
 AnyWord
-    = $[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,]+
+    = $[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,\-]+
 
 Word
     = $[a-zA-Z_]+

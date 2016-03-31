@@ -135,6 +135,17 @@ const IsolatedComponents = {
     })
 };
 
+/* -AxelDoc-
+module UI {
+    element Form {
+        @desc A container that will manage components to create a form that does not rely on a state
+            that is managed by the programmer.
+        @note
+        @blockElement
+        @hasChildren
+    }
+}
+*/
 const Form = React.createClass({
     getInitialState () {
         const children = React.Children.toArray(this.props.children);

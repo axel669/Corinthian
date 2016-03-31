@@ -15,6 +15,46 @@ Style.create(
     }
 );
 
+/* -AxelDoc-
+module UI {
+    element CenterContent {
+        @desc A container that will automatically center its content horizontally and vertically.
+        @hasChildren
+        @prop width {
+            @desc The width of the container.
+            @type Number
+            @type CSS String
+            @optional
+            @detaul `null` (wraps content)
+        }
+        @prop height {
+            @desc The height of the container.
+            @type Number
+            @type CSS String
+            @optional
+            @detaul `null` (wraps content)
+        }
+        @prop className {
+            @desc Additional class names to give the container.
+            @type String
+            @optional
+            @default `""`
+        }
+        @prop style {
+            @desc Style to apply to the container. See React inline styles for information.
+            @type object
+            @optional
+            @default `null`
+        }
+        @example
+            ```
+            <UI.CenterContent width="100%" height="100%">
+                Content to center
+            </UI.CenterContent>
+            ```
+    }
+}
+*/
 const CenterContent = ({width, height, children, style = {}, className = ""}) => {
     const wrapperName = `${Style.getClassName("core/centerContent:wrapper")} ${className}`.trim();
     return (

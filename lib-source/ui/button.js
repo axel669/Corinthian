@@ -62,28 +62,32 @@ Style.create(
 /* -AxelDoc-
 module UI {
     element Button {
-        prop onTap {
+        @desc Displays a button on screen.
+        @prop onTap {
             @desc The function to call when the button is tapped (mobile) or pressed (desktop).
             @type function
             @optional
             @default `() => {}`
+            @args {
+                @arg evt [Event] The tap event that occured.
+            }
         }
 
-        prop color {
+        @prop color {
             @desc The color of the button.
             @type CSS String
             @optional
             @default `"transparent"`
         }
 
-        prop textColor {
+        @prop textColor {
             @desc The color of the text inside the button.
             @type CSS String
             @optional
             @default $Theme.button.color
         }
 
-        prop width {
+        @prop width {
             @desc The width of the button.
             @type Number
             @type CSS String
@@ -91,7 +95,7 @@ module UI {
             @default `null` (wraps button content)
         }
 
-        prop height {
+        @prop height {
             @desc The height of the button.
             @type Number
             @type CSS String
@@ -99,35 +103,35 @@ module UI {
             @default `null` (wraps button content)
         }
 
-        prop flush {
+        @prop flush {
             @desc Makes the button flish with the elements around it (removes the margin).
             @type boolean
             @optional
             @default `false`
         }
 
-        prop block {
+        @prop block {
             @desc Makes the button display as a block element.
             @type boolean
             @optional
             @default `false`
         }
 
-        prop fill {
+        @prop fill {
             @desc Makes the button take the width and height of its container. Overwrites `width` and `height`.
             @type boolean
             @optional
             @default `false`
         }
 
-        prop raised {
+        @prop raised {
             @desc Changes the button style to a "raised" style. Changes `color` to `Theme.button.color` and `textColor` to `Theme.button.textColor` and adds a box-shadow.
             @type boolean
             @optional
             @default false
         }
 
-        prop padding {
+        @prop padding {
             @desc Adjusts the padding around the button text.
             @type Number
             @type CSS String
@@ -135,7 +139,7 @@ module UI {
             @default `"5px"`
         }
 
-        prop cornerRadius {
+        @prop cornerRadius {
             @desc Adjust the rounding of the button's corners.
             @type Number
             @type CSS String
@@ -143,18 +147,23 @@ module UI {
             @default 0
         }
 
-        prop animation {
+        @prop animation {
             @desc Sets the css class to control property animations on the button.
             @type string
             @optional
             @default null
         }
 
-        prop text {
+        @prop text {
             @desc The button text.
             @type string
             @required
         }
+
+        @example
+            ```
+            <UI.Button text="text" />
+            ```
     }
 }
 */

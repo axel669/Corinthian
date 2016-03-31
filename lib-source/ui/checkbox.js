@@ -34,6 +34,69 @@ const capitalize = str => `${str.charAt(0).toUpperCase()}${str.substr(1)}`;
 const ionOnIcon = "ion-android-checkbox";
 const ionOffIcon = "ion-android-checkbox-outline-blank";
 
+/* -AxelDoc-
+module UI {
+    element Checkbox {
+        @desc Displays a checkbox on screen.
+        @managed
+        @blockElement
+        @prop height {
+            @desc The height of the element.
+            @type number
+            @type CSS string
+            @optional
+            @default `40`
+        }
+        @prop onChange {
+            @desc The function to call when the checkbox value changes.
+            @type function
+            @optional
+            @default `() => {}`
+            @args {
+                @arg checked [boolean] The new checked state of the checkbox.
+            }
+        }
+        @prop checkColor {
+            @desc The color of the check.
+            @type CSS string
+            @optional
+            @default `"black"`
+        }
+        @prop onIcon {
+            @desc The icon to display when the checkbox is checked.
+            @type string
+            @optional
+            @default `"ion-android-checkbox"`
+        }
+        @prop onffIcon {
+            @desc The icon to display when the checkbox is not checked.
+            @type string
+            @optional
+            @default `"ion-android-checkbox-outline-blank"`
+        }
+        @prop checkSide {
+            @desc The side of the label the checkbox is on.
+            @type string
+            @optional
+            @default `"left"`
+        }
+        @prop checked {
+            @desc Whether or not the checkbox is checked.
+            @type boolean
+            @required
+        }
+        @prop label {
+            @desc The text to display next to the checbox.
+            @type string
+            @required
+        }
+        @example
+            ```
+            <UI.Checkbox label="Checkbox??" checked={this.state.checked} />
+            ```
+    }
+}
+*/
 const Checkbox = ({height = 40, onChange = () => {}, checkColor = 'black', onIcon = ionOnIcon, checkSide = 'left', offIcon = ionOffIcon, checked, label}) => {
     const checkString = (checked === true) ? icons[onIcon] : icons[offIcon];
     const iconStyle = {

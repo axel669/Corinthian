@@ -13,6 +13,33 @@ Style.create(
     }
 );
 
+/* -AxelDoc-
+module UI {
+    element Card {
+        @desc A simple separator for content to break up longer streams of content.
+        @blockElement
+        @hasChildren
+        @prop style {
+            @desc Style to apply to the container. See React inline styles for information.
+            @type object
+            @optional
+            @default `null`
+        }
+        @prop title {
+            @desc The title to display on the card.
+            @type string
+            @optional
+            @default `null`
+        }
+        @example
+            ```
+            <UI.Card>
+                Look, content!
+            </UI.Card>
+            ```
+    }
+}
+*/
 const Card = ({style = null, children, title = null}) => {
     let content;
 
