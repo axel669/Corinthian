@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"all",
+				"allTheData"
+			],
+			[
+				"readd",
+				"readdirr"
+			],
+			[
 				"prom",
 				"promise"
 			],
@@ -506,14 +514,6 @@
 			[
 				"Demo",
 				"Demo2"
-			],
-			[
-				"Reat",
-				"ReactRouter"
-			],
-			[
-				"background",
-				"backgroundSize"
 			]
 		]
 	},
@@ -887,11 +887,23 @@
 	},
 	"file_history":
 	[
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/form.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/chrono.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/divider.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/card.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/files.txt",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/axeldoc-parser.js",
+		"/C/Users/cmorgan2/Downloads/parser (1).js",
+		"/C/Users/cmorgan2/Downloads/parser.js",
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/factotum.es7.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/form.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/cmorgan2/Downloads/Basic Docs.html",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/pinboard.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
@@ -952,22 +964,16 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/spinner.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/sass/components/_scrollable.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/material.scss",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/checkbox.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/touchable.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/gesture.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/grid.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/flexbox.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/iconbutton.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/imagebutton.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/raisedbutton.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/card.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/image.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/screen.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_rangeinput.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_button.sass",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/centercontent.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/ui/radio.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/sass/components/_radio.sass",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/index.html",
@@ -1008,13 +1014,7 @@
 		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/secret cd.sublime-project",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/external/gesture.js",
 		"/C/Users/cmorgan2/AppData/Roaming/Skype/My Skype Received Files/dataCenter.js",
-		"/C/Users/cmorgan2/AppData/Roaming/Skype/My Skype Received Files/.eslintrc",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/test.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/gulpfile.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/corinthian.min.js",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/adriana.jpg",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/screen.js"
+		"/C/Users/cmorgan2/AppData/Roaming/Skype/My Skype Received Files/.eslintrc"
 	],
 	"find":
 	{
@@ -1032,6 +1032,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".+",
+			"chrono",
+			"asObject",
+			"__chrono_duration",
+			"chronoUnitRegex",
+			"=>",
 			"localStorage",
 			"get",
 			"getHours",
@@ -1153,13 +1159,7 @@
 			"promise",
 			"array.prototype",
 			"Grid",
-			"10",
-			"}>+</",
-			"async",
-			"changeStrength",
-			">)}\n",
-			"Select",
-			" {4}"
+			"10"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1167,6 +1167,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"\"$0\",",
 			"flush",
 			"this._rootNodeID$1",
 			"  ",

@@ -66,7 +66,9 @@ Module
     }
 
 ModuleItem
-    = Function / Element
+    = Function
+    / Element
+    / Object
 
 Function
     = "@" type:"function" _ name:Word _ "{" _ props:((Function / FunctionSignature / Parameter) _)* "}" {
@@ -86,7 +88,7 @@ Function
             },
             {
                 params: groupParams(props.param),
-                signature: props.signature.map(sig => sig.args)
+                signature: (props.signature || [{args: []}]).map(sig => sig.args)
             }
         );
     }
@@ -108,20 +110,12 @@ FunctionArgument
         return {name, type, desc, optional};
     }
 
-Element
-    = type:$"element" _ name:Word _ "{" _ details:(ElementItem _)* "}" {
+Object
+    = type:$"object" _ name:Word _ "{" _ details:(ObjectItem _)* "}" {
         var info = group(
             details.map(detail => detail[0]),
             detail => detail.type
         );
-        /*info = Object.keys(info).reduce(
-            (details, key) => {
-                var value = info[key];
-                details[key] = groupItems(value, item => item.name);
-                return details;
-            },
-            {}
-        );*/
         return Object.assign(
           {
               type,
@@ -129,7 +123,33 @@ Element
           },
           {
               props: groupProps(info.prop),
-              functions: groupItems(info.function || [], item => item.name)
+              functions: groupItems(info.function || [], item => item.name),
+              params: groupParams(info.param)
+          }
+        );
+    }
+ObjectItem
+    = Function
+    / Property
+    / DescriptionParam
+    / NoteParam
+    / ExampleParam
+
+Element
+    = type:$"element" _ name:Word _ "{" _ details:(ElementItem _)* "}" {
+        var info = group(
+            details.map(detail => detail[0]),
+            detail => detail.type
+        );
+        return Object.assign(
+          {
+              type,
+              name
+          },
+          {
+              props: groupProps(info.prop),
+              functions: groupItems(info.function || [], item => item.name),
+              params: groupParams(info.param)
           }
         );
     }
@@ -142,26 +162,7 @@ ElementItem
     / BlockElementParam
     / HasChildrenParam
     / ManagedParam
-
-GenericObject
-    = type:$[a-zA-Z]+ _ name:Word _ props:ItemDescription {
-        return Object.assign(
-          {
-              type,
-              name
-          },
-          props
-        );
-    }
-
-Object
-    = "object" _ name:Word _ "{" _ params:Property _ "}" {
-        return {
-            type: "object",
-            name,
-            params
-        };
-    }
+    / DefaultParam
 
 ItemDescription
     = "{" _ details:((Function / Property) _)* "}" {
@@ -274,7 +275,7 @@ WordList
     }
 
 AnyWord
-    = $[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,\-#]+
+    = $[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,\-#%]+
 
 Word
     = $[a-zA-Z_]+
