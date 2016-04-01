@@ -144,6 +144,7 @@ module global {
 
 module UI {
     element Button {
+        @desc Displays a button on screen.
         @prop onTap {
             @desc The function to call when the button is tapped (mobile) or pressed (desktop).
             @type function
@@ -251,6 +252,8 @@ module UI {
 
 module UI {
     element Card {
+        @desc A simple separator for content to break up longer streams of content.
+        @blockElement
         @hasChildren
         @prop style {
             @desc Style to apply to the container. See React inline styles for information.
@@ -276,6 +279,7 @@ module UI {
 
 module UI {
     element CenterContent {
+        @desc A container that will automatically center its content horizontally and vertically.
         @hasChildren
         @prop width {
             @desc The width of the container.
@@ -315,7 +319,9 @@ module UI {
 
 module UI {
     element Checkbox {
+        @desc Displays a checkbox on screen.
         @managed
+        @blockElement
         @prop height {
             @desc The height of the element.
             @type number
@@ -376,6 +382,7 @@ module UI {
 
 module UI {
     element Combobox {
+        @desc Displays a combobox (html select tag) on screen.
         @blockElement
         @managed
         @hasChildren
@@ -416,6 +423,7 @@ module UI {
 
 module UI {
     element Divider {
+        @desc A container that will divide content into a spcific portions by percentage.
         @notes The direction of the divider is determined by using Divider.Horizontal and Divider.Vertical.
         @blockElement
         @hasChildren
@@ -449,6 +457,7 @@ module UI {
 
 module UI {
     element Flexbox {
+        @desc A container that will apply the CSS Flexbox layout to its children.
         @blockElement
         @hasChildren
         @prop width {
@@ -478,6 +487,16 @@ module UI {
     }
 }
 
+
+module UI {
+    element Form {
+        @desc A container that will manage components to create a form that does not rely on a state
+            that is managed by the programmer.
+        @note The inputType on each Item corresponds to a specific element.
+        @blockElement
+        @hasChildren
+    }
+}
 
 
 

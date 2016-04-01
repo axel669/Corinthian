@@ -140,7 +140,7 @@ module UI {
     element Form {
         @desc A container that will manage components to create a form that does not rely on a state
             that is managed by the programmer.
-        @note
+        @note The inputType on each Item corresponds to a specific element.
         @blockElement
         @hasChildren
     }

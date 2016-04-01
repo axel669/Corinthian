@@ -36,6 +36,9 @@
         },
         {}
     );
+
+    var groupProps = (params) => groupItems(params || [], param => param.name, param => param.params);
+    var groupParams = (params) => groupItems(params || [], param => param.name, param => param.value || param.args || true);
 }
 
 Modules
@@ -44,7 +47,7 @@ Modules
     }
 
 Module
-    = _ "module" _ name:Word _ "{" _ stuff:((Function / GenericObject) _)* "}" {
+    = "module" _ name:Word _ "{" _ stuff:(ModuleItem _)* "}" {
         stuff = stuff.map(item => item[0]).reduce(
             (groups, group) => {
                 if (groups.hasOwnProperty(group.type) === false) {
@@ -62,6 +65,9 @@ Module
         return module;
     }
 
+ModuleItem
+    = Function / Element
+
 Function
     = "@" type:"function" _ name:Word _ "{" _ props:((Function / FunctionSignature / Parameter) _)* "}" {
         props = group(
@@ -73,21 +79,21 @@ Function
                 return "params";
             }
         );
-        if (props.hasOwnProperty("params") === true) {
-            props.params = groupItems(props.params, param => param.name, param => param.value);
-        }
         return Object.assign(
             {
                 type,
                 name
             },
-            props
+            {
+                params: groupParams(props.param),
+                signature: props.signature.map(sig => sig.args)
+            }
         );
     }
 
 FunctionSignature
     = "@args" _ args:FunctionArgumentSet {
-        return {type: "signature", args};
+        return {type: "signature", name: "signature", args};
     }
 
 FunctionArgumentSet
@@ -101,6 +107,41 @@ FunctionArgument
         optional = optional !== null;
         return {name, type, desc, optional};
     }
+
+Element
+    = type:$"element" _ name:Word _ "{" _ details:(ElementItem _)* "}" {
+        var info = group(
+            details.map(detail => detail[0]),
+            detail => detail.type
+        );
+        /*info = Object.keys(info).reduce(
+            (details, key) => {
+                var value = info[key];
+                details[key] = groupItems(value, item => item.name);
+                return details;
+            },
+            {}
+        );*/
+        return Object.assign(
+          {
+              type,
+              name
+          },
+          {
+              props: groupProps(info.prop),
+              functions: groupItems(info.function || [], item => item.name)
+          }
+        );
+    }
+ElementItem
+    = Function
+    / Property
+    / DescriptionParam
+    / NoteParam
+    / ExampleParam
+    / BlockElementParam
+    / HasChildrenParam
+    / ManagedParam
 
 GenericObject
     = type:$[a-zA-Z]+ _ name:Word _ props:ItemDescription {
@@ -133,23 +174,76 @@ ItemDescription
     }
 
 Property
-    = "@" type:$[a-zA-Z_]+ _ name:Word? _ params:ParameterSet {
-        //params = params.map(param => param[0]);
+    = "@" type:"prop" _ name:Word? _ "{" _ params:(PropertyItem _)* "}" {
+        params = groupItems(
+            params.map(param => param[0]),
+            param => param.name,
+            param => param.args || param.value || true
+        );
         return {
             type,
             name,
             params
         }
     }
+PropertyItem
+    = FunctionSignature
+    / DescriptionParam
+    / TypeParam
+    / OptionalParam
+    / RequiredParam
+    / DefaultParam
 
 ParameterSet
-    = "{" _ params:(Parameter _)* "}" {
+    = "{" _ params:((FunctionSignature / Parameter) _)* "}" {
         params = params.map(param => param[0]);
         return groupItems(
             params,
             param => param.name,
-            param => param.value || true
+            param => param.args || param.value || true
         );
+    }
+
+DescriptionParam
+    = "@" name:"desc" _ value:Sentence {
+        return {type: "param", name, value};
+    }
+NoteParam
+    = "@" name:"note" _ value:Sentence {
+        return {type: "param", name, value};
+    }
+ExampleParam
+    = "@" name:"example" _ value:Sentence {
+        return {type: "param", name, value};
+    }
+TypeParam
+    = "@" name:"type" _ value:Sentence {
+        return {type: "param", name, value};
+    }
+DefaultParam
+    = "@" name:"default" _ value:Sentence {
+        return {type: "param", name, value};
+    }
+
+BlockElementParam
+    = "@" name:"blockElement" {
+        return {type: "param", name, value: true};
+    }
+HasChildrenParam
+    = "@" name:"hasChildren" {
+        return {type: "param", name, value: true};
+    }
+ManagedParam
+    = "@" name:"managed" {
+        return {type: "param", name, value: true};
+    }
+OptionalParam
+    = "@" name:"optional" {
+        return {type: "param", name, value: true};
+    }
+RequiredParam
+    = "@" name:"required" {
+        return {type: "param", name, value: true};
     }
 
 Parameter
@@ -157,7 +251,7 @@ Parameter
         if (value !== null) {
             value = value[1];
         }
-        return {name, value};
+        return {type: "param", name, value};
     }
 
 BracketedSequence
@@ -180,7 +274,7 @@ WordList
     }
 
 AnyWord
-    = $[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,\-]+
+    = $[a-zA-Z_.?0-9/\[\]\\!:;'"<>/()=>$`,\-#]+
 
 Word
     = $[a-zA-Z_]+
