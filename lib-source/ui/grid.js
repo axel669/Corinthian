@@ -1,3 +1,16 @@
+/* -AxelDoc-
+module UI {
+    element Grid {
+        @desc Displays items in a grid that is evenly split into rows and columns.
+        @blockElement
+        @hasChildren
+
+        @prop width {
+            @desc
+        }
+    }
+}
+*/
 const Grid = ({children, colCount, rowCount, width = null, height = null}) => {
     if (height === null) {
         throw new Error("Height needs to be given to the grid");

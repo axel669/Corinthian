@@ -286,14 +286,14 @@ module UI {
             @type Number
             @type CSS String
             @optional
-            @detaul `null` (wraps content)
+            @default `null` (wraps content)
         }
         @prop height {
             @desc The height of the container.
             @type Number
             @type CSS String
             @optional
-            @detaul `null` (wraps content)
+            @default `null` (wraps content)
         }
         @prop className {
             @desc Additional class names to give the container.
@@ -495,6 +495,20 @@ module UI {
         @note The inputType on each Item corresponds to a specific element.
         @blockElement
         @hasChildren
+
+        @function reset {
+            @desc Resets the values of each of the children to the default values.
+            @args {}
+        }
+
+        @prop onSubmit {
+            @desc The function that gets called when the form is submitted.
+            @type function
+            @required
+            @args {
+                @arg formInfo [object] The values of all the for items.
+            }
+        }
     }
 }
 

@@ -25,14 +25,14 @@ module UI {
             @type Number
             @type CSS String
             @optional
-            @detaul `null` (wraps content)
+            @default `null` (wraps content)
         }
         @prop height {
             @desc The height of the container.
             @type Number
             @type CSS String
             @optional
-            @detaul `null` (wraps content)
+            @default `null` (wraps content)
         }
         @prop className {
             @desc Additional class names to give the container.
