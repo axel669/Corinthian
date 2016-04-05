@@ -6,7 +6,27 @@ module UI {
         @hasChildren
 
         @prop width {
-            @desc
+            @desc The width of the container.
+            @type number
+            @type css string
+            @optional
+            @default `null`
+        }
+        @prop height {
+            @desc The height of the container.
+            @type number
+            @type css string
+            @required
+        }
+        @prop colCount {
+            @desc The number of columns.
+            @type number
+            @required
+        }
+        @prop rowCount {
+            @desc The number of rows.
+            @type number
+            @required
         }
     }
 }

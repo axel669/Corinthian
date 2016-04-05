@@ -1,3 +1,9 @@
+/* -AxelDoc-
+module UI {
+    element Image {
+    }
+}
+*/
 const Image = ({source, width, height = null, display = {type: "fit"}, slice = null}) => {
     if (height === null) {
         throw new Error("Need to give image height");

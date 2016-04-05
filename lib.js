@@ -414,6 +414,16 @@ Style.__rawCSS(
     }
 );
 
+const clearPrev = () => {
+    const head = document.querySelector("head");
+    for (const node of head.querySelectorAll("style")) {
+        head.removeChild(node);
+    }
+    for(const node of document.body.querySelectorAll("body > div")) {
+        document.body.removeChild(node);
+    }
+    history.replaceState(null, "", "#/");
+};
 const init = () => {
     const appContainer = document.createElement("div");
     const viewportContainer = document.createElement("div");
@@ -448,6 +458,7 @@ const init = () => {
     Style.renderCSS();
 };
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
+    clearPrev();
     init();
 
     let history = createHashHistory({queryKey: false});
@@ -455,6 +466,8 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
         <Router history={history}>{routes}</Router>,
         document.querySelector("div")
     );
+    // console.log(appComponent);
+    // console.log(appComponent, appComponent.props.context, appComponent.props.context.replace);
 };
 
 let frameFunction = () => {
@@ -471,7 +484,7 @@ if (Environment.app === true) {
         push(url) {
             navVars[history.length] = {};
             history.push(url);
-            appComponent.history.replaceState(null, url, null);
+            appComponent.history.replace(url);
         },
         pop(n = 1) {
             if (n >= history.length) {
@@ -486,12 +499,12 @@ if (Environment.app === true) {
                     navVars[n] = null;
                 }
             );
-            appComponent.history.replaceState(null, history.slice(-1)[0], null);
+            appComponent.history.replace(history.slice(-1)[0]);
         },
         replace(url) {
             history[history.length - 1] = url;
             navVars[history.length - 1] = {};
-            appComponent.history.replaceState(null, url, null);
+            appComponent.history.replace(url);
         },
         get vars() {
             return navVars[history.length - 1];
@@ -504,13 +517,13 @@ if (Environment.app === true) {
 } else {
     App.navigation = {
         push(url) {
-            appComponent.history.pushState(null, url);
+            appComponent.history.push(url);
         },
         pop() {
             appComponent.history.goBack();
         },
         replace(url) {
-            appComponent.history.replaceState(null, url, null);
+            appComponent.history.replace(url);
         },
         get vars() {
             return {};

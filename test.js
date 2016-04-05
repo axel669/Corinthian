@@ -178,8 +178,10 @@ const DialogTest = React.createClass({
         console.log(value);
     },
     render() {
+        // console.log(this.context.router);
         return (
             <UI.Screen title="Dialog Test">
+                <UI.Button text="Fuck" onTap={() => App.navigation.push("/test")} />
                 <UI.Form submitText="Test" itemContainer={UI.Card} onSubmit={({wat}) => cblog(wat)}>
                     <UI.Item inputType="multiline" name="wat" placeholder="Testing" label="Wat" height="4l" />
                 </UI.Form>
@@ -216,7 +218,7 @@ const DialogTest = React.createClass({
 });
 
 const Test = () => {
-    console.log(History.state);
+    // console.log(History.state);
     return (
         <UI.Screen title="Test Screen" backText="Back">
             Hey there
