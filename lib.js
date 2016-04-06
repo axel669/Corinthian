@@ -78,14 +78,26 @@ window.Theme = Theme;
 window.chrono = chrono;
 
 window.schedule = (time, func, ...args) => {
-    setTimeout(() => func(...args), time);
+    const currentStack = new Error("Error occured in scheduled function");
+    setTimeout(
+        () => {
+            try {
+                func(...args);
+            } catch (e) {
+                currentStack.error = e;
+                throw currentStack;
+            }
+        },
+        time
+    );
 };
 window.API = {
     create(baseURL) {
         return {
             request(url, options) {
                 return factotum.ajax(`${baseURL}${url}`, options);
-            }
+            },
+            genURL: url => `${baseURL}${url}`
         };
     }
 };
