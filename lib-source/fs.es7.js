@@ -117,17 +117,37 @@ const getNativeURL = async (name, isFile) => {
     return name;
 };
 
-const readfile = async (name, type) => {
-    const nativeURL = await getNativeURL(name, true);
-    let ajaxResponse;
+// const readfile = async (name, type) => {
+//     const nativeURL = await getNativeURL(name, true);
+//     let ajaxResponse;
 
-    if (type === 'text') {
-        type = null;
+//     if (type === 'text') {
+//         type = null;
+//     }
+
+//     ajaxResponse = await factotum.ajax(nativeURL, {type});
+//     return ajaxResponse.response;
+// }
+const readFunctions = {
+    text: 'readAsText',
+    binary: 'readAsBinaryString',
+    url: 'readAsDataURL',
+    arraybuffer: 'readAsArrayBuffer'
+};
+const readfile = (name, type) => new Promise(
+    async (resolve, reject) => {
+        try {
+            const entry = await get(name, {create: false});
+            const reader = new FileReader();
+            const readFunc = readFunctions[type];
+
+            reader.onloadend = () => resolve(reader.result);
+            entry.file(file => reader[readFunc](file, 'utf8'));
+        } catch (error) {
+            reject(error);
+        }
     }
-
-    ajaxResponse = await factotum.ajax(nativeURL, {type});
-    return ajaxResponse.response;
-}
+);
 const getFileWriter = entry => new Promise((resolve, reject) => entry.createWriter(resolve, reject));
 const writeFile = (fileEntry, data, mode) => new Promise(
     async (resolve, reject) => {

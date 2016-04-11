@@ -753,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "Minified",
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -887,6 +887,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/package.json",
 		"/C/Users/cmorgan2/Documents/programming/js/apps/downloader/source/main.js",
@@ -1013,8 +1014,7 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/browserify/index.js",
 		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/compile.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/.sublime-gulp.cache",
-		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/secret cd.sublime-project",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/external/gesture.js"
+		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/secret cd.sublime-project"
 	],
 	"find":
 	{

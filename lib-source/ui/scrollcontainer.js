@@ -16,41 +16,47 @@ Style.create(
     }
 );
 
-const ScrollContainer = React.createClass({
-    componentDidMount() {
-        const node = this.refs.scroller;
-        const id = this._reactInternalInstance._rootNodeID;
-        const vars = App.navigation.vars;
-        let scrollInfo;
+// const ScrollContainer = React.createClass({
+//     componentDidMount() {
+//         const node = this.refs.scroller;
+//         const id = this._reactInternalInstance._rootNodeID;
+//         const vars = App.navigation.vars;
+//         let scrollInfo;
 
-        if (vars.hasOwnProperty(id) === true) {
-            scrollInfo = App.navigation.vars[id];
-        } else {
-            scrollInfo = {scrollX: 0, scrollY: 0};
-        }
+//         if (vars.hasOwnProperty(id) === true) {
+//             scrollInfo = App.navigation.vars[id];
+//         } else {
+//             scrollInfo = {scrollX: 0, scrollY: 0};
+//         }
 
-        node.scrollLeft = scrollInfo.scrollX;
-        node.scrollTop = scrollInfo.scrollY;
-        this.vars = vars;
-    },
-    componentWillUnmount() {
-        const node = this.refs.scroller;
-        const id = this._reactInternalInstance._rootNodeID;
+//         node.scrollLeft = scrollInfo.scrollX;
+//         node.scrollTop = scrollInfo.scrollY;
+//         this.vars = vars;
+//     },
+//     componentWillUnmount() {
+//         const node = this.refs.scroller;
+//         const id = this._reactInternalInstance._rootNodeID;
 
-        this.vars[id] = {
-            scrollX: node.scrollLeft,
-            scrollY: node.scrollTop
-        };
-    },
-    render() {
-        const {style = {}, children} = this.props;
+//         this.vars[id] = {
+//             scrollX: node.scrollLeft,
+//             scrollY: node.scrollTop
+//         };
+//     },
+//     render() {
+//         const {style = {}, children} = this.props;
 
-        return (
-            <div className={Style.getClassName("core/scrollContainer:container")} style={style} ref="scroller">
-                {children}
-            </div>
-        );
-    }
-});
+//         return (
+//             <div className={Style.getClassName("core/scrollContainer:container")} style={style} ref="scroller">
+//                 {children}
+//             </div>
+//         );
+//     }
+// });
 
-export default ScrollContainer;
+// export default ScrollContainer;
+
+export default ({style = null, children}) => (
+    <div className={Style.getClassName("core/scrollContainer:container")} style={style}>
+        {children}
+    </div>
+);
