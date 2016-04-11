@@ -217,18 +217,43 @@ const DialogTest = React.createClass({
     }
 });
 
-const Test = () => {
+const Test = ({children}) => {
     // console.log(History.state);
     return (
-        <UI.Screen title="Test Screen" backText="Back">
+        <UI.Screen title="Test Screen">
             Hey there
+            <div>{Date.now()}</div>
+            <UI.Button text="test" onTap={() => App.navigation.push("/test")} />
+            {children}
         </UI.Screen>
     );
+};
+const Wat = ({children}) => <div>Hey What</div>;
+
+// const test = (...args) => {
+//     console.log(args);
+// };
+let called = false;
+const waitComponent = async (location, cb) => {
+    console.log('load c');
+    if (called === false) {
+        await chrono.wait(1000);
+    }
+    called = true;
+    cb(null, Test);
+};
+const waitIndex = async (location, cb) => {
+    console.log('load r', Date.now());
+    await chrono.wait(1000);
+    cb(null, [
+        <Route path="/" component={Test} />,
+        <Route path="/test" component={Wat} />
+    ]);
 };
 
 App.start(
     <Route>
-        <Route path="/" component={DialogTest} />
-        <Route path="/test" component={Test} />
+        <Route path="/blah" component={DialogTest} />
+        <Route getChildRoutes={waitIndex} />
     </Route>
 );

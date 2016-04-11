@@ -142,7 +142,7 @@ const readfile = (name, type) => new Promise(
             const readFunc = readFunctions[type];
 
             reader.onloadend = () => resolve(reader.result);
-            entry.file(file => reader[readFunc](file, 'utf8'));
+            entry.file(file => reader[readFunc](file, 'utf-8'));
         } catch (error) {
             reject(error);
         }
@@ -319,5 +319,8 @@ export default {
     url(fileName) {
         const [protocol, fullPath] = getInfo(fileName);
         return `${rootURL[protocol].nativeURL}${fullPath}`;
+    },
+    async entry(url) {
+        return await get(url, {create: false});
     }
 };

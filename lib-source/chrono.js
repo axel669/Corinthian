@@ -494,5 +494,6 @@ chrono.trigger = (delay, func, ...args) => {
         }
     };
 };
+chrono.wait = wait => new Promise(resolve => setTimeout(() => resolve(null), wait));
 
 export default chrono;
