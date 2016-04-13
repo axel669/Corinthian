@@ -625,7 +625,7 @@
 			],
 			[
 				"Build Library",
-				"Minified"
+				""
 			]
 		],
 		[
@@ -753,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "Minified",
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -887,6 +887,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/style.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/fs.es7.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib.js",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/package.json",
@@ -927,7 +928,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/environment.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/iconbutton.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/style.js",
 		"/C/Users/Axel1/Documents/programming/js/apps/app-base/AppProject.sublime-project",
 		"/C/Users/Axel1/Documents/programming/js/apps/app-base/compile.js",
 		"/C/Users/Axel1/Documents/programming/js/apps/app-base/source/compile.js",
@@ -1032,6 +1032,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"appContainer",
 			".+",
 			"chrono",
 			"asObject",
@@ -1158,8 +1159,7 @@
 			"process.next",
 			"promise",
 			"array.prototype",
-			"Grid",
-			"10"
+			"Grid"
 		],
 		"highlight": true,
 		"in_selection": false,

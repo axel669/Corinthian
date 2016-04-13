@@ -23,11 +23,11 @@ import Environment from "lib-source/environment.js";
 import RobotoURI from "lib-source/data-uri/roboto-light.ttf.source";
 import IonicURI from "lib-source/data-uri/ionicons.ttf.source";
 
-let {Router} = ReactRouter;
+let {Router, Route} = ReactRouter;
 
 let App;
-let ScreenWrapper;
-let appContainer;
+// let ScreenWrapper;
+// let appContainer;
 
 // window.moment = (...args) => {
 //     let momentProto;
@@ -431,13 +431,15 @@ const clearPrev = () => {
     for (const node of head.querySelectorAll("style")) {
         head.removeChild(node);
     }
-    for(const node of document.body.querySelectorAll("body > div")) {
-        document.body.removeChild(node);
-    }
+    // for(const node of document.body.querySelectorAll("body > div")) {
+    //     if (node.getAttribute("data-name") !== "app-container") {
+    //         document.body.removeChild(node);
+    //     }
+    // }
     history.replaceState(null, "", "#/");
 };
+let appContainer;
 const init = () => {
-    const appContainer = document.createElement("div");
     const viewportContainer = document.createElement("div");
     const bodyClasses = document.body.className;
     const additionalClasses = Style.getClassNames({
@@ -446,7 +448,10 @@ const init = () => {
         "core:web": Environment.app === false
     });
 
+    appContainer = document.createElement("div");
+
     viewportContainer.className = Style.getClassName("core:viewport");
+    appContainer.setAttribute("data-name", "app-container");
 
     document.body.appendChild(appContainer);
     document.body.appendChild(Dialog.container);
@@ -466,18 +471,16 @@ const init = () => {
         appContainer.style.overflow = 'visible';
     }
     document.body.className = `${bodyClasses} ${additionalClasses}`.trim();
-
-    Style.renderCSS();
 };
 App.start = (routes, {hiddenStatusBar = false} = {}) => {
-    clearPrev();
-    init();
+    // clearPrev();
+    // init();
 
-    let history = createHashHistory({queryKey: false});
-    appComponent = ReactDOM.render(
-        <Router history={history}>{routes}</Router>,
-        document.querySelector("div")
-    );
+    // let history = createHashHistory({queryKey: false});
+    // appComponent = ReactDOM.render(
+    //     <Router history={history}>{routes}</Router>,
+    //     document.querySelector("div")
+    // );
     // console.log(appComponent);
     // console.log(appComponent, appComponent.props.context, appComponent.props.context.replace);
 };
@@ -518,6 +521,9 @@ if (Environment.app === true) {
             navVars[history.length - 1] = {};
             appComponent.history.replace(url);
         },
+        reset() {
+            appComponent.history.replace('/');
+        },
         get vars() {
             return navVars[history.length - 1];
         }
@@ -537,6 +543,9 @@ if (Environment.app === true) {
         replace(url) {
             appComponent.history.replace(url);
         },
+        refresh() {
+            appComponent.refresh();
+        },
         get vars() {
             return {};
         }
@@ -544,3 +553,31 @@ if (Environment.app === true) {
 }
 
 window.App = App;
+
+let active = false;
+let routes;
+App.start = (newRoutes) => {
+    if (appContainer !== undefined) {
+        appContainer.style.display = 'none';
+    }
+    clearPrev();
+    Style.renderCSS();
+
+    // console.log(routes === newRoutes);
+    routes = newRoutes;
+
+    if (active === false) {
+        init();
+        const history = createHashHistory({queryKey: false});
+        appComponent = ReactDOM.render(
+            <Router history={history}>
+                <Route getChildRoutes={(location, cb) => cb(null, routes)} />
+            </Router>,
+            document.querySelector("div")
+        );
+    } else {
+        App.navigation.replace("/");
+    }
+    active = true;
+    appContainer.style.display = '';
+};
