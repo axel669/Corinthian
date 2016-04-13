@@ -136,7 +136,7 @@ const PromptDialog = React.createClass({
         return {value: this.props.startValue};
     },
     componentDidMount() {
-        schedule(
+        chrono.trigger(
             1,
             () => this.refs.input.focus()
         );
@@ -205,7 +205,7 @@ const showDialog = (DialogComponent, options, canCancel = true) => {
             cancelable = canCancel;
             ReactDOM.render(<DialogComponent {...options} resolve={resolve} />, dialogContainer);
             dialogContainer.style.display = 'block';
-            schedule(1, () => dialogContainer.querySelector("div").style.opacity = 1);
+            chrono.trigger(1, () => dialogContainer.querySelector("div").style.opacity = 1);
         }
     );
     if (canCancel === false) {

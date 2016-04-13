@@ -23,9 +23,9 @@ import Environment from "lib-source/environment.js";
 import RobotoURI from "lib-source/data-uri/roboto-light.ttf.source";
 import IonicURI from "lib-source/data-uri/ionicons.ttf.source";
 
-let {Router, Route} = ReactRouter;
+const {Router, Route} = ReactRouter;
 
-let App;
+const App = {};
 // let ScreenWrapper;
 // let appContainer;
 
@@ -77,20 +77,20 @@ window.Style = Style;
 window.Theme = Theme;
 window.chrono = chrono;
 
-window.schedule = (time, func, ...args) => {
-    const currentStack = new Error("Error occured in scheduled function");
-    setTimeout(
-        () => {
-            try {
-                func(...args);
-            } catch (e) {
-                currentStack.error = e;
-                throw currentStack;
-            }
-        },
-        time
-    );
-};
+// window.schedule = (time, func, ...args) => {
+//     const currentStack = new Error("Error occured in scheduled function");
+//     setTimeout(
+//         () => {
+//             try {
+//                 func(...args);
+//             } catch (e) {
+//                 currentStack.error = e;
+//                 throw currentStack;
+//             }
+//         },
+//         time
+//     );
+// };
 window.API = {
     create(baseURL) {
         return {
@@ -166,8 +166,6 @@ window.API = {
 //         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
 //     }
 // });
-
-App = {};
 
 const readSetting = (storage, key, name, defaultValue) => {
     const value = storage.getItem(`${key}:${name}`);
@@ -350,8 +348,6 @@ window.cblog = ::console.log;
 
 // App.ScreenTransition = ScreenWrapper;
 
-let appComponent;
-
 Style.create(
     "core",
     {
@@ -439,6 +435,7 @@ const clearPrev = () => {
     history.replaceState(null, "", "#/");
 };
 let appContainer;
+let appComponent;
 const init = () => {
     const viewportContainer = document.createElement("div");
     const bodyClasses = document.body.className;
@@ -485,7 +482,7 @@ App.start = (routes, {hiddenStatusBar = false} = {}) => {
     // console.log(appComponent, appComponent.props.context, appComponent.props.context.replace);
 };
 
-let frameFunction = () => {
+const frameFunction = () => {
     requestAnimationFrame(frameFunction);
     PubSub.publishSync("system.framedraw");
 };
