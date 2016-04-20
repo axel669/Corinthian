@@ -753,7 +753,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Minified",
 	"command_palette":
 	{
 		"height": 392.0,

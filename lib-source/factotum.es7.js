@@ -160,6 +160,8 @@ const ajax = (url, {post = null, headers = {}, formData = null, timeout = 0, typ
                 if (post !== null) {
                     if (formData === null) {
                         request.setRequestHeader("Content-Type", "application/json");
+                    } else {
+                        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                     }
                 }
                 request.send(post);
