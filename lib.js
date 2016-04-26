@@ -525,10 +525,6 @@ if (Environment.app === true) {
             return navVars[history.length - 1];
         }
     };
-
-    window.deviceReady = new Promise(
-        resolve => document.addEventListener("deviceready", () => resolve(null))
-    );
 } else {
     App.navigation = {
         push(url) {

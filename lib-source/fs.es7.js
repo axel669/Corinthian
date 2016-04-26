@@ -1,5 +1,16 @@
+import Environment from "lib-source/environment.js";
+
+if (Environment.app === true) {
+    window.deviceReady = new Promise(
+        resolve => document.addEventListener("deviceready", () => resolve(null))
+    );
+} else {
+    window.deviceReady = Promise.resolve(null);
+}
+
 const appFileSystem = new Promise(
-    (resolve, reject) => {
+    async (resolve, reject) => {
+        await deviceReady;
         if (typeof requestFileSystem === 'undefined') {
             resolve(null);
             return;
@@ -13,7 +24,8 @@ const appFileSystem = new Promise(
     }
 );
 const tempFileSystem = new Promise(
-    (resolve, reject) => {
+    async (resolve, reject) => {
+        await deviceReady;
         if (typeof requestFileSystem === 'undefined') {
             resolve(null);
             return;
