@@ -283,9 +283,22 @@ export default {
             rawStyles[name] = ruleList;
         },
         addFonts(lib, ...fonts) {
-            rawStyles[`${lib}/font`] = fonts.map(
+            // rawStyles[`${lib}/font`] = fonts.map(
+            //     ({name, dataURI}) => {
+            //         return {
+            //             selector: "@font-face",
+            //             rules: {
+            //                 fontFamily: `"${name}"`,
+            //                 src: `url("${dataURI}")`,
+            //                 fontWeight: "normal",
+            //                 fontStyle: "normal"
+            //             }
+            //         };
+            //     }
+            // );
+            fonts.forEach(
                 ({name, dataURI}) => {
-                    return {
+                    rawStyles[`${lib}/font/${name}`] = [{
                         selector: "@font-face",
                         rules: {
                             fontFamily: `"${name}"`,
@@ -293,7 +306,7 @@ export default {
                             fontWeight: "normal",
                             fontStyle: "normal"
                         }
-                    };
+                    }];
                 }
             );
         },

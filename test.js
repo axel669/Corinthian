@@ -53,7 +53,7 @@ const DataCenter = (() => {
 
 const App1 = (() => {
     const Main = () => (
-        <UI.Screen title="App 1 Main">
+        <UI.Screen title="App 1 Main" backText="test">
             <UI.Button block text="Test" onTap={() => App.navigation.push("/test")} />
             <UI.Button block raised text="App 2" onTap={() => App.start(App2.routes)} />
         </UI.Screen>
