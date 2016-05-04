@@ -4,7 +4,7 @@ let encrypt;
 let decrypt;
 let hash;
 
-encrypt = (str, key, {iv = null, algorithm = 'aes256', output = 'hex'} = {}) => {
+encrypt = (str, key, {iv = null, algorithm = 'aes256', output = 'hex', input = 'utf8'} = {}) => {
     let encryptor;
     let result;
 
@@ -17,14 +17,14 @@ encrypt = (str, key, {iv = null, algorithm = 'aes256', output = 'hex'} = {}) => 
         encryptor = crypto.createCipher(algorithm, key, iv);
     }
 
-    encryptor.update(str, 'utf8');
-    result = encryptor.final(output);
+    result = encryptor.update(str, input, output);
+    result += encryptor.final(output);
     encryptor = null;
 
     return result;
 };
 
-decrypt = (str, key, {iv = null, algorithm = 'aes256', input = 'hex'} = {}) => {
+decrypt = (str, key, {iv = null, algorithm = 'aes256', input = 'hex', output = 'utf8'} = {}) => {
     let decryptor;
     let result;
 
@@ -37,8 +37,8 @@ decrypt = (str, key, {iv = null, algorithm = 'aes256', input = 'hex'} = {}) => {
         decryptor = crypto.createDecipher(algorithm, key, iv);
     }
 
-    decryptor.update(str, input);
-    result = decryptor.final('utf8');
+    result = decryptor.update(str, input, output);
+    result += decryptor.final(output);
     decryptor = null;
 
     return result;

@@ -541,6 +541,34 @@
 				[
 					"Build Library",
 					"CSS"
+				]
+			],
+			[
+				"Build Library",
+				"Minified"
+			]
+		],
+		[
+			[
+				[
+					"Build Library",
+					""
+				],
+				[
+					"Build Library",
+					"Minified"
+				],
+				[
+					"Build Library",
+					"Test Script"
+				],
+				[
+					"Build Library",
+					"Stripped"
+				],
+				[
+					"Build Library",
+					"CSS"
 				],
 				[
 					"Packages/User/CoffeeScript.sublime-build",
@@ -593,7 +621,7 @@
 			],
 			[
 				"Build Library",
-				""
+				"Test Script"
 			]
 		],
 		[
@@ -887,9 +915,11 @@
 	},
 	"file_history":
 	[
-		"/C/Users/cmorgan2/Documents/programming/js/apps/project setup/desktop.js",
-		"/C/Users/cmorgan2/Documents/programming/js/apps/demo/package.json",
-		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/corinthian.js",
+		"/C/Users/Axel/Documents/programming/github/Corinthian/lib-source/dialog.js",
+		"/C/Users/Axel/Documents/programming/github/Corinthian/lib-source/chrono.js",
+		"/C/Users/Axel/Documents/programming/github/Corinthian/corinthian.min.js",
+		"/C/Users/Axel/Documents/programming/github/Corinthian/package.json",
+		"/C/Users/Axel/Documents/programming/github/Corinthian/doc-gen.peg",
 		"/C/Users/cmorgan2/Documents/programming/github/Corinthian/lib-source/dialog.js",
 		"/C/Source/Kir/Kir/bin/dlls/demo.xml",
 		"/C/Users/cmorgan2/Documents/programming/servers/IPadQA/bin/dlls/demo.xml",
@@ -1012,13 +1042,11 @@
 		"/C/Users/Axel1/Documents/programming/js/test/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.min.js",
-		"/C/Users/Axel1/Documents/programming/js/mobile/pdf reader/index.html",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.js"
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.min.js"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -1292,7 +1320,7 @@
 	},
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 39.0
 	},
 	"input":
 	{
@@ -1340,7 +1368,7 @@
 	"pinned_build_system": "",
 	"replace":
 	{
-		"height": 62.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1381,7 +1409,7 @@
 	"show_open_files": true,
 	"show_tabs": false,
 	"side_bar_visible": true,
-	"side_bar_width": 287.0,
+	"side_bar_width": 535.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -1,4 +1,4 @@
-import {XRegExp as regex} from "xregexp";
+import regex from "xregexp";
 
 const chronoSpecial = {
     'yesterday'(date) {

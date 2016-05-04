@@ -6,9 +6,9 @@ Style.create(
         ".card": {
             margin: 10,
             padding: 7,
-            boxShadow: '1px 2px 4px rgba(0, 0, 0, 0.25)',
+            boxShadow: '1px 2px 2px rgba(120, 120, 120, 0.15)',
             border: '1px solid #e9e9e9',
-            backgroundColor: Theme.get("app/backgroundColor")
+            backgroundColor: 'white'
         }
     }
 );
