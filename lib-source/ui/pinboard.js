@@ -7,10 +7,17 @@ const Pinboard = ({children, width, height = null}) => {
     children = React.Children.toArray(children);
 
     children = children.map(
-        ({props: {children, detail}}, index) => {
-            return <div key={index} style={{...detail, position: 'absolute'}}>{children}</div>;
+        (child, index) => {
+            const {props: {pinInfo}} = child;
+
+            return <div key={index} style={{...pinInfo, position: 'absolute'}}>{child}</div>;
         }
     );
+    // children = children.map(
+    //     ({props: {children, detail}}, index) => {
+    //         return <div key={index} style={{...detail, position: 'absolute'}}>{children}</div>;
+    //     }
+    // );
 
     return <div style={{position: 'relative', top: 0, left: 0, width, height}}>{children}</div>;
 };
