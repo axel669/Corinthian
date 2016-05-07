@@ -4,6 +4,7 @@ import {XRegExp} from "xregexp";
 import PubSub from "pubsub-js";
 import React from "react";
 import ReactDOM from "react-dom";
+import CSSTransition from "react-addons-css-transition-group";
 import * as ReactRouter from "react-router";
 import {createHashHistory} from "history";
 // import moment from "moment";
@@ -166,6 +167,8 @@ window.API = {
 //         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
 //     }
 // });
+
+window.CSSTransition = CSSTransition;
 
 const readSetting = (storage, key, name, defaultValue) => {
     const value = storage.getItem(`${key}:${name}`);
@@ -389,6 +392,11 @@ Style.create(
             left: '-100vw',
             top: '-100vh',
             opacity: 0
+        },
+        ".appContainer": {
+            position: 'fixed',
+            width: '100%',
+            height: '100%'
         }
     }
 );
@@ -427,12 +435,7 @@ const clearPrev = () => {
     for (const node of head.querySelectorAll("style")) {
         head.removeChild(node);
     }
-    // for(const node of document.body.querySelectorAll("body > div")) {
-    //     if (node.getAttribute("data-name") !== "app-container") {
-    //         document.body.removeChild(node);
-    //     }
-    // }
-    history.replaceState(null, "", "#/");
+    // history.replaceState(null, "", "#/");
 };
 let appContainer;
 let appComponent;
@@ -446,6 +449,7 @@ const init = () => {
     });
 
     appContainer = document.createElement("div");
+    appContainer.className = Style.getClassName("core:appContainer");
 
     viewportContainer.className = Style.getClassName("core:viewport");
     appContainer.setAttribute("data-name", "app-container");
@@ -468,18 +472,6 @@ const init = () => {
         appContainer.style.overflow = 'visible';
     }
     document.body.className = `${bodyClasses} ${additionalClasses}`.trim();
-};
-App.start = (routes, {hiddenStatusBar = false} = {}) => {
-    // clearPrev();
-    // init();
-
-    // let history = createHashHistory({queryKey: false});
-    // appComponent = ReactDOM.render(
-    //     <Router history={history}>{routes}</Router>,
-    //     document.querySelector("div")
-    // );
-    // console.log(appComponent);
-    // console.log(appComponent, appComponent.props.context, appComponent.props.context.replace);
 };
 
 const frameFunction = () => {
@@ -549,7 +541,9 @@ window.App = App;
 
 let active = false;
 let routes;
-App.start = (newRoutes) => {
+App.start = (newRoutes, options = {}) => {
+    const {initialPath = "/"} = options;
+    const path = `#${initialPath}`;
     if (appContainer !== undefined) {
         appContainer.style.display = 'none';
     }
@@ -561,15 +555,16 @@ App.start = (newRoutes) => {
 
     if (active === false) {
         init();
-        const history = createHashHistory({queryKey: false});
+        history.replaceState(null, null, path);
+        const appHistory = createHashHistory({queryKey: false});
         appComponent = ReactDOM.render(
-            <Router history={history}>
+            <Router history={appHistory}>
                 <Route getChildRoutes={(location, cb) => cb(null, routes)} />
             </Router>,
             document.querySelector("div")
         );
     } else {
-        App.navigation.replace("/");
+        App.navigation.replace(path);
     }
     active = true;
     appContainer.style.display = '';

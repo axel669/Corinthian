@@ -51,7 +51,7 @@ Style.create(
     "core/screen/app",
     {
         ".title": {
-            position: 'fixed',
+            position: 'absolute',
             ...titleBase
         },
         ".titleExtended": {
@@ -59,7 +59,7 @@ Style.create(
             top: 50
         },
         ".content": {
-            position: 'fixed',
+            position: 'absolute',
             top: 0,
             left: 0,
             bottom: 0,
@@ -87,7 +87,16 @@ const AppScreen = React.createClass({
         };
     },
     render() {
-        const {children, title = null, subtext = null, scrollable = true, backText = null, expansion = null, width = 800} = this.props;
+        const {
+            children,
+            title = null,
+            subtext = null,
+            scrollable = true,
+            backText = null,
+            expansion = null,
+            width = 800,
+            onBack = () => App.navigation.pop()
+        } = this.props;
         const {expanded} = this.state;
         const styleTest = {
             position: 'absolute',
@@ -126,7 +135,7 @@ const AppScreen = React.createClass({
                 backButtonText = <span style={{fontSize: 12, padding: 3}}>{backText}</span>;
                 backButton = (
                     <div className={Style.getClassName("core/screen:backButton")}>
-                        <IconButton flush text={backButtonText} icon="ion-chevron-left" onTap={() => App.navigation.pop()} height="100%" textColor="white" cornerRadius={5} />
+                        <IconButton flush text={backButtonText} icon="ion-chevron-left" onTap={onBack} height="100%" textColor="white" cornerRadius={5} />
                     </div>
                 );
             }
@@ -175,7 +184,7 @@ const AppScreen = React.createClass({
         }
 
         return (
-            <div>
+            <div dataName="UIScreen-wrapper">
                 {titleElement}
                 <div style={contentStyle} className={Style.getClassName("core/screen/app:content")}>
                     {content}
@@ -184,54 +193,63 @@ const AppScreen = React.createClass({
         );
     }
 });
-const WebScreen = ({children, title = null, subtext = null, backText = null, width = 800}) => {
-    let backButton;
-    let contentStyle;
-    let titleElement;
+// const WebScreen = (props) => {
+//     const {
+//         children,
+//         title = null,
+//         subtext = null,
+//         backText = null,
+//         width = 800,
+//         onBack = () => App.navigation.pop()
+//     } = props;
 
-    contentStyle = {
-        width: '100%',
-        maxWidth: width,
-        margin: 'auto'
-    };
-    titleElement = null;
-    backButton = null;
+//     let backButton;
+//     let contentStyle;
+//     let titleElement;
 
-    if (title !== null) {
-        if (backText !== null) {
-            backText = <span style={{fontSize: 14, padding: 5}}>{backText}</span>;
-            backButton = (
-                <div className="cor-screen-back-button">
-                    <IconButton text={backText} icon="ion-chevron-left" onTap={() => App.goBack()} height="100%" fill={true} textColor="white" cornerRadius={5} />
-                </div>
-            );
-        }
+//     contentStyle = {
+//         width: '100%',
+//         maxWidth: width,
+//         margin: 'auto'
+//     };
+//     titleElement = null;
+//     backButton = null;
 
-        contentStyle.paddingTop = 50;
-        titleElement = (
-            <div className="cor-screen-title-web">
-                <CenterContent height={50} width="100%" style={{position: 'relative'}}>
-                    {title}
-                    <div className="cor-screen-title-subtext">
-                        {subtext}
-                    </div>
-                    <div style={{position: 'absolute', top: 0, left: '50%', width: '100%', maxWidth: width, height: 50, WebkitTransform: 'translateX(-50%)', transform: 'translateX(-50%)'}}>
-                        {backButton}
-                    </div>
-                </CenterContent>
-            </div>
-        );
-    }
+//     if (title !== null) {
+//         if (backText !== null) {
+//             backText = <span style={{fontSize: 14, padding: 5}}>{backText}</span>;
+//             backButton = (
+//                 <div className="cor-screen-back-button">
+//                     <IconButton text={backText} icon="ion-chevron-left" onTap={onBack} height="100%" fill={true} textColor="white" cornerRadius={5} />
+//                 </div>
+//             );
+//         }
 
-    return (
-        <div style={{position: 'relative'}}>
-            <div style={contentStyle}>
-                {children}
-            </div>
-            {titleElement}
-        </div>
-    );
-};
+//         contentStyle.paddingTop = 50;
+//         titleElement = (
+//             <div className="cor-screen-title-web">
+//                 <CenterContent height={50} width="100%" style={{position: 'relative'}}>
+//                     {title}
+//                     <div className="cor-screen-title-subtext">
+//                         {subtext}
+//                     </div>
+//                     <div style={{position: 'absolute', top: 0, left: '50%', width: '100%', maxWidth: width, height: 50, WebkitTransform: 'translateX(-50%)', transform: 'translateX(-50%)'}}>
+//                         {backButton}
+//                     </div>
+//                 </CenterContent>
+//             </div>
+//         );
+//     }
+
+//     return (
+//         <div style={{position: 'relative'}}>
+//             <div style={contentStyle}>
+//                 {children}
+//             </div>
+//             {titleElement}
+//         </div>
+//     );
+// };
 
 // let Screen;
 
