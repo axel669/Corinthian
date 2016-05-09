@@ -474,11 +474,18 @@ const init = () => {
     document.body.className = `${bodyClasses} ${additionalClasses}`.trim();
 };
 
-const frameFunction = () => {
+(() => {
+    const frameFunction = () => {
+        requestAnimationFrame(frameFunction);
+        const now = Date.now();
+        PubSub.publishSync("system.framedraw", now - lastFrame);
+        lastFrame = now;
+    };
+    let lastFrame;
+
+    lastFrame = Date.now();
     requestAnimationFrame(frameFunction);
-    PubSub.publishSync("system.framedraw");
-};
-requestAnimationFrame(frameFunction);
+})();
 
 
 if (Environment.app === true) {

@@ -234,3 +234,14 @@ App.start(
         <Route path="/test" component={Main} />
     </Route>
 );
+
+(async () => {
+    const frames = [];
+    const test = PubSub.subscribe("system.framedraw", (type, time) => frames.push(time));
+    // console.log(test);
+    // debugger;
+
+    await chrono.wait(5000);
+    PubSub.unsubscribe(test);
+    console.log(frames.length, factotum.group(frames, n => n));
+})();
