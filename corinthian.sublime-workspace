@@ -915,6 +915,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/static-server.js",
 		"/C/Users/Axel/Documents/programming/github/Corinthian/lib-source/dialog.js",
 		"/C/Users/Axel/Documents/programming/github/Corinthian/lib-source/chrono.js",
 		"/C/Users/Axel/Documents/programming/github/Corinthian/corinthian.min.js",
@@ -959,7 +961,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/combobox.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/Axel1/Documents/IISExpress/config/aspnet.config",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
 		"/C/Users/Axel1/Documents/IISExpress/config/applicationhost.config",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/environment.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
@@ -1041,12 +1042,11 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/index.js",
 		"/C/Users/Axel1/Documents/programming/js/test/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.min.js"
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -1409,7 +1409,7 @@
 	"show_open_files": true,
 	"show_tabs": false,
 	"side_bar_visible": true,
-	"side_bar_width": 535.0,
+	"side_bar_width": 297.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

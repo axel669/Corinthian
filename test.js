@@ -217,11 +217,12 @@ const Filler = ({color}) => <div style={{width: '100%', height: '100%', backgrou
 const Main = React.createClass({
     render() {
         return (
-            <UI.Screen title="Test" backText={"test"}>
+            <UI.Screen title="Test" backText={"test"} scrollable>
                 <UI.Button text="test" onTap={() => App.navigation.push("/test")} />
                 <UI.Pinboard height="80%">
                     <Filler color="cyan" pinInfo={{top: '10%', left: '10%', width: 100, height: '50%'}} />
                 </UI.Pinboard>
+                {factotum.range(10, n => <UI.Button block raised text={n} />)}
             </UI.Screen>
         );
     }
