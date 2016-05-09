@@ -91,7 +91,7 @@ const AppScreen = React.createClass({
             children,
             title = null,
             subtext = null,
-            scrollable = true,
+            scrollable = false,
             backText = null,
             expansion = null,
             width = 800,
