@@ -20,7 +20,7 @@ Style.create(
     }
 );
 
-const ProgressBar = ({progress}) => (
+const ProgressBar = ({progress, cornerRadius}) => (
     <div className={Style.getClassName("core/progressbar:wrapper")}>
         <div className={Style.getClassName("core/progressbar:bar")} style={{width: `${progress * 100}%`}} />
     </div>

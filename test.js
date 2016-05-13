@@ -2,20 +2,23 @@
 
 const {Route} = ReactRouter;
 
+const coolBlue = "#2FB1DF";
+
 Theme.define({
     app: {
         backgroundColor: 'white',
         textColor: '#747474'
     },
     button: {
-        color: '#2FB1DF',
-        textColor: 'white',
         hoverColor: 'rgba(0, 0, 0, 0.11)',
         activeColor: 'rgba(0, 0, 0, 0.2)',
         raised: {
-            color: '#2FB1DF',
+            color: coolBlue,
             textColor: 'white'
         }
+    },
+    card: {
+        backgroundColor: 'white'
     },
     title: {
         backgroundColor: '#2FB1DF',

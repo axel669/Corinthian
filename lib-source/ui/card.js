@@ -8,7 +8,7 @@ Style.create(
             padding: 7,
             boxShadow: '1px 2px 2px rgba(120, 120, 120, 0.15)',
             border: '1px solid #e9e9e9',
-            backgroundColor: 'white'
+            backgroundColor: Theme.get("card/backgroundColor")
         }
     }
 );
