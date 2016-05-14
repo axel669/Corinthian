@@ -36,7 +36,7 @@ Style.create(
         },
         ".gridItemChecked": {
             color: 'white',
-            backgroundColor: Theme.get("button/raised/color")
+            backgroundColor: Theme.get("radio/grid/selectedColor")
         }
     }
 );
