@@ -44,7 +44,7 @@ module UI {
     }
 }
 */
-const Flexbox = ({colCount, width = null, children}) => {
+const Flexbox = ({colCount, width = null, children, maxItemWidth, autopad = false, minWidth}) => {
     const flexWidth = 100 / colCount;
 
     if (isNaN(flexWidth) === true) {
@@ -52,19 +52,25 @@ const Flexbox = ({colCount, width = null, children}) => {
     }
 
     children = React.Children.toArray(children);
+    if (autopad === true) {
+        const extra = factotum.range(children.length % colCount, () => <div />);
+        children = [...children, ...extra];
+    }
 
     return (
         <div style={{width}} className={Style.getClassName("core/flexbox:container")}>
-            {children.map(child => <FlexboxItem width={flexWidth} key={child.key} content={child} />)}
+            {children.map((child, index) => <FlexboxItem width={flexWidth} minWidth={minWidth} maxWidth={maxItemWidth} key={index} content={child} />)}
         </div>
     );
 };
-const FlexboxItem = ({content, width}) => {
+const FlexboxItem = ({content, width, maxWidth, minWidth}) => {
     const flexCSS = `1 0 ${width}%`;
     const itemStyle = {
         WebkitFlex: flexCSS,
         flex: flexCSS,
-        position: 'relative'
+        position: 'relative',
+        maxWidth,
+        minWidth
     };
 
     return <div style={itemStyle}>{content}</div>;
