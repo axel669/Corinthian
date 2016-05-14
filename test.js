@@ -20,19 +20,28 @@ Theme.define({
     card: {
         backgroundColor: 'white'
     },
-    title: {
-        backgroundColor: '#2FB1DF',
-        textColor: 'white'
+    progressbar: {
+        backgroundColor: '#B3CEED',
+        color: '#3B8AF3'
+    },
+    radio: {
+        grid: {
+            selectedColor: coolBlue
+        }
     },
     rangeInput: {
         track: {
-            color: "#2FB1DF"
+            color: coolBlue
         }
     },
     switch: {
         track: {
-            color: '#2FB1DF'
+            color: coolBlue
         }
+    },
+    title: {
+        backgroundColor: coolBlue,
+        textColor: 'white'
     },
     userInput: {
         activeColor: '#2FB1DF',
@@ -41,105 +50,6 @@ Theme.define({
 });
 
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
-
-const App1 = (() => {
-    const Main = () => {
-        console.log("main!");
-        const test = async () => {
-            if (await Dialog.confirm("Really exit?", {confirmText: "Yes", cancelText: "No"}) === true) {
-                App.start(App2.routes);
-            }
-        };
-        return (
-            <UI.Screen title="App 1 Main" backText="test" onBack={test}>
-                <UI.Button block text="Test" onTap={() => App.navigation.push("/test")} />
-                <UI.Button block raised text="App 2" onTap={() => App.start(App2.routes)} />
-            </UI.Screen>
-        );
-    };
-    const Test = () => (
-        <UI.Screen title="App 1 Test" backText="Back" onBack={() => App.navigation.replace("/")}>
-            LOL HEY
-        </UI.Screen>
-    );
-    return {
-        get routes() {
-            return (
-                <Route>
-                    <Route path="/" component={Main} />
-                    <Route path="/test" component={Test} />
-                </Route>
-            );
-        }
-    };
-})();
-
-const App2 = (() => {
-    const Main = () => (
-        <UI.Screen title="App 2 Main">
-            <UI.Button block text="Test" onTap={() => App.navigation.push("/test")} />
-            <UI.Button block raised text="App 1" onTap={() => App.start(App1.routes)} />
-        </UI.Screen>
-    );
-    const Test = () => (
-        <UI.Screen title="App 2 Test" backText="Back">
-            LOL HEY
-        </UI.Screen>
-    );
-    return {
-        get routes() {
-            return (
-                <Route>
-                    <Route path="/" component={Main} />
-                    <Route path="/test" component={Test} />
-                </Route>
-            );
-        }
-    };
-})();
-
-// const Test = ({children}) => {
-//     // console.log(History.state);
-//     return (
-//         <UI.Screen title="Test Screen">
-//             Hey there
-//             <div>{Date.now()}</div>
-//             <UI.Button text="test" block raised onTap={() => App.navigation.push("/test")} />
-//             <UI.Button text="test" block raised onTap={() => App.navigation.reset()} />
-//             {children}
-//         </UI.Screen>
-//     );
-// };
-// const Wat = ({children}) => <UI.Screen title="Hey" backText="what">Hey What</UI.Screen>;
-
-// const test = (...args) => {
-//     console.log(args);
-// };
-// let called = false;
-// const waitComponent = async (location, cb) => {
-//     console.log('load c');
-//     if (called === false) {
-//         await chrono.wait(500);
-//     }
-//     called = true;
-//     cb(null, Test);
-// };
-// const waitIndex = async (location, cb) => {
-//     console.log('load r', Date.now());
-//     await chrono.wait(1000);
-//     cb(null, [
-//         <Route path="/" component={Test} />,
-//         <Route path="/test" component={Wat} />
-//     ]);
-// };
-
-// App.start(App1.routes, {initialPath: "/test"});
-
-// App.start(
-//     <Route>
-//         <Route getChildRoutes={DataCenter.loadRoutes} />
-//     </Route>
-// );
 
 const ScreenTransition = React.createClass({
     render() {
@@ -193,7 +103,7 @@ Style.__rawCSS(
 const Wrapper = React.createClass({
     render() {
         return (
-            <CSSTransition component="div" transitionName="test" transitionAppear transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+            <CSSTransition component="div" transitionName="test" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
                 <ScreenTransition key={Date.now()}>
                     {this.props.children}
                 </ScreenTransition>
@@ -202,30 +112,20 @@ const Wrapper = React.createClass({
     }
 });
 
-// const Wrapper = ({children}) => {
-//     children = React.Children.toArray(children);
-
-//     children.forEach((child, i) => {
-//         if (child.hasOwnProperty('key') === false) {
-//             child.key = Date.now();
-//         }
-//         console.log(i, child.key);
-//     });
-
-//     return <div>{children}</div>;
-// };
-
 const Filler = ({color}) => <div style={{width: '100%', height: '100%', backgroundColor: color}} />;
+const test = n => (
+    <UI.Card title="Test Item">{n}</UI.Card>
+);
 
 const Main = React.createClass({
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} scrollable>
-                <UI.Button text="test" onTap={() => App.navigation.push("/test")} />
-                <UI.Pinboard height="80%">
-                    <Filler color="cyan" pinInfo={{top: '10%', left: '10%', width: 100, height: '50%'}} />
-                </UI.Pinboard>
-                {factotum.range(10, n => <UI.Button block raised text={n} />)}
+                <UI.Flexbox colCount={4} autopad>
+                    {factotum.range(7, n => test(n))}
+                </UI.Flexbox>
+                <UI.ProgressBar progress={0.5} color="blue" />
+                <UI.ProgressBar progress={0.5} backgroundColor="green" height={20} cornerRadius={10} />
             </UI.Screen>
         );
     }
@@ -237,14 +137,3 @@ App.start(
         <Route path="/test" component={Main} />
     </Route>
 );
-
-(async () => {
-    const frames = [];
-    const test = PubSub.subscribe("system.framedraw", (type, time) => frames.push(time));
-    // console.log(test);
-    // debugger;
-
-    await chrono.wait(5000);
-    PubSub.unsubscribe(test);
-    console.log(frames.length, factotum.group(frames, n => n));
-})();
