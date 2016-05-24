@@ -23,8 +23,8 @@ Style.create(
             display: 'inline-block'
         },
         ".wrapper + .raised": {
-            backgroundColor: Theme.get("button/color"),
-            color: Theme.get("button/textColor")
+            backgroundColor: Theme.get("button/raised/color"),
+            color: Theme.get("button/raised/textColor")
         },
         '.text': {
             width: '100%',
