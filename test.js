@@ -135,5 +135,8 @@ App.start(
     <Route component={Wrapper}>
         <Route path="/" component={Main} />
         <Route path="/test" component={Main} />
-    </Route>
+    </Route>,
+    {
+        initialPath: "/test"
+    }
 );

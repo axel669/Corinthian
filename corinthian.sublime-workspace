@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"use",
+				"useRouterHistory"
+			],
+			[
 				"wait",
 				"waitIndex"
 			],
@@ -510,10 +514,6 @@
 			[
 				"args",
 				"argsList"
-			],
-			[
-				"piece",
-				"piecestmnts"
 			]
 		]
 	},
@@ -915,6 +915,10 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/history/lib/createDOMHistory.js",
+		"/C/Users/Axel1/Documents/programming/js/containers/rich-app/www/app.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/environment.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/split.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/static-server.js",
 		"/C/Users/Axel/Documents/programming/github/Corinthian/lib-source/dialog.js",
@@ -953,7 +957,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/chrono.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/camera.es7.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/test-compile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/index.html",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/textinput.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/rangeinput.js",
@@ -962,7 +965,6 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui.es7.jsx",
 		"/C/Users/Axel1/Documents/IISExpress/config/aspnet.config",
 		"/C/Users/Axel1/Documents/IISExpress/config/applicationhost.config",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/environment.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/button.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/ui/iconbutton.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/style.js",
@@ -1040,9 +1042,7 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/src/stringify.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/node_modules/html-minifier/cli.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/index.js",
-		"/C/Users/Axel1/Documents/programming/js/test/package.json",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.stripped.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/gulpfile.js"
+		"/C/Users/Axel1/Documents/programming/js/test/package.json"
 	],
 	"find":
 	{
@@ -1060,6 +1060,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"appComponent.context.router",
+			"appComponent.context",
+			"appComponent.history",
+			"environ",
+			"deviceready",
 			".+",
 			"chrono",
 			"asObject",
@@ -1182,12 +1187,7 @@
 			"let ",
 			"exports\\.",
 			"export let ",
-			"var",
-			"process.next",
-			"promise",
-			"array.prototype",
-			"Grid",
-			"10"
+			"var"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1195,6 +1195,9 @@
 		"regex": true,
 		"replace_history":
 		[
+			"appComponent.router",
+			"appComponent.context.router",
+			"appComponent.context",
 			"\"$0\",",
 			"flush",
 			"this._rootNodeID$1",
@@ -1368,7 +1371,7 @@
 	"pinned_build_system": "",
 	"replace":
 	{
-		"height": 74.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1409,7 +1412,7 @@
 	"show_open_files": true,
 	"show_tabs": false,
 	"side_bar_visible": true,
-	"side_bar_width": 409.0,
+	"side_bar_width": 260.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

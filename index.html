@@ -10,5 +10,12 @@
         </script>
         <script src="corinthian.js"></script>
         <script src="app.js"></script>
+        <script>
+        (function() {
+            var custom = document.createEvent("CustomEvent");
+            custom.initEvent("deviceready", null, null, true);
+            document.dispatchEvent(custom);
+        })();
+        </script>
     </body>
 </html>

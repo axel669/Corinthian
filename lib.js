@@ -24,7 +24,7 @@ import Environment from "lib-source/environment.js";
 import RobotoURI from "lib-source/data-uri/roboto-light.ttf.source";
 import IonicURI from "lib-source/data-uri/ionicons.ttf.source";
 
-const {Router, Route} = ReactRouter;
+const {Router, Route, useRouterHistory, hashHistory} = ReactRouter;
 
 const App = {};
 // let ScreenWrapper;
@@ -487,6 +487,16 @@ const init = () => {
     requestAnimationFrame(frameFunction);
 })();
 
+const deviceReady = new Promise(
+    resolve => {
+        if (Environment.app === true) {
+            document.addEventListener("deviceready", () => resolve(true));
+        } else {
+            resolve(true);
+        }
+    }
+);
+
 
 if (Environment.app === true) {
     let history = ['/'];
@@ -495,7 +505,7 @@ if (Environment.app === true) {
         push(url) {
             navVars[history.length] = {};
             history.push(url);
-            appComponent.history.replace(url);
+            appComponent.router.replace(url);
         },
         pop(n = 1) {
             if (n >= history.length) {
@@ -510,15 +520,15 @@ if (Environment.app === true) {
                     navVars[n] = null;
                 }
             );
-            appComponent.history.replace(history.slice(-1)[0]);
+            appComponent.router.replace(history.slice(-1)[0]);
         },
         replace(url) {
             history[history.length - 1] = url;
             navVars[history.length - 1] = {};
-            appComponent.history.replace(url);
+            appComponent.router.replace(url);
         },
         reset() {
-            appComponent.history.replace('/');
+            appComponent.router.replace('/');
         },
         get vars() {
             return navVars[history.length - 1];
@@ -527,13 +537,13 @@ if (Environment.app === true) {
 } else {
     App.navigation = {
         push(url) {
-            appComponent.history.push(url);
+            appComponent.router.push(url);
         },
         pop() {
-            appComponent.history.goBack();
+            appComponent.router.goBack();
         },
         replace(url) {
-            appComponent.history.replace(url);
+            appComponent.router.replace(url);
         },
         refresh() {
             appComponent.refresh();
@@ -548,7 +558,8 @@ window.App = App;
 
 let active = false;
 let routes;
-App.start = (newRoutes, options = {}) => {
+App.start = async (newRoutes, options = {}) => {
+    // await deviceReady;
     const {initialPath = "/"} = options;
     const path = `#${initialPath}`;
     if (appContainer !== undefined) {
@@ -562,8 +573,10 @@ App.start = (newRoutes, options = {}) => {
 
     if (active === false) {
         init();
-        history.replaceState(null, null, path);
-        const appHistory = createHashHistory({queryKey: false});
+        // history.replaceState(null, null, path);
+        document.location = path;
+        const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
+        // const appHistory = useRouterHistory(hashHistory);
         appComponent = ReactDOM.render(
             <Router history={appHistory}>
                 <Route getChildRoutes={(location, cb) => cb(null, routes)} />
