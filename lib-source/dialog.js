@@ -276,6 +276,10 @@ export default {
         return showDialog(SpinnerDialog, {message}, false);
     },
     __custom(generator) {
+        if (typeof generator !== 'function') {
+            const value = generator;
+            generator = () => value;
+        }
         return showDialog(CustomDialog, generator(closeDialog));
     },
     dismiss() {

@@ -21,6 +21,10 @@ var uglify = require("uglify-js");
 
 var footer = "\nconsole.log('Build Time: ', '" + (new Date()).toString() + "');";
 
+if (args.production) {
+    process.env.NODE_ENV = "production";
+}
+
 var babelTransform = [
     [
         babelify,

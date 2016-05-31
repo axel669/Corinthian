@@ -11,8 +11,8 @@ import {createHashHistory} from "history";
 import chrono from "lib-source/chrono.js";
 import UI from "lib-source/ui.es7.jsx";
 import factotum from "lib-source/factotum.es7.js";
-import Zip from "lib-source/zip.es7.js";
-import fs from "lib-source/fs.es7.js";
+// import Zip from "lib-source/zip.es7.js";
+// import fs from "lib-source/fs.es7.js";
 import icons from "lib-source/ionic-icons.js";
 import crypto from "lib-source/crypto.es7.js";
 import Dialog from "lib-source/dialog.js";
@@ -22,7 +22,7 @@ import {Style, Theme} from "lib-source/style.js";
 import Environment from "lib-source/environment.js";
 
 import RobotoURI from "lib-source/data-uri/roboto-light.ttf.source";
-import IonicURI from "lib-source/data-uri/ionicons.ttf.source";
+import IonicURI from "lib-source/data-uri/ionicons.woff.source";
 
 const {Router, Route, useRouterHistory, hashHistory} = ReactRouter;
 
@@ -69,11 +69,11 @@ window.React = React;
 window.ReactDOM = ReactDOM;
 window.ReactRouter = ReactRouter;
 window.UI = UI;
-window.fs = fs;
+// window.fs = fs;
 window.ionic = icons;
 window.Dialog = Dialog;
-window.security = crypto;
-window.Zip = Zip;
+// window.security = crypto;
+// window.Zip = Zip;
 window.Style = Style;
 window.Theme = Theme;
 window.chrono = chrono;

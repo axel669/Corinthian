@@ -1,734 +1,736 @@
-const icons = {};
+const c = String.fromCharCode;
 
-Object.defineProperty(icons, "ion-ionic", {get: function(){return String.fromCharCode(61771)}})
-Object.defineProperty(icons, "ion-arrow-up-a", {get: function(){return String.fromCharCode(61708)}})
-Object.defineProperty(icons, "ion-arrow-right-a", {get: function(){return String.fromCharCode(61705)}})
-Object.defineProperty(icons, "ion-arrow-down-a", {get: function(){return String.fromCharCode(61699)}})
-Object.defineProperty(icons, "ion-arrow-left-a", {get: function(){return String.fromCharCode(61702)}})
-Object.defineProperty(icons, "ion-arrow-up-b", {get: function(){return String.fromCharCode(61709)}})
-Object.defineProperty(icons, "ion-arrow-right-b", {get: function(){return String.fromCharCode(61706)}})
-Object.defineProperty(icons, "ion-arrow-down-b", {get: function(){return String.fromCharCode(61700)}})
-Object.defineProperty(icons, "ion-arrow-left-b", {get: function(){return String.fromCharCode(61703)}})
-Object.defineProperty(icons, "ion-arrow-up-c", {get: function(){return String.fromCharCode(61710)}})
-Object.defineProperty(icons, "ion-arrow-right-c", {get: function(){return String.fromCharCode(61707)}})
-Object.defineProperty(icons, "ion-arrow-down-c", {get: function(){return String.fromCharCode(61701)}})
-Object.defineProperty(icons, "ion-arrow-left-c", {get: function(){return String.fromCharCode(61704)}})
-Object.defineProperty(icons, "ion-arrow-return-right", {get: function(){return String.fromCharCode(62054)}})
-Object.defineProperty(icons, "ion-arrow-return-left", {get: function(){return String.fromCharCode(62053)}})
-Object.defineProperty(icons, "ion-arrow-swap", {get: function(){return String.fromCharCode(62056)}})
-Object.defineProperty(icons, "ion-arrow-shrink", {get: function(){return String.fromCharCode(62055)}})
-Object.defineProperty(icons, "ion-arrow-expand", {get: function(){return String.fromCharCode(62046)}})
-Object.defineProperty(icons, "ion-arrow-move", {get: function(){return String.fromCharCode(62051)}})
-Object.defineProperty(icons, "ion-arrow-resize", {get: function(){return String.fromCharCode(62052)}})
-Object.defineProperty(icons, "ion-chevron-up", {get: function(){return String.fromCharCode(61734)}})
-Object.defineProperty(icons, "ion-chevron-right", {get: function(){return String.fromCharCode(61733)}})
-Object.defineProperty(icons, "ion-chevron-down", {get: function(){return String.fromCharCode(61731)}})
-Object.defineProperty(icons, "ion-chevron-left", {get: function(){return String.fromCharCode(61732)}})
-Object.defineProperty(icons, "ion-navicon-round", {get: function(){return String.fromCharCode(61965)}})
-Object.defineProperty(icons, "ion-navicon", {get: function(){return String.fromCharCode(61966)}})
-Object.defineProperty(icons, "ion-drag", {get: function(){return String.fromCharCode(61744)}})
-Object.defineProperty(icons, "ion-log-in", {get: function(){return String.fromCharCode(62110)}})
-Object.defineProperty(icons, "ion-log-out", {get: function(){return String.fromCharCode(62111)}})
-Object.defineProperty(icons, "ion-checkmark-round", {get: function(){return String.fromCharCode(61729)}})
-Object.defineProperty(icons, "ion-checkmark", {get: function(){return String.fromCharCode(61730)}})
-Object.defineProperty(icons, "ion-checkmark-circled", {get: function(){return String.fromCharCode(61728)}})
-Object.defineProperty(icons, "ion-close-round", {get: function(){return String.fromCharCode(61737)}})
-Object.defineProperty(icons, "ion-close", {get: function(){return String.fromCharCode(61738)}})
-Object.defineProperty(icons, "ion-close-circled", {get: function(){return String.fromCharCode(61736)}})
-Object.defineProperty(icons, "ion-plus-round", {get: function(){return String.fromCharCode(61975)}})
-Object.defineProperty(icons, "ion-plus", {get: function(){return String.fromCharCode(61976)}})
-Object.defineProperty(icons, "ion-plus-circled", {get: function(){return String.fromCharCode(61974)}})
-Object.defineProperty(icons, "ion-minus-round", {get: function(){return String.fromCharCode(61960)}})
-Object.defineProperty(icons, "ion-minus", {get: function(){return String.fromCharCode(61961)}})
-Object.defineProperty(icons, "ion-minus-circled", {get: function(){return String.fromCharCode(61959)}})
-Object.defineProperty(icons, "ion-information", {get: function(){return String.fromCharCode(61770)}})
-Object.defineProperty(icons, "ion-information-circled", {get: function(){return String.fromCharCode(61769)}})
-Object.defineProperty(icons, "ion-help", {get: function(){return String.fromCharCode(61763)}})
-Object.defineProperty(icons, "ion-help-circled", {get: function(){return String.fromCharCode(61762)}})
-Object.defineProperty(icons, "ion-backspace-outline", {get: function(){return String.fromCharCode(62398)}})
-Object.defineProperty(icons, "ion-backspace", {get: function(){return String.fromCharCode(62399)}})
-Object.defineProperty(icons, "ion-help-buoy", {get: function(){return String.fromCharCode(62076)}})
-Object.defineProperty(icons, "ion-asterisk", {get: function(){return String.fromCharCode(62228)}})
-Object.defineProperty(icons, "ion-alert", {get: function(){return String.fromCharCode(61697)}})
-Object.defineProperty(icons, "ion-alert-circled", {get: function(){return String.fromCharCode(61696)}})
-Object.defineProperty(icons, "ion-refresh", {get: function(){return String.fromCharCode(61980)}})
-Object.defineProperty(icons, "ion-loop", {get: function(){return String.fromCharCode(61953)}})
-Object.defineProperty(icons, "ion-shuffle", {get: function(){return String.fromCharCode(61985)}})
-Object.defineProperty(icons, "ion-home", {get: function(){return String.fromCharCode(61764)}})
-Object.defineProperty(icons, "ion-search", {get: function(){return String.fromCharCode(61983)}})
-Object.defineProperty(icons, "ion-flag", {get: function(){return String.fromCharCode(62073)}})
-Object.defineProperty(icons, "ion-star", {get: function(){return String.fromCharCode(62030)}})
-Object.defineProperty(icons, "ion-heart", {get: function(){return String.fromCharCode(61761)}})
-Object.defineProperty(icons, "ion-heart-broken", {get: function(){return String.fromCharCode(62237)}})
-Object.defineProperty(icons, "ion-gear-a", {get: function(){return String.fromCharCode(61757)}})
-Object.defineProperty(icons, "ion-gear-b", {get: function(){return String.fromCharCode(61758)}})
-Object.defineProperty(icons, "ion-toggle-filled", {get: function(){return String.fromCharCode(62292)}})
-Object.defineProperty(icons, "ion-toggle", {get: function(){return String.fromCharCode(62293)}})
-Object.defineProperty(icons, "ion-settings", {get: function(){return String.fromCharCode(62125)}})
-Object.defineProperty(icons, "ion-wrench", {get: function(){return String.fromCharCode(62138)}})
-Object.defineProperty(icons, "ion-hammer", {get: function(){return String.fromCharCode(62075)}})
-Object.defineProperty(icons, "ion-edit", {get: function(){return String.fromCharCode(62143)}})
-Object.defineProperty(icons, "ion-trash-a", {get: function(){return String.fromCharCode(62034)}})
-Object.defineProperty(icons, "ion-trash-b", {get: function(){return String.fromCharCode(62035)}})
-Object.defineProperty(icons, "ion-document", {get: function(){return String.fromCharCode(61743)}})
-Object.defineProperty(icons, "ion-document-text", {get: function(){return String.fromCharCode(61742)}})
-Object.defineProperty(icons, "ion-clipboard", {get: function(){return String.fromCharCode(61735)}})
-Object.defineProperty(icons, "ion-scissors", {get: function(){return String.fromCharCode(62283)}})
-Object.defineProperty(icons, "ion-funnel", {get: function(){return String.fromCharCode(62235)}})
-Object.defineProperty(icons, "ion-bookmark", {get: function(){return String.fromCharCode(62059)}})
-Object.defineProperty(icons, "ion-email", {get: function(){return String.fromCharCode(61746)}})
-Object.defineProperty(icons, "ion-email-unread", {get: function(){return String.fromCharCode(62403)}})
-Object.defineProperty(icons, "ion-folder", {get: function(){return String.fromCharCode(61753)}})
-Object.defineProperty(icons, "ion-filing", {get: function(){return String.fromCharCode(61748)}})
-Object.defineProperty(icons, "ion-archive", {get: function(){return String.fromCharCode(61698)}})
-Object.defineProperty(icons, "ion-reply", {get: function(){return String.fromCharCode(61982)}})
-Object.defineProperty(icons, "ion-reply-all", {get: function(){return String.fromCharCode(61981)}})
-Object.defineProperty(icons, "ion-forward", {get: function(){return String.fromCharCode(61754)}})
-Object.defineProperty(icons, "ion-share", {get: function(){return String.fromCharCode(61984)}})
-Object.defineProperty(icons, "ion-paper-airplane", {get: function(){return String.fromCharCode(62147)}})
-Object.defineProperty(icons, "ion-link", {get: function(){return String.fromCharCode(61950)}})
-Object.defineProperty(icons, "ion-paperclip", {get: function(){return String.fromCharCode(61967)}})
-Object.defineProperty(icons, "ion-compose", {get: function(){return String.fromCharCode(61740)}})
-Object.defineProperty(icons, "ion-briefcase", {get: function(){return String.fromCharCode(62060)}})
-Object.defineProperty(icons, "ion-medkit", {get: function(){return String.fromCharCode(62114)}})
-Object.defineProperty(icons, "ion-at", {get: function(){return String.fromCharCode(61711)}})
-Object.defineProperty(icons, "ion-pound", {get: function(){return String.fromCharCode(61977)}})
-Object.defineProperty(icons, "ion-quote", {get: function(){return String.fromCharCode(62279)}})
-Object.defineProperty(icons, "ion-cloud", {get: function(){return String.fromCharCode(61739)}})
-Object.defineProperty(icons, "ion-upload", {get: function(){return String.fromCharCode(62037)}})
-Object.defineProperty(icons, "ion-more", {get: function(){return String.fromCharCode(61963)}})
-Object.defineProperty(icons, "ion-grid", {get: function(){return String.fromCharCode(61759)}})
-Object.defineProperty(icons, "ion-calendar", {get: function(){return String.fromCharCode(61719)}})
-Object.defineProperty(icons, "ion-clock", {get: function(){return String.fromCharCode(62062)}})
-Object.defineProperty(icons, "ion-compass", {get: function(){return String.fromCharCode(62067)}})
-Object.defineProperty(icons, "ion-pinpoint", {get: function(){return String.fromCharCode(62119)}})
-Object.defineProperty(icons, "ion-pin", {get: function(){return String.fromCharCode(62118)}})
-Object.defineProperty(icons, "ion-navigate", {get: function(){return String.fromCharCode(62115)}})
-Object.defineProperty(icons, "ion-location", {get: function(){return String.fromCharCode(61951)}})
-Object.defineProperty(icons, "ion-map", {get: function(){return String.fromCharCode(61955)}})
-Object.defineProperty(icons, "ion-lock-combination", {get: function(){return String.fromCharCode(62676)}})
-Object.defineProperty(icons, "ion-locked", {get: function(){return String.fromCharCode(61952)}})
-Object.defineProperty(icons, "ion-unlocked", {get: function(){return String.fromCharCode(62036)}})
-Object.defineProperty(icons, "ion-key", {get: function(){return String.fromCharCode(62102)}})
-Object.defineProperty(icons, "ion-arrow-graph-up-right", {get: function(){return String.fromCharCode(62050)}})
-Object.defineProperty(icons, "ion-arrow-graph-down-right", {get: function(){return String.fromCharCode(62048)}})
-Object.defineProperty(icons, "ion-arrow-graph-up-left", {get: function(){return String.fromCharCode(62049)}})
-Object.defineProperty(icons, "ion-arrow-graph-down-left", {get: function(){return String.fromCharCode(62047)}})
-Object.defineProperty(icons, "ion-stats-bars", {get: function(){return String.fromCharCode(62133)}})
-Object.defineProperty(icons, "ion-connection-bars", {get: function(){return String.fromCharCode(62068)}})
-Object.defineProperty(icons, "ion-pie-graph", {get: function(){return String.fromCharCode(62117)}})
-Object.defineProperty(icons, "ion-chatbubble", {get: function(){return String.fromCharCode(61726)}})
-Object.defineProperty(icons, "ion-chatbubble-working", {get: function(){return String.fromCharCode(61725)}})
-Object.defineProperty(icons, "ion-chatbubbles", {get: function(){return String.fromCharCode(61727)}})
-Object.defineProperty(icons, "ion-chatbox", {get: function(){return String.fromCharCode(61723)}})
-Object.defineProperty(icons, "ion-chatbox-working", {get: function(){return String.fromCharCode(61722)}})
-Object.defineProperty(icons, "ion-chatboxes", {get: function(){return String.fromCharCode(61724)}})
-Object.defineProperty(icons, "ion-person", {get: function(){return String.fromCharCode(61971)}})
-Object.defineProperty(icons, "ion-person-add", {get: function(){return String.fromCharCode(61969)}})
-Object.defineProperty(icons, "ion-person-stalker", {get: function(){return String.fromCharCode(61970)}})
-Object.defineProperty(icons, "ion-woman", {get: function(){return String.fromCharCode(62045)}})
-Object.defineProperty(icons, "ion-man", {get: function(){return String.fromCharCode(61954)}})
-Object.defineProperty(icons, "ion-female", {get: function(){return String.fromCharCode(62072)}})
-Object.defineProperty(icons, "ion-male", {get: function(){return String.fromCharCode(62113)}})
-Object.defineProperty(icons, "ion-transgender", {get: function(){return String.fromCharCode(62709)}})
-Object.defineProperty(icons, "ion-fork", {get: function(){return String.fromCharCode(62074)}})
-Object.defineProperty(icons, "ion-knife", {get: function(){return String.fromCharCode(62103)}})
-Object.defineProperty(icons, "ion-spoon", {get: function(){return String.fromCharCode(62132)}})
-Object.defineProperty(icons, "ion-soup-can-outline", {get: function(){return String.fromCharCode(62707)}})
-Object.defineProperty(icons, "ion-soup-can", {get: function(){return String.fromCharCode(62708)}})
-Object.defineProperty(icons, "ion-beer", {get: function(){return String.fromCharCode(62058)}})
-Object.defineProperty(icons, "ion-wineglass", {get: function(){return String.fromCharCode(62137)}})
-Object.defineProperty(icons, "ion-coffee", {get: function(){return String.fromCharCode(62066)}})
-Object.defineProperty(icons, "ion-icecream", {get: function(){return String.fromCharCode(62077)}})
-Object.defineProperty(icons, "ion-pizza", {get: function(){return String.fromCharCode(62120)}})
-Object.defineProperty(icons, "ion-power", {get: function(){return String.fromCharCode(62121)}})
-Object.defineProperty(icons, "ion-mouse", {get: function(){return String.fromCharCode(62272)}})
-Object.defineProperty(icons, "ion-battery-full", {get: function(){return String.fromCharCode(61715)}})
-Object.defineProperty(icons, "ion-battery-half", {get: function(){return String.fromCharCode(61716)}})
-Object.defineProperty(icons, "ion-battery-low", {get: function(){return String.fromCharCode(61717)}})
-Object.defineProperty(icons, "ion-battery-empty", {get: function(){return String.fromCharCode(61714)}})
-Object.defineProperty(icons, "ion-battery-charging", {get: function(){return String.fromCharCode(61713)}})
-Object.defineProperty(icons, "ion-wifi", {get: function(){return String.fromCharCode(62044)}})
-Object.defineProperty(icons, "ion-bluetooth", {get: function(){return String.fromCharCode(61718)}})
-Object.defineProperty(icons, "ion-calculator", {get: function(){return String.fromCharCode(62061)}})
-Object.defineProperty(icons, "ion-camera", {get: function(){return String.fromCharCode(61720)}})
-Object.defineProperty(icons, "ion-eye", {get: function(){return String.fromCharCode(61747)}})
-Object.defineProperty(icons, "ion-eye-disabled", {get: function(){return String.fromCharCode(62214)}})
-Object.defineProperty(icons, "ion-flash", {get: function(){return String.fromCharCode(61751)}})
-Object.defineProperty(icons, "ion-flash-off", {get: function(){return String.fromCharCode(61750)}})
-Object.defineProperty(icons, "ion-qr-scanner", {get: function(){return String.fromCharCode(62278)}})
-Object.defineProperty(icons, "ion-image", {get: function(){return String.fromCharCode(61767)}})
-Object.defineProperty(icons, "ion-images", {get: function(){return String.fromCharCode(61768)}})
-Object.defineProperty(icons, "ion-wand", {get: function(){return String.fromCharCode(62296)}})
-Object.defineProperty(icons, "ion-contrast", {get: function(){return String.fromCharCode(62069)}})
-Object.defineProperty(icons, "ion-aperture", {get: function(){return String.fromCharCode(62227)}})
-Object.defineProperty(icons, "ion-crop", {get: function(){return String.fromCharCode(62401)}})
-Object.defineProperty(icons, "ion-easel", {get: function(){return String.fromCharCode(62402)}})
-Object.defineProperty(icons, "ion-paintbrush", {get: function(){return String.fromCharCode(62677)}})
-Object.defineProperty(icons, "ion-paintbucket", {get: function(){return String.fromCharCode(62678)}})
-Object.defineProperty(icons, "ion-monitor", {get: function(){return String.fromCharCode(61962)}})
-Object.defineProperty(icons, "ion-laptop", {get: function(){return String.fromCharCode(61948)}})
-Object.defineProperty(icons, "ion-ipad", {get: function(){return String.fromCharCode(61945)}})
-Object.defineProperty(icons, "ion-iphone", {get: function(){return String.fromCharCode(61946)}})
-Object.defineProperty(icons, "ion-ipod", {get: function(){return String.fromCharCode(61947)}})
-Object.defineProperty(icons, "ion-printer", {get: function(){return String.fromCharCode(61978)}})
-Object.defineProperty(icons, "ion-usb", {get: function(){return String.fromCharCode(62136)}})
-Object.defineProperty(icons, "ion-outlet", {get: function(){return String.fromCharCode(62274)}})
-Object.defineProperty(icons, "ion-bug", {get: function(){return String.fromCharCode(62142)}})
-Object.defineProperty(icons, "ion-code", {get: function(){return String.fromCharCode(62065)}})
-Object.defineProperty(icons, "ion-code-working", {get: function(){return String.fromCharCode(62064)}})
-Object.defineProperty(icons, "ion-code-download", {get: function(){return String.fromCharCode(62063)}})
-Object.defineProperty(icons, "ion-fork-repo", {get: function(){return String.fromCharCode(62144)}})
-Object.defineProperty(icons, "ion-network", {get: function(){return String.fromCharCode(62273)}})
-Object.defineProperty(icons, "ion-pull-request", {get: function(){return String.fromCharCode(62277)}})
-Object.defineProperty(icons, "ion-merge", {get: function(){return String.fromCharCode(62271)}})
-Object.defineProperty(icons, "ion-xbox", {get: function(){return String.fromCharCode(62220)}})
-Object.defineProperty(icons, "ion-playstation", {get: function(){return String.fromCharCode(62218)}})
-Object.defineProperty(icons, "ion-steam", {get: function(){return String.fromCharCode(62219)}})
-Object.defineProperty(icons, "ion-closed-captioning", {get: function(){return String.fromCharCode(62231)}})
-Object.defineProperty(icons, "ion-videocamera", {get: function(){return String.fromCharCode(62038)}})
-Object.defineProperty(icons, "ion-film-marker", {get: function(){return String.fromCharCode(61749)}})
-Object.defineProperty(icons, "ion-disc", {get: function(){return String.fromCharCode(61741)}})
-Object.defineProperty(icons, "ion-headphone", {get: function(){return String.fromCharCode(61760)}})
-Object.defineProperty(icons, "ion-music-note", {get: function(){return String.fromCharCode(61964)}})
-Object.defineProperty(icons, "ion-radio-waves", {get: function(){return String.fromCharCode(62124)}})
-Object.defineProperty(icons, "ion-speakerphone", {get: function(){return String.fromCharCode(62130)}})
-Object.defineProperty(icons, "ion-mic-a", {get: function(){return String.fromCharCode(61956)}})
-Object.defineProperty(icons, "ion-mic-b", {get: function(){return String.fromCharCode(61957)}})
-Object.defineProperty(icons, "ion-mic-c", {get: function(){return String.fromCharCode(61958)}})
-Object.defineProperty(icons, "ion-volume-high", {get: function(){return String.fromCharCode(62039)}})
-Object.defineProperty(icons, "ion-volume-medium", {get: function(){return String.fromCharCode(62041)}})
-Object.defineProperty(icons, "ion-volume-low", {get: function(){return String.fromCharCode(62040)}})
-Object.defineProperty(icons, "ion-volume-mute", {get: function(){return String.fromCharCode(62042)}})
-Object.defineProperty(icons, "ion-levels", {get: function(){return String.fromCharCode(62104)}})
-Object.defineProperty(icons, "ion-play", {get: function(){return String.fromCharCode(61973)}})
-Object.defineProperty(icons, "ion-pause", {get: function(){return String.fromCharCode(61968)}})
-Object.defineProperty(icons, "ion-stop", {get: function(){return String.fromCharCode(62031)}})
-Object.defineProperty(icons, "ion-record", {get: function(){return String.fromCharCode(61979)}})
-Object.defineProperty(icons, "ion-skip-forward", {get: function(){return String.fromCharCode(61987)}})
-Object.defineProperty(icons, "ion-skip-backward", {get: function(){return String.fromCharCode(61986)}})
-Object.defineProperty(icons, "ion-eject", {get: function(){return String.fromCharCode(61745)}})
-Object.defineProperty(icons, "ion-bag", {get: function(){return String.fromCharCode(61712)}})
-Object.defineProperty(icons, "ion-card", {get: function(){return String.fromCharCode(61721)}})
-Object.defineProperty(icons, "ion-cash", {get: function(){return String.fromCharCode(62230)}})
-Object.defineProperty(icons, "ion-pricetag", {get: function(){return String.fromCharCode(62122)}})
-Object.defineProperty(icons, "ion-pricetags", {get: function(){return String.fromCharCode(62123)}})
-Object.defineProperty(icons, "ion-thumbsup", {get: function(){return String.fromCharCode(62033)}})
-Object.defineProperty(icons, "ion-thumbsdown", {get: function(){return String.fromCharCode(62032)}})
-Object.defineProperty(icons, "ion-happy-outline", {get: function(){return String.fromCharCode(62406)}})
-Object.defineProperty(icons, "ion-happy", {get: function(){return String.fromCharCode(62236)}})
-Object.defineProperty(icons, "ion-sad-outline", {get: function(){return String.fromCharCode(62679)}})
-Object.defineProperty(icons, "ion-sad", {get: function(){return String.fromCharCode(62282)}})
-Object.defineProperty(icons, "ion-bowtie", {get: function(){return String.fromCharCode(62400)}})
-Object.defineProperty(icons, "ion-tshirt-outline", {get: function(){return String.fromCharCode(62710)}})
-Object.defineProperty(icons, "ion-tshirt", {get: function(){return String.fromCharCode(62711)}})
-Object.defineProperty(icons, "ion-trophy", {get: function(){return String.fromCharCode(62294)}})
-Object.defineProperty(icons, "ion-podium", {get: function(){return String.fromCharCode(62276)}})
-Object.defineProperty(icons, "ion-ribbon-a", {get: function(){return String.fromCharCode(62280)}})
-Object.defineProperty(icons, "ion-ribbon-b", {get: function(){return String.fromCharCode(62281)}})
-Object.defineProperty(icons, "ion-university", {get: function(){return String.fromCharCode(62295)}})
-Object.defineProperty(icons, "ion-magnet", {get: function(){return String.fromCharCode(62112)}})
-Object.defineProperty(icons, "ion-beaker", {get: function(){return String.fromCharCode(62057)}})
-Object.defineProperty(icons, "ion-erlenmeyer-flask", {get: function(){return String.fromCharCode(62405)}})
-Object.defineProperty(icons, "ion-egg", {get: function(){return String.fromCharCode(62071)}})
-Object.defineProperty(icons, "ion-earth", {get: function(){return String.fromCharCode(62070)}})
-Object.defineProperty(icons, "ion-planet", {get: function(){return String.fromCharCode(62275)}})
-Object.defineProperty(icons, "ion-lightbulb", {get: function(){return String.fromCharCode(62105)}})
-Object.defineProperty(icons, "ion-cube", {get: function(){return String.fromCharCode(62232)}})
-Object.defineProperty(icons, "ion-leaf", {get: function(){return String.fromCharCode(61949)}})
-Object.defineProperty(icons, "ion-waterdrop", {get: function(){return String.fromCharCode(62043)}})
-Object.defineProperty(icons, "ion-flame", {get: function(){return String.fromCharCode(62234)}})
-Object.defineProperty(icons, "ion-fireball", {get: function(){return String.fromCharCode(62233)}})
-Object.defineProperty(icons, "ion-bonfire", {get: function(){return String.fromCharCode(62229)}})
-Object.defineProperty(icons, "ion-umbrella", {get: function(){return String.fromCharCode(62135)}})
-Object.defineProperty(icons, "ion-nuclear", {get: function(){return String.fromCharCode(62116)}})
-Object.defineProperty(icons, "ion-no-smoking", {get: function(){return String.fromCharCode(62146)}})
-Object.defineProperty(icons, "ion-thermometer", {get: function(){return String.fromCharCode(62134)}})
-Object.defineProperty(icons, "ion-speedometer", {get: function(){return String.fromCharCode(62131)}})
-Object.defineProperty(icons, "ion-model-s", {get: function(){return String.fromCharCode(62145)}})
-Object.defineProperty(icons, "ion-plane", {get: function(){return String.fromCharCode(61972)}})
-Object.defineProperty(icons, "ion-jet", {get: function(){return String.fromCharCode(62101)}})
-Object.defineProperty(icons, "ion-load-a", {get: function(){return String.fromCharCode(62106)}})
-Object.defineProperty(icons, "ion-load-b", {get: function(){return String.fromCharCode(62107)}})
-Object.defineProperty(icons, "ion-load-c", {get: function(){return String.fromCharCode(62108)}})
-Object.defineProperty(icons, "ion-load-d", {get: function(){return String.fromCharCode(62109)}})
-Object.defineProperty(icons, "ion-ios-ionic-outline", {get: function(){return String.fromCharCode(62542)}})
-Object.defineProperty(icons, "ion-ios-arrow-back", {get: function(){return String.fromCharCode(62415)}})
-Object.defineProperty(icons, "ion-ios-arrow-forward", {get: function(){return String.fromCharCode(62417)}})
-Object.defineProperty(icons, "ion-ios-arrow-up", {get: function(){return String.fromCharCode(62424)}})
-Object.defineProperty(icons, "ion-ios-arrow-right", {get: function(){return String.fromCharCode(62419)}})
-Object.defineProperty(icons, "ion-ios-arrow-down", {get: function(){return String.fromCharCode(62416)}})
-Object.defineProperty(icons, "ion-ios-arrow-left", {get: function(){return String.fromCharCode(62418)}})
-Object.defineProperty(icons, "ion-ios-arrow-thin-up", {get: function(){return String.fromCharCode(62423)}})
-Object.defineProperty(icons, "ion-ios-arrow-thin-right", {get: function(){return String.fromCharCode(62422)}})
-Object.defineProperty(icons, "ion-ios-arrow-thin-down", {get: function(){return String.fromCharCode(62420)}})
-Object.defineProperty(icons, "ion-ios-arrow-thin-left", {get: function(){return String.fromCharCode(62421)}})
-Object.defineProperty(icons, "ion-ios-circle-filled", {get: function(){return String.fromCharCode(62464)}})
-Object.defineProperty(icons, "ion-ios-circle-outline", {get: function(){return String.fromCharCode(62465)}})
-Object.defineProperty(icons, "ion-ios-checkmark-empty", {get: function(){return String.fromCharCode(62461)}})
-Object.defineProperty(icons, "ion-ios-checkmark-outline", {get: function(){return String.fromCharCode(62462)}})
-Object.defineProperty(icons, "ion-ios-checkmark", {get: function(){return String.fromCharCode(62463)}})
-Object.defineProperty(icons, "ion-ios-plus-empty", {get: function(){return String.fromCharCode(62601)}})
-Object.defineProperty(icons, "ion-ios-plus-outline", {get: function(){return String.fromCharCode(62602)}})
-Object.defineProperty(icons, "ion-ios-plus", {get: function(){return String.fromCharCode(62603)}})
-Object.defineProperty(icons, "ion-ios-close-empty", {get: function(){return String.fromCharCode(62468)}})
-Object.defineProperty(icons, "ion-ios-close-outline", {get: function(){return String.fromCharCode(62469)}})
-Object.defineProperty(icons, "ion-ios-close", {get: function(){return String.fromCharCode(62470)}})
-Object.defineProperty(icons, "ion-ios-minus-empty", {get: function(){return String.fromCharCode(62562)}})
-Object.defineProperty(icons, "ion-ios-minus-outline", {get: function(){return String.fromCharCode(62563)}})
-Object.defineProperty(icons, "ion-ios-minus", {get: function(){return String.fromCharCode(62564)}})
-Object.defineProperty(icons, "ion-ios-information-empty", {get: function(){return String.fromCharCode(62539)}})
-Object.defineProperty(icons, "ion-ios-information-outline", {get: function(){return String.fromCharCode(62540)}})
-Object.defineProperty(icons, "ion-ios-information", {get: function(){return String.fromCharCode(62541)}})
-Object.defineProperty(icons, "ion-ios-help-empty", {get: function(){return String.fromCharCode(62532)}})
-Object.defineProperty(icons, "ion-ios-help-outline", {get: function(){return String.fromCharCode(62533)}})
-Object.defineProperty(icons, "ion-ios-help", {get: function(){return String.fromCharCode(62534)}})
-Object.defineProperty(icons, "ion-ios-search", {get: function(){return String.fromCharCode(62629)}})
-Object.defineProperty(icons, "ion-ios-search-strong", {get: function(){return String.fromCharCode(62628)}})
-Object.defineProperty(icons, "ion-ios-star", {get: function(){return String.fromCharCode(62643)}})
-Object.defineProperty(icons, "ion-ios-star-half", {get: function(){return String.fromCharCode(62641)}})
-Object.defineProperty(icons, "ion-ios-star-outline", {get: function(){return String.fromCharCode(62642)}})
-Object.defineProperty(icons, "ion-ios-heart", {get: function(){return String.fromCharCode(62531)}})
-Object.defineProperty(icons, "ion-ios-heart-outline", {get: function(){return String.fromCharCode(62530)}})
-Object.defineProperty(icons, "ion-ios-more", {get: function(){return String.fromCharCode(62570)}})
-Object.defineProperty(icons, "ion-ios-more-outline", {get: function(){return String.fromCharCode(62569)}})
-Object.defineProperty(icons, "ion-ios-home", {get: function(){return String.fromCharCode(62536)}})
-Object.defineProperty(icons, "ion-ios-home-outline", {get: function(){return String.fromCharCode(62535)}})
-Object.defineProperty(icons, "ion-ios-cloud", {get: function(){return String.fromCharCode(62476)}})
-Object.defineProperty(icons, "ion-ios-cloud-outline", {get: function(){return String.fromCharCode(62473)}})
-Object.defineProperty(icons, "ion-ios-cloud-upload", {get: function(){return String.fromCharCode(62475)}})
-Object.defineProperty(icons, "ion-ios-cloud-upload-outline", {get: function(){return String.fromCharCode(62474)}})
-Object.defineProperty(icons, "ion-ios-cloud-download", {get: function(){return String.fromCharCode(62472)}})
-Object.defineProperty(icons, "ion-ios-cloud-download-outline", {get: function(){return String.fromCharCode(62471)}})
-Object.defineProperty(icons, "ion-ios-upload", {get: function(){return String.fromCharCode(62667)}})
-Object.defineProperty(icons, "ion-ios-upload-outline", {get: function(){return String.fromCharCode(62666)}})
-Object.defineProperty(icons, "ion-ios-download", {get: function(){return String.fromCharCode(62496)}})
-Object.defineProperty(icons, "ion-ios-download-outline", {get: function(){return String.fromCharCode(62495)}})
-Object.defineProperty(icons, "ion-ios-refresh", {get: function(){return String.fromCharCode(62620)}})
-Object.defineProperty(icons, "ion-ios-refresh-outline", {get: function(){return String.fromCharCode(62619)}})
-Object.defineProperty(icons, "ion-ios-refresh-empty", {get: function(){return String.fromCharCode(62618)}})
-Object.defineProperty(icons, "ion-ios-reload", {get: function(){return String.fromCharCode(62621)}})
-Object.defineProperty(icons, "ion-ios-loop-strong", {get: function(){return String.fromCharCode(62553)}})
-Object.defineProperty(icons, "ion-ios-loop", {get: function(){return String.fromCharCode(62554)}})
-Object.defineProperty(icons, "ion-ios-bookmarks", {get: function(){return String.fromCharCode(62442)}})
-Object.defineProperty(icons, "ion-ios-bookmarks-outline", {get: function(){return String.fromCharCode(62441)}})
-Object.defineProperty(icons, "ion-ios-book", {get: function(){return String.fromCharCode(62440)}})
-Object.defineProperty(icons, "ion-ios-book-outline", {get: function(){return String.fromCharCode(62439)}})
-Object.defineProperty(icons, "ion-ios-flag", {get: function(){return String.fromCharCode(62509)}})
-Object.defineProperty(icons, "ion-ios-flag-outline", {get: function(){return String.fromCharCode(62508)}})
-Object.defineProperty(icons, "ion-ios-glasses", {get: function(){return String.fromCharCode(62527)}})
-Object.defineProperty(icons, "ion-ios-glasses-outline", {get: function(){return String.fromCharCode(62526)}})
-Object.defineProperty(icons, "ion-ios-browsers", {get: function(){return String.fromCharCode(62448)}})
-Object.defineProperty(icons, "ion-ios-browsers-outline", {get: function(){return String.fromCharCode(62447)}})
-Object.defineProperty(icons, "ion-ios-at", {get: function(){return String.fromCharCode(62426)}})
-Object.defineProperty(icons, "ion-ios-at-outline", {get: function(){return String.fromCharCode(62425)}})
-Object.defineProperty(icons, "ion-ios-pricetag", {get: function(){return String.fromCharCode(62605)}})
-Object.defineProperty(icons, "ion-ios-pricetag-outline", {get: function(){return String.fromCharCode(62604)}})
-Object.defineProperty(icons, "ion-ios-pricetags", {get: function(){return String.fromCharCode(62607)}})
-Object.defineProperty(icons, "ion-ios-pricetags-outline", {get: function(){return String.fromCharCode(62606)}})
-Object.defineProperty(icons, "ion-ios-cart", {get: function(){return String.fromCharCode(62456)}})
-Object.defineProperty(icons, "ion-ios-cart-outline", {get: function(){return String.fromCharCode(62455)}})
-Object.defineProperty(icons, "ion-ios-chatboxes", {get: function(){return String.fromCharCode(62458)}})
-Object.defineProperty(icons, "ion-ios-chatboxes-outline", {get: function(){return String.fromCharCode(62457)}})
-Object.defineProperty(icons, "ion-ios-chatbubble", {get: function(){return String.fromCharCode(62460)}})
-Object.defineProperty(icons, "ion-ios-chatbubble-outline", {get: function(){return String.fromCharCode(62459)}})
-Object.defineProperty(icons, "ion-ios-cog", {get: function(){return String.fromCharCode(62482)}})
-Object.defineProperty(icons, "ion-ios-cog-outline", {get: function(){return String.fromCharCode(62481)}})
-Object.defineProperty(icons, "ion-ios-gear", {get: function(){return String.fromCharCode(62525)}})
-Object.defineProperty(icons, "ion-ios-gear-outline", {get: function(){return String.fromCharCode(62524)}})
-Object.defineProperty(icons, "ion-ios-settings", {get: function(){return String.fromCharCode(62631)}})
-Object.defineProperty(icons, "ion-ios-settings-strong", {get: function(){return String.fromCharCode(62630)}})
-Object.defineProperty(icons, "ion-ios-toggle", {get: function(){return String.fromCharCode(62659)}})
-Object.defineProperty(icons, "ion-ios-toggle-outline", {get: function(){return String.fromCharCode(62658)}})
-Object.defineProperty(icons, "ion-ios-analytics", {get: function(){return String.fromCharCode(62414)}})
-Object.defineProperty(icons, "ion-ios-analytics-outline", {get: function(){return String.fromCharCode(62413)}})
-Object.defineProperty(icons, "ion-ios-pie", {get: function(){return String.fromCharCode(62596)}})
-Object.defineProperty(icons, "ion-ios-pie-outline", {get: function(){return String.fromCharCode(62595)}})
-Object.defineProperty(icons, "ion-ios-pulse", {get: function(){return String.fromCharCode(62611)}})
-Object.defineProperty(icons, "ion-ios-pulse-strong", {get: function(){return String.fromCharCode(62610)}})
-Object.defineProperty(icons, "ion-ios-filing", {get: function(){return String.fromCharCode(62505)}})
-Object.defineProperty(icons, "ion-ios-filing-outline", {get: function(){return String.fromCharCode(62504)}})
-Object.defineProperty(icons, "ion-ios-box", {get: function(){return String.fromCharCode(62444)}})
-Object.defineProperty(icons, "ion-ios-box-outline", {get: function(){return String.fromCharCode(62443)}})
-Object.defineProperty(icons, "ion-ios-compose", {get: function(){return String.fromCharCode(62488)}})
-Object.defineProperty(icons, "ion-ios-compose-outline", {get: function(){return String.fromCharCode(62487)}})
-Object.defineProperty(icons, "ion-ios-trash", {get: function(){return String.fromCharCode(62661)}})
-Object.defineProperty(icons, "ion-ios-trash-outline", {get: function(){return String.fromCharCode(62660)}})
-Object.defineProperty(icons, "ion-ios-copy", {get: function(){return String.fromCharCode(62492)}})
-Object.defineProperty(icons, "ion-ios-copy-outline", {get: function(){return String.fromCharCode(62491)}})
-Object.defineProperty(icons, "ion-ios-email", {get: function(){return String.fromCharCode(62499)}})
-Object.defineProperty(icons, "ion-ios-email-outline", {get: function(){return String.fromCharCode(62498)}})
-Object.defineProperty(icons, "ion-ios-undo", {get: function(){return String.fromCharCode(62663)}})
-Object.defineProperty(icons, "ion-ios-undo-outline", {get: function(){return String.fromCharCode(62662)}})
-Object.defineProperty(icons, "ion-ios-redo", {get: function(){return String.fromCharCode(62617)}})
-Object.defineProperty(icons, "ion-ios-redo-outline", {get: function(){return String.fromCharCode(62616)}})
-Object.defineProperty(icons, "ion-ios-paperplane", {get: function(){return String.fromCharCode(62580)}})
-Object.defineProperty(icons, "ion-ios-paperplane-outline", {get: function(){return String.fromCharCode(62579)}})
-Object.defineProperty(icons, "ion-ios-folder", {get: function(){return String.fromCharCode(62517)}})
-Object.defineProperty(icons, "ion-ios-folder-outline", {get: function(){return String.fromCharCode(62516)}})
-Object.defineProperty(icons, "ion-ios-paper", {get: function(){return String.fromCharCode(62578)}})
-Object.defineProperty(icons, "ion-ios-paper-outline", {get: function(){return String.fromCharCode(62577)}})
-Object.defineProperty(icons, "ion-ios-list", {get: function(){return String.fromCharCode(62548)}})
-Object.defineProperty(icons, "ion-ios-list-outline", {get: function(){return String.fromCharCode(62547)}})
-Object.defineProperty(icons, "ion-ios-world", {get: function(){return String.fromCharCode(62675)}})
-Object.defineProperty(icons, "ion-ios-world-outline", {get: function(){return String.fromCharCode(62674)}})
-Object.defineProperty(icons, "ion-ios-alarm", {get: function(){return String.fromCharCode(62408)}})
-Object.defineProperty(icons, "ion-ios-alarm-outline", {get: function(){return String.fromCharCode(62407)}})
-Object.defineProperty(icons, "ion-ios-speedometer", {get: function(){return String.fromCharCode(62640)}})
-Object.defineProperty(icons, "ion-ios-speedometer-outline", {get: function(){return String.fromCharCode(62639)}})
-Object.defineProperty(icons, "ion-ios-stopwatch", {get: function(){return String.fromCharCode(62645)}})
-Object.defineProperty(icons, "ion-ios-stopwatch-outline", {get: function(){return String.fromCharCode(62644)}})
-Object.defineProperty(icons, "ion-ios-timer", {get: function(){return String.fromCharCode(62657)}})
-Object.defineProperty(icons, "ion-ios-timer-outline", {get: function(){return String.fromCharCode(62656)}})
-Object.defineProperty(icons, "ion-ios-clock", {get: function(){return String.fromCharCode(62467)}})
-Object.defineProperty(icons, "ion-ios-clock-outline", {get: function(){return String.fromCharCode(62466)}})
-Object.defineProperty(icons, "ion-ios-time", {get: function(){return String.fromCharCode(62655)}})
-Object.defineProperty(icons, "ion-ios-time-outline", {get: function(){return String.fromCharCode(62654)}})
-Object.defineProperty(icons, "ion-ios-calendar", {get: function(){return String.fromCharCode(62452)}})
-Object.defineProperty(icons, "ion-ios-calendar-outline", {get: function(){return String.fromCharCode(62451)}})
-Object.defineProperty(icons, "ion-ios-photos", {get: function(){return String.fromCharCode(62594)}})
-Object.defineProperty(icons, "ion-ios-photos-outline", {get: function(){return String.fromCharCode(62593)}})
-Object.defineProperty(icons, "ion-ios-albums", {get: function(){return String.fromCharCode(62410)}})
-Object.defineProperty(icons, "ion-ios-albums-outline", {get: function(){return String.fromCharCode(62409)}})
-Object.defineProperty(icons, "ion-ios-camera", {get: function(){return String.fromCharCode(62454)}})
-Object.defineProperty(icons, "ion-ios-camera-outline", {get: function(){return String.fromCharCode(62453)}})
-Object.defineProperty(icons, "ion-ios-reverse-camera", {get: function(){return String.fromCharCode(62623)}})
-Object.defineProperty(icons, "ion-ios-reverse-camera-outline", {get: function(){return String.fromCharCode(62622)}})
-Object.defineProperty(icons, "ion-ios-eye", {get: function(){return String.fromCharCode(62501)}})
-Object.defineProperty(icons, "ion-ios-eye-outline", {get: function(){return String.fromCharCode(62500)}})
-Object.defineProperty(icons, "ion-ios-bolt", {get: function(){return String.fromCharCode(62438)}})
-Object.defineProperty(icons, "ion-ios-bolt-outline", {get: function(){return String.fromCharCode(62437)}})
-Object.defineProperty(icons, "ion-ios-color-wand", {get: function(){return String.fromCharCode(62486)}})
-Object.defineProperty(icons, "ion-ios-color-wand-outline", {get: function(){return String.fromCharCode(62485)}})
-Object.defineProperty(icons, "ion-ios-color-filter", {get: function(){return String.fromCharCode(62484)}})
-Object.defineProperty(icons, "ion-ios-color-filter-outline", {get: function(){return String.fromCharCode(62483)}})
-Object.defineProperty(icons, "ion-ios-grid-view", {get: function(){return String.fromCharCode(62529)}})
-Object.defineProperty(icons, "ion-ios-grid-view-outline", {get: function(){return String.fromCharCode(62528)}})
-Object.defineProperty(icons, "ion-ios-crop-strong", {get: function(){return String.fromCharCode(62493)}})
-Object.defineProperty(icons, "ion-ios-crop", {get: function(){return String.fromCharCode(62494)}})
-Object.defineProperty(icons, "ion-ios-barcode", {get: function(){return String.fromCharCode(62428)}})
-Object.defineProperty(icons, "ion-ios-barcode-outline", {get: function(){return String.fromCharCode(62427)}})
-Object.defineProperty(icons, "ion-ios-briefcase", {get: function(){return String.fromCharCode(62446)}})
-Object.defineProperty(icons, "ion-ios-briefcase-outline", {get: function(){return String.fromCharCode(62445)}})
-Object.defineProperty(icons, "ion-ios-medkit", {get: function(){return String.fromCharCode(62558)}})
-Object.defineProperty(icons, "ion-ios-medkit-outline", {get: function(){return String.fromCharCode(62557)}})
-Object.defineProperty(icons, "ion-ios-medical", {get: function(){return String.fromCharCode(62556)}})
-Object.defineProperty(icons, "ion-ios-medical-outline", {get: function(){return String.fromCharCode(62555)}})
-Object.defineProperty(icons, "ion-ios-infinite", {get: function(){return String.fromCharCode(62538)}})
-Object.defineProperty(icons, "ion-ios-infinite-outline", {get: function(){return String.fromCharCode(62537)}})
-Object.defineProperty(icons, "ion-ios-calculator", {get: function(){return String.fromCharCode(62450)}})
-Object.defineProperty(icons, "ion-ios-calculator-outline", {get: function(){return String.fromCharCode(62449)}})
-Object.defineProperty(icons, "ion-ios-keypad", {get: function(){return String.fromCharCode(62544)}})
-Object.defineProperty(icons, "ion-ios-keypad-outline", {get: function(){return String.fromCharCode(62543)}})
-Object.defineProperty(icons, "ion-ios-telephone", {get: function(){return String.fromCharCode(62649)}})
-Object.defineProperty(icons, "ion-ios-telephone-outline", {get: function(){return String.fromCharCode(62648)}})
-Object.defineProperty(icons, "ion-ios-drag", {get: function(){return String.fromCharCode(62497)}})
-Object.defineProperty(icons, "ion-ios-location", {get: function(){return String.fromCharCode(62550)}})
-Object.defineProperty(icons, "ion-ios-location-outline", {get: function(){return String.fromCharCode(62549)}})
-Object.defineProperty(icons, "ion-ios-navigate", {get: function(){return String.fromCharCode(62574)}})
-Object.defineProperty(icons, "ion-ios-navigate-outline", {get: function(){return String.fromCharCode(62573)}})
-Object.defineProperty(icons, "ion-ios-locked", {get: function(){return String.fromCharCode(62552)}})
-Object.defineProperty(icons, "ion-ios-locked-outline", {get: function(){return String.fromCharCode(62551)}})
-Object.defineProperty(icons, "ion-ios-unlocked", {get: function(){return String.fromCharCode(62665)}})
-Object.defineProperty(icons, "ion-ios-unlocked-outline", {get: function(){return String.fromCharCode(62664)}})
-Object.defineProperty(icons, "ion-ios-monitor", {get: function(){return String.fromCharCode(62566)}})
-Object.defineProperty(icons, "ion-ios-monitor-outline", {get: function(){return String.fromCharCode(62565)}})
-Object.defineProperty(icons, "ion-ios-printer", {get: function(){return String.fromCharCode(62609)}})
-Object.defineProperty(icons, "ion-ios-printer-outline", {get: function(){return String.fromCharCode(62608)}})
-Object.defineProperty(icons, "ion-ios-game-controller-a", {get: function(){return String.fromCharCode(62521)}})
-Object.defineProperty(icons, "ion-ios-game-controller-a-outline", {get: function(){return String.fromCharCode(62520)}})
-Object.defineProperty(icons, "ion-ios-game-controller-b", {get: function(){return String.fromCharCode(62523)}})
-Object.defineProperty(icons, "ion-ios-game-controller-b-outline", {get: function(){return String.fromCharCode(62522)}})
-Object.defineProperty(icons, "ion-ios-americanfootball", {get: function(){return String.fromCharCode(62412)}})
-Object.defineProperty(icons, "ion-ios-americanfootball-outline", {get: function(){return String.fromCharCode(62411)}})
-Object.defineProperty(icons, "ion-ios-baseball", {get: function(){return String.fromCharCode(62430)}})
-Object.defineProperty(icons, "ion-ios-baseball-outline", {get: function(){return String.fromCharCode(62429)}})
-Object.defineProperty(icons, "ion-ios-basketball", {get: function(){return String.fromCharCode(62432)}})
-Object.defineProperty(icons, "ion-ios-basketball-outline", {get: function(){return String.fromCharCode(62431)}})
-Object.defineProperty(icons, "ion-ios-tennisball", {get: function(){return String.fromCharCode(62651)}})
-Object.defineProperty(icons, "ion-ios-tennisball-outline", {get: function(){return String.fromCharCode(62650)}})
-Object.defineProperty(icons, "ion-ios-football", {get: function(){return String.fromCharCode(62519)}})
-Object.defineProperty(icons, "ion-ios-football-outline", {get: function(){return String.fromCharCode(62518)}})
-Object.defineProperty(icons, "ion-ios-body", {get: function(){return String.fromCharCode(62436)}})
-Object.defineProperty(icons, "ion-ios-body-outline", {get: function(){return String.fromCharCode(62435)}})
-Object.defineProperty(icons, "ion-ios-person", {get: function(){return String.fromCharCode(62590)}})
-Object.defineProperty(icons, "ion-ios-person-outline", {get: function(){return String.fromCharCode(62589)}})
-Object.defineProperty(icons, "ion-ios-personadd", {get: function(){return String.fromCharCode(62592)}})
-Object.defineProperty(icons, "ion-ios-personadd-outline", {get: function(){return String.fromCharCode(62591)}})
-Object.defineProperty(icons, "ion-ios-people", {get: function(){return String.fromCharCode(62588)}})
-Object.defineProperty(icons, "ion-ios-people-outline", {get: function(){return String.fromCharCode(62587)}})
-Object.defineProperty(icons, "ion-ios-musical-notes", {get: function(){return String.fromCharCode(62572)}})
-Object.defineProperty(icons, "ion-ios-musical-note", {get: function(){return String.fromCharCode(62571)}})
-Object.defineProperty(icons, "ion-ios-bell", {get: function(){return String.fromCharCode(62434)}})
-Object.defineProperty(icons, "ion-ios-bell-outline", {get: function(){return String.fromCharCode(62433)}})
-Object.defineProperty(icons, "ion-ios-mic", {get: function(){return String.fromCharCode(62561)}})
-Object.defineProperty(icons, "ion-ios-mic-outline", {get: function(){return String.fromCharCode(62560)}})
-Object.defineProperty(icons, "ion-ios-mic-off", {get: function(){return String.fromCharCode(62559)}})
-Object.defineProperty(icons, "ion-ios-volume-high", {get: function(){return String.fromCharCode(62670)}})
-Object.defineProperty(icons, "ion-ios-volume-low", {get: function(){return String.fromCharCode(62671)}})
-Object.defineProperty(icons, "ion-ios-play", {get: function(){return String.fromCharCode(62600)}})
-Object.defineProperty(icons, "ion-ios-play-outline", {get: function(){return String.fromCharCode(62599)}})
-Object.defineProperty(icons, "ion-ios-pause", {get: function(){return String.fromCharCode(62584)}})
-Object.defineProperty(icons, "ion-ios-pause-outline", {get: function(){return String.fromCharCode(62583)}})
-Object.defineProperty(icons, "ion-ios-recording", {get: function(){return String.fromCharCode(62615)}})
-Object.defineProperty(icons, "ion-ios-recording-outline", {get: function(){return String.fromCharCode(62614)}})
-Object.defineProperty(icons, "ion-ios-fastforward", {get: function(){return String.fromCharCode(62503)}})
-Object.defineProperty(icons, "ion-ios-fastforward-outline", {get: function(){return String.fromCharCode(62502)}})
-Object.defineProperty(icons, "ion-ios-rewind", {get: function(){return String.fromCharCode(62625)}})
-Object.defineProperty(icons, "ion-ios-rewind-outline", {get: function(){return String.fromCharCode(62624)}})
-Object.defineProperty(icons, "ion-ios-skipbackward", {get: function(){return String.fromCharCode(62635)}})
-Object.defineProperty(icons, "ion-ios-skipbackward-outline", {get: function(){return String.fromCharCode(62634)}})
-Object.defineProperty(icons, "ion-ios-skipforward", {get: function(){return String.fromCharCode(62637)}})
-Object.defineProperty(icons, "ion-ios-skipforward-outline", {get: function(){return String.fromCharCode(62636)}})
-Object.defineProperty(icons, "ion-ios-shuffle-strong", {get: function(){return String.fromCharCode(62632)}})
-Object.defineProperty(icons, "ion-ios-shuffle", {get: function(){return String.fromCharCode(62633)}})
-Object.defineProperty(icons, "ion-ios-videocam", {get: function(){return String.fromCharCode(62669)}})
-Object.defineProperty(icons, "ion-ios-videocam-outline", {get: function(){return String.fromCharCode(62668)}})
-Object.defineProperty(icons, "ion-ios-film", {get: function(){return String.fromCharCode(62507)}})
-Object.defineProperty(icons, "ion-ios-film-outline", {get: function(){return String.fromCharCode(62506)}})
-Object.defineProperty(icons, "ion-ios-flask", {get: function(){return String.fromCharCode(62513)}})
-Object.defineProperty(icons, "ion-ios-flask-outline", {get: function(){return String.fromCharCode(62512)}})
-Object.defineProperty(icons, "ion-ios-lightbulb", {get: function(){return String.fromCharCode(62546)}})
-Object.defineProperty(icons, "ion-ios-lightbulb-outline", {get: function(){return String.fromCharCode(62545)}})
-Object.defineProperty(icons, "ion-ios-wineglass", {get: function(){return String.fromCharCode(62673)}})
-Object.defineProperty(icons, "ion-ios-wineglass-outline", {get: function(){return String.fromCharCode(62672)}})
-Object.defineProperty(icons, "ion-ios-pint", {get: function(){return String.fromCharCode(62598)}})
-Object.defineProperty(icons, "ion-ios-pint-outline", {get: function(){return String.fromCharCode(62597)}})
-Object.defineProperty(icons, "ion-ios-nutrition", {get: function(){return String.fromCharCode(62576)}})
-Object.defineProperty(icons, "ion-ios-nutrition-outline", {get: function(){return String.fromCharCode(62575)}})
-Object.defineProperty(icons, "ion-ios-flower", {get: function(){return String.fromCharCode(62515)}})
-Object.defineProperty(icons, "ion-ios-flower-outline", {get: function(){return String.fromCharCode(62514)}})
-Object.defineProperty(icons, "ion-ios-rose", {get: function(){return String.fromCharCode(62627)}})
-Object.defineProperty(icons, "ion-ios-rose-outline", {get: function(){return String.fromCharCode(62626)}})
-Object.defineProperty(icons, "ion-ios-paw", {get: function(){return String.fromCharCode(62586)}})
-Object.defineProperty(icons, "ion-ios-paw-outline", {get: function(){return String.fromCharCode(62585)}})
-Object.defineProperty(icons, "ion-ios-flame", {get: function(){return String.fromCharCode(62511)}})
-Object.defineProperty(icons, "ion-ios-flame-outline", {get: function(){return String.fromCharCode(62510)}})
-Object.defineProperty(icons, "ion-ios-sunny", {get: function(){return String.fromCharCode(62647)}})
-Object.defineProperty(icons, "ion-ios-sunny-outline", {get: function(){return String.fromCharCode(62646)}})
-Object.defineProperty(icons, "ion-ios-partlysunny", {get: function(){return String.fromCharCode(62582)}})
-Object.defineProperty(icons, "ion-ios-partlysunny-outline", {get: function(){return String.fromCharCode(62581)}})
-Object.defineProperty(icons, "ion-ios-cloudy", {get: function(){return String.fromCharCode(62480)}})
-Object.defineProperty(icons, "ion-ios-cloudy-outline", {get: function(){return String.fromCharCode(62479)}})
-Object.defineProperty(icons, "ion-ios-rainy", {get: function(){return String.fromCharCode(62613)}})
-Object.defineProperty(icons, "ion-ios-rainy-outline", {get: function(){return String.fromCharCode(62612)}})
-Object.defineProperty(icons, "ion-ios-thunderstorm", {get: function(){return String.fromCharCode(62653)}})
-Object.defineProperty(icons, "ion-ios-thunderstorm-outline", {get: function(){return String.fromCharCode(62652)}})
-Object.defineProperty(icons, "ion-ios-snowy", {get: function(){return String.fromCharCode(62638)}})
-Object.defineProperty(icons, "ion-ios-moon", {get: function(){return String.fromCharCode(62568)}})
-Object.defineProperty(icons, "ion-ios-moon-outline", {get: function(){return String.fromCharCode(62567)}})
-Object.defineProperty(icons, "ion-ios-cloudy-night", {get: function(){return String.fromCharCode(62478)}})
-Object.defineProperty(icons, "ion-ios-cloudy-night-outline", {get: function(){return String.fromCharCode(62477)}})
-Object.defineProperty(icons, "ion-android-arrow-up", {get: function(){return String.fromCharCode(62310)}})
-Object.defineProperty(icons, "ion-android-arrow-forward", {get: function(){return String.fromCharCode(62223)}})
-Object.defineProperty(icons, "ion-android-arrow-down", {get: function(){return String.fromCharCode(62301)}})
-Object.defineProperty(icons, "ion-android-arrow-back", {get: function(){return String.fromCharCode(62154)}})
-Object.defineProperty(icons, "ion-android-arrow-dropup", {get: function(){return String.fromCharCode(62309)}})
-Object.defineProperty(icons, "ion-android-arrow-dropup-circle", {get: function(){return String.fromCharCode(62308)}})
-Object.defineProperty(icons, "ion-android-arrow-dropright", {get: function(){return String.fromCharCode(62307)}})
-Object.defineProperty(icons, "ion-android-arrow-dropright-circle", {get: function(){return String.fromCharCode(62306)}})
-Object.defineProperty(icons, "ion-android-arrow-dropdown", {get: function(){return String.fromCharCode(62303)}})
-Object.defineProperty(icons, "ion-android-arrow-dropdown-circle", {get: function(){return String.fromCharCode(62302)}})
-Object.defineProperty(icons, "ion-android-arrow-dropleft", {get: function(){return String.fromCharCode(62305)}})
-Object.defineProperty(icons, "ion-android-arrow-dropleft-circle", {get: function(){return String.fromCharCode(62304)}})
-Object.defineProperty(icons, "ion-android-add", {get: function(){return String.fromCharCode(62151)}})
-Object.defineProperty(icons, "ion-android-add-circle", {get: function(){return String.fromCharCode(62297)}})
-Object.defineProperty(icons, "ion-android-remove", {get: function(){return String.fromCharCode(62196)}})
-Object.defineProperty(icons, "ion-android-remove-circle", {get: function(){return String.fromCharCode(62377)}})
-Object.defineProperty(icons, "ion-android-close", {get: function(){return String.fromCharCode(62167)}})
-Object.defineProperty(icons, "ion-android-cancel", {get: function(){return String.fromCharCode(62318)}})
-Object.defineProperty(icons, "ion-android-radio-button-off", {get: function(){return String.fromCharCode(62374)}})
-Object.defineProperty(icons, "ion-android-radio-button-on", {get: function(){return String.fromCharCode(62375)}})
-Object.defineProperty(icons, "ion-android-checkmark-circle", {get: function(){return String.fromCharCode(62325)}})
-Object.defineProperty(icons, "ion-android-checkbox-outline-blank", {get: function(){return String.fromCharCode(62322)}})
-Object.defineProperty(icons, "ion-android-checkbox-outline", {get: function(){return String.fromCharCode(62323)}})
-Object.defineProperty(icons, "ion-android-checkbox-blank", {get: function(){return String.fromCharCode(62321)}})
-Object.defineProperty(icons, "ion-android-checkbox", {get: function(){return String.fromCharCode(62324)}})
-Object.defineProperty(icons, "ion-android-done", {get: function(){return String.fromCharCode(62339)}})
-Object.defineProperty(icons, "ion-android-done-all", {get: function(){return String.fromCharCode(62338)}})
-Object.defineProperty(icons, "ion-android-menu", {get: function(){return String.fromCharCode(62356)}})
-Object.defineProperty(icons, "ion-android-more-horizontal", {get: function(){return String.fromCharCode(62358)}})
-Object.defineProperty(icons, "ion-android-more-vertical", {get: function(){return String.fromCharCode(62359)}})
-Object.defineProperty(icons, "ion-android-refresh", {get: function(){return String.fromCharCode(62376)}})
-Object.defineProperty(icons, "ion-android-sync", {get: function(){return String.fromCharCode(62385)}})
-Object.defineProperty(icons, "ion-android-wifi", {get: function(){return String.fromCharCode(62213)}})
-Object.defineProperty(icons, "ion-android-call", {get: function(){return String.fromCharCode(62162)}})
-Object.defineProperty(icons, "ion-android-apps", {get: function(){return String.fromCharCode(62300)}})
-Object.defineProperty(icons, "ion-android-settings", {get: function(){return String.fromCharCode(62199)}})
-Object.defineProperty(icons, "ion-android-options", {get: function(){return String.fromCharCode(62365)}})
-Object.defineProperty(icons, "ion-android-funnel", {get: function(){return String.fromCharCode(62347)}})
-Object.defineProperty(icons, "ion-android-search", {get: function(){return String.fromCharCode(62197)}})
-Object.defineProperty(icons, "ion-android-home", {get: function(){return String.fromCharCode(62351)}})
-Object.defineProperty(icons, "ion-android-cloud-outline", {get: function(){return String.fromCharCode(62329)}})
-Object.defineProperty(icons, "ion-android-cloud", {get: function(){return String.fromCharCode(62330)}})
-Object.defineProperty(icons, "ion-android-download", {get: function(){return String.fromCharCode(62173)}})
-Object.defineProperty(icons, "ion-android-upload", {get: function(){return String.fromCharCode(62390)}})
-Object.defineProperty(icons, "ion-android-cloud-done", {get: function(){return String.fromCharCode(62328)}})
-Object.defineProperty(icons, "ion-android-cloud-circle", {get: function(){return String.fromCharCode(62327)}})
-Object.defineProperty(icons, "ion-android-favorite-outline", {get: function(){return String.fromCharCode(62343)}})
-Object.defineProperty(icons, "ion-android-favorite", {get: function(){return String.fromCharCode(62344)}})
-Object.defineProperty(icons, "ion-android-star-outline", {get: function(){return String.fromCharCode(62382)}})
-Object.defineProperty(icons, "ion-android-star-half", {get: function(){return String.fromCharCode(62381)}})
-Object.defineProperty(icons, "ion-android-star", {get: function(){return String.fromCharCode(62204)}})
-Object.defineProperty(icons, "ion-android-calendar", {get: function(){return String.fromCharCode(62161)}})
-Object.defineProperty(icons, "ion-android-alarm-clock", {get: function(){return String.fromCharCode(62298)}})
-Object.defineProperty(icons, "ion-android-time", {get: function(){return String.fromCharCode(62387)}})
-Object.defineProperty(icons, "ion-android-stopwatch", {get: function(){return String.fromCharCode(62205)}})
-Object.defineProperty(icons, "ion-android-watch", {get: function(){return String.fromCharCode(62397)}})
-Object.defineProperty(icons, "ion-android-locate", {get: function(){return String.fromCharCode(62185)}})
-Object.defineProperty(icons, "ion-android-navigate", {get: function(){return String.fromCharCode(62360)}})
-Object.defineProperty(icons, "ion-android-pin", {get: function(){return String.fromCharCode(62371)}})
-Object.defineProperty(icons, "ion-android-compass", {get: function(){return String.fromCharCode(62332)}})
-Object.defineProperty(icons, "ion-android-map", {get: function(){return String.fromCharCode(62355)}})
-Object.defineProperty(icons, "ion-android-walk", {get: function(){return String.fromCharCode(62395)}})
-Object.defineProperty(icons, "ion-android-bicycle", {get: function(){return String.fromCharCode(62313)}})
-Object.defineProperty(icons, "ion-android-car", {get: function(){return String.fromCharCode(62319)}})
-Object.defineProperty(icons, "ion-android-bus", {get: function(){return String.fromCharCode(62317)}})
-Object.defineProperty(icons, "ion-android-subway", {get: function(){return String.fromCharCode(62383)}})
-Object.defineProperty(icons, "ion-android-train", {get: function(){return String.fromCharCode(62388)}})
-Object.defineProperty(icons, "ion-android-boat", {get: function(){return String.fromCharCode(62314)}})
-Object.defineProperty(icons, "ion-android-plane", {get: function(){return String.fromCharCode(62372)}})
-Object.defineProperty(icons, "ion-android-restaurant", {get: function(){return String.fromCharCode(62378)}})
-Object.defineProperty(icons, "ion-android-bar", {get: function(){return String.fromCharCode(62312)}})
-Object.defineProperty(icons, "ion-android-cart", {get: function(){return String.fromCharCode(62320)}})
-Object.defineProperty(icons, "ion-android-camera", {get: function(){return String.fromCharCode(62163)}})
-Object.defineProperty(icons, "ion-android-image", {get: function(){return String.fromCharCode(62180)}})
-Object.defineProperty(icons, "ion-android-film", {get: function(){return String.fromCharCode(62345)}})
-Object.defineProperty(icons, "ion-android-color-palette", {get: function(){return String.fromCharCode(62331)}})
-Object.defineProperty(icons, "ion-android-create", {get: function(){return String.fromCharCode(62334)}})
-Object.defineProperty(icons, "ion-android-mail", {get: function(){return String.fromCharCode(62187)}})
-Object.defineProperty(icons, "ion-android-drafts", {get: function(){return String.fromCharCode(62340)}})
-Object.defineProperty(icons, "ion-android-send", {get: function(){return String.fromCharCode(62198)}})
-Object.defineProperty(icons, "ion-android-archive", {get: function(){return String.fromCharCode(62153)}})
-Object.defineProperty(icons, "ion-android-delete", {get: function(){return String.fromCharCode(62335)}})
-Object.defineProperty(icons, "ion-android-attach", {get: function(){return String.fromCharCode(62311)}})
-Object.defineProperty(icons, "ion-android-share", {get: function(){return String.fromCharCode(62200)}})
-Object.defineProperty(icons, "ion-android-share-alt", {get: function(){return String.fromCharCode(62380)}})
-Object.defineProperty(icons, "ion-android-bookmark", {get: function(){return String.fromCharCode(62315)}})
-Object.defineProperty(icons, "ion-android-document", {get: function(){return String.fromCharCode(62337)}})
-Object.defineProperty(icons, "ion-android-clipboard", {get: function(){return String.fromCharCode(62326)}})
-Object.defineProperty(icons, "ion-android-list", {get: function(){return String.fromCharCode(62353)}})
-Object.defineProperty(icons, "ion-android-folder-open", {get: function(){return String.fromCharCode(62346)}})
-Object.defineProperty(icons, "ion-android-folder", {get: function(){return String.fromCharCode(62176)}})
-Object.defineProperty(icons, "ion-android-print", {get: function(){return String.fromCharCode(62373)}})
-Object.defineProperty(icons, "ion-android-open", {get: function(){return String.fromCharCode(62364)}})
-Object.defineProperty(icons, "ion-android-exit", {get: function(){return String.fromCharCode(62341)}})
-Object.defineProperty(icons, "ion-android-contract", {get: function(){return String.fromCharCode(62333)}})
-Object.defineProperty(icons, "ion-android-expand", {get: function(){return String.fromCharCode(62342)}})
-Object.defineProperty(icons, "ion-android-globe", {get: function(){return String.fromCharCode(62348)}})
-Object.defineProperty(icons, "ion-android-chat", {get: function(){return String.fromCharCode(62164)}})
-Object.defineProperty(icons, "ion-android-textsms", {get: function(){return String.fromCharCode(62386)}})
-Object.defineProperty(icons, "ion-android-hangout", {get: function(){return String.fromCharCode(62349)}})
-Object.defineProperty(icons, "ion-android-happy", {get: function(){return String.fromCharCode(62350)}})
-Object.defineProperty(icons, "ion-android-sad", {get: function(){return String.fromCharCode(62379)}})
-Object.defineProperty(icons, "ion-android-person", {get: function(){return String.fromCharCode(62368)}})
-Object.defineProperty(icons, "ion-android-people", {get: function(){return String.fromCharCode(62366)}})
-Object.defineProperty(icons, "ion-android-person-add", {get: function(){return String.fromCharCode(62367)}})
-Object.defineProperty(icons, "ion-android-contact", {get: function(){return String.fromCharCode(62168)}})
-Object.defineProperty(icons, "ion-android-contacts", {get: function(){return String.fromCharCode(62169)}})
-Object.defineProperty(icons, "ion-android-playstore", {get: function(){return String.fromCharCode(62192)}})
-Object.defineProperty(icons, "ion-android-lock", {get: function(){return String.fromCharCode(62354)}})
-Object.defineProperty(icons, "ion-android-unlock", {get: function(){return String.fromCharCode(62389)}})
-Object.defineProperty(icons, "ion-android-microphone", {get: function(){return String.fromCharCode(62188)}})
-Object.defineProperty(icons, "ion-android-microphone-off", {get: function(){return String.fromCharCode(62357)}})
-Object.defineProperty(icons, "ion-android-notifications-none", {get: function(){return String.fromCharCode(62361)}})
-Object.defineProperty(icons, "ion-android-notifications", {get: function(){return String.fromCharCode(62363)}})
-Object.defineProperty(icons, "ion-android-notifications-off", {get: function(){return String.fromCharCode(62362)}})
-Object.defineProperty(icons, "ion-android-volume-mute", {get: function(){return String.fromCharCode(62392)}})
-Object.defineProperty(icons, "ion-android-volume-down", {get: function(){return String.fromCharCode(62391)}})
-Object.defineProperty(icons, "ion-android-volume-up", {get: function(){return String.fromCharCode(62394)}})
-Object.defineProperty(icons, "ion-android-volume-off", {get: function(){return String.fromCharCode(62393)}})
-Object.defineProperty(icons, "ion-android-hand", {get: function(){return String.fromCharCode(62179)}})
-Object.defineProperty(icons, "ion-android-desktop", {get: function(){return String.fromCharCode(62336)}})
-Object.defineProperty(icons, "ion-android-laptop", {get: function(){return String.fromCharCode(62352)}})
-Object.defineProperty(icons, "ion-android-phone-portrait", {get: function(){return String.fromCharCode(62370)}})
-Object.defineProperty(icons, "ion-android-phone-landscape", {get: function(){return String.fromCharCode(62369)}})
-Object.defineProperty(icons, "ion-android-bulb", {get: function(){return String.fromCharCode(62316)}})
-Object.defineProperty(icons, "ion-android-sunny", {get: function(){return String.fromCharCode(62384)}})
-Object.defineProperty(icons, "ion-android-alert", {get: function(){return String.fromCharCode(62299)}})
-Object.defineProperty(icons, "ion-android-warning", {get: function(){return String.fromCharCode(62396)}})
-Object.defineProperty(icons, "ion-social-twitter", {get: function(){return String.fromCharCode(62019)}})
-Object.defineProperty(icons, "ion-social-twitter-outline", {get: function(){return String.fromCharCode(62018)}})
-Object.defineProperty(icons, "ion-social-facebook", {get: function(){return String.fromCharCode(62001)}})
-Object.defineProperty(icons, "ion-social-facebook-outline", {get: function(){return String.fromCharCode(62000)}})
-Object.defineProperty(icons, "ion-social-googleplus", {get: function(){return String.fromCharCode(62005)}})
-Object.defineProperty(icons, "ion-social-googleplus-outline", {get: function(){return String.fromCharCode(62004)}})
-Object.defineProperty(icons, "ion-social-google", {get: function(){return String.fromCharCode(62287)}})
-Object.defineProperty(icons, "ion-social-google-outline", {get: function(){return String.fromCharCode(62286)}})
-Object.defineProperty(icons, "ion-social-dribbble", {get: function(){return String.fromCharCode(61997)}})
-Object.defineProperty(icons, "ion-social-dribbble-outline", {get: function(){return String.fromCharCode(61996)}})
-Object.defineProperty(icons, "ion-social-octocat", {get: function(){return String.fromCharCode(62696)}})
-Object.defineProperty(icons, "ion-social-github", {get: function(){return String.fromCharCode(62003)}})
-Object.defineProperty(icons, "ion-social-github-outline", {get: function(){return String.fromCharCode(62002)}})
-Object.defineProperty(icons, "ion-social-instagram", {get: function(){return String.fromCharCode(62289)}})
-Object.defineProperty(icons, "ion-social-instagram-outline", {get: function(){return String.fromCharCode(62288)}})
-Object.defineProperty(icons, "ion-social-whatsapp", {get: function(){return String.fromCharCode(62704)}})
-Object.defineProperty(icons, "ion-social-whatsapp-outline", {get: function(){return String.fromCharCode(62703)}})
-Object.defineProperty(icons, "ion-social-snapchat", {get: function(){return String.fromCharCode(62700)}})
-Object.defineProperty(icons, "ion-social-snapchat-outline", {get: function(){return String.fromCharCode(62699)}})
-Object.defineProperty(icons, "ion-social-foursquare", {get: function(){return String.fromCharCode(62285)}})
-Object.defineProperty(icons, "ion-social-foursquare-outline", {get: function(){return String.fromCharCode(62284)}})
-Object.defineProperty(icons, "ion-social-pinterest", {get: function(){return String.fromCharCode(62129)}})
-Object.defineProperty(icons, "ion-social-pinterest-outline", {get: function(){return String.fromCharCode(62128)}})
-Object.defineProperty(icons, "ion-social-rss", {get: function(){return String.fromCharCode(62013)}})
-Object.defineProperty(icons, "ion-social-rss-outline", {get: function(){return String.fromCharCode(62012)}})
-Object.defineProperty(icons, "ion-social-tumblr", {get: function(){return String.fromCharCode(62017)}})
-Object.defineProperty(icons, "ion-social-tumblr-outline", {get: function(){return String.fromCharCode(62016)}})
-Object.defineProperty(icons, "ion-social-wordpress", {get: function(){return String.fromCharCode(62025)}})
-Object.defineProperty(icons, "ion-social-wordpress-outline", {get: function(){return String.fromCharCode(62024)}})
-Object.defineProperty(icons, "ion-social-reddit", {get: function(){return String.fromCharCode(62011)}})
-Object.defineProperty(icons, "ion-social-reddit-outline", {get: function(){return String.fromCharCode(62010)}})
-Object.defineProperty(icons, "ion-social-hackernews", {get: function(){return String.fromCharCode(62007)}})
-Object.defineProperty(icons, "ion-social-hackernews-outline", {get: function(){return String.fromCharCode(62006)}})
-Object.defineProperty(icons, "ion-social-designernews", {get: function(){return String.fromCharCode(61995)}})
-Object.defineProperty(icons, "ion-social-designernews-outline", {get: function(){return String.fromCharCode(61994)}})
-Object.defineProperty(icons, "ion-social-yahoo", {get: function(){return String.fromCharCode(62027)}})
-Object.defineProperty(icons, "ion-social-yahoo-outline", {get: function(){return String.fromCharCode(62026)}})
-Object.defineProperty(icons, "ion-social-buffer", {get: function(){return String.fromCharCode(61993)}})
-Object.defineProperty(icons, "ion-social-buffer-outline", {get: function(){return String.fromCharCode(61992)}})
-Object.defineProperty(icons, "ion-social-skype", {get: function(){return String.fromCharCode(62015)}})
-Object.defineProperty(icons, "ion-social-skype-outline", {get: function(){return String.fromCharCode(62014)}})
-Object.defineProperty(icons, "ion-social-linkedin", {get: function(){return String.fromCharCode(62009)}})
-Object.defineProperty(icons, "ion-social-linkedin-outline", {get: function(){return String.fromCharCode(62008)}})
-Object.defineProperty(icons, "ion-social-vimeo", {get: function(){return String.fromCharCode(62021)}})
-Object.defineProperty(icons, "ion-social-vimeo-outline", {get: function(){return String.fromCharCode(62020)}})
-Object.defineProperty(icons, "ion-social-twitch", {get: function(){return String.fromCharCode(62702)}})
-Object.defineProperty(icons, "ion-social-twitch-outline", {get: function(){return String.fromCharCode(62701)}})
-Object.defineProperty(icons, "ion-social-youtube", {get: function(){return String.fromCharCode(62029)}})
-Object.defineProperty(icons, "ion-social-youtube-outline", {get: function(){return String.fromCharCode(62028)}})
-Object.defineProperty(icons, "ion-social-dropbox", {get: function(){return String.fromCharCode(61999)}})
-Object.defineProperty(icons, "ion-social-dropbox-outline", {get: function(){return String.fromCharCode(61998)}})
-Object.defineProperty(icons, "ion-social-apple", {get: function(){return String.fromCharCode(61991)}})
-Object.defineProperty(icons, "ion-social-apple-outline", {get: function(){return String.fromCharCode(61990)}})
-Object.defineProperty(icons, "ion-social-android", {get: function(){return String.fromCharCode(61989)}})
-Object.defineProperty(icons, "ion-social-android-outline", {get: function(){return String.fromCharCode(61988)}})
-Object.defineProperty(icons, "ion-social-windows", {get: function(){return String.fromCharCode(62023)}})
-Object.defineProperty(icons, "ion-social-windows-outline", {get: function(){return String.fromCharCode(62022)}})
-Object.defineProperty(icons, "ion-social-html5", {get: function(){return String.fromCharCode(62691)}})
-Object.defineProperty(icons, "ion-social-html5-outline", {get: function(){return String.fromCharCode(62690)}})
-Object.defineProperty(icons, "ion-social-css3", {get: function(){return String.fromCharCode(62687)}})
-Object.defineProperty(icons, "ion-social-css3-outline", {get: function(){return String.fromCharCode(62686)}})
-Object.defineProperty(icons, "ion-social-javascript", {get: function(){return String.fromCharCode(62693)}})
-Object.defineProperty(icons, "ion-social-javascript-outline", {get: function(){return String.fromCharCode(62692)}})
-Object.defineProperty(icons, "ion-social-angular", {get: function(){return String.fromCharCode(62681)}})
-Object.defineProperty(icons, "ion-social-angular-outline", {get: function(){return String.fromCharCode(62680)}})
-Object.defineProperty(icons, "ion-social-nodejs", {get: function(){return String.fromCharCode(62695)}})
-Object.defineProperty(icons, "ion-social-sass", {get: function(){return String.fromCharCode(62698)}})
-Object.defineProperty(icons, "ion-social-python", {get: function(){return String.fromCharCode(62697)}})
-Object.defineProperty(icons, "ion-social-chrome", {get: function(){return String.fromCharCode(62683)}})
-Object.defineProperty(icons, "ion-social-chrome-outline", {get: function(){return String.fromCharCode(62682)}})
-Object.defineProperty(icons, "ion-social-codepen", {get: function(){return String.fromCharCode(62685)}})
-Object.defineProperty(icons, "ion-social-codepen-outline", {get: function(){return String.fromCharCode(62684)}})
-Object.defineProperty(icons, "ion-social-markdown", {get: function(){return String.fromCharCode(62694)}})
-Object.defineProperty(icons, "ion-social-tux", {get: function(){return String.fromCharCode(62149)}})
-Object.defineProperty(icons, "ion-social-freebsd-devil", {get: function(){return String.fromCharCode(62148)}})
-Object.defineProperty(icons, "ion-social-usd", {get: function(){return String.fromCharCode(62291)}})
-Object.defineProperty(icons, "ion-social-usd-outline", {get: function(){return String.fromCharCode(62290)}})
-Object.defineProperty(icons, "ion-social-bitcoin", {get: function(){return String.fromCharCode(62127)}})
-Object.defineProperty(icons, "ion-social-bitcoin-outline", {get: function(){return String.fromCharCode(62126)}})
-Object.defineProperty(icons, "ion-social-yen", {get: function(){return String.fromCharCode(62706)}})
-Object.defineProperty(icons, "ion-social-yen-outline", {get: function(){return String.fromCharCode(62705)}})
-Object.defineProperty(icons, "ion-social-euro", {get: function(){return String.fromCharCode(62689)}})
-Object.defineProperty(icons, "ion-social-euro-outline", {get: function(){return String.fromCharCode(62688)}})
+const icons = {
+"ion-ionic": c(61771),
+"ion-arrow-up-a": c(61708),
+"ion-arrow-right-a": c(61705),
+"ion-arrow-down-a": c(61699),
+"ion-arrow-left-a": c(61702),
+"ion-arrow-up-b": c(61709),
+"ion-arrow-right-b": c(61706),
+"ion-arrow-down-b": c(61700),
+"ion-arrow-left-b": c(61703),
+"ion-arrow-up-c": c(61710),
+"ion-arrow-right-c": c(61707),
+"ion-arrow-down-c": c(61701),
+"ion-arrow-left-c": c(61704),
+"ion-arrow-return-right": c(62054),
+"ion-arrow-return-left": c(62053),
+"ion-arrow-swap": c(62056),
+"ion-arrow-shrink": c(62055),
+"ion-arrow-expand": c(62046),
+"ion-arrow-move": c(62051),
+"ion-arrow-resize": c(62052),
+"ion-chevron-up": c(61734),
+"ion-chevron-right": c(61733),
+"ion-chevron-down": c(61731),
+"ion-chevron-left": c(61732),
+"ion-navicon-round": c(61965),
+"ion-navicon": c(61966),
+"ion-drag": c(61744),
+"ion-log-in": c(62110),
+"ion-log-out": c(62111),
+"ion-checkmark-round": c(61729),
+"ion-checkmark": c(61730),
+"ion-checkmark-circled": c(61728),
+"ion-close-round": c(61737),
+"ion-close": c(61738),
+"ion-close-circled": c(61736),
+"ion-plus-round": c(61975),
+"ion-plus": c(61976),
+"ion-plus-circled": c(61974),
+"ion-minus-round": c(61960),
+"ion-minus": c(61961),
+"ion-minus-circled": c(61959),
+"ion-information": c(61770),
+"ion-information-circled": c(61769),
+"ion-help": c(61763),
+"ion-help-circled": c(61762),
+"ion-backspace-outline": c(62398),
+"ion-backspace": c(62399),
+"ion-help-buoy": c(62076),
+"ion-asterisk": c(62228),
+"ion-alert": c(61697),
+"ion-alert-circled": c(61696),
+"ion-refresh": c(61980),
+"ion-loop": c(61953),
+"ion-shuffle": c(61985),
+"ion-home": c(61764),
+"ion-search": c(61983),
+"ion-flag": c(62073),
+"ion-star": c(62030),
+"ion-heart": c(61761),
+"ion-heart-broken": c(62237),
+"ion-gear-a": c(61757),
+"ion-gear-b": c(61758),
+"ion-toggle-filled": c(62292),
+"ion-toggle": c(62293),
+"ion-settings": c(62125),
+"ion-wrench": c(62138),
+"ion-hammer": c(62075),
+"ion-edit": c(62143),
+"ion-trash-a": c(62034),
+"ion-trash-b": c(62035),
+"ion-document": c(61743),
+"ion-document-text": c(61742),
+"ion-clipboard": c(61735),
+"ion-scissors": c(62283),
+"ion-funnel": c(62235),
+"ion-bookmark": c(62059),
+"ion-email": c(61746),
+"ion-email-unread": c(62403),
+"ion-folder": c(61753),
+"ion-filing": c(61748),
+"ion-archive": c(61698),
+"ion-reply": c(61982),
+"ion-reply-all": c(61981),
+"ion-forward": c(61754),
+"ion-share": c(61984),
+"ion-paper-airplane": c(62147),
+"ion-link": c(61950),
+"ion-paperclip": c(61967),
+"ion-compose": c(61740),
+"ion-briefcase": c(62060),
+"ion-medkit": c(62114),
+"ion-at": c(61711),
+"ion-pound": c(61977),
+"ion-quote": c(62279),
+"ion-cloud": c(61739),
+"ion-upload": c(62037),
+"ion-more": c(61963),
+"ion-grid": c(61759),
+"ion-calendar": c(61719),
+"ion-clock": c(62062),
+"ion-compass": c(62067),
+"ion-pinpoint": c(62119),
+"ion-pin": c(62118),
+"ion-navigate": c(62115),
+"ion-location": c(61951),
+"ion-map": c(61955),
+"ion-lock-combination": c(62676),
+"ion-locked": c(61952),
+"ion-unlocked": c(62036),
+"ion-key": c(62102),
+"ion-arrow-graph-up-right": c(62050),
+"ion-arrow-graph-down-right": c(62048),
+"ion-arrow-graph-up-left": c(62049),
+"ion-arrow-graph-down-left": c(62047),
+"ion-stats-bars": c(62133),
+"ion-connection-bars": c(62068),
+"ion-pie-graph": c(62117),
+"ion-chatbubble": c(61726),
+"ion-chatbubble-working": c(61725),
+"ion-chatbubbles": c(61727),
+"ion-chatbox": c(61723),
+"ion-chatbox-working": c(61722),
+"ion-chatboxes": c(61724),
+"ion-person": c(61971),
+"ion-person-add": c(61969),
+"ion-person-stalker": c(61970),
+"ion-woman": c(62045),
+"ion-man": c(61954),
+"ion-female": c(62072),
+"ion-male": c(62113),
+"ion-transgender": c(62709),
+"ion-fork": c(62074),
+"ion-knife": c(62103),
+"ion-spoon": c(62132),
+"ion-soup-can-outline": c(62707),
+"ion-soup-can": c(62708),
+"ion-beer": c(62058),
+"ion-wineglass": c(62137),
+"ion-coffee": c(62066),
+"ion-icecream": c(62077),
+"ion-pizza": c(62120),
+"ion-power": c(62121),
+"ion-mouse": c(62272),
+"ion-battery-full": c(61715),
+"ion-battery-half": c(61716),
+"ion-battery-low": c(61717),
+"ion-battery-empty": c(61714),
+"ion-battery-charging": c(61713),
+"ion-wifi": c(62044),
+"ion-bluetooth": c(61718),
+"ion-calculator": c(62061),
+"ion-camera": c(61720),
+"ion-eye": c(61747),
+"ion-eye-disabled": c(62214),
+"ion-flash": c(61751),
+"ion-flash-off": c(61750),
+"ion-qr-scanner": c(62278),
+"ion-image": c(61767),
+"ion-images": c(61768),
+"ion-wand": c(62296),
+"ion-contrast": c(62069),
+"ion-aperture": c(62227),
+"ion-crop": c(62401),
+"ion-easel": c(62402),
+"ion-paintbrush": c(62677),
+"ion-paintbucket": c(62678),
+"ion-monitor": c(61962),
+"ion-laptop": c(61948),
+"ion-ipad": c(61945),
+"ion-iphone": c(61946),
+"ion-ipod": c(61947),
+"ion-printer": c(61978),
+"ion-usb": c(62136),
+"ion-outlet": c(62274),
+"ion-bug": c(62142),
+"ion-code": c(62065),
+"ion-code-working": c(62064),
+"ion-code-download": c(62063),
+"ion-fork-repo": c(62144),
+"ion-network": c(62273),
+"ion-pull-request": c(62277),
+"ion-merge": c(62271),
+"ion-xbox": c(62220),
+"ion-playstation": c(62218),
+"ion-steam": c(62219),
+"ion-closed-captioning": c(62231),
+"ion-videocamera": c(62038),
+"ion-film-marker": c(61749),
+"ion-disc": c(61741),
+"ion-headphone": c(61760),
+"ion-music-note": c(61964),
+"ion-radio-waves": c(62124),
+"ion-speakerphone": c(62130),
+"ion-mic-a": c(61956),
+"ion-mic-b": c(61957),
+"ion-mic-c": c(61958),
+"ion-volume-high": c(62039),
+"ion-volume-medium": c(62041),
+"ion-volume-low": c(62040),
+"ion-volume-mute": c(62042),
+"ion-levels": c(62104),
+"ion-play": c(61973),
+"ion-pause": c(61968),
+"ion-stop": c(62031),
+"ion-record": c(61979),
+"ion-skip-forward": c(61987),
+"ion-skip-backward": c(61986),
+"ion-eject": c(61745),
+"ion-bag": c(61712),
+"ion-card": c(61721),
+"ion-cash": c(62230),
+"ion-pricetag": c(62122),
+"ion-pricetags": c(62123),
+"ion-thumbsup": c(62033),
+"ion-thumbsdown": c(62032),
+"ion-happy-outline": c(62406),
+"ion-happy": c(62236),
+"ion-sad-outline": c(62679),
+"ion-sad": c(62282),
+"ion-bowtie": c(62400),
+"ion-tshirt-outline": c(62710),
+"ion-tshirt": c(62711),
+"ion-trophy": c(62294),
+"ion-podium": c(62276),
+"ion-ribbon-a": c(62280),
+"ion-ribbon-b": c(62281),
+"ion-university": c(62295),
+"ion-magnet": c(62112),
+"ion-beaker": c(62057),
+"ion-erlenmeyer-flask": c(62405),
+"ion-egg": c(62071),
+"ion-earth": c(62070),
+"ion-planet": c(62275),
+"ion-lightbulb": c(62105),
+"ion-cube": c(62232),
+"ion-leaf": c(61949),
+"ion-waterdrop": c(62043),
+"ion-flame": c(62234),
+"ion-fireball": c(62233),
+"ion-bonfire": c(62229),
+"ion-umbrella": c(62135),
+"ion-nuclear": c(62116),
+"ion-no-smoking": c(62146),
+"ion-thermometer": c(62134),
+"ion-speedometer": c(62131),
+"ion-model-s": c(62145),
+"ion-plane": c(61972),
+"ion-jet": c(62101),
+"ion-load-a": c(62106),
+"ion-load-b": c(62107),
+"ion-load-c": c(62108),
+"ion-load-d": c(62109),
+"ion-ios-ionic-outline": c(62542),
+"ion-ios-arrow-back": c(62415),
+"ion-ios-arrow-forward": c(62417),
+"ion-ios-arrow-up": c(62424),
+"ion-ios-arrow-right": c(62419),
+"ion-ios-arrow-down": c(62416),
+"ion-ios-arrow-left": c(62418),
+"ion-ios-arrow-thin-up": c(62423),
+"ion-ios-arrow-thin-right": c(62422),
+"ion-ios-arrow-thin-down": c(62420),
+"ion-ios-arrow-thin-left": c(62421),
+"ion-ios-circle-filled": c(62464),
+"ion-ios-circle-outline": c(62465),
+"ion-ios-checkmark-empty": c(62461),
+"ion-ios-checkmark-outline": c(62462),
+"ion-ios-checkmark": c(62463),
+"ion-ios-plus-empty": c(62601),
+"ion-ios-plus-outline": c(62602),
+"ion-ios-plus": c(62603),
+"ion-ios-close-empty": c(62468),
+"ion-ios-close-outline": c(62469),
+"ion-ios-close": c(62470),
+"ion-ios-minus-empty": c(62562),
+"ion-ios-minus-outline": c(62563),
+"ion-ios-minus": c(62564),
+"ion-ios-information-empty": c(62539),
+"ion-ios-information-outline": c(62540),
+"ion-ios-information": c(62541),
+"ion-ios-help-empty": c(62532),
+"ion-ios-help-outline": c(62533),
+"ion-ios-help": c(62534),
+"ion-ios-search": c(62629),
+"ion-ios-search-strong": c(62628),
+"ion-ios-star": c(62643),
+"ion-ios-star-half": c(62641),
+"ion-ios-star-outline": c(62642),
+"ion-ios-heart": c(62531),
+"ion-ios-heart-outline": c(62530),
+"ion-ios-more": c(62570),
+"ion-ios-more-outline": c(62569),
+"ion-ios-home": c(62536),
+"ion-ios-home-outline": c(62535),
+"ion-ios-cloud": c(62476),
+"ion-ios-cloud-outline": c(62473),
+"ion-ios-cloud-upload": c(62475),
+"ion-ios-cloud-upload-outline": c(62474),
+"ion-ios-cloud-download": c(62472),
+"ion-ios-cloud-download-outline": c(62471),
+"ion-ios-upload": c(62667),
+"ion-ios-upload-outline": c(62666),
+"ion-ios-download": c(62496),
+"ion-ios-download-outline": c(62495),
+"ion-ios-refresh": c(62620),
+"ion-ios-refresh-outline": c(62619),
+"ion-ios-refresh-empty": c(62618),
+"ion-ios-reload": c(62621),
+"ion-ios-loop-strong": c(62553),
+"ion-ios-loop": c(62554),
+"ion-ios-bookmarks": c(62442),
+"ion-ios-bookmarks-outline": c(62441),
+"ion-ios-book": c(62440),
+"ion-ios-book-outline": c(62439),
+"ion-ios-flag": c(62509),
+"ion-ios-flag-outline": c(62508),
+"ion-ios-glasses": c(62527),
+"ion-ios-glasses-outline": c(62526),
+"ion-ios-browsers": c(62448),
+"ion-ios-browsers-outline": c(62447),
+"ion-ios-at": c(62426),
+"ion-ios-at-outline": c(62425),
+"ion-ios-pricetag": c(62605),
+"ion-ios-pricetag-outline": c(62604),
+"ion-ios-pricetags": c(62607),
+"ion-ios-pricetags-outline": c(62606),
+"ion-ios-cart": c(62456),
+"ion-ios-cart-outline": c(62455),
+"ion-ios-chatboxes": c(62458),
+"ion-ios-chatboxes-outline": c(62457),
+"ion-ios-chatbubble": c(62460),
+"ion-ios-chatbubble-outline": c(62459),
+"ion-ios-cog": c(62482),
+"ion-ios-cog-outline": c(62481),
+"ion-ios-gear": c(62525),
+"ion-ios-gear-outline": c(62524),
+"ion-ios-settings": c(62631),
+"ion-ios-settings-strong": c(62630),
+"ion-ios-toggle": c(62659),
+"ion-ios-toggle-outline": c(62658),
+"ion-ios-analytics": c(62414),
+"ion-ios-analytics-outline": c(62413),
+"ion-ios-pie": c(62596),
+"ion-ios-pie-outline": c(62595),
+"ion-ios-pulse": c(62611),
+"ion-ios-pulse-strong": c(62610),
+"ion-ios-filing": c(62505),
+"ion-ios-filing-outline": c(62504),
+"ion-ios-box": c(62444),
+"ion-ios-box-outline": c(62443),
+"ion-ios-compose": c(62488),
+"ion-ios-compose-outline": c(62487),
+"ion-ios-trash": c(62661),
+"ion-ios-trash-outline": c(62660),
+"ion-ios-copy": c(62492),
+"ion-ios-copy-outline": c(62491),
+"ion-ios-email": c(62499),
+"ion-ios-email-outline": c(62498),
+"ion-ios-undo": c(62663),
+"ion-ios-undo-outline": c(62662),
+"ion-ios-redo": c(62617),
+"ion-ios-redo-outline": c(62616),
+"ion-ios-paperplane": c(62580),
+"ion-ios-paperplane-outline": c(62579),
+"ion-ios-folder": c(62517),
+"ion-ios-folder-outline": c(62516),
+"ion-ios-paper": c(62578),
+"ion-ios-paper-outline": c(62577),
+"ion-ios-list": c(62548),
+"ion-ios-list-outline": c(62547),
+"ion-ios-world": c(62675),
+"ion-ios-world-outline": c(62674),
+"ion-ios-alarm": c(62408),
+"ion-ios-alarm-outline": c(62407),
+"ion-ios-speedometer": c(62640),
+"ion-ios-speedometer-outline": c(62639),
+"ion-ios-stopwatch": c(62645),
+"ion-ios-stopwatch-outline": c(62644),
+"ion-ios-timer": c(62657),
+"ion-ios-timer-outline": c(62656),
+"ion-ios-clock": c(62467),
+"ion-ios-clock-outline": c(62466),
+"ion-ios-time": c(62655),
+"ion-ios-time-outline": c(62654),
+"ion-ios-calendar": c(62452),
+"ion-ios-calendar-outline": c(62451),
+"ion-ios-photos": c(62594),
+"ion-ios-photos-outline": c(62593),
+"ion-ios-albums": c(62410),
+"ion-ios-albums-outline": c(62409),
+"ion-ios-camera": c(62454),
+"ion-ios-camera-outline": c(62453),
+"ion-ios-reverse-camera": c(62623),
+"ion-ios-reverse-camera-outline": c(62622),
+"ion-ios-eye": c(62501),
+"ion-ios-eye-outline": c(62500),
+"ion-ios-bolt": c(62438),
+"ion-ios-bolt-outline": c(62437),
+"ion-ios-color-wand": c(62486),
+"ion-ios-color-wand-outline": c(62485),
+"ion-ios-color-filter": c(62484),
+"ion-ios-color-filter-outline": c(62483),
+"ion-ios-grid-view": c(62529),
+"ion-ios-grid-view-outline": c(62528),
+"ion-ios-crop-strong": c(62493),
+"ion-ios-crop": c(62494),
+"ion-ios-barcode": c(62428),
+"ion-ios-barcode-outline": c(62427),
+"ion-ios-briefcase": c(62446),
+"ion-ios-briefcase-outline": c(62445),
+"ion-ios-medkit": c(62558),
+"ion-ios-medkit-outline": c(62557),
+"ion-ios-medical": c(62556),
+"ion-ios-medical-outline": c(62555),
+"ion-ios-infinite": c(62538),
+"ion-ios-infinite-outline": c(62537),
+"ion-ios-calculator": c(62450),
+"ion-ios-calculator-outline": c(62449),
+"ion-ios-keypad": c(62544),
+"ion-ios-keypad-outline": c(62543),
+"ion-ios-telephone": c(62649),
+"ion-ios-telephone-outline": c(62648),
+"ion-ios-drag": c(62497),
+"ion-ios-location": c(62550),
+"ion-ios-location-outline": c(62549),
+"ion-ios-navigate": c(62574),
+"ion-ios-navigate-outline": c(62573),
+"ion-ios-locked": c(62552),
+"ion-ios-locked-outline": c(62551),
+"ion-ios-unlocked": c(62665),
+"ion-ios-unlocked-outline": c(62664),
+"ion-ios-monitor": c(62566),
+"ion-ios-monitor-outline": c(62565),
+"ion-ios-printer": c(62609),
+"ion-ios-printer-outline": c(62608),
+"ion-ios-game-controller-a": c(62521),
+"ion-ios-game-controller-a-outline": c(62520),
+"ion-ios-game-controller-b": c(62523),
+"ion-ios-game-controller-b-outline": c(62522),
+"ion-ios-americanfootball": c(62412),
+"ion-ios-americanfootball-outline": c(62411),
+"ion-ios-baseball": c(62430),
+"ion-ios-baseball-outline": c(62429),
+"ion-ios-basketball": c(62432),
+"ion-ios-basketball-outline": c(62431),
+"ion-ios-tennisball": c(62651),
+"ion-ios-tennisball-outline": c(62650),
+"ion-ios-football": c(62519),
+"ion-ios-football-outline": c(62518),
+"ion-ios-body": c(62436),
+"ion-ios-body-outline": c(62435),
+"ion-ios-person": c(62590),
+"ion-ios-person-outline": c(62589),
+"ion-ios-personadd": c(62592),
+"ion-ios-personadd-outline": c(62591),
+"ion-ios-people": c(62588),
+"ion-ios-people-outline": c(62587),
+"ion-ios-musical-notes": c(62572),
+"ion-ios-musical-note": c(62571),
+"ion-ios-bell": c(62434),
+"ion-ios-bell-outline": c(62433),
+"ion-ios-mic": c(62561),
+"ion-ios-mic-outline": c(62560),
+"ion-ios-mic-off": c(62559),
+"ion-ios-volume-high": c(62670),
+"ion-ios-volume-low": c(62671),
+"ion-ios-play": c(62600),
+"ion-ios-play-outline": c(62599),
+"ion-ios-pause": c(62584),
+"ion-ios-pause-outline": c(62583),
+"ion-ios-recording": c(62615),
+"ion-ios-recording-outline": c(62614),
+"ion-ios-fastforward": c(62503),
+"ion-ios-fastforward-outline": c(62502),
+"ion-ios-rewind": c(62625),
+"ion-ios-rewind-outline": c(62624),
+"ion-ios-skipbackward": c(62635),
+"ion-ios-skipbackward-outline": c(62634),
+"ion-ios-skipforward": c(62637),
+"ion-ios-skipforward-outline": c(62636),
+"ion-ios-shuffle-strong": c(62632),
+"ion-ios-shuffle": c(62633),
+"ion-ios-videocam": c(62669),
+"ion-ios-videocam-outline": c(62668),
+"ion-ios-film": c(62507),
+"ion-ios-film-outline": c(62506),
+"ion-ios-flask": c(62513),
+"ion-ios-flask-outline": c(62512),
+"ion-ios-lightbulb": c(62546),
+"ion-ios-lightbulb-outline": c(62545),
+"ion-ios-wineglass": c(62673),
+"ion-ios-wineglass-outline": c(62672),
+"ion-ios-pint": c(62598),
+"ion-ios-pint-outline": c(62597),
+"ion-ios-nutrition": c(62576),
+"ion-ios-nutrition-outline": c(62575),
+"ion-ios-flower": c(62515),
+"ion-ios-flower-outline": c(62514),
+"ion-ios-rose": c(62627),
+"ion-ios-rose-outline": c(62626),
+"ion-ios-paw": c(62586),
+"ion-ios-paw-outline": c(62585),
+"ion-ios-flame": c(62511),
+"ion-ios-flame-outline": c(62510),
+"ion-ios-sunny": c(62647),
+"ion-ios-sunny-outline": c(62646),
+"ion-ios-partlysunny": c(62582),
+"ion-ios-partlysunny-outline": c(62581),
+"ion-ios-cloudy": c(62480),
+"ion-ios-cloudy-outline": c(62479),
+"ion-ios-rainy": c(62613),
+"ion-ios-rainy-outline": c(62612),
+"ion-ios-thunderstorm": c(62653),
+"ion-ios-thunderstorm-outline": c(62652),
+"ion-ios-snowy": c(62638),
+"ion-ios-moon": c(62568),
+"ion-ios-moon-outline": c(62567),
+"ion-ios-cloudy-night": c(62478),
+"ion-ios-cloudy-night-outline": c(62477),
+"ion-android-arrow-up": c(62310),
+"ion-android-arrow-forward": c(62223),
+"ion-android-arrow-down": c(62301),
+"ion-android-arrow-back": c(62154),
+"ion-android-arrow-dropup": c(62309),
+"ion-android-arrow-dropup-circle": c(62308),
+"ion-android-arrow-dropright": c(62307),
+"ion-android-arrow-dropright-circle": c(62306),
+"ion-android-arrow-dropdown": c(62303),
+"ion-android-arrow-dropdown-circle": c(62302),
+"ion-android-arrow-dropleft": c(62305),
+"ion-android-arrow-dropleft-circle": c(62304),
+"ion-android-add": c(62151),
+"ion-android-add-circle": c(62297),
+"ion-android-remove": c(62196),
+"ion-android-remove-circle": c(62377),
+"ion-android-close": c(62167),
+"ion-android-cancel": c(62318),
+"ion-android-radio-button-off": c(62374),
+"ion-android-radio-button-on": c(62375),
+"ion-android-checkmark-circle": c(62325),
+"ion-android-checkbox-outline-blank": c(62322),
+"ion-android-checkbox-outline": c(62323),
+"ion-android-checkbox-blank": c(62321),
+"ion-android-checkbox": c(62324),
+"ion-android-done": c(62339),
+"ion-android-done-all": c(62338),
+"ion-android-menu": c(62356),
+"ion-android-more-horizontal": c(62358),
+"ion-android-more-vertical": c(62359),
+"ion-android-refresh": c(62376),
+"ion-android-sync": c(62385),
+"ion-android-wifi": c(62213),
+"ion-android-call": c(62162),
+"ion-android-apps": c(62300),
+"ion-android-settings": c(62199),
+"ion-android-options": c(62365),
+"ion-android-funnel": c(62347),
+"ion-android-search": c(62197),
+"ion-android-home": c(62351),
+"ion-android-cloud-outline": c(62329),
+"ion-android-cloud": c(62330),
+"ion-android-download": c(62173),
+"ion-android-upload": c(62390),
+"ion-android-cloud-done": c(62328),
+"ion-android-cloud-circle": c(62327),
+"ion-android-favorite-outline": c(62343),
+"ion-android-favorite": c(62344),
+"ion-android-star-outline": c(62382),
+"ion-android-star-half": c(62381),
+"ion-android-star": c(62204),
+"ion-android-calendar": c(62161),
+"ion-android-alarm-clock": c(62298),
+"ion-android-time": c(62387),
+"ion-android-stopwatch": c(62205),
+"ion-android-watch": c(62397),
+"ion-android-locate": c(62185),
+"ion-android-navigate": c(62360),
+"ion-android-pin": c(62371),
+"ion-android-compass": c(62332),
+"ion-android-map": c(62355),
+"ion-android-walk": c(62395),
+"ion-android-bicycle": c(62313),
+"ion-android-car": c(62319),
+"ion-android-bus": c(62317),
+"ion-android-subway": c(62383),
+"ion-android-train": c(62388),
+"ion-android-boat": c(62314),
+"ion-android-plane": c(62372),
+"ion-android-restaurant": c(62378),
+"ion-android-bar": c(62312),
+"ion-android-cart": c(62320),
+"ion-android-camera": c(62163),
+"ion-android-image": c(62180),
+"ion-android-film": c(62345),
+"ion-android-color-palette": c(62331),
+"ion-android-create": c(62334),
+"ion-android-mail": c(62187),
+"ion-android-drafts": c(62340),
+"ion-android-send": c(62198),
+"ion-android-archive": c(62153),
+"ion-android-delete": c(62335),
+"ion-android-attach": c(62311),
+"ion-android-share": c(62200),
+"ion-android-share-alt": c(62380),
+"ion-android-bookmark": c(62315),
+"ion-android-document": c(62337),
+"ion-android-clipboard": c(62326),
+"ion-android-list": c(62353),
+"ion-android-folder-open": c(62346),
+"ion-android-folder": c(62176),
+"ion-android-print": c(62373),
+"ion-android-open": c(62364),
+"ion-android-exit": c(62341),
+"ion-android-contract": c(62333),
+"ion-android-expand": c(62342),
+"ion-android-globe": c(62348),
+"ion-android-chat": c(62164),
+"ion-android-textsms": c(62386),
+"ion-android-hangout": c(62349),
+"ion-android-happy": c(62350),
+"ion-android-sad": c(62379),
+"ion-android-person": c(62368),
+"ion-android-people": c(62366),
+"ion-android-person-add": c(62367),
+"ion-android-contact": c(62168),
+"ion-android-contacts": c(62169),
+"ion-android-playstore": c(62192),
+"ion-android-lock": c(62354),
+"ion-android-unlock": c(62389),
+"ion-android-microphone": c(62188),
+"ion-android-microphone-off": c(62357),
+"ion-android-notifications-none": c(62361),
+"ion-android-notifications": c(62363),
+"ion-android-notifications-off": c(62362),
+"ion-android-volume-mute": c(62392),
+"ion-android-volume-down": c(62391),
+"ion-android-volume-up": c(62394),
+"ion-android-volume-off": c(62393),
+"ion-android-hand": c(62179),
+"ion-android-desktop": c(62336),
+"ion-android-laptop": c(62352),
+"ion-android-phone-portrait": c(62370),
+"ion-android-phone-landscape": c(62369),
+"ion-android-bulb": c(62316),
+"ion-android-sunny": c(62384),
+"ion-android-alert": c(62299),
+"ion-android-warning": c(62396),
+"ion-social-twitter": c(62019),
+"ion-social-twitter-outline": c(62018),
+"ion-social-facebook": c(62001),
+"ion-social-facebook-outline": c(62000),
+"ion-social-googleplus": c(62005),
+"ion-social-googleplus-outline": c(62004),
+"ion-social-google": c(62287),
+"ion-social-google-outline": c(62286),
+"ion-social-dribbble": c(61997),
+"ion-social-dribbble-outline": c(61996),
+"ion-social-octocat": c(62696),
+"ion-social-github": c(62003),
+"ion-social-github-outline": c(62002),
+"ion-social-instagram": c(62289),
+"ion-social-instagram-outline": c(62288),
+"ion-social-whatsapp": c(62704),
+"ion-social-whatsapp-outline": c(62703),
+"ion-social-snapchat": c(62700),
+"ion-social-snapchat-outline": c(62699),
+"ion-social-foursquare": c(62285),
+"ion-social-foursquare-outline": c(62284),
+"ion-social-pinterest": c(62129),
+"ion-social-pinterest-outline": c(62128),
+"ion-social-rss": c(62013),
+"ion-social-rss-outline": c(62012),
+"ion-social-tumblr": c(62017),
+"ion-social-tumblr-outline": c(62016),
+"ion-social-wordpress": c(62025),
+"ion-social-wordpress-outline": c(62024),
+"ion-social-reddit": c(62011),
+"ion-social-reddit-outline": c(62010),
+"ion-social-hackernews": c(62007),
+"ion-social-hackernews-outline": c(62006),
+"ion-social-designernews": c(61995),
+"ion-social-designernews-outline": c(61994),
+"ion-social-yahoo": c(62027),
+"ion-social-yahoo-outline": c(62026),
+"ion-social-buffer": c(61993),
+"ion-social-buffer-outline": c(61992),
+"ion-social-skype": c(62015),
+"ion-social-skype-outline": c(62014),
+"ion-social-linkedin": c(62009),
+"ion-social-linkedin-outline": c(62008),
+"ion-social-vimeo": c(62021),
+"ion-social-vimeo-outline": c(62020),
+"ion-social-twitch": c(62702),
+"ion-social-twitch-outline": c(62701),
+"ion-social-youtube": c(62029),
+"ion-social-youtube-outline": c(62028),
+"ion-social-dropbox": c(61999),
+"ion-social-dropbox-outline": c(61998),
+"ion-social-apple": c(61991),
+"ion-social-apple-outline": c(61990),
+"ion-social-android": c(61989),
+"ion-social-android-outline": c(61988),
+"ion-social-windows": c(62023),
+"ion-social-windows-outline": c(62022),
+"ion-social-html5": c(62691),
+"ion-social-html5-outline": c(62690),
+"ion-social-css3": c(62687),
+"ion-social-css3-outline": c(62686),
+"ion-social-javascript": c(62693),
+"ion-social-javascript-outline": c(62692),
+"ion-social-angular": c(62681),
+"ion-social-angular-outline": c(62680),
+"ion-social-nodejs": c(62695),
+"ion-social-sass": c(62698),
+"ion-social-python": c(62697),
+"ion-social-chrome": c(62683),
+"ion-social-chrome-outline": c(62682),
+"ion-social-codepen": c(62685),
+"ion-social-codepen-outline": c(62684),
+"ion-social-markdown": c(62694),
+"ion-social-tux": c(62149),
+"ion-social-freebsd-devil": c(62148),
+"ion-social-usd": c(62291),
+"ion-social-usd-outline": c(62290),
+"ion-social-bitcoin": c(62127),
+"ion-social-bitcoin-outline": c(62126),
+"ion-social-yen": c(62706),
+"ion-social-yen-outline": c(62705),
+"ion-social-euro": c(62689),
+"ion-social-euro-outline": c(62688)
+};
 
 export default icons;

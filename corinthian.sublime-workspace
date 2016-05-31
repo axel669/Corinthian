@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"ge",
+				"generator"
+			],
+			[
 				"use",
 				"useRouterHistory"
 			],
@@ -510,10 +514,6 @@
 			[
 				"kbnam",
 				"kbNames"
-			],
-			[
-				"args",
-				"argsList"
 			]
 		]
 	},
@@ -653,7 +653,7 @@
 			],
 			[
 				"Build Library",
-				""
+				"Minified"
 			]
 		],
 		[
@@ -781,7 +781,7 @@
 			]
 		]
 	],
-	"build_varint": "",
+	"build_varint": "Minified",
 	"command_palette":
 	{
 		"height": 392.0,
@@ -915,6 +915,14 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/react/lib/ReactCSSTransitionGroup.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/react-addons-css-transition-group/index.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/react/package.json",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/react/dist/react.js",
+		"/C/Users/Axel1/Documents/programming/github/Corinthian/lib-source/data-uri/ionicons.woff.source",
+		"/C/Users/Axel1/Documents/programming/js/node/babel/result.js",
+		"/C/Users/Axel1/Documents/programming/js/node/babel/other.js",
+		"/C/Users/Axel1/Documents/programming/js/node/babel/test.js",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/package.json",
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/history/lib/createDOMHistory.js",
 		"/C/Users/Axel1/Documents/programming/js/containers/rich-app/www/app.js",
@@ -1034,15 +1042,7 @@
 		"/C/Users/Axel1/Documents/programming/github/Corinthian/corinthian.sublime-project",
 		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-runtime/helpers/typeof.js",
 		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-preset-stage-0/node_modules/babel-preset-stage-1/node_modules/babel-preset-stage-2/node_modules/babel-preset-stage-3/package.json",
-		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-preset-stage-0/package.json",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/min-test.js",
-		"/C/Users/Axel1/Documents/programming/js/test/compiler/test-es7.js",
-		"/C/Users/Axel1/Documents/programming/js/test/compiler/test-compile.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/compiler.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/src/stringify.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/node_modules/html-minifier/cli.js",
-		"/C/Users/Axel1/Documents/programming/github/Corinthian/node_modules/stringify/index.js",
-		"/C/Users/Axel1/Documents/programming/js/test/package.json"
+		"/C/Users/Axel1/Documents/programming/js/test/node_modules/babel-preset-stage-0/package.json"
 	],
 	"find":
 	{
@@ -1060,6 +1060,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"String.fromCharCode",
+			".+(\".+\").+(String\\.fromCharCode\\(\\d+\\)).+",
 			"appComponent.context.router",
 			"appComponent.context",
 			"appComponent.history",
@@ -1185,9 +1187,7 @@
 			"click",
 			"let (.*);",
 			"let ",
-			"exports\\.",
-			"export let ",
-			"var"
+			"exports\\."
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1195,6 +1195,8 @@
 		"regex": true,
 		"replace_history":
 		[
+			"c",
+			"$1: $2,",
 			"appComponent.router",
 			"appComponent.context.router",
 			"appComponent.context",

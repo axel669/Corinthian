@@ -10,7 +10,7 @@
             "variants": [
                 {
                     "name": "Minified",
-                    "shell_cmd": "node test-compile.js --type js --source lib --dest corinthian.min --minify --build-time",
+                    "shell_cmd": "node test-compile.js --type js --source lib --dest corinthian.min --minify --build-time --production",
                 },
                 {
                     "name": "Test Script",
