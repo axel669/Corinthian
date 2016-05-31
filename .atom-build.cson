@@ -1,0 +1,15 @@
+{
+    cmd: "node test-compile.js --type js --source lib --dest corinthian --build-time"
+    name: "Build Dev"
+    keymap: "ctrl-b",
+    targets: {
+        production: {
+            cmd: "node test-compile.js --type js --source lib --dest corinthian.min --minify --build-time --production",
+            keymap: "ctrl-shift-p"
+        },
+        test: {
+            cmd: "node test-compile.js --type js --source test --dest app",
+            keymap: "ctrl-t"
+        }
+    }
+}
