@@ -188,62 +188,99 @@ const readSetting = (storage, key, name, defaultValue) => {
 const writeSetting = (storage, key, name, value) => {
     storage.setItem(`${key}:${name}`, JSON.stringify(value));
 };
+const genStorage = mechanism =>
+    key => ({
+        read(name, defaultValue) {
+            return readSetting(mechanism, key, name, defaultValue);
+        },
+        readObject(...names) {
+            return names.reduce(
+                (result, item) => {
+                    if (typeof item === 'string') {
+                        item = [item, undefined];
+                    }
+                    const [name, defaultValue] = item;
 
-App.createSettings = key => ({
-    read(name, defaultValue) {
-        return readSetting(localStorage, key, name, defaultValue);
-    },
-    readObject(...names) {
-        return names.reduce(
-            (result, item) => {
-                if (typeof item === 'string') {
-                    item = [item, undefined];
-                }
-                const [name, defaultValue] = item;
-
-                result[name] = readSetting(localStorage, key, name, defaultValue);
-                return result;
-            },
-            {}
-        );
-    },
-    write(name, value) {
-        writeSetting(localStorage, key, name, value);
-    },
-    writeObject(settings) {
-        for (const [name, value] of Object.entries(settings)) {
-            writeSetting(localStorage, key, name, value);
+                    result[name] = readSetting(mechanism, key, name, defaultValue);
+                    return result;
+                },
+                {}
+            );
+        },
+        write(name, value) {
+            writeSetting(mechanism, key, name, value);
+        },
+        writeObject(settings) {
+            for (const [name, value] of Object.entries(settings)) {
+                writeSetting(mechanism, key, name, value);
+            }
+        },
+        has(name) {
+            return mechanism.getItem(`${key}:${name}`) !== null;
+        },
+        remove(name) {
+            mechanism.removeItem(`${key}:${name}`);
         }
-    }
-});
+    });
 
-App.createSession = key => ({
-    read(name, defaultValue) {
-        return readSetting(sessionStorage, key, name, defaultValue);
-    },
-    readObject(...names) {
-        return names.reduce(
-            (result, item) => {
-                if (typeof item === 'string') {
-                    item = [item, undefined];
-                }
-                const [name, defaultValue] = item;
+App.createSettings = genStorage(localStorage);
+App.createSession = genStorage(sessionStorage);
 
-                result[name] = readSetting(sessionStorage, key, name, defaultValue);
-                return result;
-            },
-            {}
-        );
-    },
-    write(name, value) {
-        writeSetting(sessionStorage, key, name, value);
-    },
-    writeObject(settings) {
-        for (const [name, value] of Object.entries(settings)) {
-            writeSetting(sessionStorage, key, name, value);
-        }
-    }
-});
+// App.createSettings = key => ({
+//     read(name, defaultValue) {
+//         return readSetting(localStorage, key, name, defaultValue);
+//     },
+//     readObject(...names) {
+//         return names.reduce(
+//             (result, item) => {
+//                 if (typeof item === 'string') {
+//                     item = [item, undefined];
+//                 }
+//                 const [name, defaultValue] = item;
+//
+//                 result[name] = readSetting(localStorage, key, name, defaultValue);
+//                 return result;
+//             },
+//             {}
+//         );
+//     },
+//     write(name, value) {
+//         writeSetting(localStorage, key, name, value);
+//     },
+//     writeObject(settings) {
+//         for (const [name, value] of Object.entries(settings)) {
+//             writeSetting(localStorage, key, name, value);
+//         }
+//     }
+// });
+//
+// App.createSession = key => ({
+//     read(name, defaultValue) {
+//         return readSetting(sessionStorage, key, name, defaultValue);
+//     },
+//     readObject(...names) {
+//         return names.reduce(
+//             (result, item) => {
+//                 if (typeof item === 'string') {
+//                     item = [item, undefined];
+//                 }
+//                 const [name, defaultValue] = item;
+//
+//                 result[name] = readSetting(sessionStorage, key, name, defaultValue);
+//                 return result;
+//             },
+//             {}
+//         );
+//     },
+//     write(name, value) {
+//         writeSetting(sessionStorage, key, name, value);
+//     },
+//     writeObject(settings) {
+//         for (const [name, value] of Object.entries(settings)) {
+//             writeSetting(sessionStorage, key, name, value);
+//         }
+//     }
+// });
 
 window.cblog = ::console.log;
 

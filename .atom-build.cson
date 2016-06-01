@@ -5,7 +5,7 @@
     targets: {
         production: {
             cmd: "node test-compile.js --type js --source lib --dest corinthian.min --minify --build-time --production",
-            keymap: "ctrl-shift-p"
+            keymap: "ctrl-alt-p"
         },
         test: {
             cmd: "node test-compile.js --type js --source test --dest app",
