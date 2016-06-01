@@ -94,10 +94,16 @@ window.chrono = chrono;
 // };
 window.API = {
     create(baseURL) {
+        const request = (url, options) => {
+            return factotum.ajax(`${baseURL}${url}`, options);
+        };
+        const json = async (url, options) => {
+            const result = await request(url, option);
+            return JSON.parse(result.response);
+        };
         return {
-            request(url, options) {
-                return factotum.ajax(`${baseURL}${url}`, options);
-            },
+            request,
+            json,
             genURL: url => `${baseURL}${url}`
         };
     }
