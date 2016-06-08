@@ -128,6 +128,16 @@ const Test = ({children}) => {
 class ItemContainer extends React.Component {
     constructor(props) {
         super(props);
+
+        this.child = React.cloneElement(props.children, {onChange: this.change});
+    }
+
+    change = evt => {
+        console.log(evt);
+    }
+
+    render = () => {
+        return <div>{this.child}</div>;
     }
 }
 class BetterForm extends React.Component {
@@ -138,8 +148,9 @@ class BetterForm extends React.Component {
         const children = React.Children.toArray(props.children);
 
         if (layout === null) {
-            const childList = children.map(
+            this.childList = children.map(
                 child => {
+                    return <ItemContainer valueName={child.type.valueName} valueFunction={child.type.valueFunction}>{child}</ItemContainer>;
                 }
             );
         }
@@ -153,7 +164,7 @@ class BetterForm extends React.Component {
     render = () => {
         return (
             <form onSubmit={this.submit} ref="form">
-                {this.props.children}
+                {this.childList}
                 <UI.Button text="Submit" onTap={this.submit} raised block />
             </form>
         );
