@@ -17,7 +17,7 @@ Style.create(
             overflow: 'hidden',
             zIndex: "+0",
             backgroundColor: 'transparent',
-            color: Theme.get("button/color"),
+            color: 'black',
             fontWeight: 'bold',
             whiteSpace: 'pre',
             display: 'inline-block'

@@ -21,46 +21,12 @@ import {Style, Theme} from "lib-source/style.js";
 
 import Environment from "lib-source/environment.js";
 
-import RobotoURI from "lib-source/data-uri/roboto-light.ttf.source";
+import RobotoURI from "lib-source/data-uri/roboto-light.woff.source";
 import IonicURI from "lib-source/data-uri/ionicons.woff.source";
 
 const {Router, Route, useRouterHistory, hashHistory} = ReactRouter;
 
 const App = {};
-// let ScreenWrapper;
-// let appContainer;
-
-// window.moment = (...args) => {
-//     let momentProto;
-//     let momentObject;
-
-//     if (args.length > 0 && args[0]._isAmomentObject === true) {
-//         momentObject = args[0];
-//     } else {
-//         momentObject = moment(...args);
-//     }
-//     momentProto = momentObject.constructor.prototype;
-//     return Object.keys(momentProto).reduce(
-//         (functional, funcName) => {
-//             functional[funcName] = (...args) => {
-//                 let intermediate;
-
-//                 intermediate = moment(momentObject)[funcName](...args);
-//                 if (intermediate._isAMomentObject === true) {
-//                     intermediate = specialMoment(intermediate);
-//                 }
-//                 return intermediate;
-//             };
-//             return functional;
-//         },
-//         {
-//             get timeStamp() {return momentObject.valueOf();}
-//         }
-//     );
-// };
-// Object.keys(moment).forEach(key => {
-//     window.moment[key] = moment[key];
-// });
 
 window.factotum = factotum;
 window.regex = XRegExp;
@@ -78,20 +44,6 @@ window.Style = Style;
 window.Theme = Theme;
 window.chrono = chrono;
 
-// window.schedule = (time, func, ...args) => {
-//     const currentStack = new Error("Error occured in scheduled function");
-//     setTimeout(
-//         () => {
-//             try {
-//                 func(...args);
-//             } catch (e) {
-//                 currentStack.error = e;
-//                 throw currentStack;
-//             }
-//         },
-//         time
-//     );
-// };
 window.API = {
     create(baseURL) {
         const request = (url, options) => {
@@ -108,71 +60,6 @@ window.API = {
         };
     }
 };
-
-// App.settings = Object.freeze({
-//     get (name, defaultValue) {
-//         let value;
-
-//         value = localStorage.getItem(name);
-//         if (value === null) {
-//             return defaultValue;
-//         }
-//         return JSON.parse(value);
-//     },
-//     set (name, value) {
-//         localStorage.setItem(name, JSON.stringify(value));
-//     },
-//     getObject (...names) {
-//         return names.reduce(
-//             (settings, name) => {
-//                 let defaultValue;
-
-//                 if (typeof name !== 'string') {
-//                     [name, defaultValue] = name;
-//                 }
-//                 settings[name] = App.settings.get(name, defaultValue);
-//                 return settings;
-//             },
-//             {}
-//         );
-//     },
-//     setObject (obj) {
-//         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
-//     }
-// });
-// App.storage = App.settings;
-
-// App.session = Object.freeze({
-//     get(name, defaultValue) {
-//         let value;
-
-//         value = sessionStorage.getItem(name);
-//         if (value === null) {
-//             return defaultValue;
-//         }
-//         return JSON.parse(value);
-//     },
-//     set(name, value) {
-//         sessionStorage.setItem(name, JSON.stringify(value));
-//     },
-//     getObject(...names) {
-//         return names.reduce(
-//             (settings, name) => {
-//                 let defaultValue;
-
-//                 if (typeof name !== 'string') {
-//                     [name, defaultValue] = name;
-//                 }
-//                 settings[name] = App.settings.get(name, defaultValue);
-//                 return settings;
-//             },
-//             {}
-//         );
-//     },
-//     setObject(obj) {
-//         Object.keys(obj).forEach(key => App.settings.set(key, obj[key]));
-//     }
-// });
 
 window.CSSTransition = CSSTransition;
 
@@ -226,173 +113,7 @@ const genStorage = mechanism =>
 App.createSettings = genStorage(localStorage);
 App.createSession = genStorage(sessionStorage);
 
-// App.createSettings = key => ({
-//     read(name, defaultValue) {
-//         return readSetting(localStorage, key, name, defaultValue);
-//     },
-//     readObject(...names) {
-//         return names.reduce(
-//             (result, item) => {
-//                 if (typeof item === 'string') {
-//                     item = [item, undefined];
-//                 }
-//                 const [name, defaultValue] = item;
-//
-//                 result[name] = readSetting(localStorage, key, name, defaultValue);
-//                 return result;
-//             },
-//             {}
-//         );
-//     },
-//     write(name, value) {
-//         writeSetting(localStorage, key, name, value);
-//     },
-//     writeObject(settings) {
-//         for (const [name, value] of Object.entries(settings)) {
-//             writeSetting(localStorage, key, name, value);
-//         }
-//     }
-// });
-//
-// App.createSession = key => ({
-//     read(name, defaultValue) {
-//         return readSetting(sessionStorage, key, name, defaultValue);
-//     },
-//     readObject(...names) {
-//         return names.reduce(
-//             (result, item) => {
-//                 if (typeof item === 'string') {
-//                     item = [item, undefined];
-//                 }
-//                 const [name, defaultValue] = item;
-//
-//                 result[name] = readSetting(sessionStorage, key, name, defaultValue);
-//                 return result;
-//             },
-//             {}
-//         );
-//     },
-//     write(name, value) {
-//         writeSetting(sessionStorage, key, name, value);
-//     },
-//     writeObject(settings) {
-//         for (const [name, value] of Object.entries(settings)) {
-//             writeSetting(sessionStorage, key, name, value);
-//         }
-//     }
-// });
-
 window.cblog = ::console.log;
-
-// let animator = (component, done, func, time) => {
-//     let progress;
-//     let lastFrame;
-//     let frameRender;
-
-//     time = time || 500
-//     progress = 0;
-//     lastFrame = Date.now();
-//     // let progress = 0, max = 250, last = Date.now();
-//     frameRender = () => {
-//         let now;
-//         let t;
-
-//         now = Date.now();
-//         progress += (now - lastFrame);
-//         lastFrame = now;
-//         t = progress / time;
-//         t = Math.sin(t * Math.PI / 2);
-
-//         if (progress > time) {
-//             progress = time;
-//         }
-
-//         component.setState({style: func(t)});
-//         // console.log(func(progress / time));
-
-//         if (progress !== time) {
-//             requestAnimationFrame(frameRender);
-//         } else {
-//             component.setState({style: null});
-//             done();
-//         }
-//     };
-//     component.setState({style: func(0)});
-//     requestAnimationFrame(frameRender);
-// };
-// let animations = {
-//     enter: {
-//         forward: progress => ({
-//             WebkitTransform: `translateX(${100 - progress * 100}%)`,
-//             opacity: progress
-//         }),
-//         backward: progress => ({
-//             WebkitTransform: `translateX(${-100 + progress * 100}%)`,
-//             opacity: progress
-//         })
-//     },
-//     leave: {
-//         forward: progress => ({
-//             WebkitTransform: `translateX(${-progress * 100}%)`,
-//             opacity: 1 - progress
-//         }),
-//         backward: progress => ({
-//             WebkitTransform: `translateX(${progress * 100}%)`,
-//             opacity: 1 - progress
-//         })
-//     }
-// };
-
-// let TestTransitioner = React.createClass({
-//     getInitialState () {
-//         return {style: null};
-//     },
-//     componentWillEnter (done) {
-//         animator(this, done, animations.enter[this.props.parent.direction], App.transitionTime);
-//     },
-//     componentWillLeave (done) {
-//         let finish;
-
-//         finish = () => {
-//             done();
-//         };
-//         animator(this, done, animations.leave[this.props.parent.direction], App.transitionTime);
-//     },
-//     render () {
-//         let style;
-//         let extra;
-
-//         style = {
-//             height: '100%',
-//             width: '100%',
-//             position: 'absolute',
-//             backgroundColor: 'white',
-//             ...this.state.style
-//         }
-//         return <div style={style}>{this.props.children}</div>;
-//     }
-// });
-
-// ScreenWrapper = React.createClass({
-//     render () {
-//         let {action} = this.props;
-
-//         if (action !== 'pop') {
-//             this.direction = 'forward';
-//         } else {
-//             this.direction = 'backward';
-//         }
-//         return (
-//             <React.addons.TransitionGroup component="div" style={{position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, WebkitTransform: 'translateZ(0)'}}>
-//                 <TestTransitioner key={Date.now()} parent={this}>
-//                     <ReactRouter.RouteHandler />
-//                 </TestTransitioner>
-//             </React.addons.TransitionGroup>
-//         );
-//     }
-// });
-
-// App.ScreenTransition = ScreenWrapper;
 
 Style.create(
     "core",

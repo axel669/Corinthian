@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, user-scalable=0, width=device-width" />
+        <title>Base64 Encode</title>
+    </head>
+    <body>
+        <input type="file" />
+        Drop da filez anywhere
+        <script>
+        'use strict';
+
+        const readFile = file => new Promise(
+            resolve => {
+                var reader = new FileReader();
+                reader.addEventListener(
+                    "load",
+                    evt => resolve([file, reader.result])
+                    // function (evt) {
+                    //     console.log(reader.result);
+                    // }
+                );
+                console.log(file);
+                reader.readAsDataURL(file);
+            }
+        );
+
+        const cancel = evt => evt.preventDefault();
+        document.body.addEventListener('dragover', cancel);
+        document.body.addEventListener('dragenter', cancel);
+        document.body.addEventListener(
+            'drop',
+            evt => {
+                evt.preventDefault();
+                const reads = Array.prototype.map.call(
+                    evt.dataTransfer.files,
+                    readFile
+                );
+                Promise.all(reads).then(results => {
+                    results.forEach(
+                        result => {
+                            const data = result[1];
+                            const file = result[0];
+                            const tag = document.createElement('a');
+                            tag.href = "data:text/plain," + data;
+                            tag.download = file.name + ".source";
+                            tag.click();
+                        }
+                    );
+                });
+            }
+        );
+
+        var file = document.querySelector("input");
+        file.addEventListener(
+            "change",
+            function (evt) {
+                var reader = new FileReader();
+                reader.addEventListener(
+                    "load",
+                    function (evt) {
+                        console.log(reader.result);
+                    }
+                );
+                reader.readAsDataURL(evt.target.files[0]);
+
+                file.value = "";
+            }
+        );
+        </script>
+    </body>
+</html>

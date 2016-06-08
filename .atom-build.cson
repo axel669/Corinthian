@@ -10,6 +10,10 @@
         test: {
             cmd: "node test-compile.js --type js --source test --dest app",
             keymap: "ctrl-t"
+        },
+        gzipTest: {
+            cmd: "node gzip-test.js",
+            keymap: "ctrl-shift-r"
         }
     }
 }

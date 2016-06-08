@@ -117,15 +117,61 @@ const test = n => (
     <UI.Card title="Test Item">{n}</UI.Card>
 );
 
+const Test = ({children}) => {
+    children = React.Children.toArray(children);
+    for (const child of children) {
+        console.log(child, child.type.valueName);
+    }
+    return <div>{children}</div>
+};
+
+class ItemContainer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+}
+class BetterForm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        const {itemContainer = 'div', layout = null} = props;
+        const children = React.Children.toArray(props.children);
+
+        if (layout === null) {
+            const childList = children.map(
+                child => {
+                }
+            );
+        }
+    }
+
+    submit = evt => {
+        evt.preventDefault();
+        evt.stopPropagation();
+    }
+
+    render = () => {
+        return (
+            <form onSubmit={this.submit} ref="form">
+                {this.props.children}
+                <UI.Button text="Submit" onTap={this.submit} raised block />
+            </form>
+        );
+    }
+}
+
 const Main = React.createClass({
+    async demo() {
+        if (await Dialog.confirm("Really?") === true) {
+            console.log("Nope!");
+        }
+    },
     render() {
         return (
-            <UI.Screen title="Test" backText={"test"} scrollable>
-                <UI.Flexbox colCount={4} autopad>
-                    {factotum.range(7, n => test(n))}
-                </UI.Flexbox>
-                <UI.ProgressBar progress={0.5} color="blue" />
-                <UI.ProgressBar progress={0.5} backgroundColor="green" height={20} cornerRadius={10} />
+            <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
+                <BetterForm>
+                    <UI.TextInput />
+                </BetterForm>
             </UI.Screen>
         );
     }
@@ -135,8 +181,5 @@ App.start(
     <Route component={Wrapper}>
         <Route path="/" component={Main} />
         <Route path="/test" component={Main} />
-    </Route>,
-    {
-        initialPath: "/test"
-    }
+    </Route>
 );
