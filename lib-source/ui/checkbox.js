@@ -118,5 +118,8 @@ const Checkbox = ({height = 40, onChange = () => {}, checkColor = 'black', onIco
         </Touchable>
     );
 };
+Checkbox.valueProp = "checked";
+Checkbox.valueFunction = checked => checked;
+Checkbox.defaultPropValue = false;
 
 export default Checkbox;

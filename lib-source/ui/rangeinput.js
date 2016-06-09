@@ -119,5 +119,8 @@ const RangeInput = ({value = 0, min = 0, max = 10, step = 1, trackColor = null, 
         </div>
     );
 };
+RangeInput.valueProp = "value";
+RangeInput.valueFunction = value => value;
+RangeInput.defaultPropValue = 0;
 
 export default RangeInput;

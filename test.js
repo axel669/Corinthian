@@ -129,15 +129,29 @@ class ItemContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.child = React.cloneElement(props.children, {onChange: this.change});
+        this.state = {value: props.childInfo.initialValue};
     }
 
-    change = evt => {
-        console.log(evt);
+    change = (...args) => {
+        const {updateForm, childInfo: {valueFunction, name}} = this.props;
+        this.setState({value: args[0]});
+        updateForm(name, valueFunction(...args));
     }
 
     render = () => {
-        return <div>{this.child}</div>;
+        const {Renderer, valueProp, children, props} = this.props.childInfo;
+        const {value} = this.state;
+        const valueObj = {
+            [valueProp]: value
+        };
+
+        return (
+            <div>
+                <Renderer {...props} onChange={this.change} {...valueObj}>
+                {children}
+                </Renderer>
+            </div>
+        );
     }
 }
 class BetterForm extends React.Component {
@@ -146,19 +160,59 @@ class BetterForm extends React.Component {
 
         const {itemContainer = 'div', layout = null} = props;
         const children = React.Children.toArray(props.children);
+        let ElemContainer;
+
+        this.internalState = {};
+
+        if (layout === null) {
+            this.Container = 'div';
+            ElemContainer = itemContainer;
+        } else {
+            this.Container = layout;
+            ElemContainer = layout.FormContainer;
+        }
 
         if (layout === null) {
             this.childList = children.map(
-                child => {
-                    return <ItemContainer valueName={child.type.valueName} valueFunction={child.type.valueFunction}>{child}</ItemContainer>;
+                (child, index) => {
+                    const childInfo = {
+                        Renderer: child.type,
+                        props: child.props,
+                        children: child.props.children,
+                        valueProp: child.type.valueProp,
+                        valueFunction: child.type.valueFunction,
+                        initialValue: child.props.defaultPropValue || child.type.defaultPropValue,
+                        name: child.props.formName || index
+                    };
+                    const containerProps = Object.entries(child.props).reduce(
+                        (props, [key, value]) => {
+                            if (key.startsWith('layout-') === true) {
+                                props[key.substr(7)] = value;
+                            }
+                            return props;
+                        },
+                        {}
+                    );
+                    this.internalState[childInfo.name] = childInfo.valueFunction(childInfo.initialValue);
+                    return (
+                        <ElemContainer {...containerProps}>
+                            <ItemContainer childInfo={childInfo} updateForm={this.updateInternalState} />
+                        </ElemContainer>
+                    );
                 }
             );
         }
     }
 
+    updateInternalState = (name, value) => {
+        this.internalState[name] = value;
+    }
+
     submit = evt => {
         evt.preventDefault();
         evt.stopPropagation();
+
+        console.log(this.internalState);
     }
 
     render = () => {
@@ -180,8 +234,21 @@ const Main = React.createClass({
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
-                <BetterForm>
-                    <UI.TextInput />
+                <BetterForm itemContainer={UI.Card}>
+                    <UI.TextInput defaultPropValue="Woaah" formName="input" layout-title="Input?" />
+                    <UI.Combobox formName="combobox">
+                        <UI.Option hidden label="LOL" />
+                        <UI.Option label="test" />
+                        <UI.Option label="woah" />
+                    </UI.Combobox>
+                    <UI.Checkbox label="Test" formName="checkbox" />
+                    <UI.RangeInput formName="rangeInput" />
+                    <UI.RadioGroup defaultPropValue={-1} formName="radioGroup">
+                        <UI.Option>First</UI.Option>
+                        <UI.Option>Second</UI.Option>
+                        <UI.Option>Third</UI.Option>
+                    </UI.RadioGroup>
+                    <UI.Switch label="Switch!" formName="switch" />
                 </BetterForm>
             </UI.Screen>
         );

@@ -62,5 +62,8 @@ const Switch = ({on, onChange = () => {}, color = null, label}) => {
         </Touchable>
     );
 };
+Switch.valueProp = "on";
+Switch.valueFunction = on => on;
+Switch.defaultPropValue = false;
 
 export default Switch;

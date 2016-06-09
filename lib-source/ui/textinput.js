@@ -84,8 +84,9 @@ Style.create(
 // });
 
 class TextInput extends React.Component {
-    static valueName = "value";
+    static valueProp = "value";
     static valueFunction = text => text;
+    static defaultPropValue = "";
 
     focus() {
         this.refs.input.focus();

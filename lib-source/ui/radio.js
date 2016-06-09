@@ -121,4 +121,8 @@ const GridRadioItem = ({checked, children, onTap}) => {
     );
 };
 
+RadioGroup.valueProp = "selectedIndex";
+RadioGroup.valueFunction = (index, value) => ({index, value});
+RadioGroup.defaultPropValue = 0;
+
 export default RadioGroup;

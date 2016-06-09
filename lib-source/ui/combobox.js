@@ -123,5 +123,8 @@ const Combobox = ({width, height = 40, children, onChange = () => {}, selectedIn
         </div>
     );
 };
+Combobox.valueProp = "selectedIndex";
+Combobox.valueFunction = (index, value) => ({index, value});
+Combobox.defaultPropValue = 0;
 
 export default Combobox;
