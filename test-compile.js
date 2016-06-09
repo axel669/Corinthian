@@ -100,5 +100,6 @@ compiler.bundle(function (err, buffer) {
     'error',
     function (error) {
         console.log(error.toString());
+        process.exit(1);
     }
 );

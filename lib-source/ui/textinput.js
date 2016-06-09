@@ -88,10 +88,10 @@ class TextInput extends React.Component {
     static valueFunction = text => text;
     static defaultPropValue = "";
 
-    focus() {
+    focus = () => {
         this.refs.input.focus();
     }
-    render() {
+    render = () => {
         const {icon = null, type = 'text', onChange = () => {}, placeholder, value, label, autoCapitalize = false, autoComplete = true} = this.props;
         let iconArea;
         let inputStyle;

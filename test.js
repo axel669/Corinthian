@@ -169,39 +169,46 @@ class BetterForm extends React.Component {
             ElemContainer = itemContainer;
         } else {
             this.Container = layout;
-            ElemContainer = layout.FormContainer;
-        }
-
-        if (layout === null) {
-            this.childList = children.map(
-                (child, index) => {
-                    const childInfo = {
-                        Renderer: child.type,
-                        props: child.props,
-                        children: child.props.children,
-                        valueProp: child.type.valueProp,
-                        valueFunction: child.type.valueFunction,
-                        initialValue: child.props.defaultPropValue || child.type.defaultPropValue,
-                        name: child.props.formName || index
-                    };
-                    const containerProps = Object.entries(child.props).reduce(
-                        (props, [key, value]) => {
-                            if (key.startsWith('layout-') === true) {
-                                props[key.substr(7)] = value;
-                            }
-                            return props;
-                        },
-                        {}
-                    );
-                    this.internalState[childInfo.name] = childInfo.valueFunction(childInfo.initialValue);
-                    return (
-                        <ElemContainer {...containerProps}>
-                            <ItemContainer childInfo={childInfo} updateForm={this.updateInternalState} />
-                        </ElemContainer>
-                    );
-                }
+            ElemContainer = layout.FormContainer || (({children}) => children);
+            this.containerProps = Object.entries(props).reduce(
+                (props, [key, value]) => {
+                    if (key.startsWith('layout-') === true) {
+                        props[key.substr(7)] = value;
+                    }
+                    return props;
+                },
+                {}
             );
         }
+
+        this.childList = children.map(
+            (child, index) => {
+                const childInfo = {
+                    Renderer: child.type,
+                    props: child.props,
+                    children: child.props.children,
+                    valueProp: child.type.valueProp,
+                    valueFunction: child.type.valueFunction,
+                    initialValue: child.props.defaultPropValue || child.type.defaultPropValue,
+                    name: child.props.formName || index
+                };
+                const containerProps = Object.entries(child.props).reduce(
+                    (props, [key, value]) => {
+                        if (key.startsWith('layout-') === true) {
+                            props[key.substr(7)] = value;
+                        }
+                        return props;
+                    },
+                    {}
+                );
+                this.internalState[childInfo.name] = childInfo.valueFunction(childInfo.initialValue);
+                return (
+                    <ElemContainer {...containerProps} key={index}>
+                        <ItemContainer childInfo={childInfo} updateForm={this.updateInternalState} />
+                    </ElemContainer>
+                );
+            }
+        );
     }
 
     updateInternalState = (name, value) => {
@@ -216,9 +223,13 @@ class BetterForm extends React.Component {
     }
 
     render = () => {
+        const {Container, childList, containerProps} = this;
+
         return (
             <form onSubmit={this.submit} ref="form">
-                {this.childList}
+                <Container {...containerProps}>
+                    {childList}
+                </Container>
                 <UI.Button text="Submit" onTap={this.submit} raised block />
             </form>
         );
@@ -234,21 +245,10 @@ const Main = React.createClass({
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
-                <BetterForm itemContainer={UI.Card}>
-                    <UI.TextInput defaultPropValue="Woaah" formName="input" layout-title="Input?" />
-                    <UI.Combobox formName="combobox">
-                        <UI.Option hidden label="LOL" />
-                        <UI.Option label="test" />
-                        <UI.Option label="woah" />
-                    </UI.Combobox>
-                    <UI.Checkbox label="Test" formName="checkbox" />
-                    <UI.RangeInput formName="rangeInput" />
-                    <UI.RadioGroup defaultPropValue={-1} formName="radioGroup">
-                        <UI.Option>First</UI.Option>
-                        <UI.Option>Second</UI.Option>
-                        <UI.Option>Third</UI.Option>
-                    </UI.RadioGroup>
-                    <UI.Switch label="Switch!" formName="switch" />
+                <BetterForm layout={UI.Flexbox} layout-colCount={3} layout-autopad>
+                    {factotum.range(13,
+                        n => <UI.TextInput formName={`input${n}`} label={n} />
+                    )}
                 </BetterForm>
             </UI.Screen>
         );
