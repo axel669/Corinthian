@@ -50,7 +50,7 @@ window.API = {
             return factotum.ajax(`${baseURL}${url}`, options);
         };
         const json = async (url, options) => {
-            const result = await request(url, option);
+            const result = await request(url, options);
             return JSON.parse(result.response);
         };
         return {

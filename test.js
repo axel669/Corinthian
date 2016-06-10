@@ -245,11 +245,11 @@ const Main = React.createClass({
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
-                <BetterForm layout={UI.Flexbox} layout-colCount={3} layout-autopad>
-                    {factotum.range(13,
+                <UI.Form itemContainer={UI.Card}>
+                    {factotum.range(3,
                         n => <UI.TextInput formName={`input${n}`} label={n} />
                     )}
-                </BetterForm>
+                </UI.Form>
             </UI.Screen>
         );
     }
