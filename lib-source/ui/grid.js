@@ -31,6 +31,9 @@ module UI {
     }
 }
 */
+import Touchable from "lib-source/ui/touchable";
+import CenterContent from "lib-source/ui/centercontent";
+
 const Grid = ({children, colCount, rowCount, width = null, height = null}) => {
     if (height === null) {
         throw new Error("Height needs to be given to the grid");
@@ -61,6 +64,21 @@ const GridItem = ({width, height, x, y, content}) => {
     };
 
     return <div className="cor-grid-item" style={style}>{content}</div>;
+};
+
+Grid.RadioItem = ({checked, children, onTap}) => {
+    // const className = `cor-grid-radio-item cor-grid-radio-item-${checked}`;
+    const gridClassName = Style.getClassNames({
+        "core/radio:gridItemChecked": checked
+    });
+
+    return (
+        <Touchable component="div" style={{width: '100%', height: '100%'}} onTap={onTap} className={gridClassName}>
+            <CenterContent width="100%" height="100%" className={Style.getClassName("core/radio:gridOverlay")}>
+                {children}
+            </CenterContent>
+        </Touchable>
+    );
 };
 
 export default Grid;

@@ -44,6 +44,9 @@ module UI {
     }
 }
 */
+import Touchable from "lib-source/ui/touchable";
+import CenterContent from "lib-source/ui/centercontent";
+
 const Flexbox = ({colCount, width = null, children, maxItemWidth, autopad = false, minWidth}) => {
     const flexWidth = 100 / colCount;
 
@@ -53,7 +56,7 @@ const Flexbox = ({colCount, width = null, children, maxItemWidth, autopad = fals
 
     children = React.Children.toArray(children);
     if (autopad === true) {
-        const extra = factotum.range(children.length % colCount, () => <div />);
+        const extra = factotum.range(colCount - children.length % colCount, () => <div />);
         children = [...children, ...extra];
     }
 
@@ -74,6 +77,20 @@ const FlexboxItem = ({content, width, maxWidth, minWidth}) => {
     };
 
     return <div style={itemStyle}>{content}</div>;
+};
+Flexbox.RadioItem = ({checked, children, onTap}) => {
+    // const className = `cor-grid-radio-item cor-grid-radio-item-${checked}`;
+    const gridClassName = Style.getClassNames({
+        "core/radio:gridItemChecked": checked
+    });
+
+    return (
+        <Touchable component="div" style={{width: '100%'}} onTap={onTap} className={gridClassName}>
+            <CenterContent width="100%" className={Style.getClassName("core/radio:gridOverlay")}>
+                {children}
+            </CenterContent>
+        </Touchable>
+    );
 };
 
 export default Flexbox;
