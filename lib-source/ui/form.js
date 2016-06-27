@@ -342,13 +342,14 @@ class Form extends React.Component {
 
     render = () => {
         const {Container, childList, containerProps} = this;
+        const {submitText = "Submit"} = this.props;
 
         return (
             <form onSubmit={this.submit} ref="form">
                 <Container {...containerProps}>
                     {childList}
                 </Container>
-                <UI.Button text="Submit" onTap={this.submit} raised block />
+                <UI.Button text={submitText} onTap={this.submit} raised block />
             </form>
         );
     }

@@ -44,6 +44,10 @@ window.Style = Style;
 window.Theme = Theme;
 window.chrono = chrono;
 
+window.corinthian = Object.freeze({
+    version: "0.1.0"
+});
+
 window.API = {
     create(baseURL) {
         const request = (url, options) => {
