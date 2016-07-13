@@ -275,12 +275,12 @@ export default {
     spinner(message) {
         return showDialog(SpinnerDialog, {message}, false);
     },
-    __custom(generator) {
+    __custom(generator, canClose = true) {
         if (typeof generator !== 'function') {
             const value = generator;
             generator = () => value;
         }
-        return showDialog(CustomDialog, generator(closeDialog));
+        return showDialog(CustomDialog, generator(closeDialog), canClose);
     },
     dismiss() {
         closeDialog();
