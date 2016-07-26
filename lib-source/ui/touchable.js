@@ -66,21 +66,32 @@ Touchable = React.createClass({
         );
     },
     render() {
-        let Component;
-        let props;
-
-        Component = this.props.component;
-        props = {
-            ...this.props,
+        const {component, children, onTap, onHold, ...props} = this.props;
+        const Component = component;
+        const passedProps = {
+            ...props,
             onTouchStart: this.touchStart,
             onTouchMove: this.touchMove,
             onTouchEnd: this.touchEnd,
             onTouchCancel: this.touchEnd
         };
-        props.children = null;
-        props.component = null;
+        // let Component;
+        // let props;
+        //
+        // Component = this.props.component;
+        // props = {
+        //     ...this.props,
+        //     onTouchStart: this.touchStart,
+        //     onTouchMove: this.touchMove,
+        //     onTouchEnd: this.touchEnd,
+        //     onTouchCancel: this.touchEnd
+        // };
+        // props.children = null;
+        // props.component = null;
+        //
+        // console.log(props);
 
-        return <Component {...props}>{this.props.children}</Component>;
+        return <Component {...passedProps}>{children}</Component>;
     }
 });
 

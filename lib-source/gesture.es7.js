@@ -158,6 +158,7 @@ window.addEventListener(
             if (editableTagNames.indexOf(targetTagName) === -1 && somethingEditable === false && evt.cancelable === true) {
                 evt.preventDefault();
             }
+            data.target.focus();
 
             registeredHandlers.forEach(handlerName => {
                 const handler = registeredCallbacks[handlerName];

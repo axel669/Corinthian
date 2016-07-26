@@ -184,7 +184,7 @@ const AppScreen = React.createClass({
         }
 
         return (
-            <div dataName="UIScreen-wrapper">
+            <div data-name="UIScreen-wrapper">
                 {titleElement}
                 <div style={contentStyle} className={Style.getClassName("core/screen/app:content")}>
                     {content}

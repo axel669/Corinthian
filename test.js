@@ -250,10 +250,23 @@ const Main = React.createClass({
                         n => <UI.TextInput formName={`input${n}`} label={n} />
                     )}
                 </UI.Form>
+                {/*<UI.Touchable component="div" tabIndex="-1" id="wat" onTap={evt => evt.target.focus()}>Test</UI.Touchable>*/}
+                <div tabIndex={-1}>Test</div>
             </UI.Screen>
         );
     }
 });
+
+Style.__rawCSS(
+    "wat",
+    {
+        selector: "div:focus",
+        rules: {
+            border: '1px solid black',
+            outline: 'none'
+        }
+    }
+);
 
 App.start(
     <Route component={Wrapper}>
