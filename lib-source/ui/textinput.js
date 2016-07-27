@@ -27,62 +27,6 @@ Style.create(
     }
 );
 
-// const TextInput = React.createClass({
-//     statics: {
-//         valueName: 'value'
-//     },
-//     focus() {
-//         this.refs.input.focus();
-//     },
-//     render() {
-//         const {icon = null, type = 'text', onChange = () => {}, placeholder, value, label, autoCapitalize = false, autoComplete = true} = this.props;
-//         let iconArea;
-//         let inputStyle;
-//         let labelOffset;
-//
-//         inputStyle = {
-//         };
-//         labelOffset = {
-//             position: 'absolute',
-//             bottom: '100%',
-//             width: '100%'
-//         };
-//
-//         if (icon === null) {
-//             iconArea = null;
-//         } else {
-//             iconArea = <CenterContent style={{position: 'absolute', top: 0}} width={40} height={40} className={Style.getClassName("core:icon")}>{icons[icon]}</CenterContent>;
-//             inputStyle = {
-//                 marginLeft: 40,
-//                 width: "calc(100% - 40px)"
-//             };
-//             labelOffset = {
-//                 ...labelOffset,
-//                 ...inputStyle
-//             };
-//         }
-//
-//         return (
-//             <div style={{position: 'relative'}}>
-//                 <div className={Style.getClassName("core:componentLabel")} style={{color: 'transparent'}}>{label}</div>
-//                 <div style={{position: 'relative'}}>
-//                     <input
-//                         type={type} value={value} style={inputStyle}
-//                         onChange={evt => onChange(evt.target.value)}
-//                         className={Style.getClassName("core/userInput:textField")}
-//                         placeholder={placeholder} ref="input"
-//                         autoComplete={autoComplete}
-//                         autoCapitalize={autoCapitalize} />
-//                     {iconArea}
-//                     <Touchable component="div" className={Style.getClassName("core:componentLabel")} style={labelOffset} onTap={this.focus}>
-//                         {label}
-//                     </Touchable>
-//                 </div>
-//             </div>
-//         );
-//     }
-// });
-
 class TextInput extends React.Component {
     static valueProp = "value";
     static valueFunction = text => text;

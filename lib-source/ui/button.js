@@ -20,7 +20,10 @@ Style.create(
             color: 'black',
             fontWeight: 'bold',
             whiteSpace: 'pre',
-            display: 'inline-block'
+            display: 'inline-block',
+            ": focus": {
+                backgroundImage: `url("file:///C:/Users/cmorgan2/Pictures/bayonetta21280jpg-800626_1280w.jpg")`
+            }
         },
         ".wrapper + .raised": {
             backgroundColor: Theme.get("button/raised/color"),
@@ -217,7 +220,7 @@ const Button = ({onTap = () => {}, color = null, textColor = null, width = null,
     }
 
     return (
-        <Touchable component="div" className={className} style={style} onTap={onTap}>
+        <Touchable component="div" tabIndex={-1} className={className} style={style} onTap={onTap}>
             <div className={Style.getClassName("core/button:overlay")} />
             <CenterContent className={Style.getClassName("core/button:text")} style={textStyle} height={height}>{text}</CenterContent>
         </Touchable>

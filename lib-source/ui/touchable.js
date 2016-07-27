@@ -52,13 +52,18 @@ Touchable = React.createClass({
         this.props.onTouchEnd(evt);
     },
     componentDidMount() {
-        ReactDOM.findDOMNode(this).addEventListener(
+        // const node = ReactDOM.findDOMNode(this);
+        const {node} = this.refs;
+        node.addEventListener(
             'tap',
             evt => {
+                // evt.target.focus();
+                // console.log(evt.target);
+                node.focus();
                 ::this.props.onTap(evt);
             }
         );
-        ReactDOM.findDOMNode(this).addEventListener(
+        node.addEventListener(
             'hold',
             evt => {
                 ::this.props.onHold(evt);
@@ -68,7 +73,7 @@ Touchable = React.createClass({
     render() {
         const {component, children, onTap, onHold, ...props} = this.props;
         const Component = component;
-        const passedProps = {
+        const componentProps = {
             ...props,
             onTouchStart: this.touchStart,
             onTouchMove: this.touchMove,
@@ -91,7 +96,7 @@ Touchable = React.createClass({
         //
         // console.log(props);
 
-        return <Component {...passedProps}>{children}</Component>;
+        return <Component ref="node" {...componentProps}>{children}</Component>;
     }
 });
 

@@ -125,115 +125,19 @@ const Test = ({children}) => {
     return <div>{children}</div>
 };
 
-class ItemContainer extends React.Component {
+class FormattedInput extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {value: props.childInfo.initialValue};
+        this.state = {value: ""};
     }
 
-    change = (...args) => {
-        const {updateForm, childInfo: {valueFunction, name}} = this.props;
-        this.setState({value: args[0]});
-        updateForm(name, valueFunction(...args));
+    change = (evt) => {
+        let {value} = evt.target;
+        value = value + value;
+        this.setState({value});
     }
 
-    render = () => {
-        const {Renderer, valueProp, children, props} = this.props.childInfo;
-        const {value} = this.state;
-        const valueObj = {
-            [valueProp]: value
-        };
-
-        return (
-            <div>
-                <Renderer {...props} onChange={this.change} {...valueObj}>
-                {children}
-                </Renderer>
-            </div>
-        );
-    }
-}
-class BetterForm extends React.Component {
-    constructor(props) {
-        super(props);
-
-        const {itemContainer = 'div', layout = null} = props;
-        const children = React.Children.toArray(props.children);
-        let ElemContainer;
-
-        this.internalState = {};
-
-        if (layout === null) {
-            this.Container = 'div';
-            ElemContainer = itemContainer;
-        } else {
-            this.Container = layout;
-            ElemContainer = layout.FormContainer || (({children}) => children);
-            this.containerProps = Object.entries(props).reduce(
-                (props, [key, value]) => {
-                    if (key.startsWith('layout-') === true) {
-                        props[key.substr(7)] = value;
-                    }
-                    return props;
-                },
-                {}
-            );
-        }
-
-        this.childList = children.map(
-            (child, index) => {
-                const childInfo = {
-                    Renderer: child.type,
-                    props: child.props,
-                    children: child.props.children,
-                    valueProp: child.type.valueProp,
-                    valueFunction: child.type.valueFunction,
-                    initialValue: child.props.defaultPropValue || child.type.defaultPropValue,
-                    name: child.props.formName || index
-                };
-                const containerProps = Object.entries(child.props).reduce(
-                    (props, [key, value]) => {
-                        if (key.startsWith('layout-') === true) {
-                            props[key.substr(7)] = value;
-                        }
-                        return props;
-                    },
-                    {}
-                );
-                this.internalState[childInfo.name] = childInfo.valueFunction(childInfo.initialValue);
-                return (
-                    <ElemContainer {...containerProps} key={index}>
-                        <ItemContainer childInfo={childInfo} updateForm={this.updateInternalState} />
-                    </ElemContainer>
-                );
-            }
-        );
-    }
-
-    updateInternalState = (name, value) => {
-        this.internalState[name] = value;
-    }
-
-    submit = evt => {
-        evt.preventDefault();
-        evt.stopPropagation();
-
-        console.log(this.internalState);
-    }
-
-    render = () => {
-        const {Container, childList, containerProps} = this;
-
-        return (
-            <form onSubmit={this.submit} ref="form">
-                <Container {...containerProps}>
-                    {childList}
-                </Container>
-                <UI.Button text="Submit" onTap={this.submit} raised block />
-            </form>
-        );
-    }
+    render = () => <input type="text" value={this.state.value} onChange={this.change} />
 }
 
 const Main = React.createClass({
@@ -247,26 +151,15 @@ const Main = React.createClass({
             <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
                 <UI.Form itemContainer={UI.Card}>
                     {factotum.range(3,
-                        n => <UI.TextInput formName={`input${n}`} label={n} />
+                        n => <UI.TextInput formName={`input${n}`} label={`input ${n}`} />
                     )}
                 </UI.Form>
                 {/*<UI.Touchable component="div" tabIndex="-1" id="wat" onTap={evt => evt.target.focus()}>Test</UI.Touchable>*/}
-                <div tabIndex={-1}>Test</div>
+                <FormattedInput />
             </UI.Screen>
         );
     }
 });
-
-Style.__rawCSS(
-    "wat",
-    {
-        selector: "div:focus",
-        rules: {
-            border: '1px solid black',
-            outline: 'none'
-        }
-    }
-);
 
 App.start(
     <Route component={Wrapper}>
