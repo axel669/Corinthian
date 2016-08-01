@@ -195,7 +195,16 @@ const cssNoMeasurement = new Set([
 const cssPrefixNames = new Set([
     'transform',
     'box-shadow',
-    'transition'
+    'transition',
+    'animation',
+    'animationDelay',
+    'animationDirection',
+    'animationDuration',
+    'animationFillMode',
+    'animationIterationCount',
+    'animationName',
+    'animationPlayState',
+    'animationTimingFunction'
 ]);
 const cssPrefixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
 
@@ -303,11 +312,68 @@ defineComponentStyle(
         "wrapper:focus": {
             outline: 'none',
         },
-        "wrapper > text": {
+        "text-wrapper": {
+            display: 'table',
+            width: '100%'
+        },
+        "text": {
             width: '100%',
             padding: 5,
             paddingLeft: 15,
-            paddingRight: 15
+            paddingRight: 15,
+            textAlign: 'center',
+            verticalAlign: 'middle',
+            whiteSpace: 'pre'
+        },
+        "wrapper > overlay": {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            transition: 'background-color 100ms linear'
+        },
+        ".core-desktop overlay:hover": {
+            backgroundColor: 'rgba(0, 0, 0, 0.1)'
+        },
+        "wrapper:active > overlay": {
+            backgroundColor: 'rgba(0, 0, 0, 0.15)'
+        }
+    }
+);
+defineComponentStyle(
+    'button',
+    'cyan',
+    {
+        "wrapper": {
+            position: 'relative',
+            textAlign: 'center',
+            fontSize: 18,
+            margin: 4,
+            overflow: 'hidden',
+            zIndex: "+0",
+            backgroundColor: 'cyan',
+            color: () => _Theme.variable.core.button.textColor,
+            fontWeight: 'bold',
+            whiteSpace: 'pre',
+            display: 'inline-block',
+            borderRadius: 3
+        },
+        "wrapper:focus": {
+            outline: 'none',
+        },
+        "text-wrapper": {
+            display: 'table',
+            width: '100%'
+        },
+        "text": {
+            width: '100%',
+            padding: 5,
+            paddingLeft: 15,
+            paddingRight: 15,
+            textAlign: 'center',
+            verticalAlign: 'middle',
+            whiteSpace: 'pre'
         },
         "wrapper > overlay": {
             position: 'absolute',
@@ -334,17 +400,22 @@ defineComponentStyle(
             top: 0,
             left: 0,
             right: 0,
-            bottom: 0
+            bottom: 0,
+            transform: 'translate3d(0, 0, 0)'
         },
         "dot": {
             position: 'absolute',
             transform: 'translate(-50%, -50%)',
-            animationName: 'animation',
-            animationDuration: '700ms',
+            animation: 'ripple-core-animation-ripple-effect 700ms linear',
             borderRadius: '50%',
-            paddingBottom: '100%'
+            display: 'inline-block'
         },
-        "!animate:dot": {
+        "dot:before": {
+            paddingTop: '100%',
+            content: `""`,
+            float: 'left'
+        },
+        "!ripple-effect": {
             "0%": {
                 width: 0,
                 backgroundColor: 'rgba(0, 0, 0, 0)'
@@ -353,7 +424,7 @@ defineComponentStyle(
                 backgroundColor: 'rgba(0, 0, 0, 0.2)'
             },
             "100%": {
-                width: '250%',
+                width: '225%',
                 backgroundColor: 'rgba(0, 0, 0, 0.0)'
             }
         }
@@ -371,14 +442,18 @@ const createStyles = () => {
             //  Grab all the individual groups of styles defined in the named style
             for (const [descriptor, defs] of Object.entries(styleDefs)) {
                 if (descriptor.startsWith("!") === true) {
-                    // console.log("animation?", descriptor, defs);
-                    // continue;
-                    cssLines.push("@keyframes animation {");
+                    //  Repeat an extra time with prefixed keyframes because ios < 9 is pretty awful
+                    cssLines.push(`@-webkit-keyframes ${componentName}-${styleName}-animation-${descriptor.slice(1)} {`);
                     for (const [selector, def] of Object.entries(defs)) {
                         cssLines = processDef(cssLines, selector, def);
                     }
-                    // cssLines = processDef(cssLines, "from", defs.from);
-                    // cssLines = processDef(cssLines, "to", defs.to);
+                    cssLines.push("}");
+
+                    //  normal @keyframes css
+                    cssLines.push(`@keyframes ${componentName}-${styleName}-animation-${descriptor.slice(1)} {`);
+                    for (const [selector, def] of Object.entries(defs)) {
+                        cssLines = processDef(cssLines, selector, def);
+                    }
                     cssLines.push("}");
                 } else {
                     const selector = processSelector(componentName, styleName, descriptor);
@@ -390,7 +465,6 @@ const createStyles = () => {
             styleTag.setAttribute("data-name", `${componentName}/${styleName}`);
             styleTag.innerHTML = cssLines.join('\n');
             head.appendChild(styleTag);
-            // console.log(styleTag);
         }
     }
 };
@@ -406,7 +480,7 @@ class Ripple extends React.Component {
         const {top, left, bottom, right} = this.refs.wrapper.getBoundingClientRect();
         let {list} = this.state;
 
-        chrono.trigger(1000, () => this.setState({list: this.state.list.slice(1)}));
+        chrono.trigger(750, () => this.setState({list: this.state.list.slice(1)}));
         list = [...list, {x: touch.clientX - left, y: touch.clientY - top, id: Date.now()}];
         // console.log(list);
         this.setState({list});
@@ -423,6 +497,52 @@ class Ripple extends React.Component {
     }
 }
 
+/*
+    text
+    onTap
+    styleName
+*/
+const Button = props => {
+    const {
+        text,
+        onTap = () => console.warn("No onTap given to Button"),
+        styleName = "core"
+    } = props;
+
+    const wrapperName = `button-${styleName}-wrapper`;
+    const textWrapperName = `button-${styleName}-text-wrapper`;
+    const textName = `button-${styleName}-text`;
+
+    return (
+        <UI.Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTap}>
+            <Ripple />
+            <div className={textWrapperName}>
+                <div className={textName}>{text}</div>
+            </div>
+        </UI.Touchable>
+    );
+};
+
+defineComponentStyle(
+    'div',
+    'core',
+    {
+        "test": {
+            height: 100,
+            backgroundColor: 'rgba(0, 200, 255, 0.7)',
+            color: 'black',
+            verticalAlign: 'middle',
+            textALign: 'center',
+            display: 'table-cell'
+        },
+        "test:after": {
+            width: '100%',
+            float: 'left',
+            content: `""`
+        }
+    }
+);
+
 const Main = React.createClass({
     async demo() {
         if (await Dialog.confirm("Really?") === true) {
@@ -432,20 +552,17 @@ const Main = React.createClass({
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
+                <Button text="test" />
+                <Button.Cyan text="test" />
                 {/*<UI.Form itemContainer={UI.Card} submitText="Woah">
                     {factotum.range(3,
                         n => <UI.TextInput formName={`input${n}`} label={`input ${n}`} />
                     )}
                 </UI.Form>*/}
-                <UI.Touchable component="div" tabIndex={-1} className="button-core-wrapper" style={{display: 'block'}}>
-                    {/*<div className="button-core-overlay" />*/}
-                    <Ripple />
-                    <div className="button-core-text">Testing</div>
-                    {/*<CenterContent className={Style.getClassName("core/button:text")} style={textStyle} height={height}>{text}</CenterContent>*/}
-                </UI.Touchable>
+
                 {/*<UI.Touchable component="div" tabIndex="-1" id="wat" onTap={evt => evt.target.focus()}>Test</UI.Touchable>*/}
                 {/*<FormattedInput />*/}
-                <UI.ProgressBar progress={0.35} height={30} />
+                {/*<UI.ProgressBar progress={0.35} height={30} />*/}
                 {/*<button style={{whiteSpace: 'pre'}} onTouchStart={evt => dispatchEvent(evt.target, 'DOMActivate', 1)}>{"test\n12"}</button>*/}
             </UI.Screen>
         );
