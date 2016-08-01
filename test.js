@@ -228,6 +228,27 @@ const processSelector = (componentName, styleName, selector) => {
     });
     return realParts.join(' ');
 };
+const processDef = (cssLines, selector, defs) => {
+    cssLines = [...cssLines, `${selector} {`];
+    for (const [cssProp, cssValue] of Object.entries(defs)) {
+        const value = getCSSValue(cssProp, cssValue);
+        const prop = cssProp.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
+        if (cssPrefixNames.has(cssProp) === true) {
+            cssLines = [
+                ...cssLines,
+                ...cssPrefixes.map(prefix => `\t${prefix}${prop}: ${value[0]};`)
+            ];
+        } else {
+            cssLines = [
+                ...cssLines,
+                ...value.map(value => `\t${prop}: ${value};`)
+            ];
+        }
+    }
+    cssLines = [...cssLines, "}"];
+    return cssLines;
+    // cssLines.push("}");
+};
 
 const componentStyles = {};
 const createProp = (object, propName, defaultValue) => {
@@ -257,7 +278,7 @@ const _Theme = {
 _Theme.define({
     core: {
         button: {
-            textColor: "green"
+            textColor: "black"
         }
     }
 });
@@ -276,9 +297,13 @@ defineComponentStyle(
             color: () => _Theme.variable.core.button.textColor,
             fontWeight: 'bold',
             whiteSpace: 'pre',
-            display: 'inline-block'
+            display: 'inline-block',
+            borderRadius: 3
         },
-        "wrapper text": {
+        "wrapper:focus": {
+            outline: 'none',
+        },
+        "wrapper > text": {
             width: '100%',
             padding: 5,
             paddingLeft: 15,
@@ -289,83 +314,112 @@ defineComponentStyle(
             top: 0,
             left: 0,
             right: 0,
-            bottom: 0
+            bottom: 0,
+            transition: 'background-color 100ms linear'
         },
         ".core-desktop overlay:hover": {
             backgroundColor: 'rgba(0, 0, 0, 0.1)'
         },
         "wrapper:active > overlay": {
-            backgroundColor: 'rgba(0, 0, 0, 0.2)'
+            backgroundColor: 'rgba(0, 0, 0, 0.15)'
         }
     }
 );
 defineComponentStyle(
-    'input-text',
+    'ripple',
     'core',
     {
         "wrapper": {
-            position: 'relative',
-            textAlign: 'center',
-            fontSize: 18,
-            margin: 4,
-            overflow: 'hidden',
-            zIndex: "+0",
-            backgroundColor: 'transparent',
-            color: () => _Theme.variable.core.button.textColor,
-            fontWeight: 'bold',
-            whiteSpace: 'pre',
-            display: 'inline-block'
-        },
-        "wrapper text": {
-            width: '100%',
-            padding: 5,
-            paddingLeft: 15,
-            paddingRight: 15
-        },
-        "wrapper > overlay": {
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0
         },
-        ".core-desktop overlay:hover": {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)'
+        "dot": {
+            position: 'absolute',
+            transform: 'translate(-50%, -50%)',
+            animationName: 'animation',
+            animationDuration: '700ms',
+            borderRadius: '50%',
+            paddingBottom: '100%'
         },
-        "wrapper:active > overlay": {
-            backgroundColor: 'rgba(0, 0, 0, 0.2)'
+        "!animate:dot": {
+            "0%": {
+                width: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0)'
+            },
+            "70%": {
+                backgroundColor: 'rgba(0, 0, 0, 0.2)'
+            },
+            "100%": {
+                width: '250%',
+                backgroundColor: 'rgba(0, 0, 0, 0.0)'
+            }
         }
     }
 );
 
-for (const [componentName, styles] of Object.entries(componentStyles)) {
-    for (const [styleName, styleDefs] of Object.entries(styles)) {
-        let cssLines = [];
-        for (const [descriptor, defs] of Object.entries(styleDefs)) {
-            const selector = processSelector(componentName, styleName, descriptor);
-            cssLines.push(`${selector} {`);
-            for (const [cssProp, cssValue] of Object.entries(defs)) {
-                const value = getCSSValue(cssProp, cssValue);
-                const prop = cssProp.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
-                if (cssPrefixNames.has(cssProp) === true) {
-                    cssLines = [
-                        ...cssLines,
-                        ...cssPrefixes.map(prefix => `\t${prefix}${prop}: ${value[0]};`)
-                    ];
+const createStyles = () => {
+    const head = document.querySelector("head");
+
+    //  Iterate over the components that have styles defined
+    for (const [componentName, styles] of Object.entries(componentStyles)) {
+        //  Iterate over the various named styles for the given component
+        for (const [styleName, styleDefs] of Object.entries(styles)) {
+            let cssLines = [];
+            //  Grab all the individual groups of styles defined in the named style
+            for (const [descriptor, defs] of Object.entries(styleDefs)) {
+                if (descriptor.startsWith("!") === true) {
+                    // console.log("animation?", descriptor, defs);
+                    // continue;
+                    cssLines.push("@keyframes animation {");
+                    for (const [selector, def] of Object.entries(defs)) {
+                        cssLines = processDef(cssLines, selector, def);
+                    }
+                    // cssLines = processDef(cssLines, "from", defs.from);
+                    // cssLines = processDef(cssLines, "to", defs.to);
+                    cssLines.push("}");
                 } else {
-                    cssLines = [
-                        ...cssLines,
-                        ...value.map(value => `\t${prop}: ${value};`)
-                    ];
+                    const selector = processSelector(componentName, styleName, descriptor);
+                    cssLines = processDef(cssLines, selector, defs);
                 }
             }
-            cssLines.push("}");
+            const styleTag = document.createElement("style");
+            styleTag.setAttribute("type", "text/css");
+            styleTag.setAttribute("data-name", `${componentName}/${styleName}`);
+            styleTag.innerHTML = cssLines.join('\n');
+            head.appendChild(styleTag);
+            // console.log(styleTag);
         }
-        const styleTag = document.createElement("style");
-        styleTag.setAttribute("type", "text/css");
-        styleTag.setAttribute("data-name", `${componentName}/${styleName}`);
-        styleTag.innerHTML = cssLines.join('\n');
-        console.log(styleTag);
+    }
+};
+
+class Ripple extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {list: []};
+    }
+
+    touch = (evt) => {
+        const touch = evt.changedTouches[0];
+        const {top, left, bottom, right} = this.refs.wrapper.getBoundingClientRect();
+        let {list} = this.state;
+
+        chrono.trigger(1000, () => this.setState({list: this.state.list.slice(1)}));
+        list = [...list, {x: touch.clientX - left, y: touch.clientY - top, id: Date.now()}];
+        // console.log(list);
+        this.setState({list});
+    }
+
+    render = () => {
+        const {list} = this.state;
+
+        return (
+            <div className="ripple-core-wrapper" onTouchStart={this.touch} ref="wrapper">
+                {list.map(({id, x, y}) => <div key={id} style={{top: y, left: x}} className="ripple-core-dot" />)}
+            </div>
+        );
     }
 }
 
@@ -378,11 +432,17 @@ const Main = React.createClass({
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
-                <UI.Form itemContainer={UI.Card} submitText="Woah">
+                {/*<UI.Form itemContainer={UI.Card} submitText="Woah">
                     {factotum.range(3,
                         n => <UI.TextInput formName={`input${n}`} label={`input ${n}`} />
                     )}
-                </UI.Form>
+                </UI.Form>*/}
+                <UI.Touchable component="div" tabIndex={-1} className="button-core-wrapper" style={{display: 'block'}}>
+                    {/*<div className="button-core-overlay" />*/}
+                    <Ripple />
+                    <div className="button-core-text">Testing</div>
+                    {/*<CenterContent className={Style.getClassName("core/button:text")} style={textStyle} height={height}>{text}</CenterContent>*/}
+                </UI.Touchable>
                 {/*<UI.Touchable component="div" tabIndex="-1" id="wat" onTap={evt => evt.target.focus()}>Test</UI.Touchable>*/}
                 {/*<FormattedInput />*/}
                 <UI.ProgressBar progress={0.35} height={30} />
@@ -398,3 +458,4 @@ App.start(
         <Route path="/test" component={Main} />
     </Route>
 );
+createStyles();
