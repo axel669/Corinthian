@@ -1,4 +1,29 @@
 // import CSSTransition from 'react-addons-css-transition-group';
+import Icon from 'lib-source/uiv2/icon';
+import Ripple from 'lib-source/uiv2/ripple';
+import Button from 'lib-source/uiv2/button';
+import IconButton from 'lib-source/uiv2/iconbutton';
+import Card from 'lib-source/uiv2/Card';
+import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
+
+const range = function* (args) {
+  let {start = 0, end = null, count = null, step = 1, map = i => i} = args;
+
+  if (end === null) {
+    if (count === null) {
+      throw new Error("Must give the size of the range")
+    }
+    end = start + count;
+  }
+
+  while (true) {
+    if (start >= end) {
+      break;
+    }
+    yield map(start);
+    start += step;
+  }
+};
 
 const {Route} = ReactRouter;
 
@@ -164,125 +189,6 @@ Style.__rawCSS(
 //
 // StyledButton("normal");
 
-const cssNoMeasurement = new Set([
-    "animationIterationCount",
-    "boxFlex",
-    "boxFlexGroup",
-    "boxOrdinalGroup",
-    "columnCount",
-    "fillOpacity",
-    "flex",
-    "flexGrow",
-    "flexPositive",
-    "flexShrink",
-    "flexNegative",
-    "flexOrder",
-    "fontWeight",
-    "lineClamp",
-    "lineHeight",
-    "opacity",
-    "order",
-    "orphans",
-    "stopOpacity",
-    "strokeDashoffset",
-    "strokeOpacity",
-    "strokeWidth",
-    "tabSize",
-    "widows",
-    "zIndex",
-    "zoom"
-]);
-const cssPrefixNames = new Set([
-    'transform',
-    'box-shadow',
-    'transition',
-    'animation',
-    'animationDelay',
-    'animationDirection',
-    'animationDuration',
-    'animationFillMode',
-    'animationIterationCount',
-    'animationName',
-    'animationPlayState',
-    'animationTimingFunction'
-]);
-const cssPrefixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
-
-const getCSSValue = (prop, value) => {
-    if (typeof value === 'function') {
-        value = value();
-    }
-    if (Array.isArray(value) === true) {
-        return value.map(getCSSValue);
-    }
-    if (typeof value === 'number' && cssNoMeasurement.has(prop) === false) {
-        value += "px";
-    }
-    return [value];
-};
-const processSelector = (componentName, styleName, selector) => {
-    const parts = selector.split(/\s+/);
-    const realParts = parts.map(part => {
-        part = part.replace(":active", ".cor-touch-active");
-        return part.split('/').map(part => {
-            switch (true) {
-                case part.charAt(0) === "$":
-                    return part.slice(1);
-                case /^[a-z]/i.test(part) === true:
-                    return `.${componentName}-${styleName}-${part}`;
-                default:
-                    return part;
-            }
-        }).join('.');
-    });
-    return realParts.join(' ');
-};
-const processDef = (cssLines, selector, defs) => {
-    cssLines = [...cssLines, `${selector} {`];
-    for (const [cssProp, cssValue] of Object.entries(defs)) {
-        const value = getCSSValue(cssProp, cssValue);
-        const prop = cssProp.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
-        if (cssPrefixNames.has(cssProp) === true) {
-            cssLines = [
-                ...cssLines,
-                ...cssPrefixes.map(prefix => `\t${prefix}${prop}: ${value[0]};`)
-            ];
-        } else {
-            cssLines = [
-                ...cssLines,
-                ...value.map(value => `\t${prop}: ${value};`)
-            ];
-        }
-    }
-    cssLines = [...cssLines, "}"];
-    return cssLines;
-    // cssLines.push("}");
-};
-
-const componentStyles = {};
-const createProp = (object, propName, defaultValue) => {
-    if (object.hasOwnProperty(propName) === false) {
-        object[propName] = defaultValue;
-    }
-    return object[propName];
-};
-const defineComponentStyle = (component, styleName, styles) =>
-    createProp(
-        createProp(componentStyles, component, {}),
-        styleName,
-        styles
-    );
-
-let themeValues;
-const _Theme = {
-    define(theme) {
-        themeValues = theme;
-    },
-    get variable() {
-        return themeValues;
-    }
-};
-
 
 _Theme.define({
     core: {
@@ -291,257 +197,30 @@ _Theme.define({
         }
     }
 });
-defineComponentStyle(
-    'button',
-    'core',
-    {
-        "wrapper": {
-            position: 'relative',
-            textAlign: 'center',
-            fontSize: 18,
-            margin: 4,
-            overflow: 'hidden',
-            zIndex: "+0",
-            backgroundColor: 'transparent',
-            color: () => _Theme.variable.core.button.textColor,
-            fontWeight: 'bold',
-            whiteSpace: 'pre',
-            display: 'inline-block',
-            borderRadius: 3
-        },
-        "wrapper:focus": {
-            outline: 'none',
-        },
-        "text-wrapper": {
-            display: 'table',
-            width: '100%'
-        },
-        "text": {
-            width: '100%',
-            padding: 5,
-            paddingLeft: 15,
-            paddingRight: 15,
-            textAlign: 'center',
-            verticalAlign: 'middle',
-            whiteSpace: 'pre'
-        },
-        "wrapper > overlay": {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            transition: 'background-color 100ms linear'
-        },
-        ".core-desktop overlay:hover": {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)'
-        },
-        "wrapper:active > overlay": {
-            backgroundColor: 'rgba(0, 0, 0, 0.15)'
-        }
-    }
-);
-defineComponentStyle(
-    'button',
-    'cyan',
-    {
-        "wrapper": {
-            position: 'relative',
-            textAlign: 'center',
-            fontSize: 18,
-            margin: 4,
-            overflow: 'hidden',
-            zIndex: "+0",
-            backgroundColor: 'cyan',
-            color: () => _Theme.variable.core.button.textColor,
-            fontWeight: 'bold',
-            whiteSpace: 'pre',
-            display: 'inline-block',
-            borderRadius: 3
-        },
-        "wrapper:focus": {
-            outline: 'none',
-        },
-        "text-wrapper": {
-            display: 'table',
-            width: '100%'
-        },
-        "text": {
-            width: '100%',
-            padding: 5,
-            paddingLeft: 15,
-            paddingRight: 15,
-            textAlign: 'center',
-            verticalAlign: 'middle',
-            whiteSpace: 'pre'
-        },
-        "wrapper > overlay": {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            transition: 'background-color 100ms linear'
-        },
-        ".core-desktop overlay:hover": {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)'
-        },
-        "wrapper:active > overlay": {
-            backgroundColor: 'rgba(0, 0, 0, 0.15)'
-        }
-    }
-);
-defineComponentStyle(
-    'ripple',
-    'core',
-    {
-        "wrapper": {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            transform: 'translate3d(0, 0, 0)'
-        },
-        "dot": {
-            position: 'absolute',
-            transform: 'translate(-50%, -50%)',
-            animation: 'ripple-core-animation-ripple-effect 700ms linear',
-            borderRadius: '50%',
-            display: 'inline-block'
-        },
-        "dot:before": {
-            paddingTop: '100%',
-            content: `""`,
-            float: 'left'
-        },
-        "!ripple-effect": {
-            "0%": {
-                width: 0,
-                backgroundColor: 'rgba(0, 0, 0, 0)'
-            },
-            "70%": {
-                backgroundColor: 'rgba(0, 0, 0, 0.2)'
-            },
-            "100%": {
-                width: '225%',
-                backgroundColor: 'rgba(0, 0, 0, 0.0)'
-            }
-        }
-    }
-);
 
-const createStyles = () => {
-    const head = document.querySelector("head");
-
-    //  Iterate over the components that have styles defined
-    for (const [componentName, styles] of Object.entries(componentStyles)) {
-        //  Iterate over the various named styles for the given component
-        for (const [styleName, styleDefs] of Object.entries(styles)) {
-            let cssLines = [];
-            //  Grab all the individual groups of styles defined in the named style
-            for (const [descriptor, defs] of Object.entries(styleDefs)) {
-                if (descriptor.startsWith("!") === true) {
-                    //  Repeat an extra time with prefixed keyframes because ios < 9 is pretty awful
-                    cssLines.push(`@-webkit-keyframes ${componentName}-${styleName}-animation-${descriptor.slice(1)} {`);
-                    for (const [selector, def] of Object.entries(defs)) {
-                        cssLines = processDef(cssLines, selector, def);
-                    }
-                    cssLines.push("}");
-
-                    //  normal @keyframes css
-                    cssLines.push(`@keyframes ${componentName}-${styleName}-animation-${descriptor.slice(1)} {`);
-                    for (const [selector, def] of Object.entries(defs)) {
-                        cssLines = processDef(cssLines, selector, def);
-                    }
-                    cssLines.push("}");
-                } else {
-                    const selector = processSelector(componentName, styleName, descriptor);
-                    cssLines = processDef(cssLines, selector, defs);
-                }
-            }
-            const styleTag = document.createElement("style");
-            styleTag.setAttribute("type", "text/css");
-            styleTag.setAttribute("data-name", `${componentName}/${styleName}`);
-            styleTag.innerHTML = cssLines.join('\n');
-            head.appendChild(styleTag);
-        }
-    }
-};
-
-class Ripple extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {list: []};
-    }
-
-    touch = (evt) => {
-        const touch = evt.changedTouches[0];
-        const {top, left, bottom, right} = this.refs.wrapper.getBoundingClientRect();
-        let {list} = this.state;
-
-        chrono.trigger(750, () => this.setState({list: this.state.list.slice(1)}));
-        list = [...list, {x: touch.clientX - left, y: touch.clientY - top, id: Date.now()}];
-        // console.log(list);
-        this.setState({list});
-    }
-
-    render = () => {
-        const {list} = this.state;
-
-        return (
-            <div className="ripple-core-wrapper" onTouchStart={this.touch} ref="wrapper">
-                {list.map(({id, x, y}) => <div key={id} style={{top: y, left: x}} className="ripple-core-dot" />)}
-            </div>
-        );
-    }
-}
-
-/*
-    text
-    onTap
-    styleName
-*/
-const Button = props => {
-    const {
-        text,
-        onTap = () => console.warn("No onTap given to Button"),
-        styleName = "core"
-    } = props;
-
-    const wrapperName = `button-${styleName}-wrapper`;
-    const textWrapperName = `button-${styleName}-text-wrapper`;
-    const textName = `button-${styleName}-text`;
-
-    return (
-        <UI.Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTap}>
-            <Ripple />
-            <div className={textWrapperName}>
-                <div className={textName}>{text}</div>
-            </div>
-        </UI.Touchable>
-    );
-};
-
-defineComponentStyle(
-    'div',
-    'core',
-    {
-        "test": {
-            height: 100,
-            backgroundColor: 'rgba(0, 200, 255, 0.7)',
-            color: 'black',
-            verticalAlign: 'middle',
-            textALign: 'center',
-            display: 'table-cell'
-        },
-        "test:after": {
-            width: '100%',
-            float: 'left',
-            content: `""`
-        }
-    }
-);
+// window.benchmark = (iterations, first, second) => {
+//     const r = [];
+//     for (const testNum of range({count: 30})) {
+//         let a = performance.now();
+//         for (let i = 0; i < iterations; i += 1) {
+//             first();
+//         }
+//         a = performance.now() - a;
+//
+//         let b = performance.now();
+//         for (let i = 0; i < iterations; i += 1) {
+//             second();
+//         }
+//         b = performance.now() - b;
+//         r.push([a.toFixed(3), b.toFixed(3)]);
+//     }
+//     return r;
+// };
+//
+// const checkProp = (obj, prop, value) => obj.hasOwnProperty(prop) === true && obj[prop] === value;
+// const x = {a: 10, b: 12};
+// const res = benchmark(1e6, () => x.c || false, () => x.c === undefined);
+// console.log(res.map(i => i.join('\t')).join('\n'));
 
 const Main = React.createClass({
     async demo() {
@@ -552,8 +231,16 @@ const Main = React.createClass({
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
-                <Button text="test" />
-                <Button.Cyan text="test" />
+                <img src="http://axel669.ngrok.io/bayonetta.jpg" />
+                {/*<Button text="test" iconName="ion-refresh" block />
+                <Button text="test" iconName="ion-loop" />
+                <Button text="test" disabled iconName="ion-close-round" />
+                <div style={{height: 100}}>
+                    <Button text="filled" fill />
+                </div>
+                <Icon name="ion-alert" />
+                <IconButton name="ion-alert" iconSize={20} />*/}
+                {/*<UI.Button cornerRadius={10} text="test" />*/}
                 {/*<UI.Form itemContainer={UI.Card} submitText="Woah">
                     {factotum.range(3,
                         n => <UI.TextInput formName={`input${n}`} label={`input ${n}`} />

@@ -1,3 +1,6 @@
+import {defineComponentStyle} from "lib-source/v2/style.js";
+
+const animationDuration = 500;
 defineComponentStyle(
     'ripple',
     'core',
@@ -8,12 +11,12 @@ defineComponentStyle(
             left: 0,
             right: 0,
             bottom: 0,
-            transform: 'translate3d(0, 0, 0)'
+            // transform: 'translate3d(0, 0, 0)'
         },
         "dot": {
             position: 'absolute',
             transform: 'translate(-50%, -50%)',
-            animation: 'ripple-core-animation-ripple-effect 700ms linear',
+            animation: `ripple-core-animation-ripple-effect ${animationDuration}ms linear`,
             borderRadius: '50%',
             display: 'inline-block'
         },
@@ -49,7 +52,7 @@ class Ripple extends React.Component {
         const {top, left, bottom, right} = this.refs.wrapper.getBoundingClientRect();
         let {list} = this.state;
 
-        chrono.trigger(750, () => this.setState({list: this.state.list.slice(1)}));
+        chrono.trigger(animationDuration, () => this.setState({list: this.state.list.slice(1)}));
         list = [...list, {x: touch.clientX - left, y: touch.clientY - top, id: Date.now()}];
         // console.log(list);
         this.setState({list});
