@@ -51,6 +51,9 @@ Touchable = React.createClass({
         });
         this.props.onTouchEnd(evt);
     },
+    getBoundingClientRect() {
+        return this.refs.node.getBoundingClientRect();
+    },
     componentDidMount() {
         // const node = ReactDOM.findDOMNode(this);
         const {node} = this.refs;

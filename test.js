@@ -4,6 +4,7 @@ import Ripple from 'lib-source/uiv2/ripple';
 import Button from 'lib-source/uiv2/button';
 import IconButton from 'lib-source/uiv2/iconbutton';
 import Card from 'lib-source/uiv2/Card';
+import Image from 'lib-source/uiv2/Image';
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
 
 const range = function* (args) {
@@ -73,8 +74,6 @@ Theme.define({
         textColor: 'black'
     }
 });
-
-const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 
 const ScreenTransition = React.createClass({
     render() {
@@ -222,6 +221,9 @@ _Theme.define({
 // const res = benchmark(1e6, () => x.c || false, () => x.c === undefined);
 // console.log(res.map(i => i.join('\t')).join('\n'));
 
+const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
+// const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
+
 const Main = React.createClass({
     async demo() {
         if (await Dialog.confirm("Really?") === true) {
@@ -230,8 +232,11 @@ const Main = React.createClass({
     },
     render() {
         return (
-            <UI.Screen title="Test" backText={"test"} scrollable onBack={this.demo}>
-                <img src="http://axel669.ngrok.io/bayonetta.jpg" />
+            <UI.Screen title="Test" backText={"test"} width={600} scrollable onBack={this.demo}>
+                {/*<Image source={url} height={150} color="cyan" />*/}
+                <div style={{height: 200}}>
+                    <Button text="click me!" fill />
+                </div>
                 {/*<Button text="test" iconName="ion-refresh" block />
                 <Button text="test" iconName="ion-loop" />
                 <Button text="test" disabled iconName="ion-close-round" />

@@ -48,12 +48,13 @@ class Ripple extends React.Component {
     }
 
     touch = (evt) => {
-        const touch = evt.changedTouches[0];
+        const {position} = evt.touch;
+        // const touch = evt.changedTouches[0];
         const {top, left, bottom, right} = this.refs.wrapper.getBoundingClientRect();
         let {list} = this.state;
 
         chrono.trigger(animationDuration, () => this.setState({list: this.state.list.slice(1)}));
-        list = [...list, {x: touch.clientX - left, y: touch.clientY - top, id: Date.now()}];
+        list = [...list, {x: position.x - left, y: position.y - top, id: Date.now()}];
         // console.log(list);
         this.setState({list});
     }
@@ -62,9 +63,9 @@ class Ripple extends React.Component {
         const {list} = this.state;
 
         return (
-            <div className="ripple-core-wrapper" onTouchStart={this.touch} ref="wrapper">
+            <UI.Touchable component="div" className="ripple-core-wrapper" onTap={this.touch} ref="wrapper">
                 {list.map(({id, x, y}) => <div key={id} style={{top: y, left: x}} className="ripple-core-dot" />)}
-            </div>
+            </UI.Touchable>
         );
     }
 }
