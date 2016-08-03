@@ -47,13 +47,14 @@ defineComponentStyle(
             left: 0,
             right: 0,
             bottom: 0,
-            transition: 'background-color 100ms linear'
+            transition: 'background-color 500ms linear'
         },
         ".core-desktop overlay:hover": {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            backgroundColor: 'rgba(0, 0, 0, 0.05)'
         },
         "wrapper:active > overlay": {
-            backgroundColor: 'rgba(0, 0, 0, 0.15)'
+            backgroundColor: 'rgba(0, 0, 0, 0.075)',
+            transition: 'none'
         }
     }
 );
@@ -80,6 +81,7 @@ const Button = props => {
     const wrapperName = `button-${styleName}-wrapper`;
     const textWrapperName = `button-${styleName}-text-wrapper`;
     const textName = `button-${styleName}-text`;
+    const overlayName = `button-${styleName}-overlay`;
 
     const wrapperStyle = {};
     const textWrapperStyle = {};
@@ -108,10 +110,11 @@ const Button = props => {
 
     return (
         <UI.Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTapHandler} disabled={disabled} style={wrapperStyle}>
-            {rippleElement}
             <div className={textWrapperName} style={textWrapperStyle}>
                 <div className={textName}>{text}</div>
             </div>
+            <div className={overlayName} />
+            {rippleElement}
         </UI.Touchable>
     );
 };

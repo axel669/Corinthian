@@ -5,6 +5,8 @@ import Button from 'lib-source/uiv2/button';
 import IconButton from 'lib-source/uiv2/iconbutton';
 import Card from 'lib-source/uiv2/Card';
 import Image from 'lib-source/uiv2/Image';
+import CenterContent from 'lib-source/uiv2/CenterContent';
+import Checkbox from 'lib-source/uiv2/Checkbox';
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
 
 const range = function* (args) {
@@ -218,11 +220,116 @@ _Theme.define({
 //
 // const checkProp = (obj, prop, value) => obj.hasOwnProperty(prop) === true && obj[prop] === value;
 // const x = {a: 10, b: 12};
-// const res = benchmark(1e6, () => x.c || false, () => x.c === undefined);
+// const res = benchmark(1e6, () => typeof x.c === 'undefined', () => x.c === undefined);
 // console.log(res.map(i => i.join('\t')).join('\n'));
 
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 // const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
+
+defineComponentStyle(
+    'toggle',
+    'core',
+    {
+        "container": {
+            position: 'relative',
+            transition: 'background-color 500ms linear',
+            fontSize: 20,
+            overflow: 'hidden'
+        },
+        "container:active": {
+            backgroundColor: 'rgba(0, 0, 0, 0.075)',
+            transition: 'none'
+        },
+        "toggle-container": {
+            position: 'absolute',
+            right: 13,
+            width: 30,
+            top: '50%',
+            transform: "translateY(-50%)",
+            height: 8,
+            fontSize: 11,
+            borderRadius: 15,
+            backgroundColor: 'lightgray',
+            lineHeight: '22px'
+            // border: '1px solid lightgray',
+            // overflow: 'hidden'
+        },
+        "toggle-container[data-on='true']": {
+            backgroundColor: '#bed0bd'
+        },
+        "toggle": {
+            transition: 'background-color 150ms linear, left 150ms linear',
+            position: 'absolute',
+            top: '50%',
+            transform: "translate(-50%, -50%)",
+            height: 22,
+            width: 22,
+            borderRadius: 15,
+            textAlign: 'center',
+            border: '1px solid lightgray',
+            boxShadow: '2px 2px 2px rgba(0, 0, 0, 0.15)'
+        },
+        "toggle[data-on='false']": {
+            left: 0,
+            backgroundColor: 'white'
+        },
+        // "toggle[data-on='false']:after": {
+        //     content: `"Off"`,
+        //     color: 'black'
+        // },
+        "toggle[data-on='true']": {
+            // right: 0,
+            left: 30,
+            backgroundColor: '#24b324'
+        },
+        // "toggle[data-on='true']:after": {
+        //     content: `"On"`,
+        //     color: 'black'
+        // },
+        "label": {
+            padding: 3,
+            paddingRight: 70,
+            whiteSpace: 'pre',
+            color: 'black'
+        },
+        "subtitle": {
+            color: 'gray',
+            fontSize: 14
+        }
+    }
+);
+const ionOnIcon = "ion-android-checkbox";
+const ionOffIcon = "ion-android-checkbox-outline-blank";
+
+const Toggle = props => {
+    const {
+        on = false,
+        label,
+        subTitle = null,
+        onChange = () => console.warn("No onChange given to checkbox")
+    } = props;
+    let content = label;
+    let toggleStyle;
+
+    if (subTitle !== null) {
+        content = (
+            <div>
+                {label}
+                <div className="checkbox-core-subtitle">{subTitle}</div>
+            </div>
+        );
+    }
+
+    return (
+        <UI.Touchable component="div" className="toggle-core-container" onTap={() => onChange(!on)}>
+            <div className="toggle-core-label">{content}</div>
+            <div className="toggle-core-toggle-container" data-on={on}>
+                <div className="toggle-core-toggle" data-on={on} />
+            </div>
+            <Ripple />
+        </UI.Touchable>
+    );
+};
 
 const Main = React.createClass({
     async demo() {
@@ -230,32 +337,16 @@ const Main = React.createClass({
             console.log("Nope!");
         }
     },
+    getInitialState() {
+        return {checked: false, on: false};
+    },
     render() {
         return (
             <UI.Screen title="Test" backText={"test"} width={600} scrollable onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
-                <div style={{height: 200}}>
-                    <Button text="click me!" fill />
-                </div>
-                {/*<Button text="test" iconName="ion-refresh" block />
-                <Button text="test" iconName="ion-loop" />
-                <Button text="test" disabled iconName="ion-close-round" />
-                <div style={{height: 100}}>
-                    <Button text="filled" fill />
-                </div>
-                <Icon name="ion-alert" />
-                <IconButton name="ion-alert" iconSize={20} />*/}
-                {/*<UI.Button cornerRadius={10} text="test" />*/}
-                {/*<UI.Form itemContainer={UI.Card} submitText="Woah">
-                    {factotum.range(3,
-                        n => <UI.TextInput formName={`input${n}`} label={`input ${n}`} />
-                    )}
-                </UI.Form>*/}
-
-                {/*<UI.Touchable component="div" tabIndex="-1" id="wat" onTap={evt => evt.target.focus()}>Test</UI.Touchable>*/}
-                {/*<FormattedInput />*/}
-                {/*<UI.ProgressBar progress={0.35} height={30} />*/}
-                {/*<button style={{whiteSpace: 'pre'}} onTouchStart={evt => dispatchEvent(evt.target, 'DOMActivate', 1)}>{"test\n12"}</button>*/}
+                <Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
+                <Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
+                <Button text="Button Text" />
             </UI.Screen>
         );
     }

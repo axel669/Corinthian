@@ -1,6 +1,6 @@
 import {defineComponentStyle} from "lib-source/v2/style.js";
 
-const animationDuration = 500;
+const animationDuration = 300;
 defineComponentStyle(
     'ripple',
     'core',
@@ -11,6 +11,7 @@ defineComponentStyle(
             left: 0,
             right: 0,
             bottom: 0,
+            zIndex: '+5'
             // transform: 'translate3d(0, 0, 0)'
         },
         "dot": {
@@ -31,10 +32,10 @@ defineComponentStyle(
                 backgroundColor: 'rgba(0, 0, 0, 0)'
             },
             "70%": {
-                backgroundColor: 'rgba(0, 0, 0, 0.2)'
+                backgroundColor: 'rgba(0, 0, 0, 0.1)'
             },
             "100%": {
-                width: '225%',
+                width: '150%',
                 backgroundColor: 'rgba(0, 0, 0, 0.0)'
             }
         }
@@ -50,12 +51,32 @@ class Ripple extends React.Component {
     touch = (evt) => {
         const {position} = evt.touch;
         // const touch = evt.changedTouches[0];
-        const {top, left, bottom, right} = this.refs.wrapper.getBoundingClientRect();
+        const {top, left} = this.refs.wrapper.getBoundingClientRect();
+        this.triggerRipple(position.x - left, position.y - top);
+        // let {list} = this.state;
+        //
+        // chrono.trigger(animationDuration, () => this.setState({list: this.state.list.slice(1)}));
+        // list = [...list, {x: position.x - left, y: position.y - top, id: Date.now()}];
+        // // console.log(list);
+        // this.setState({list});
+    }
+    triggerRipple = (x = null, y) => {
         let {list} = this.state;
 
-        chrono.trigger(animationDuration, () => this.setState({list: this.state.list.slice(1)}));
-        list = [...list, {x: position.x - left, y: position.y - top, id: Date.now()}];
-        // console.log(list);
+        if (x === null) {
+            const {width, height} = this.refs.wrapper.getBoundingClientRect();
+            x = width / 2;
+            y = height / 2;
+        }
+
+        chrono.trigger(
+            animationDuration,
+            () => this.setState({
+                list: this.state.list.slice(1)
+            })
+        );
+        list = [...list, {x, y, id: Date.now()}];
+
         this.setState({list});
     }
 
