@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+// import React from "react";
+// import ReactDOM from "react-dom";
 
 const forEach = Array.prototype.forEach;
 const {sqrt} = Math;
@@ -7,20 +7,14 @@ const {sqrt} = Math;
 let Touchable;
 
 Touchable = React.createClass({
-    getDefaultProps() {
-        return {
-            onTap() {},
-            onHold() {},
-            onTouchStart() {},
-            onTouchMove() {},
-            onTouchEnd() {}
-        };
-    },
     touchStart(evt) {
+        const {onTouchStart} = this.props;
         const [touch] = evt.changedTouches;
 
         ReactDOM.findDOMNode(this).classList.add("cor-touch-active");
-        this.props.onTouchStart(evt);
+        if (onTouchStart !== undefined) {
+            onTouchStart(evt);
+        }
 
         this.info = {
             id: touch.identifier,
@@ -29,7 +23,10 @@ Touchable = React.createClass({
         };
     },
     touchMove(evt) {
-        this.props.onTouchMove(evt);
+        const {onTouchMove} = this.props;
+        if (onTouchMove !== undefined) {
+            onTouchMove(evt);
+        }
 
         evt.changedTouches::forEach(touch => {
             if (touch.identifier !== this.info.id) {
@@ -42,6 +39,10 @@ Touchable = React.createClass({
         });
     },
     touchEnd(evt) {
+        const {onTouchEnd} = this.props;
+        if (onTouchEnd !== undefined) {
+            onTouchEnd(evt);
+        }
         evt.changedTouches::forEach(touch => {
             if (touch.identifier !== this.info.id) {
                 return;
@@ -49,7 +50,7 @@ Touchable = React.createClass({
 
             ReactDOM.findDOMNode(this).classList.remove("cor-touch-active");
         });
-        this.props.onTouchEnd(evt);
+        // this.props.onTouchEnd(evt);
     },
     getBoundingClientRect() {
         return this.refs.node.getBoundingClientRect();
@@ -59,19 +60,28 @@ Touchable = React.createClass({
         node.addEventListener(
             'tap',
             evt => {
+                const {onTap} = this.props;
                 node.focus();
-                ::this.props.onTap(evt);
+                if (onTap !== undefined) {
+                    this::onTap(evt);
+                }
+                // ::this.props.onTap(evt);
             }
         );
         node.addEventListener(
             'hold',
             evt => {
-                ::this.props.onHold(evt);
+                const {onHold} = this.props;
+                node.focus();
+                if (onHold !== undefined) {
+                    this::onHold(evt);
+                }
+                // ::this.props.onHold(evt);
             }
         );
     },
     render() {
-        const {component, children, onTap, onHold, ...props} = this.props;
+        const {component = null, children, onTap, onHold, ...props} = this.props;
         const Component = component;
         const componentProps = {
             ...props,
@@ -80,21 +90,10 @@ Touchable = React.createClass({
             onTouchEnd: this.touchEnd,
             onTouchCancel: this.touchEnd
         };
-        // let Component;
-        // let props;
-        //
-        // Component = this.props.component;
-        // props = {
-        //     ...this.props,
-        //     onTouchStart: this.touchStart,
-        //     onTouchMove: this.touchMove,
-        //     onTouchEnd: this.touchEnd,
-        //     onTouchCancel: this.touchEnd
-        // };
-        // props.children = null;
-        // props.component = null;
-        //
-        // console.log(props);
+
+        if (Component === null) {
+            throw new Error("Must pass a component into Touchable");
+        }
 
         return <Component ref="node" {...componentProps}>{children}</Component>;
     }

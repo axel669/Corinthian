@@ -1,6 +1,7 @@
 import {defineComponentStyle, Theme} from "lib-source/v2/style.js";
 import Ripple from "lib-source/uiv2/ripple.js";
 import Icon from 'lib-source/uiv2/icon.js';
+import Touchable from 'lib-source/uiv2/Touchable';
 
 defineComponentStyle(
     'button',
@@ -109,13 +110,13 @@ const Button = props => {
     }
 
     return (
-        <UI.Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTapHandler} disabled={disabled} style={wrapperStyle}>
+        <Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTapHandler} disabled={disabled} style={wrapperStyle}>
             <div className={textWrapperName} style={textWrapperStyle}>
                 <div className={textName}>{text}</div>
             </div>
             <div className={overlayName} />
             {rippleElement}
-        </UI.Touchable>
+        </Touchable>
     );
 };
 

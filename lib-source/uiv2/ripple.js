@@ -19,7 +19,8 @@ defineComponentStyle(
             transform: 'translate(-50%, -50%)',
             animation: `ripple-core-animation-ripple-effect ${animationDuration}ms linear`,
             borderRadius: '50%',
-            display: 'inline-block'
+            display: 'inline-block',
+            width: '250%'
         },
         "dot:before": {
             paddingTop: '100%',
@@ -28,14 +29,16 @@ defineComponentStyle(
         },
         "!ripple-effect": {
             "0%": {
-                width: 0,
+                transform: 'translate(-50%, -50%) scale(0, 0)',
+                // width: 0,
                 backgroundColor: 'rgba(0, 0, 0, 0)'
             },
             "70%": {
                 backgroundColor: 'rgba(0, 0, 0, 0.1)'
             },
             "100%": {
-                width: '150%',
+                transform: 'translate(-50%, -50%) scale(1, 1)',
+                // width: '150%',
                 backgroundColor: 'rgba(0, 0, 0, 0.0)'
             }
         }
@@ -50,15 +53,8 @@ class Ripple extends React.Component {
 
     touch = (evt) => {
         const {position} = evt.touch;
-        // const touch = evt.changedTouches[0];
         const {top, left} = this.refs.wrapper.getBoundingClientRect();
         this.triggerRipple(position.x - left, position.y - top);
-        // let {list} = this.state;
-        //
-        // chrono.trigger(animationDuration, () => this.setState({list: this.state.list.slice(1)}));
-        // list = [...list, {x: position.x - left, y: position.y - top, id: Date.now()}];
-        // // console.log(list);
-        // this.setState({list});
     }
     triggerRipple = (x = null, y) => {
         let {list} = this.state;
@@ -71,13 +67,26 @@ class Ripple extends React.Component {
 
         chrono.trigger(
             animationDuration,
-            () => this.setState({
-                list: this.state.list.slice(1)
-            })
+            () => {
+                if (this.active === false) {
+                    return;
+                }
+                this.setState({
+                    list: this.state.list.slice(1)
+                });
+            }
         );
         list = [...list, {x, y, id: Date.now()}];
 
         this.setState({list});
+    }
+
+    componentDidMount = () => {
+        this.active = true;
+    }
+    componentWillUnmount = () => {
+        this.active = false;
+        // console.log('removing');
     }
 
     render = () => {

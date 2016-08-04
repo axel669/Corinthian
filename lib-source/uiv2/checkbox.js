@@ -1,6 +1,6 @@
 import {defineComponentStyle} from "lib-source/v2/style";
 import CenterContent from "lib-source/uiv2/CenterContent";
-import Ripple from "lib-source/uiv2/Ripple";
+// import Ripple from "lib-source/uiv2/Ripple";
 import Icon from "lib-source/uiv2/Icon";
 
 defineComponentStyle(
@@ -74,7 +74,7 @@ const Checkbox = props => {
                 </CenterContent>
             </div>
             <div className="checkbox-core-label">{content}</div>
-            <Ripple />
+            {/*<Ripple />*/}
         </UI.Touchable>
     );
 };

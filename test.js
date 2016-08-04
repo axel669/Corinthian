@@ -7,6 +7,8 @@ import Card from 'lib-source/uiv2/Card';
 import Image from 'lib-source/uiv2/Image';
 import CenterContent from 'lib-source/uiv2/CenterContent';
 import Checkbox from 'lib-source/uiv2/Checkbox';
+import Toggle from 'lib-source/uiv2/Toggle';
+import Touchable from 'lib-source/uiv2/Touchable';
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
 
 const range = function* (args) {
@@ -26,6 +28,17 @@ const range = function* (args) {
     yield map(start);
     start += step;
   }
+};
+
+window.frange = function* (count) {
+    let current = 0;
+    while (true) {
+        if (current === count) {
+            break;
+        }
+        yield current;
+        current += 1;
+    }
 };
 
 const {Route} = ReactRouter;
@@ -223,112 +236,171 @@ _Theme.define({
 // const res = benchmark(1e6, () => typeof x.c === 'undefined', () => x.c === undefined);
 // console.log(res.map(i => i.join('\t')).join('\n'));
 
+/*
+const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
+*/
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
-// const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
 
+const animationTime = 250;
 defineComponentStyle(
-    'toggle',
+    'dialog',
     'core',
     {
-        "container": {
-            position: 'relative',
-            transition: 'background-color 500ms linear',
-            fontSize: 20,
-            overflow: 'hidden'
-        },
-        "container:active": {
-            backgroundColor: 'rgba(0, 0, 0, 0.075)',
-            transition: 'none'
-        },
-        "toggle-container": {
+        "overlay": {
             position: 'absolute',
-            right: 13,
-            width: 30,
-            top: '50%',
-            transform: "translateY(-50%)",
-            height: 8,
-            fontSize: 11,
-            borderRadius: 15,
-            backgroundColor: 'lightgray',
-            lineHeight: '22px'
-            // border: '1px solid lightgray',
-            // overflow: 'hidden'
-        },
-        "toggle-container[data-on='true']": {
-            backgroundColor: '#bed0bd'
-        },
-        "toggle": {
-            transition: 'background-color 150ms linear, left 150ms linear',
-            position: 'absolute',
-            top: '50%',
-            transform: "translate(-50%, -50%)",
-            height: 22,
-            width: 22,
-            borderRadius: 15,
-            textAlign: 'center',
-            border: '1px solid lightgray',
-            boxShadow: '2px 2px 2px rgba(0, 0, 0, 0.15)'
-        },
-        "toggle[data-on='false']": {
+            top: 0,
             left: 0,
-            backgroundColor: 'white'
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.35)',
+            zIndex: '+100',
+            display: 'none',
+            WebkitOverflowScrolling: 'auto',
+            opacity: 0,
+            transition: `opacity ${animationTime}ms linear`
+            // display: 'none'
         },
-        // "toggle[data-on='false']:after": {
-        //     content: `"Off"`,
-        //     color: 'black'
-        // },
-        "toggle[data-on='true']": {
-            // right: 0,
-            left: 30,
-            backgroundColor: '#24b324'
+
+        "window": {
+            position: 'absolute',
+            backgroundColor: 'white',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
+            borderRadius: 5,
+            maxWidth: 480
         },
-        // "toggle[data-on='true']:after": {
-        //     content: `"On"`,
-        //     color: 'black'
-        // },
-        "label": {
-            padding: 3,
-            paddingRight: 70,
-            whiteSpace: 'pre',
-            color: 'black'
+        "window-top": {
+            top: '15%',
+            left: '50%',
+            transform: 'translateX(-50%)'
         },
-        "subtitle": {
-            color: 'gray',
-            fontSize: 14
+        "window-center": {
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)'
         }
+
+        // ".window": {
+        //     position: 'absolute',
+        //     top: '15%',
+        //     left: '50%',
+        //     transform: 'translateX(-50%)',
+        //     backgroundColor: 'white',
+        //     boxShadow: '0px 0px 35px rgba(0, 0, 0, 0.6)',
+        //     width: '70%',
+        //     maxWidth: 480,
+        //     opacity: 0,
+        //     transition: 'opacity 0.5s',
+        //     borderRadius: 3
+        // },
+        // '.content': {
+        //     maxHeight: '40vh',
+        //     WebkitOverflowScrolling: 'touch',
+        //     overflow: 'auto',
+        //     padding: 15,
+        //     transform: 'translateZ(0)'
+        // },
+        // ".title": {
+        //     lineHeight: '30px',
+        //     padding: 15,
+        //     paddingTop: 10,
+        //     paddingBottom: 0,
+        //     fontSize: 18,
+        //     fontWeight: 900,
+        //     color: 'black'
+        // },
+        // ".buttons": {
+        //     textAlign: 'right',
+        //     width: '100%',
+        //     height: 35
+        // },
+        //
+        // ".loadSpinner": {
+        //     position: 'absolute',
+        //     top: '50%',
+        //     left: '50%',
+        //     transform: 'translate(-50%, -50%)',
+        //     padding: 5,
+        //     backgroundColor: 'white',
+        //     borderRadius: 3,
+        //     minWidth: 54
+        // }
     }
 );
-const ionOnIcon = "ion-android-checkbox";
-const ionOffIcon = "ion-android-checkbox-outline-blank";
 
-const Toggle = props => {
-    const {
-        on = false,
-        label,
-        subTitle = null,
-        onChange = () => console.warn("No onChange given to checkbox")
-    } = props;
-    let content = label;
-    let toggleStyle;
-
-    if (subTitle !== null) {
-        content = (
-            <div>
-                {label}
-                <div className="checkbox-core-subtitle">{subTitle}</div>
-            </div>
-        );
+let currentDialog = null;
+window.dialog = {
+    get current() {
+        return currentDialog;
+    }
+};
+class Dialog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {display: null, opacity: null, name: null};
     }
 
-    return (
-        <UI.Touchable component="div" className="toggle-core-container" onTap={() => onChange(!on)}>
-            <div className="toggle-core-label">{content}</div>
-            <div className="toggle-core-toggle-container" data-on={on}>
-                <div className="toggle-core-toggle" data-on={on} />
-            </div>
-            <Ripple />
-        </UI.Touchable>
-    );
+    show = async (style) => {
+        this.setState({display: 'block'});
+        await chrono.wait(50);
+        this.setState({opacity: 1});
+    }
+    hide = async () => {
+        this.setState({opacity: null});
+        await chrono.wait(animationTime);
+        this.setState({display: null});
+    }
+
+    componentDidMount = () => {
+        currentDialog = this;
+    }
+    componentWillUnmount = () => {
+        currentDialog = null;
+    }
+
+    render = () => {
+        return (
+            <Touchable component="div" onTap={this.hide} className="dialog-core-overlay" style={this.state}>
+                <div className="dialog-core-window dialog-core-window-upper" style={{width: 100, height: 100}} />
+            </Touchable>
+        );
+    }
+}
+
+class Combobox extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    openOptions = async () => {
+        const {title = "Combobox!"} = this.props;
+        console.log(await Dialog.__custom(
+            closeDialog => ({
+                content: (
+                    <div>
+                        {Array.from(range({
+                            count: 10,
+                            map: n => <Button text={n} key={n} block onTap={() => closeDialog(n)} />
+                        }))}
+                    </div>
+                ),
+                title,
+                buttons: [{text: 'cancel'}]
+            })
+        ));
+    }
+
+    render = () => {
+        return (
+            <Touchable component="div" onTap={this.openOptions}>
+                Test?
+            </Touchable>
+        );
+        // return <div>Edit Me</div>;
+    }
+}
+
+const Option = () => {
+    throw new Error("Option is intended as a filler element and should not be rendered on its own");
 };
 
 const Main = React.createClass({
@@ -342,11 +414,15 @@ const Main = React.createClass({
     },
     render() {
         return (
-            <UI.Screen title="Test" backText={"test"} width={600} scrollable onBack={this.demo}>
+            <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 <Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
                 <Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
-                <Button text="Button Text" />
+                <Button text="Button Text" onTap={() => dialog.current.show()} />
+                <Combobox selectedIndex={0}>
+                    <Option value={0}>Test</Option>
+                </Combobox>
+                <Dialog />
             </UI.Screen>
         );
     }
