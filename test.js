@@ -267,7 +267,9 @@ defineComponentStyle(
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
             borderRadius: 5,
             width: '75%',
-            maxWidth: 480
+            maxWidth: 480,
+            padding: 0,
+            overflow: 'hidden'
         },
         "window-top": {
             top: '15%',
@@ -284,7 +286,15 @@ defineComponentStyle(
             maxHeight: '40vh',
             WebkitOverflowScrolling: 'touch',
             overflow: 'auto',
-            padding: 10
+            // padding: 10,
+            borderBottom: '1px solid lightgray',
+            borderTop: '1px solid lightgray'
+        },
+        "title": {
+            padding: '5 15',
+            fontSize: 20,
+            fontWeight: 900,
+            color: 'black'
         }
 
         // ".window": {
@@ -339,6 +349,15 @@ let currentDialog = null;
 window.dialog = {
     get current() {
         return currentDialog;
+    },
+    success(value) {
+        return {value, status: 'success'};
+    },
+    cancel(value) {
+        return {value, status: 'canceled'};
+    },
+    invalid(value = null, reason = 'invalid') {
+        return {value, reason};
     }
 };
 class Dialog extends React.Component {
@@ -350,33 +369,60 @@ class Dialog extends React.Component {
             name: null,
             pos: 'top',
             content: null,
-            response: cblog,
-            closable: !true
+            closable: !true,
+            buttons: null,
+            title: null
         };
         this.animating = false;
+        this.resolver = null;
     }
 
-    show = async (style) => {
-        if (this.animating === true) {
-            return;
+    show = async (displayProps) => {
+        if (this.animating === true || this.resolver !== null) {
+            return dialog.invalid();
         }
         this.animating = true;
-        this.setState({display: 'block'});
+        this.resolver = new Promise(
+            resolve => {
+                this.response = value => resolve(value);
+            }
+        );
+
+        const {
+            content = null,
+            closable = true,
+            buttons = [
+                {text: 'ok'}
+            ],
+            title = null,
+            setup = null
+        } = displayProps;
+
+        this.setState({display: 'block', content, buttons, closable, title});
         await chrono.wait(50);
+        this.refs.container.scrollTop = 0;
+        if (setup !== null) {
+            setup(this.refs.container);
+        }
         this.setState({opacity: 1});
         await chrono.wait(animationTime);
         this.animating = false;
+        return await this.resolver;
     }
     hide = async (value) => {
         // console.log(this.animating, this.animating === true);
-        if (this.animating === true) {
+        if (this.animating === true || this.resolve === null) {
             return;
         }
         this.animating = true;
         this.setState({opacity: null});
         await chrono.wait(animationTime);
         this.setState({display: null});
-        requestAnimationFrame(() => this.state.response(value));
+        requestAnimationFrame(() => {
+            this.response(value);
+            this.response = null;
+            this.resolver = null;
+        });
         this.animating = false;
     }
 
@@ -384,7 +430,7 @@ class Dialog extends React.Component {
         if (this.state.closable === false) {
             return;
         }
-        this.hide(undefined);
+        this.hide(dialog.cancel(null));
     }
     stopper = (evt) => {
         evt.stopPropagation();
@@ -398,47 +444,110 @@ class Dialog extends React.Component {
     }
 
     render = () => {
-        const {display, opacity, pos, content} = this.state;
+        const {display, opacity, pos, content, buttons, title} = this.state;
+        const buttonList = (buttons || []).map(
+            ({text, value = null, cancels = false}, index) => {
+                // const valueFunc = (cancels === true) ? dialog.cancel : dialog.success;
+                const retValue = (cancels === true) ?
+                                    dialog.cancel(value) :
+                                    dialog.success(value);
+                return <Button text={text} key={index} onTap={() => this.hide(retValue)} block flush />;
+            }
+        );
+        let titleDisplay = null;
+
+        if (title !== null) {
+            titleDisplay = <div className="dialog-core-title">{title}</div>;
+        }
 
         return (
             <Touchable component="div" onTap={this.close} className="dialog-core-overlay" style={{display, opacity}}>
                 <Touchable component="div" className={`dialog-core-window dialog-core-window-${pos}`} onTap={this.stopper}>
-                    <div className="dialog-core-content">
-                        <Button text="demo" block onTap={() => this.hide('test')} />
+                    {titleDisplay}
+                    <div className="dialog-core-content" ref="container">
+                        {/*<Button text="demo" block onTap={() => this.hide('test')} />*/}
+                        {content}
                     </div>
+                    <UI.Flexbox colCount={3}>{buttonList}</UI.Flexbox>
                 </Touchable>
             </Touchable>
         );
     }
 }
 
+defineComponentStyle(
+    'combobox',
+    'core',
+    {
+        'container': {
+            border: '1px solid lightgray',
+            borderRadius: 3,
+            // padding: 3,
+            position: 'relative',
+            color: 'black'
+        },
+        "icon": {
+            position: 'absolute',
+            top: '50%',
+            right: 10,
+            transform: 'translateY(-50%)',
+            pointerEvents: 'none'
+        }
+    }
+);
+
+const comboboxSelect = (index, value) => dialog.success([index, value]);
 class Combobox extends React.Component {
     constructor(props) {
         super(props);
     }
 
     openOptions = async () => {
-        const {title = "Combobox!"} = this.props;
-        console.log(await Dialog.__custom(
-            closeDialog => ({
-                content: (
-                    <div>
-                        {Array.from(range({
-                            count: 10,
-                            map: n => <Button text={n} key={n} block onTap={() => closeDialog(n)} />
-                        }))}
-                    </div>
-                ),
-                title,
-                buttons: [{text: 'cancel'}]
-            })
-        ));
+        const {title = "Combobox!", scrollToSelected = false, selectedIndex} = this.props;
+        const children = React.Children.toArray(this.props.children);
+
+        const response = await dialog.current.show({
+            title,
+            content: children.map(
+                ({props: {value = null, children, style = null, className = null}}, index) => {
+                    const onTap = () => dialog.current.hide(comboboxSelect(index, value));
+                    return (
+                        <div {...{style, className}} key={index}>
+                            <Button text={children} block flush onTap={onTap} />
+                        </div>
+                    );
+                }
+            ),
+            buttons: [
+                {text: "Cancel", cancels: true}
+            ],
+            setup(container) {
+                if (scrollToSelected === true && selectedIndex !== -1) {
+                    container.scrollTop = container.children[selectedIndex].offsetTop - container.offsetTop;
+                }
+            }
+        });
+
+        if (response.status === "success") {
+            this.props.onChange(...response.value);
+        }
     }
 
     render = () => {
+        const {selectedIndex, children} = this.props;
+        const flattenedChildren = React.Children.toArray(children);
+        let currentChild = "Please select an option";
+
+        if (selectedIndex !== -1) {
+            currentChild = flattenedChildren[selectedIndex].props.children;
+        }
+
         return (
-            <Touchable component="div" onTap={this.openOptions}>
-                Test?
+            <Touchable component="div" className="combobox-core-container">
+                <Button text={currentChild} block flush onTap={this.openOptions} />
+                <div className="combobox-core-icon">
+                    <Icon name="ion-arrow-down-b" size={24} />
+                </div>
             </Touchable>
         );
         // return <div>Edit Me</div>;
@@ -461,17 +570,44 @@ const Main = React.createClass({
         }
     },
     getInitialState() {
-        return {checked: false, on: false};
+        return {
+            checked: false,
+            on: false,
+            disabled: false,
+            button: {
+                image: false
+            },
+            index: -1
+        };
+    },
+    async dialogTest() {
+        console.log(
+            await dialog.current.show({
+                content: "Testing?",
+                buttons: [
+                    {text: 'a', value: 10},
+                    {text: 'b', cancels: true}
+                ],
+                title: "Alert!"
+            })
+        );
     },
     render() {
+        const {disabled} = this.state;
+
         return (
             <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 <Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
                 <Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
-                <Button text={<span><Spinner size={20} />Button Text</span>} onTap={() => dialog.current.show()} />
-                <Combobox selectedIndex={0}>
-                    <Option value={0}>Test</Option>
+                <Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />
+                <Combobox selectedIndex={this.state.index} onChange={index => this.setState({index})} scrollToSelected>
+                    {/*<Option value={0}>Test</Option>*/}
+                    {Array.from(range({
+                        count: 20,
+                        map: i => <Option value={i ** i}><Spinner size={14} />Test {i}</Option>
+                    }))}
+                    <Option value={'lol'}><Image source={url} height={50} width="50%" /></Option>
                 </Combobox>
                 <Dialog />
             </UI.Screen>

@@ -1,4 +1,4 @@
-const Image = ({source, width, height = null, imageSize = 'fit', color, block = false}) => {
+const Image = ({source, width = '100%', height = null, imageSize = 'fit', color, block = false}) => {
     if (height === null) {
         throw new Error("Need to give image height");
     }

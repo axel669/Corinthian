@@ -15,7 +15,7 @@ defineComponentStyle(
             zIndex: "+0",
             backgroundColor: 'transparent',
             color: () => Theme.variable.core.button.textColor,
-            textTransform: 'uppercase',
+            // textTransform: 'uppercase',
             whiteSpace: 'pre',
             display: 'inline-block',
             borderRadius: 3
@@ -90,7 +90,7 @@ const Button = props => {
     let onTapHandler;
 
     if (disabled !== true) {
-        rippleElement = <Ripple />;
+        // rippleElement = <Ripple />;
         onTapHandler = onTap;
     }
     if (block === true) {
