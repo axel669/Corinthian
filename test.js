@@ -266,6 +266,7 @@ defineComponentStyle(
             backgroundColor: 'white',
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
             borderRadius: 5,
+            width: '75%',
             maxWidth: 480
         },
         "window-top": {
@@ -277,6 +278,13 @@ defineComponentStyle(
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)'
+        },
+
+        "content": {
+            maxHeight: '40vh',
+            WebkitOverflowScrolling: 'touch',
+            overflow: 'auto',
+            padding: 10
         }
 
         // ".window": {
@@ -336,18 +344,50 @@ window.dialog = {
 class Dialog extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {display: null, opacity: null, name: null};
+        this.state = {
+            display: null,
+            opacity: null,
+            name: null,
+            pos: 'top',
+            content: null,
+            response: cblog,
+            closable: !true
+        };
+        this.animating = false;
     }
 
     show = async (style) => {
+        if (this.animating === true) {
+            return;
+        }
+        this.animating = true;
         this.setState({display: 'block'});
         await chrono.wait(50);
         this.setState({opacity: 1});
+        await chrono.wait(animationTime);
+        this.animating = false;
     }
-    hide = async () => {
+    hide = async (value) => {
+        // console.log(this.animating, this.animating === true);
+        if (this.animating === true) {
+            return;
+        }
+        this.animating = true;
         this.setState({opacity: null});
         await chrono.wait(animationTime);
         this.setState({display: null});
+        requestAnimationFrame(() => this.state.response(value));
+        this.animating = false;
+    }
+
+    close = () => {
+        if (this.state.closable === false) {
+            return;
+        }
+        this.hide(undefined);
+    }
+    stopper = (evt) => {
+        evt.stopPropagation();
     }
 
     componentDidMount = () => {
@@ -358,9 +398,15 @@ class Dialog extends React.Component {
     }
 
     render = () => {
+        const {display, opacity, pos, content} = this.state;
+
         return (
-            <Touchable component="div" onTap={this.hide} className="dialog-core-overlay" style={this.state}>
-                <div className="dialog-core-window dialog-core-window-upper" style={{width: 100, height: 100}} />
+            <Touchable component="div" onTap={this.close} className="dialog-core-overlay" style={{display, opacity}}>
+                <Touchable component="div" className={`dialog-core-window dialog-core-window-${pos}`} onTap={this.stopper}>
+                    <div className="dialog-core-content">
+                        <Button text="demo" block onTap={() => this.hide('test')} />
+                    </div>
+                </Touchable>
             </Touchable>
         );
     }
@@ -403,6 +449,11 @@ const Option = () => {
     throw new Error("Option is intended as a filler element and should not be rendered on its own");
 };
 
+
+import SpinnerDataURL from "lib-source/data-uri/load-spinner.gif.source";
+const Spinner = ({size}) => <Image width={size} height={size} source={SpinnerDataURL} />;
+
+
 const Main = React.createClass({
     async demo() {
         if (await Dialog.confirm("Really?") === true) {
@@ -418,7 +469,7 @@ const Main = React.createClass({
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 <Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
                 <Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
-                <Button text="Button Text" onTap={() => dialog.current.show()} />
+                <Button text={<span><Spinner size={20} />Button Text</span>} onTap={() => dialog.current.show()} />
                 <Combobox selectedIndex={0}>
                     <Option value={0}>Test</Option>
                 </Combobox>

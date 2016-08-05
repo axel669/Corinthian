@@ -1,9 +1,10 @@
-const Image = ({source, width, height = null, imageSize = 'fit', color}) => {
+const Image = ({source, width, height = null, imageSize = 'fit', color, block = false}) => {
     if (height === null) {
         throw new Error("Need to give image height");
     }
 
     const style = {
+        display: block === true ? "block" : "inline-block",
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
         backgroundImage: `url("${source}")`,
