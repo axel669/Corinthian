@@ -1,6 +1,6 @@
 import {defineComponentStyle} from "lib-source/v2/style";
-// import Ripple from "lib-source/uiv2/Ripple";
 
+const animationTime = 100;
 defineComponentStyle(
     'toggle',
     'core',
@@ -31,13 +31,11 @@ defineComponentStyle(
             backgroundColor: '#bed0bd'
         },
         "toggle": {
-            WebkitTransition: 'background-color 150ms linear, -webkit-transform 150ms linear',
-            transition: 'background-color 150ms linear, transform 150ms linear',
+            WebkitTransition: `background-color ${animationTime}ms linear, -webkit-transform ${animationTime}ms linear`,
+            transition: `background-color ${animationTime}ms linear, transform ${animationTime}ms linear`,
             position: 'absolute',
             left: -11,
             top: -7,
-            // top: '50%',
-            // transform: "translate(-50%, -50%)",
             height: 22,
             width: 22,
             borderRadius: 15,
@@ -46,13 +44,10 @@ defineComponentStyle(
             boxShadow: '2px 2px 2px rgba(0, 0, 0, 0.15)'
         },
         "toggle[data-on='false']": {
-            // left: 0,
             transform: 'translateX(0)',
             backgroundColor: 'white'
         },
         "toggle[data-on='true']": {
-            // right: 0,
-            // left: 30,
             transform: 'translateX(30px)',
             backgroundColor: '#24b324'
         },

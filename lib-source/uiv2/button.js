@@ -14,7 +14,8 @@ defineComponentStyle(
             overflow: 'hidden',
             zIndex: "+0",
             backgroundColor: 'transparent',
-            color: () => Theme.variable.core.button.textColor,
+            color: 'black',
+            // color: () => Theme.variable.core.button.textColor,
             // textTransform: 'uppercase',
             whiteSpace: 'pre',
             display: 'inline-block',
@@ -54,7 +55,7 @@ defineComponentStyle(
             backgroundColor: 'rgba(0, 0, 0, 0.05)'
         },
         "wrapper:active > overlay": {
-            backgroundColor: 'rgba(0, 0, 0, 0.075)',
+            backgroundColor: 'rgba(0, 0, 0, 0.1)',
             transition: 'none'
         }
     }

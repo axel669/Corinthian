@@ -9,6 +9,12 @@ import CenterContent from 'lib-source/uiv2/CenterContent';
 import Checkbox from 'lib-source/uiv2/Checkbox';
 import Toggle from 'lib-source/uiv2/Toggle';
 import Touchable from 'lib-source/uiv2/Touchable';
+import Combobox from 'lib-source/uiv2/Combobox';
+import Option from 'lib-source/uiv2/Option';
+import Spinner from 'lib-source/uiv2/Spinner';
+import Radio from 'lib-source/uiv2/Radio';
+
+import DialogComponent from "lib-source/uiv2/dialog";
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
 
 const range = function* (args) {
@@ -151,67 +157,6 @@ const Wrapper = React.createClass({
     }
 });
 
-const Filler = ({color}) => <div style={{width: '100%', height: '100%', backgroundColor: color}} />;
-const test = n => (
-    <UI.Card title="Test Item">{n}</UI.Card>
-);
-
-const Test = ({children}) => {
-    children = React.Children.toArray(children);
-    for (const child of children) {
-        console.log(child, child.type.valueName);
-    }
-    return <div>{children}</div>
-};
-
-class FormattedInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {value: ""};
-    }
-
-    change = (evt) => {
-        let {value} = evt.target;
-        value = value + value;
-        this.setState({value});
-    }
-
-    render = () => <input type="text" value={this.state.value} onChange={this.change} />
-}
-
-// const Horiz = ({children}) => (
-//     <div>
-//         {React.Children.toArray(children).map(child => )}
-//     </div>
-// );
-
-Style.__rawCSS(
-    "demo",
-    {
-        selector: ".normal",
-        rules: {
-            backgroundColor: 'cyan'
-        }
-    }
-);
-
-// const Button = ({...buttonProps, text}) => <button style={{whiteSpace: 'pre'}} {...buttonProps}>{text}</button>;
-// const StyledButton = styleName => {
-//     styleName = `${styleName.charAt(0).toUpperCase()}${styleName.slice(1)}`;
-//     Button[styleName] = props => <Button className={styleName} {...props} />;
-// };
-//
-// StyledButton("normal");
-
-
-_Theme.define({
-    core: {
-        button: {
-            textColor: "black"
-        }
-    }
-});
-
 // window.benchmark = (iterations, first, second) => {
 //     const r = [];
 //     for (const testNum of range({count: 30})) {
@@ -238,330 +183,21 @@ _Theme.define({
 
 /*
 const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
-*/
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
+*/
 
-const animationTime = 250;
-defineComponentStyle(
-    'dialog',
-    'core',
-    {
-        "overlay": {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.35)',
-            zIndex: '+100',
-            display: 'none',
-            WebkitOverflowScrolling: 'auto',
-            opacity: 0,
-            transition: `opacity ${animationTime}ms linear`
-            // display: 'none'
-        },
-
-        "window": {
-            position: 'absolute',
-            backgroundColor: 'white',
-            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
-            borderRadius: 5,
-            width: '75%',
-            maxWidth: 480,
-            padding: 0,
-            overflow: 'hidden'
-        },
-        "window-top": {
-            top: '15%',
-            left: '50%',
-            transform: 'translateX(-50%)'
-        },
-        "window-center": {
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)'
-        },
-
-        "content": {
-            maxHeight: '40vh',
-            WebkitOverflowScrolling: 'touch',
-            overflow: 'auto',
-            // padding: 10,
-            borderBottom: '1px solid lightgray',
-            borderTop: '1px solid lightgray'
-        },
-        "title": {
-            padding: '5 15',
-            fontSize: 20,
-            fontWeight: 900,
-            color: 'black'
-        }
-
-        // ".window": {
-        //     position: 'absolute',
-        //     top: '15%',
-        //     left: '50%',
-        //     transform: 'translateX(-50%)',
-        //     backgroundColor: 'white',
-        //     boxShadow: '0px 0px 35px rgba(0, 0, 0, 0.6)',
-        //     width: '70%',
-        //     maxWidth: 480,
-        //     opacity: 0,
-        //     transition: 'opacity 0.5s',
-        //     borderRadius: 3
-        // },
-        // '.content': {
-        //     maxHeight: '40vh',
-        //     WebkitOverflowScrolling: 'touch',
-        //     overflow: 'auto',
-        //     padding: 15,
-        //     transform: 'translateZ(0)'
-        // },
-        // ".title": {
-        //     lineHeight: '30px',
-        //     padding: 15,
-        //     paddingTop: 10,
-        //     paddingBottom: 0,
-        //     fontSize: 18,
-        //     fontWeight: 900,
-        //     color: 'black'
-        // },
-        // ".buttons": {
-        //     textAlign: 'right',
-        //     width: '100%',
-        //     height: 35
-        // },
-        //
-        // ".loadSpinner": {
-        //     position: 'absolute',
-        //     top: '50%',
-        //     left: '50%',
-        //     transform: 'translate(-50%, -50%)',
-        //     padding: 5,
-        //     backgroundColor: 'white',
-        //     borderRadius: 3,
-        //     minWidth: 54
-        // }
-    }
+const InputBase = ({label, ...props}) => (
+    <div>
+        <div>{label}</div>
+        <input {...props} />
+    </div>
 );
 
-let currentDialog = null;
-window.dialog = {
-    get current() {
-        return currentDialog;
-    },
-    success(value) {
-        return {value, status: 'success'};
-    },
-    cancel(value) {
-        return {value, status: 'canceled'};
-    },
-    invalid(value = null, reason = 'invalid') {
-        return {value, reason};
+const Input = {
+    Text: props => {
+        return <InputBase {...props} />;
     }
 };
-class Dialog extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            display: null,
-            opacity: null,
-            name: null,
-            pos: 'top',
-            content: null,
-            closable: !true,
-            buttons: null,
-            title: null
-        };
-        this.animating = false;
-        this.resolver = null;
-    }
-
-    show = async (displayProps) => {
-        if (this.animating === true || this.resolver !== null) {
-            return dialog.invalid();
-        }
-        this.animating = true;
-        this.resolver = new Promise(
-            resolve => {
-                this.response = value => resolve(value);
-            }
-        );
-
-        const {
-            content = null,
-            closable = true,
-            buttons = [
-                {text: 'ok'}
-            ],
-            title = null,
-            setup = null
-        } = displayProps;
-
-        this.setState({display: 'block', content, buttons, closable, title});
-        await chrono.wait(50);
-        this.refs.container.scrollTop = 0;
-        if (setup !== null) {
-            setup(this.refs.container);
-        }
-        this.setState({opacity: 1});
-        await chrono.wait(animationTime);
-        this.animating = false;
-        return await this.resolver;
-    }
-    hide = async (value) => {
-        // console.log(this.animating, this.animating === true);
-        if (this.animating === true || this.resolve === null) {
-            return;
-        }
-        this.animating = true;
-        this.setState({opacity: null});
-        await chrono.wait(animationTime);
-        this.setState({display: null});
-        requestAnimationFrame(() => {
-            this.response(value);
-            this.response = null;
-            this.resolver = null;
-        });
-        this.animating = false;
-    }
-
-    close = () => {
-        if (this.state.closable === false) {
-            return;
-        }
-        this.hide(dialog.cancel(null));
-    }
-    stopper = (evt) => {
-        evt.stopPropagation();
-    }
-
-    componentDidMount = () => {
-        currentDialog = this;
-    }
-    componentWillUnmount = () => {
-        currentDialog = null;
-    }
-
-    render = () => {
-        const {display, opacity, pos, content, buttons, title} = this.state;
-        const buttonList = (buttons || []).map(
-            ({text, value = null, cancels = false}, index) => {
-                // const valueFunc = (cancels === true) ? dialog.cancel : dialog.success;
-                const retValue = (cancels === true) ?
-                                    dialog.cancel(value) :
-                                    dialog.success(value);
-                return <Button text={text} key={index} onTap={() => this.hide(retValue)} block flush />;
-            }
-        );
-        let titleDisplay = null;
-
-        if (title !== null) {
-            titleDisplay = <div className="dialog-core-title">{title}</div>;
-        }
-
-        return (
-            <Touchable component="div" onTap={this.close} className="dialog-core-overlay" style={{display, opacity}}>
-                <Touchable component="div" className={`dialog-core-window dialog-core-window-${pos}`} onTap={this.stopper}>
-                    {titleDisplay}
-                    <div className="dialog-core-content" ref="container">
-                        {/*<Button text="demo" block onTap={() => this.hide('test')} />*/}
-                        {content}
-                    </div>
-                    <UI.Flexbox colCount={3}>{buttonList}</UI.Flexbox>
-                </Touchable>
-            </Touchable>
-        );
-    }
-}
-
-defineComponentStyle(
-    'combobox',
-    'core',
-    {
-        'container': {
-            border: '1px solid lightgray',
-            borderRadius: 3,
-            // padding: 3,
-            position: 'relative',
-            color: 'black'
-        },
-        "icon": {
-            position: 'absolute',
-            top: '50%',
-            right: 10,
-            transform: 'translateY(-50%)',
-            pointerEvents: 'none'
-        }
-    }
-);
-
-const comboboxSelect = (index, value) => dialog.success([index, value]);
-class Combobox extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    openOptions = async () => {
-        const {title = "Combobox!", scrollToSelected = false, selectedIndex} = this.props;
-        const children = React.Children.toArray(this.props.children);
-
-        const response = await dialog.current.show({
-            title,
-            content: children.map(
-                ({props: {value = null, children, style = null, className = null}}, index) => {
-                    const onTap = () => dialog.current.hide(comboboxSelect(index, value));
-                    return (
-                        <div {...{style, className}} key={index}>
-                            <Button text={children} block flush onTap={onTap} />
-                        </div>
-                    );
-                }
-            ),
-            buttons: [
-                {text: "Cancel", cancels: true}
-            ],
-            setup(container) {
-                if (scrollToSelected === true && selectedIndex !== -1) {
-                    container.scrollTop = container.children[selectedIndex].offsetTop - container.offsetTop;
-                }
-            }
-        });
-
-        if (response.status === "success") {
-            this.props.onChange(...response.value);
-        }
-    }
-
-    render = () => {
-        const {selectedIndex, children} = this.props;
-        const flattenedChildren = React.Children.toArray(children);
-        let currentChild = "Please select an option";
-
-        if (selectedIndex !== -1) {
-            currentChild = flattenedChildren[selectedIndex].props.children;
-        }
-
-        return (
-            <Touchable component="div" className="combobox-core-container">
-                <Button text={currentChild} block flush onTap={this.openOptions} />
-                <div className="combobox-core-icon">
-                    <Icon name="ion-arrow-down-b" size={24} />
-                </div>
-            </Touchable>
-        );
-        // return <div>Edit Me</div>;
-    }
-}
-
-const Option = () => {
-    throw new Error("Option is intended as a filler element and should not be rendered on its own");
-};
-
-
-import SpinnerDataURL from "lib-source/data-uri/load-spinner.gif.source";
-const Spinner = ({size}) => <Image width={size} height={size} source={SpinnerDataURL} />;
-
 
 const Main = React.createClass({
     async demo() {
@@ -580,36 +216,32 @@ const Main = React.createClass({
             index: -1
         };
     },
-    async dialogTest() {
-        console.log(
-            await dialog.current.show({
-                content: "Testing?",
-                buttons: [
-                    {text: 'a', value: 10},
-                    {text: 'b', cancels: true}
-                ],
-                title: "Alert!"
-            })
-        );
-    },
     render() {
         const {disabled} = this.state;
 
         return (
             <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
-                <Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
+                {/*<Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
                 <Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
                 <Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />
                 <Combobox selectedIndex={this.state.index} onChange={index => this.setState({index})} scrollToSelected>
-                    {/*<Option value={0}>Test</Option>*/}
                     {Array.from(range({
                         count: 20,
                         map: i => <Option value={i ** i}><Spinner size={14} />Test {i}</Option>
                     }))}
                     <Option value={'lol'}><Image source={url} height={50} width="50%" /></Option>
-                </Combobox>
-                <Dialog />
+                </Combobox>*/}
+                {/*<Radio selectedIndex={this.state.index} onChange={index => this.setState({index})} title="Test">
+                    {Array.from(range({
+                        count: 10,
+                        map: n => <Option value={n ** n}>{n}</Option>
+                    }))}
+                    <Option><Image source={url} height={30} /></Option>
+                </Radio>
+                <Button text="Test" />*/}
+                <Input.Text label="test" value="wat" onChange={cblog} />
+                <DialogComponent />
             </UI.Screen>
         );
     }
