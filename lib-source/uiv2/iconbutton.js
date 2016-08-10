@@ -13,7 +13,7 @@ defineComponentStyle(
             overflow: 'hidden',
             zIndex: "+0",
             backgroundColor: 'transparent',
-            color: () => Theme.variable.core.button.textColor,
+            color: 'black',
             display: 'inline-block',
             borderRadius: '50%'
         }

@@ -1,4 +1,6 @@
 // import CSSTransition from 'react-addons-css-transition-group';
+import chrono from "lib-source/v2/chrono";
+
 import Icon from 'lib-source/uiv2/icon';
 import Ripple from 'lib-source/uiv2/ripple';
 import Button from 'lib-source/uiv2/button';
@@ -13,9 +15,12 @@ import Combobox from 'lib-source/uiv2/Combobox';
 import Option from 'lib-source/uiv2/Option';
 import Spinner from 'lib-source/uiv2/Spinner';
 import Radio from 'lib-source/uiv2/Radio';
+import Calendar from 'lib-source/uiv2/Calendar';
 
 import DialogComponent from "lib-source/uiv2/dialog";
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
+
+window.chrono = chrono;
 
 const range = function* (args) {
   let {start = 0, end = null, count = null, step = 1, map = i => i} = args;
@@ -186,17 +191,58 @@ const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Ba
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 */
 
-const InputBase = ({label, ...props}) => (
-    <div>
-        <div>{label}</div>
-        <input {...props} />
-    </div>
-);
+const InputBase = ({label, textFormatter, valueParser, onChange = () => {}, ...props}) => {
+    const handler = evt => {
+        const raw = evt.target.value;
+        onChange(
+            textFormatter(raw),
+            valueParser(raw),
+            raw
+        );
+    };
+    return (
+        <div>
+            <div>{label}</div>
+            <input {...props} onChange={handler} />
+        </div>
+    );
+};
 
 const Input = {
-    Text: props => {
-        return <InputBase {...props} />;
-    }
+};
+const registerTextType = (type, textType, textFormatter, valueParser) => {
+    Input[type] = props => <InputBase {...props} type={textType} {...{valueParser, textFormatter}} />;
+};
+registerTextType('Text', 'text', i => i, i => i);
+registerTextType(
+    'Numeric',
+    'number',
+    text => {
+        return text.trim().replace(/\-{2,}/g, '-').replace(/[^\-0-9eE\.\,]/g, '');
+    },
+    text => parseFloat(text)
+);
+
+const DateInput = ({date = new Date(), format = "{month}/{day}/{year}", onChange = () => {}, iconName}) => {
+    const changeDate = async () => {
+        const handler = date => {
+            dialog.hide(dialog.success(date));
+        };
+        const result = await dialog.show({
+            content: <Calendar selectedDate={date} onDateSelected={handler} key={Date.now()} />,
+            buttons: [{text: "Cancel"}],
+            title: "Select Date"
+        });
+
+        if (result.value !== null) {
+            onChange(result.value);
+        }
+    };
+    return (
+        <div style={{height: 30}}>
+            <Button text={chrono(date).format(format)} onTap={changeDate} flush fill iconName={iconName} />
+        </div>
+    );
 };
 
 const Main = React.createClass({
@@ -213,11 +259,18 @@ const Main = React.createClass({
             button: {
                 image: false
             },
-            index: -1
+            index: -1,
+            text: "",
+            value: null,
+            date: new Date()
         };
     },
     render() {
         const {disabled} = this.state;
+        const textHandler = (text, value) => {
+            // console.log('value', value);
+            this.setState({text, value});
+        }
 
         return (
             <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
@@ -240,7 +293,12 @@ const Main = React.createClass({
                     <Option><Image source={url} height={30} /></Option>
                 </Radio>
                 <Button text="Test" />*/}
-                <Input.Text label="test" value="wat" onChange={cblog} />
+                {/*<div style={{width: '75%', maxWidth: 480}}>
+                    <Calendar selectedDate={new Date()} />
+                </div>*/}
+                {/*<DateInput onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo\n{month}/{day}/{year}"} />*/}
+                {/*<Button text="Wat" onTap={() => dialog.show({content: <Calendar selectedDate={new Date()} onDateSelected={cblog} />, title: "Select Date", buttons: [{text: "Cancel"}]})} />*/}
+                {/*<input type="datetime" />*/}
                 <DialogComponent />
             </UI.Screen>
         );
@@ -254,3 +312,20 @@ App.start(
     </Route>
 );
 createStyles();
+
+const isPow2 = n => (n & -n) === n;
+window.collatz = n => (n % 2 === 0) ? n / 2 : 3 * n + 1;
+window.check = start => {
+    while (true) {
+        if (start === 1) {
+            break;
+        }
+        console.log(start);
+        start = collatz(start);
+    }
+};
+
+const f = n => (n & -n);
+for (const i of frange(100)) {
+    console.log(i, f(i));
+}

@@ -70,8 +70,8 @@ const Button = props => {
         text,
         onTap = () => console.warn("No onTap given to Button"),
         styleName = "core",
-        buttonColor,
-        textColor,
+        buttonColor = null,
+        textColor = null,
         flush,
         block,
         fill,
@@ -85,8 +85,9 @@ const Button = props => {
     const textName = `button-${styleName}-text`;
     const overlayName = `button-${styleName}-overlay`;
 
-    const wrapperStyle = {};
+    const wrapperStyle = {backgroundColor: buttonColor};
     const textWrapperStyle = {};
+    const textStyle = {color: textColor};
     let rippleElement;
     let onTapHandler;
 
@@ -102,6 +103,7 @@ const Button = props => {
         wrapperStyle.width = '100%';
         wrapperStyle.height = '100%';
         textWrapperStyle.height = '100%';
+        textStyle.padding = 0;
     }
     if (flush === true) {
         wrapperStyle.margin = 0;
@@ -113,7 +115,7 @@ const Button = props => {
     return (
         <Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTapHandler} disabled={disabled} style={wrapperStyle}>
             <div className={textWrapperName} style={textWrapperStyle}>
-                <div className={textName}>{text}</div>
+                <div className={textName} style={textStyle}>{text}</div>
             </div>
             <div className={overlayName} />
             {rippleElement}

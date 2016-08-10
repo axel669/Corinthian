@@ -71,7 +71,7 @@ const startOf = {
     },
     week(date) {
         startOf.day(date);
-        date.setDay(0);
+        date.setDate(date.getDate() - date.getDay());
     },
     month(date) {
         startOf.day(date);
@@ -80,6 +80,36 @@ const startOf = {
     year(date) {
         startOf.month(date);
         date.setMonth(0);
+    }
+};
+const endOf = {
+    second(date) {
+        date.setMilliseconds(999);
+    },
+    minute(date) {
+        endOf.second(date);
+        date.setSeconds(59);
+    },
+    hour(date) {
+        endOf.minute(date);
+        date.setMinutes(59);
+    },
+    day(date) {
+        endOf.hour(date);
+        date.setHours(23);
+    },
+    week(date) {
+        endOf.day(date);
+        date.setDate(date.getDate() + (6 - date.getDay()));
+    },
+    month(date) {
+        endOf.day(date);
+        date.setMonth(date.getMonth() + 1);
+        date.setDate(0);
+    },
+    year(date) {
+        endOf.month(date);
+        date.setMonth(11);
     }
 };
 const unitConversion = {
@@ -188,6 +218,7 @@ const chronoFormat = {
         full: date => date.getFullYear()
     }
 };
+chronoFormat.day = chronoFormat.date;
 const chronoCheckUnit = unit => {
     if (unitConversion.hasOwnProperty(unit) === false) {
         throw new Error(`Unrecognized unit: ${unit}`);
@@ -431,6 +462,13 @@ const chrono = (arg = null) => {
 
             return chrono(adjustedDate);
         },
+        endOf(unit) {
+            const adjustedDate = new Date(internalDate);
+
+            endOf[unit](adjustedDate);
+
+            return chrono(adjustedDate);
+        },
         format(formatString = null) {
             if (formatString === null) {
                 return internalDate.toString();
@@ -458,13 +496,15 @@ const chrono = (arg = null) => {
 };
 chrono.diff = (first, second) => {
     const internalDate = new Date(second.unixTimestamp - first.unixTimestamp);
+    console.log(second.unixTimestamp - first.unixTimestamp);
+    console.log(internalDate);
 
     return {
         milliseconds: internalDate.getMilliseconds(),
         seconds: internalDate.getSeconds(),
         minutes: internalDate.getMinutes(),
         hours: internalDate.getHours(),
-        days: internalDate.getDate() - 2,
+        days: internalDate.getDate() - 1,
         months: internalDate.getMonth(),
         years: internalDate.getFullYear() - 1970
     };
