@@ -167,13 +167,13 @@ const Wrapper = React.createClass({
 //     for (const testNum of range({count: 30})) {
 //         let a = performance.now();
 //         for (let i = 0; i < iterations; i += 1) {
-//             first();
+//             first(i);
 //         }
 //         a = performance.now() - a;
 //
 //         let b = performance.now();
 //         for (let i = 0; i < iterations; i += 1) {
-//             second();
+//             second(i);
 //         }
 //         b = performance.now() - b;
 //         r.push([a.toFixed(3), b.toFixed(3)]);
@@ -183,13 +183,14 @@ const Wrapper = React.createClass({
 //
 // const checkProp = (obj, prop, value) => obj.hasOwnProperty(prop) === true && obj[prop] === value;
 // const x = {a: 10, b: 12};
-// const res = benchmark(1e6, () => typeof x.c === 'undefined', () => x.c === undefined);
+//
+// const res = benchmark(1e6, (i) => (i % 2 === 0) ? i >> 1 : 0, (i) => (i % 2 === 0) ? i / 2 : 0);
 // console.log(res.map(i => i.join('\t')).join('\n'));
 
 /*
 const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
-const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 */
+const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 
 const InputBase = ({label, textFormatter, valueParser, onChange = () => {}, ...props}) => {
     const handler = evt => {
@@ -245,6 +246,106 @@ const DateInput = ({date = new Date(), format = "{month}/{day}/{year}", onChange
     );
 };
 
+// class TimeInput extends React.Component {
+//     constructor(props) {
+//         super(props);
+//     }
+//
+//     test = () => {
+//         console.log(this.refs.lol);
+//         this.refs.lol.click();
+//     }
+//
+//     render = () => {
+//         return <div><Button text="Test" block onTap={this.test} /><input type="time" style={{display: 'none'}} ref="lol" onChange={cblog} /></div>;
+//     }
+// }
+
+const thumbSize = {
+    width: 24,
+    height: 24
+};
+defineComponentStyle(
+    'range-input',
+    'core',
+    {
+        "wrapper": {
+            height: 30,
+            position: 'relative'
+        },
+        "track-background": {
+        },
+        "track": {
+            position: 'absolute',
+            left: 0,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            height: 4
+        },
+        "track::after": {
+            ...thumbSize,
+            position: 'absolute',
+            top: '50%',
+            right: 0,
+            transform: 'translate(50%, -50%)',
+            backgroundColor: 'cyan',
+            content: "''"
+        },
+        "wrapper $input[type='range']": {
+            WebkitAppearance: 'none',
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            // opacity: 0
+        },
+        "wrapper $input[type='range']::-webkit-slider-thumb": {
+            ...thumbSize,
+            borderRadius: '50%',
+            WebkitAppearance: 'none',
+            backgroundColor: 'green'
+        }
+    }
+);
+const RangeInput = props => {
+    const {
+        min = 0,
+        max = 10,
+        step = 1,
+        onChange = () => {}
+    } = props;
+    const range = max - min;
+    const changeHandler = evt => {
+        onChange(evt.target.value);
+    };
+    let {value = null} = props;
+    let adjusted;
+
+    if (value === null) {
+        value = min;
+    }
+
+    // adjusted
+    // if (
+
+    return (
+        <div className="range-input-core-wrapper">
+            <div className="range-input-core-track" style={{width: `${(adjusted / range) * 100}%`}} />
+            <input type="range" min={min} max={max} step={step} value={adjusted} onChange={changeHandler} />
+        </div>
+    );
+};
+
+/*
+defineStyleForComponent(
+    Button,
+    'special',
+    {
+    }
+);
+...
+<Button.Special />
+*/
+
 const Main = React.createClass({
     async demo() {
         if (await Dialog.confirm("Really?") === true) {
@@ -262,7 +363,8 @@ const Main = React.createClass({
             index: -1,
             text: "",
             value: null,
-            date: new Date()
+            date: chrono(),
+            rangeValue: 0
         };
     },
     render() {
@@ -284,7 +386,8 @@ const Main = React.createClass({
                         map: i => <Option value={i ** i}><Spinner size={14} />Test {i}</Option>
                     }))}
                     <Option value={'lol'}><Image source={url} height={50} width="50%" /></Option>
-                </Combobox>*/}
+                </Combobox>
+                <Icon name="ion-calendar" size={20} />*/}
                 {/*<Radio selectedIndex={this.state.index} onChange={index => this.setState({index})} title="Test">
                     {Array.from(range({
                         count: 10,
@@ -296,9 +399,12 @@ const Main = React.createClass({
                 {/*<div style={{width: '75%', maxWidth: 480}}>
                     <Calendar selectedDate={new Date()} />
                 </div>*/}
-                {/*<DateInput onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo\n{month}/{day}/{year}"} />*/}
+                <DateInput onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />
                 {/*<Button text="Wat" onTap={() => dialog.show({content: <Calendar selectedDate={new Date()} onDateSelected={cblog} />, title: "Select Date", buttons: [{text: "Cancel"}]})} />*/}
                 {/*<input type="datetime" />*/}
+                {/*<input type="time" onChange={evt => cblog(evt.target.value)} ref="test" />*/}
+                {/*<TimeInput />*/}
+                <RangeInput value={this.state.rangeValue} max={24} onChange={rangeValue => this.setState({rangeValue})} />
                 <DialogComponent />
             </UI.Screen>
         );
@@ -313,19 +419,19 @@ App.start(
 );
 createStyles();
 
-const isPow2 = n => (n & -n) === n;
-window.collatz = n => (n % 2 === 0) ? n / 2 : 3 * n + 1;
-window.check = start => {
-    while (true) {
-        if (start === 1) {
-            break;
-        }
-        console.log(start);
-        start = collatz(start);
-    }
-};
-
-const f = n => (n & -n);
-for (const i of frange(100)) {
-    console.log(i, f(i));
-}
+// const isPow2 = n => (n & -n) === n;
+// window.collatz = n => (n % 2 === 0) ? n / 2 : 3 * n + 1;
+// window.check = start => {
+//     while (true) {
+//         if (start === 1) {
+//             break;
+//         }
+//         console.log(start);
+//         start = collatz(start);
+//     }
+// };
+//
+// const f = n => (n & -n);
+// for (const i of frange(100)) {
+//     console.log(i, f(i));
+// }

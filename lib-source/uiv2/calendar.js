@@ -2,6 +2,7 @@ import {defineComponentStyle, Theme} from "lib-source/v2/style";
 import Button from "lib-source/uiv2/Button";
 import CenterContent from 'lib-source/uiv2/CenterContent';
 
+const coolBlue = "#2FB1DF";
 defineComponentStyle(
     'calendar',
     'core',
@@ -10,10 +11,8 @@ defineComponentStyle(
             height: '100%',
             fontSize: 14,
             textAlign: 'center',
-            // border: '1px solid lightgray'
         },
         "day[data-inactive]": {
-            // backgroundColor: 'rgb(200, 200, 200)'
             color: 'lightgray',
             paddingTop: 4
         }
@@ -24,8 +23,8 @@ class Calendar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            month: props.selectedDate.getMonth(),
-            year: props.selectedDate.getFullYear()
+            month: props.selectedDate.month,
+            year: props.selectedDate.year
         };
     }
 
@@ -56,8 +55,8 @@ class Calendar extends React.Component {
 
     select = (date) => {
         const {onDateSelected = () => {}} = this.props;
-        console.log(date.toString());
-        onDateSelected(date.dateObject);
+        // console.log(date.toString());
+        onDateSelected(date);
     }
 
     render = () => {
