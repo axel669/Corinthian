@@ -157,7 +157,6 @@ window.addEventListener(
 
             if (editableTagNames.indexOf(targetTagName) === -1 && somethingEditable === false && evt.cancelable === true) {
                 evt.preventDefault();
-                data.target.focus();
             }
 
             registeredHandlers.forEach(handlerName => {
@@ -276,6 +275,7 @@ register(
             if (vars.valid === true && (touch.time - startTouch.time) < 500) {
                 if (startTouch.target !== document.activeElement && document.activeElement !== null && touch.mouseTriggered === false && ('blur' in document.activeElement)) {
                     document.activeElement.blur();
+                    startTouch.target.focus();
                 }
 
                 startTouch.target.dispatchEvent(

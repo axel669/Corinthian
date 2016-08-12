@@ -113,5 +113,6 @@ class Calendar extends React.Component {
         );
     }
 }
+Calendar.componentStyleName = 'calendar';
 
 export default Calendar;

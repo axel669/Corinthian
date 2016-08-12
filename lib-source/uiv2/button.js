@@ -122,5 +122,6 @@ const Button = props => {
         </Touchable>
     );
 };
+Button.componentStyleName = 'button';
 
 export default Button;

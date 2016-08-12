@@ -39,5 +39,6 @@ const Card = ({children, title = null}) => {
         </div>
     );
 };
+Card.componentStyleName = 'card'
 
 export default Card;

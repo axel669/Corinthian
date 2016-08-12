@@ -17,6 +17,8 @@ import Spinner from 'lib-source/uiv2/Spinner';
 import Radio from 'lib-source/uiv2/Radio';
 import Calendar from 'lib-source/uiv2/Calendar';
 
+import RangeInput from 'lib-source/uiv2/input/RangeInput';
+
 import DialogComponent from "lib-source/uiv2/dialog";
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
 
@@ -192,37 +194,140 @@ const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Ba
 */
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 
-const InputBase = ({label, textFormatter, valueParser, onChange = () => {}, ...props}) => {
-    const handler = evt => {
-        const raw = evt.target.value;
-        onChange(
-            textFormatter(raw),
-            valueParser(raw),
-            raw
+// const InputBase = ({label, textFormatter, valueParser, onChange = () => {}, ...props}) => {
+//     const handler = evt => {
+//         const raw = evt.target.value;
+//         onChange(
+//             textFormatter(raw),
+//             valueParser(raw),
+//             raw
+//         );
+//     };
+//     return (
+//         <div>
+//             <div>{label}</div>
+//             <input {...props} onChange={handler} />
+//         </div>
+//     );
+// };
+defineComponentStyle(
+    'input',
+    'core',
+    {
+        "$body": {
+            WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)'
+        },
+        "wrapper": {
+            position: 'relative',
+            backgroundColor: 'white',
+            height: 32
+            // margin: 3
+        },
+        "field": {
+            width: '100%',
+            borderWidth: 0,
+            borderBottom: '2px solid lightgray',
+            borderRadius: 0,
+            backgroundColor: 'transparent',
+            margin: 0,
+            height: '100%',
+            position: 'relative',
+            zIndex: '+1'
+            // WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)'
+        },
+        "field:focus": {
+            outline: 'none'
+        },
+        "icon": {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            width: 30
+        },
+        "highlight-border": {
+            position: 'absolute',
+            bottom: 0,
+            borderBottom: `2px solid ${coolBlue}`,
+            left: '50%',
+            transform: 'translateX(-50%) scaleX(0)',
+            width: '100%',
+            zIndex: '+2'
+        },
+        "field:focus + highlight-border": {
+            // width: '100%',
+            WebkitTransition: '-webkit-transform 250ms linear',
+            transition: 'transform 150ms linear',
+            transform: 'translateX(-50%) scaleX(1)'
+        }
+    }
+);
+class InputWrapper extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    focus = () => {
+        this.refs.field.focus();
+    }
+
+    render = () => {
+        const {parser = i => i, onChange = () => {}, iconName = null, style = {}, ...props} = this.props;
+        const handler = evt => {
+            // const raw = evt.target.value;
+            onChange(parser(evt.target.value));
+        };
+        let realStyle = {...style};
+        let iconDisplay = null;
+
+        if (iconName !== null) {
+            iconDisplay = <CenterContent className="input-core-icon" height="100%"><Icon name={iconName} size={18} /></CenterContent>;
+            realStyle.paddingLeft = 30;
+        }
+
+        return (
+            <div className="input-core-wrapper">
+                <input {...props} style={realStyle} onChange={handler} className="input-core-field" ref="field" />
+                <div className="input-core-highlight-border" />
+                {iconDisplay}
+            </div>
         );
-    };
-    return (
-        <div>
-            <div>{label}</div>
-            <input {...props} onChange={handler} />
-        </div>
-    );
-};
+    }
+}
+// const IconInput = ({iconName, style = {},
+class LabeledInput extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render = () => {
+        const {label, Wrapper = InputWrapper, ...props} = this.props;
+
+        return (
+            <div style={{position: 'relative', margin: 3}}>
+                <Touchable component="div" onTap={() => this.refs.wrapped.focus()}>{label}</Touchable>
+                <Wrapper ref="wrapped" {...props} />
+            </div>
+        );
+    }
+}
 
 const Input = {
+    Text: props => <LabeledInput {...props} type="text" />,
+    Password: props => <LabeledInput {...props} type="password" />
 };
-const registerTextType = (type, textType, textFormatter, valueParser) => {
-    Input[type] = props => <InputBase {...props} type={textType} {...{valueParser, textFormatter}} />;
-};
-registerTextType('Text', 'text', i => i, i => i);
-registerTextType(
-    'Numeric',
-    'number',
-    text => {
-        return text.trim().replace(/\-{2,}/g, '-').replace(/[^\-0-9eE\.\,]/g, '');
-    },
-    text => parseFloat(text)
-);
+// const registerTextType = (type, textType, textFormatter, valueParser) => {
+//     Input[type] = props => <InputBase {...props} type={textType} {...{valueParser, textFormatter}} />;
+// };
+// registerTextType('Text', 'text', i => i, i => i);
+// registerTextType(
+//     'Numeric',
+//     'number',
+//     text => {
+//         return text.trim().replace(/\-{2,}/g, '-').replace(/[^\-0-9eE\.\,]/g, '');
+//     },
+//     text => parseFloat(text)
+// );
 
 const DateInput = ({date = new Date(), format = "{month}/{day}/{year}", onChange = () => {}, iconName}) => {
     const changeDate = async () => {
@@ -261,80 +366,6 @@ const DateInput = ({date = new Date(), format = "{month}/{day}/{year}", onChange
 //     }
 // }
 
-const thumbSize = {
-    width: 24,
-    height: 24
-};
-defineComponentStyle(
-    'range-input',
-    'core',
-    {
-        "wrapper": {
-            height: 30,
-            position: 'relative'
-        },
-        "track-background": {
-        },
-        "track": {
-            position: 'absolute',
-            left: 0,
-            top: '50%',
-            transform: 'translateY(-50%)',
-            height: 4
-        },
-        "track::after": {
-            ...thumbSize,
-            position: 'absolute',
-            top: '50%',
-            right: 0,
-            transform: 'translate(50%, -50%)',
-            backgroundColor: 'cyan',
-            content: "''"
-        },
-        "wrapper $input[type='range']": {
-            WebkitAppearance: 'none',
-            width: '100%',
-            height: '100%',
-            margin: 0,
-            // opacity: 0
-        },
-        "wrapper $input[type='range']::-webkit-slider-thumb": {
-            ...thumbSize,
-            borderRadius: '50%',
-            WebkitAppearance: 'none',
-            backgroundColor: 'green'
-        }
-    }
-);
-const RangeInput = props => {
-    const {
-        min = 0,
-        max = 10,
-        step = 1,
-        onChange = () => {}
-    } = props;
-    const range = max - min;
-    const changeHandler = evt => {
-        onChange(evt.target.value);
-    };
-    let {value = null} = props;
-    let adjusted;
-
-    if (value === null) {
-        value = min;
-    }
-
-    // adjusted
-    // if (
-
-    return (
-        <div className="range-input-core-wrapper">
-            <div className="range-input-core-track" style={{width: `${(adjusted / range) * 100}%`}} />
-            <input type="range" min={min} max={max} step={step} value={adjusted} onChange={changeHandler} />
-        </div>
-    );
-};
-
 /*
 defineStyleForComponent(
     Button,
@@ -362,9 +393,10 @@ const Main = React.createClass({
             },
             index: -1,
             text: "",
+            password: "",
             value: null,
             date: chrono(),
-            rangeValue: 0
+            rangeValue: 100
         };
     },
     render() {
@@ -399,12 +431,17 @@ const Main = React.createClass({
                 {/*<div style={{width: '75%', maxWidth: 480}}>
                     <Calendar selectedDate={new Date()} />
                 </div>*/}
-                <DateInput onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />
+                {/*<DateInput onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />*/}
                 {/*<Button text="Wat" onTap={() => dialog.show({content: <Calendar selectedDate={new Date()} onDateSelected={cblog} />, title: "Select Date", buttons: [{text: "Cancel"}]})} />*/}
                 {/*<input type="datetime" />*/}
                 {/*<input type="time" onChange={evt => cblog(evt.target.value)} ref="test" />*/}
                 {/*<TimeInput />*/}
-                <RangeInput value={this.state.rangeValue} max={24} onChange={rangeValue => this.setState({rangeValue})} />
+                <Card>
+                    <RangeInput value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />
+                    <input type="range" value={this.state.rangeValue} max={255} onChange={evt => this.setState({rangeValue: evt.target.value})} />
+                </Card>
+                <Input.Text label="Text" iconName="ion-email" value={this.state.text} onChange={text => this.setState({text})} />
+                <Input.Password label="Password" value={this.state.password} onChange={password => this.setState({password})} />
                 <DialogComponent />
             </UI.Screen>
         );
@@ -418,6 +455,7 @@ App.start(
     </Route>
 );
 createStyles();
+window.qsel = (...args) => document.querySelector(...args);
 
 // const isPow2 = n => (n & -n) === n;
 // window.collatz = n => (n % 2 === 0) ? n / 2 : 3 * n + 1;
