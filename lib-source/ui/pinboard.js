@@ -10,9 +10,13 @@ const Pinboard = ({children, width, height = null}) => {
 
     children = children.map(
         (child, index) => {
-            const {props: {pinInfo}} = child;
+            const {pinInfo, ...props} = child.props;
+            // const {props: {pinInfo}} = child;
+            const displayedChild = <child.type {...props} />;
+            // child = React.clone
+            // console.log(child.type);
 
-            return <div key={index} style={{...pinInfo, position: 'absolute'}}>{child}</div>;
+            return <div key={index} style={{...pinInfo, position: 'absolute'}}>{displayedChild}</div>;
         }
     );
 

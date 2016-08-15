@@ -18,6 +18,7 @@ import Radio from 'lib-source/uiv2/Radio';
 import Calendar from 'lib-source/uiv2/Calendar';
 
 import RangeInput from 'lib-source/uiv2/input/RangeInput';
+import DateInput from 'lib-source/uiv2/input/DateInput';
 
 import DialogComponent from "lib-source/uiv2/dialog";
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
@@ -220,8 +221,8 @@ defineComponentStyle(
         "wrapper": {
             position: 'relative',
             backgroundColor: 'white',
-            height: 32
-            // margin: 3
+            height: 32,
+            margin: 3
         },
         "field": {
             width: '100%',
@@ -259,6 +260,11 @@ defineComponentStyle(
             WebkitTransition: '-webkit-transform 250ms linear',
             transition: 'transform 150ms linear',
             transform: 'translateX(-50%) scaleX(1)'
+        },
+        "label": {
+            color: "black",
+            fontSize: 16,
+            padding: 3
         }
     }
 );
@@ -304,8 +310,8 @@ class LabeledInput extends React.Component {
         const {label, Wrapper = InputWrapper, ...props} = this.props;
 
         return (
-            <div style={{position: 'relative', margin: 3}}>
-                <Touchable component="div" onTap={() => this.refs.wrapped.focus()}>{label}</Touchable>
+            <div style={{position: 'relative'}}>
+                <Touchable component="div" className="input-core-label" onTap={() => this.refs.wrapped.focus()}>{label}</Touchable>
                 <Wrapper ref="wrapped" {...props} />
             </div>
         );
@@ -314,7 +320,10 @@ class LabeledInput extends React.Component {
 
 const Input = {
     Text: props => <LabeledInput {...props} type="text" />,
-    Password: props => <LabeledInput {...props} type="password" />
+    Password: props => <LabeledInput {...props} type="password" />,
+    Search: props => <LabeledInput {...props} type="search" iconName="ion-search" />,
+    Date: props => <DateInput {...props} />,
+    Range: props => <RangeInput {...props} />
 };
 // const registerTextType = (type, textType, textFormatter, valueParser) => {
 //     Input[type] = props => <InputBase {...props} type={textType} {...{valueParser, textFormatter}} />;
@@ -328,28 +337,6 @@ const Input = {
 //     },
 //     text => parseFloat(text)
 // );
-
-const DateInput = ({date = new Date(), format = "{month}/{day}/{year}", onChange = () => {}, iconName}) => {
-    const changeDate = async () => {
-        const handler = date => {
-            dialog.hide(dialog.success(date));
-        };
-        const result = await dialog.show({
-            content: <Calendar selectedDate={date} onDateSelected={handler} key={Date.now()} />,
-            buttons: [{text: "Cancel"}],
-            title: "Select Date"
-        });
-
-        if (result.value !== null) {
-            onChange(result.value);
-        }
-    };
-    return (
-        <div style={{height: 30}}>
-            <Button text={chrono(date).format(format)} onTap={changeDate} flush fill iconName={iconName} />
-        </div>
-    );
-};
 
 // class TimeInput extends React.Component {
 //     constructor(props) {
@@ -376,6 +363,29 @@ defineStyleForComponent(
 ...
 <Button.Special />
 */
+
+class FileInput extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    trigger = () => {
+        this.refs.file.click();
+    }
+    upload = (evt) => {
+        this.props.onChange(Array.from(evt.target.files));
+    }
+
+    render = () => {
+        const {text, value, ...props} = this.props;
+        return (
+            <div>
+                <input {...props} type="file" ref="file" style={{display: 'none'}} value="" onChange={this.upload} />
+                <Button text={text} onTap={this.trigger} block />
+            </div>
+        );
+    }
+}
 
 const Main = React.createClass({
     async demo() {
@@ -431,17 +441,19 @@ const Main = React.createClass({
                 {/*<div style={{width: '75%', maxWidth: 480}}>
                     <Calendar selectedDate={new Date()} />
                 </div>*/}
-                {/*<DateInput onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />*/}
+                <Input.Date onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />
                 {/*<Button text="Wat" onTap={() => dialog.show({content: <Calendar selectedDate={new Date()} onDateSelected={cblog} />, title: "Select Date", buttons: [{text: "Cancel"}]})} />*/}
                 {/*<input type="datetime" />*/}
                 {/*<input type="time" onChange={evt => cblog(evt.target.value)} ref="test" />*/}
                 {/*<TimeInput />*/}
-                <Card>
+                {/*<Card>
                     <RangeInput value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />
                     <input type="range" value={this.state.rangeValue} max={255} onChange={evt => this.setState({rangeValue: evt.target.value})} />
-                </Card>
-                <Input.Text label="Text" iconName="ion-email" value={this.state.text} onChange={text => this.setState({text})} />
+                </Card>*/}
+                <Input.Search label="Text" iconName="ion-email" value={this.state.text} onChange={text => this.setState({text})} />
                 <Input.Password label="Password" value={this.state.password} onChange={password => this.setState({password})} />
+                <Input.Range value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />
+                <FileInput text="Test" onChange={files => console.log(files)} multiple />
                 <DialogComponent />
             </UI.Screen>
         );
