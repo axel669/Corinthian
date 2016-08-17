@@ -1,5 +1,6 @@
 // import CSSTransition from 'react-addons-css-transition-group';
 import chrono from "lib-source/v2/chrono";
+import ajax from "lib-source/v2/ajax";
 
 import Icon from 'lib-source/uiv2/icon';
 import Ripple from 'lib-source/uiv2/ripple';
@@ -16,12 +17,15 @@ import Option from 'lib-source/uiv2/Option';
 import Spinner from 'lib-source/uiv2/Spinner';
 import Radio from 'lib-source/uiv2/Radio';
 import Calendar from 'lib-source/uiv2/Calendar';
+import Input from 'lib-source/uiv2/Input';
 
-import RangeInput from 'lib-source/uiv2/input/RangeInput';
-import DateInput from 'lib-source/uiv2/input/DateInput';
+import Flexbox from 'lib-source/uiv2/layout/Flexbox';
 
 import DialogComponent from "lib-source/uiv2/dialog";
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
+
+import {warningFunc} from "lib-source/v2/utils";
+import {sharedReference, SharedObjectDisplay} from "lib-source/v2/shared";
 
 window.chrono = chrono;
 
@@ -44,16 +48,17 @@ const range = function* (args) {
   }
 };
 
-window.frange = function* (count) {
+window.frange = function* (count, map = i => i) {
     let current = 0;
     while (true) {
         if (current === count) {
             break;
         }
-        yield current;
+        yield map(current);
         current += 1;
     }
 };
+window.arange = (count, map) => Array.from(frange(count, map));
 
 const {Route} = ReactRouter;
 
@@ -195,164 +200,6 @@ const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Ba
 */
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 
-// const InputBase = ({label, textFormatter, valueParser, onChange = () => {}, ...props}) => {
-//     const handler = evt => {
-//         const raw = evt.target.value;
-//         onChange(
-//             textFormatter(raw),
-//             valueParser(raw),
-//             raw
-//         );
-//     };
-//     return (
-//         <div>
-//             <div>{label}</div>
-//             <input {...props} onChange={handler} />
-//         </div>
-//     );
-// };
-defineComponentStyle(
-    'input',
-    'core',
-    {
-        "$body": {
-            WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)'
-        },
-        "wrapper": {
-            position: 'relative',
-            backgroundColor: 'white',
-            height: 32,
-            margin: 3
-        },
-        "field": {
-            width: '100%',
-            borderWidth: 0,
-            borderBottom: '2px solid lightgray',
-            borderRadius: 0,
-            backgroundColor: 'transparent',
-            margin: 0,
-            height: '100%',
-            position: 'relative',
-            zIndex: '+1'
-            // WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)'
-        },
-        "field:focus": {
-            outline: 'none'
-        },
-        "icon": {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            width: 30
-        },
-        "highlight-border": {
-            position: 'absolute',
-            bottom: 0,
-            borderBottom: `2px solid ${coolBlue}`,
-            left: '50%',
-            transform: 'translateX(-50%) scaleX(0)',
-            width: '100%',
-            zIndex: '+2'
-        },
-        "field:focus + highlight-border": {
-            // width: '100%',
-            WebkitTransition: '-webkit-transform 250ms linear',
-            transition: 'transform 150ms linear',
-            transform: 'translateX(-50%) scaleX(1)'
-        },
-        "label": {
-            color: "black",
-            fontSize: 16,
-            padding: 3
-        }
-    }
-);
-class InputWrapper extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    focus = () => {
-        this.refs.field.focus();
-    }
-
-    render = () => {
-        const {parser = i => i, onChange = () => {}, iconName = null, style = {}, ...props} = this.props;
-        const handler = evt => {
-            // const raw = evt.target.value;
-            onChange(parser(evt.target.value));
-        };
-        let realStyle = {...style};
-        let iconDisplay = null;
-
-        if (iconName !== null) {
-            iconDisplay = <CenterContent className="input-core-icon" height="100%"><Icon name={iconName} size={18} /></CenterContent>;
-            realStyle.paddingLeft = 30;
-        }
-
-        return (
-            <div className="input-core-wrapper">
-                <input {...props} style={realStyle} onChange={handler} className="input-core-field" ref="field" />
-                <div className="input-core-highlight-border" />
-                {iconDisplay}
-            </div>
-        );
-    }
-}
-// const IconInput = ({iconName, style = {},
-class LabeledInput extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render = () => {
-        const {label, Wrapper = InputWrapper, ...props} = this.props;
-
-        return (
-            <div style={{position: 'relative'}}>
-                <Touchable component="div" className="input-core-label" onTap={() => this.refs.wrapped.focus()}>{label}</Touchable>
-                <Wrapper ref="wrapped" {...props} />
-            </div>
-        );
-    }
-}
-
-const Input = {
-    Text: props => <LabeledInput {...props} type="text" />,
-    Password: props => <LabeledInput {...props} type="password" />,
-    Search: props => <LabeledInput {...props} type="search" iconName="ion-search" />,
-    Date: props => <DateInput {...props} />,
-    Range: props => <RangeInput {...props} />
-};
-// const registerTextType = (type, textType, textFormatter, valueParser) => {
-//     Input[type] = props => <InputBase {...props} type={textType} {...{valueParser, textFormatter}} />;
-// };
-// registerTextType('Text', 'text', i => i, i => i);
-// registerTextType(
-//     'Numeric',
-//     'number',
-//     text => {
-//         return text.trim().replace(/\-{2,}/g, '-').replace(/[^\-0-9eE\.\,]/g, '');
-//     },
-//     text => parseFloat(text)
-// );
-
-// class TimeInput extends React.Component {
-//     constructor(props) {
-//         super(props);
-//     }
-//
-//     test = () => {
-//         console.log(this.refs.lol);
-//         this.refs.lol.click();
-//     }
-//
-//     render = () => {
-//         return <div><Button text="Test" block onTap={this.test} /><input type="time" style={{display: 'none'}} ref="lol" onChange={cblog} /></div>;
-//     }
-// }
-
 /*
 defineStyleForComponent(
     Button,
@@ -363,29 +210,6 @@ defineStyleForComponent(
 ...
 <Button.Special />
 */
-
-class FileInput extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    trigger = () => {
-        this.refs.file.click();
-    }
-    upload = (evt) => {
-        this.props.onChange(Array.from(evt.target.files));
-    }
-
-    render = () => {
-        const {text, value, ...props} = this.props;
-        return (
-            <div>
-                <input {...props} type="file" ref="file" style={{display: 'none'}} value="" onChange={this.upload} />
-                <Button text={text} onTap={this.trigger} block />
-            </div>
-        );
-    }
-}
 
 const Main = React.createClass({
     async demo() {
@@ -419,29 +243,29 @@ const Main = React.createClass({
         return (
             <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
-                {/*<Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
-                <Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
-                <Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />
-                <Combobox selectedIndex={this.state.index} onChange={index => this.setState({index})} scrollToSelected>
+                {/*<Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />*/}
+                {/*<Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
+                {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
+                {/*<Combobox selectedIndex={this.state.index} onChange={index => this.setState({index})} scrollToSelected>
                     {Array.from(range({
                         count: 20,
                         map: i => <Option value={i ** i}><Spinner size={14} />Test {i}</Option>
                     }))}
                     <Option value={'lol'}><Image source={url} height={50} width="50%" /></Option>
-                </Combobox>
-                <Icon name="ion-calendar" size={20} />*/}
+                </Combobox>*/}
+                {/*<Icon name="ion-calendar" size={20} />*/}
                 {/*<Radio selectedIndex={this.state.index} onChange={index => this.setState({index})} title="Test">
                     {Array.from(range({
                         count: 10,
                         map: n => <Option value={n ** n}>{n}</Option>
                     }))}
                     <Option><Image source={url} height={30} /></Option>
-                </Radio>
-                <Button text="Test" />*/}
+                </Radio>*/}
+                {/*<Button text="Test" />*/}
                 {/*<div style={{width: '75%', maxWidth: 480}}>
                     <Calendar selectedDate={new Date()} />
                 </div>*/}
-                <Input.Date onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />
+                {/*<Input.Date onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />*/}
                 {/*<Button text="Wat" onTap={() => dialog.show({content: <Calendar selectedDate={new Date()} onDateSelected={cblog} />, title: "Select Date", buttons: [{text: "Cancel"}]})} />*/}
                 {/*<input type="datetime" />*/}
                 {/*<input type="time" onChange={evt => cblog(evt.target.value)} ref="test" />*/}
@@ -450,10 +274,18 @@ const Main = React.createClass({
                     <RangeInput value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />
                     <input type="range" value={this.state.rangeValue} max={255} onChange={evt => this.setState({rangeValue: evt.target.value})} />
                 </Card>*/}
-                <Input.Search label="Text" iconName="ion-email" value={this.state.text} onChange={text => this.setState({text})} />
+                {/*<Input.URL label="URL" value={this.state.text} onChange={(text, valid) => {console.log(text, valid); this.setState({text});}} />
+                <Input.Email label="Email" value={this.state.text} onChange={(text, valid) => {console.log(text, valid); this.setState({text});}} />
                 <Input.Password label="Password" value={this.state.password} onChange={password => this.setState({password})} />
                 <Input.Range value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />
-                <FileInput text="Test" onChange={files => console.log(files)} multiple />
+                <FileInput text="Test" onChange={files => console.log(files)} multiple />*/}
+                {/*<TimeSelector value={this.state.date} onChange={date => this.setState({date})} />*/}
+                {/*<Input.Time value={this.state.date} onChange={date => this.setState({date})} />*/}
+                {/*<Input.Date value={this.state.date} onChange={date => this.setState({date})} />*/}
+                {/*<Input.File onChange={cblog} text="Select File" />*/}
+                <Flexbox colCount={3} padEnd maxItemWidth={110}>
+                    {arange(11, n => <Button text={n} block flush />)}
+                </Flexbox>
                 <DialogComponent />
             </UI.Screen>
         );
@@ -468,6 +300,12 @@ App.start(
 );
 createStyles();
 window.qsel = (...args) => document.querySelector(...args);
+
+const token = ajax.cancelToken();
+(async () => {
+    console.log(await ajax("http://axel669.net/echo/index2.php", {post: [1, 2, 3, 4], token}));
+})();
+chrono.trigger(2000, token.cancel);
 
 // const isPow2 = n => (n & -n) === n;
 // window.collatz = n => (n % 2 === 0) ? n / 2 : 3 * n + 1;

@@ -48,6 +48,7 @@ defineComponentStyle(
         },
         "track::after": {
             ...thumbSize,
+            boxSizing: 'border-box',
             position: 'absolute',
             top: '50%',
             right: 0,
@@ -83,7 +84,8 @@ const RangeInput = props => {
         max = 10,
         step = 1,
         onChange = () => {},
-        focusStyle = null
+        focusStyle = null,
+        label
     } = props;
     const range = max - min;
     const changeHandler = evt => {
@@ -104,12 +106,15 @@ const RangeInput = props => {
     adjusted = clampValue(adjusted, min, max);
 
     return (
-        <div className="range-input-core-wrapper">
-            <input type="range" min={min} max={max} step={step} value={adjusted} onChange={changeHandler} onTouchStart={evt => evt.target.focus()} />
-            <div className="range-input-core-focus-background" style={focusStyle} />
-            <div className="range-input-core-track-container">
-                <div className="range-input-core-track-background" />
-                <div className="range-input-core-track" style={{width: `${(adjusted / range) * 100}%`}} />
+        <div>
+            <div className="input-core-label">{label}</div>
+            <div className="range-input-core-wrapper">
+                <input type="range" min={min} max={max} step={step} value={adjusted} onChange={changeHandler} onTouchStart={evt => evt.target.focus()} />
+                <div className="range-input-core-focus-background" style={focusStyle} />
+                <div className="range-input-core-track-container">
+                    <div className="range-input-core-track-background" />
+                    <div className="range-input-core-track" style={{width: `${(adjusted / range) * 100}%`}} />
+                </div>
             </div>
         </div>
     );

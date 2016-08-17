@@ -197,7 +197,8 @@ const chronoFormat = {
                 return 12;
             }
             return hour
-        }
+        },
+        "12padded": date => `0${chronoFormat.hour['12'](date)}`.slice(-2)
     },
     weekday: {
         base: date => date.getDay(),
@@ -216,6 +217,9 @@ const chronoFormat = {
     year: {
         base: date => date.getFullYear() % 100,
         full: date => date.getFullYear()
+    },
+    tod: {
+        base: date => (date.getHours() < 12 === true) ? "AM" : "PM"
     }
 };
 chronoFormat.day = chronoFormat.date;
@@ -389,8 +393,8 @@ const chrono = (arg = null) => {
             return new Date(arg);
         }
 
-        const {year = 1970, month = 0, day = 0, hour = 0, minute = 0, second = 0, millisecond = 0} = arg;
-        return new Date(year, month, day + 1, hour, minute, second, millisecond);
+        const {year = 1970, month = 0, date = 0, hours = 0, minutes = 0, seconds = 0, milliseconds = 0} = arg;
+        return new Date(year, month, date + 1, hours, minutes, seconds, milliseconds);
     })();
 
     return {
@@ -427,6 +431,19 @@ const chrono = (arg = null) => {
             return internalDate.getFullYear();
         },
 
+        set(props) {
+            const {
+                year = internalDate.getFullYear(),
+                month = internalDate.getMonth(),
+                date = internalDate.getDate() - 1,
+                hours = internalDate.getHours(),
+                minutes = internalDate.getMinutes(),
+                seconds = internalDate.getSeconds(),
+                milliseconds = internalDate.getMilliseconds()
+            } = props;
+
+            return chrono(new Date(year, month, date + 1, hours, minutes, seconds, milliseconds));
+        },
         shift(offset, unit) {
             let newDate;
             newDate = new Date(internalDate);

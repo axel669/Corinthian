@@ -164,10 +164,17 @@ class Dialog extends React.Component {
         const buttonList = (buttons || []).map(
             ({text, value = null, cancels = false}, index) => {
                 // const valueFunc = (cancels === true) ? dialog.cancel : dialog.success;
-                const retValue = (cancels === true) ?
+                const onTap = () => {
+                    if (typeof value === 'function') {
+                        value = value(this.refs.container);
+                    }
+                    const retValue = (cancels === true) ?
                                     dialog.cancel(value) :
                                     dialog.success(value);
-                return <Button text={text} key={index} onTap={() => this.hide(retValue)} block flush />;
+
+                    this.hide(retValue);
+                };
+                return <Button text={text} key={index} onTap={onTap} block flush />;
             }
         );
         let titleDisplay = null;

@@ -47,7 +47,7 @@ const getCSSValue = (prop, value) => {
         value = value();
     }
     if (Array.isArray(value) === true) {
-        return value.map(getCSSValue);
+        return value.map(value => getCSSValue(prop, value)[0]);
     }
     if (typeof value === 'number' && cssNoMeasurement.has(prop) === false) {
         value += "px";

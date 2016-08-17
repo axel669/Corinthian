@@ -2,13 +2,13 @@ import {defineComponentStyle} from "lib-source/v2/style";
 import Button from "lib-source/uiv2/Button";
 import Calendar from "lib-source/uiv2/Calendar";
 
-const DateInput = ({date = new Date(), format = "{month}/{day}/{year}", onChange = () => {}, iconName}) => {
+const DateInput = ({value = chrono(), format = "{month}/{day}/{year}", onChange = () => {}, iconName}) => {
     const changeDate = async () => {
         const handler = date => {
             dialog.hide(dialog.success(date));
         };
         const result = await dialog.show({
-            content: <Calendar selectedDate={date} onDateSelected={handler} key={Date.now()} />,
+            content: <Calendar selectedDate={value} onDateSelected={handler} key={Date.now()} />,
             buttons: [{text: "Cancel"}],
             title: "Select Date"
         });
@@ -19,7 +19,7 @@ const DateInput = ({date = new Date(), format = "{month}/{day}/{year}", onChange
     };
     return (
         <div style={{height: 30}}>
-            <Button text={chrono(date).format(format)} onTap={changeDate} flush fill iconName={iconName} />
+            <Button text={value.format(format)} onTap={changeDate} flush fill iconName={iconName} />
         </div>
     );
 };

@@ -76,7 +76,6 @@ class Calendar extends React.Component {
                     </CenterContent>
                     <Button pinInfo={{top: 0, right: 0, height: '100%', width: 30}} iconName="ion-arrow-right-b" fill flush onTap={this.nextMonth} textColor="white" />
                 </UI.Pinboard>
-                {/*<div>{month}/{year}</div>*/}
                 <UI.Grid colCount={7} rowCount={7} height={180}>
                     {['s', 'm', 't', 'w', 't', 'f', 's'].map(
                         letter => {
@@ -87,6 +86,7 @@ class Calendar extends React.Component {
                         42,
                         n => {
                             const date = baseDate.shift(n, 'days');
+                            const dateValue = selectedDate.set({month: date.month, year: date.year, date: date.date});
 
                             if (date.month === month) {
                                 let buttonStyle = {};
@@ -100,7 +100,7 @@ class Calendar extends React.Component {
 
                                 return (
                                     <div className="calendar-core-day" key={n}>
-                                        <Button text={date.date + 1} flush fill onTap={() => this.select(date)} {...buttonStyle} />
+                                        <Button text={date.date + 1} flush fill onTap={() => this.select(dateValue)} {...buttonStyle} />
                                     </div>
                                 );
                             } else {
