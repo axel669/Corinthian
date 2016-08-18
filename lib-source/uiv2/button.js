@@ -1,4 +1,4 @@
-import {defineComponentStyle, Theme} from "lib-source/v2/style.js";
+import {defineComponentStyle, defineStyleForComponent, defineCustomBase} from "lib-source/v2/style.js";
 import Ripple from "lib-source/uiv2/ripple.js";
 import Icon from 'lib-source/uiv2/icon.js';
 import Touchable from 'lib-source/uiv2/Touchable';
@@ -13,12 +13,10 @@ defineComponentStyle(
             margin: 4,
             overflow: 'hidden',
             zIndex: "+0",
-            backgroundColor: 'transparent',
-            color: 'black',
-            // color: () => Theme.variable.core.button.textColor,
-            // textTransform: 'uppercase',
             whiteSpace: 'pre',
             display: 'inline-block',
+            backgroundColor: 'transparent',
+            color: 'black',
             borderRadius: 3
         },
         "wrapper:focus": {
@@ -60,11 +58,25 @@ defineComponentStyle(
         }
     }
 );
-/*
-    text
-    onTap
-    styleName
-*/
+defineCustomBase(
+    'button',
+    ({normal = null, focus = null, disabled = null}) => {
+        const style = {};
+
+        if (normal !== null) {
+            style[".button-core-wrapper/wrapper-custom"] = normal;
+        }
+        if (focus !== null) {
+            style[".button-core-wrapper/wrapper-custom:focus"] = normal;
+        }
+        if (disabled !== null) {
+            style[".button-core-wrapper/wrapper-custom[disabled]"] = normal;
+        }
+
+        return style;
+    }
+);
+
 const Button = props => {
     let {
         text,
@@ -80,10 +92,7 @@ const Button = props => {
         iconName = null
     } = props;
 
-    const wrapperName = `button-${styleName}-wrapper`;
-    const textWrapperName = `button-${styleName}-text-wrapper`;
-    const textName = `button-${styleName}-text`;
-    const overlayName = `button-${styleName}-overlay`;
+    const wrapperName = `button-core-wrapper button-${styleName}-wrapper-custom`;
 
     const wrapperStyle = {backgroundColor: buttonColor};
     const textWrapperStyle = {};
@@ -114,14 +123,32 @@ const Button = props => {
 
     return (
         <Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTapHandler} disabled={disabled} style={wrapperStyle}>
-            <div className={textWrapperName} style={textWrapperStyle}>
-                <div className={textName} style={textStyle}>{text}</div>
+            <div className="button-core-text-wrapper" style={textWrapperStyle}>
+                <div className="button-core-text" style={textStyle}>{text}</div>
             </div>
-            <div className={overlayName} />
+            <div className="button-core-overlay" />
             {rippleElement}
         </Touchable>
     );
 };
-Button.componentStyleName = 'button';
+Button.componentName = 'button';
+
+defineStyleForComponent(
+    Button, "cancel",
+    {
+        normal: {
+            backgroundColor: "#b5263e",
+            color: 'white'
+        }
+    }
+);
+defineStyleForComponent(
+    Button, "confirm",
+    {
+        normal: {
+            backgroundColor: "#30d5a7"
+        }
+    }
+);
 
 export default Button;

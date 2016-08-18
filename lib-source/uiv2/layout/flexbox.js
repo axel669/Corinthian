@@ -7,7 +7,9 @@ defineComponentStyle(
         "container": {
             display: ['-webkit-flex', 'flex'],
             WebkitFlexWrap: 'wrap',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            // alignItems: 'center',
+            // justifyContent: 'center'
         }
     }
 );
@@ -17,7 +19,8 @@ const Flexbox = props => {
         width = '100%',
         padEnd = false,
         minItemWidth = null,
-        maxItemWidth = null
+        maxItemWidth = null,
+        align = 'center'
     } = props;
     const flexWidth = 100 / colCount;
     let {children} = props;
@@ -39,8 +42,10 @@ const Flexbox = props => {
             <FlexboxItem key={index} width={flexWidth} content={child} minWidth={minItemWidth} maxWidth={maxItemWidth} />
     )
 
+    // console.trace();
+
     return (
-        <div style={{width}} className="flexbox-core-container">
+        <div style={{width, justifyContent: align, WebkitJustifyContent: align}} className="flexbox-core-container">
             {children}
         </div>
     );

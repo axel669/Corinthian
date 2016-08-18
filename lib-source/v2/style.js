@@ -43,6 +43,9 @@ const cssPrefixNames = new Set([
 const cssPrefixes = ['-webkit-', '-moz-', '-ms-', '-o-', ''];
 
 const getCSSValue = (prop, value) => {
+    if (value === null) {
+        return null;
+    }
     if (typeof value === 'function') {
         value = value();
     }
@@ -67,7 +70,7 @@ const processSelector = (componentName, styleName, selector) => {
                 default:
                     return part;
             }
-        }).join('.');
+        }).join('');
     });
     return realParts.join(' ');
 };
@@ -76,16 +79,18 @@ const processDef = (cssLines, selector, defs) => {
     for (const [cssProp, cssValue] of Object.entries(defs)) {
         const value = getCSSValue(cssProp, cssValue);
         const prop = cssProp.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
-        if (cssPrefixNames.has(cssProp) === true) {
-            cssLines = [
-                ...cssLines,
-                ...cssPrefixes.map(prefix => `\t${prefix}${prop}: ${value[0]};`)
-            ];
-        } else {
-            cssLines = [
-                ...cssLines,
-                ...value.map(value => `\t${prop}: ${value};`)
-            ];
+        if (value !== null) {
+            if (cssPrefixNames.has(cssProp) === true) {
+                cssLines = [
+                    ...cssLines,
+                    ...cssPrefixes.map(prefix => `\t${prefix}${prop}: ${value[0]};`)
+                ];
+            } else {
+                cssLines = [
+                    ...cssLines,
+                    ...value.map(value => `\t${prop}: ${value};`)
+                ];
+            }
         }
     }
     cssLines = [...cssLines, "}"];
@@ -106,6 +111,26 @@ const defineComponentStyle = (component, styleName, styles) =>
         styleName,
         styles
     );
+const baseStyles = {};
+const defineCustomBase = (component, baseFunc) => {
+    if (typeof component !== 'string') {
+        component = component.componentName;
+    }
+    baseStyles[component] = baseFunc;
+};
+const propStyleName = name => name.replace(/(^\w)|\-\w/g, s => s.slice(-1).toUpperCase());
+const defineStyleForComponent = (component, styleName, options) => {
+    const Component = component;
+    const styleDef = baseStyles[component.componentName](options);
+
+    if (styleDef === null || styleDef === undefined || typeof styleDef !== 'object') {
+        console.warn(`Improper type returned from style function for ${component.componentName}:${styleName}. Did you forget to return the constructed style?`);
+    } else {
+        defineComponentStyle(component.componentName, styleName, styleDef);
+    }
+
+    component[propStyleName(styleName)] = props => <Component {...props} styleName={styleName} />;
+};
 
 const createStyles = () => {
     const head = document.querySelector("head");
@@ -157,6 +182,8 @@ const Theme = {
 
 export default {
     defineComponentStyle,
+    defineCustomBase,
+    defineStyleForComponent,
     Theme,
     __setup: createStyles
 };

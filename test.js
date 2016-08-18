@@ -20,9 +20,11 @@ import Calendar from 'lib-source/uiv2/Calendar';
 import Input from 'lib-source/uiv2/Input';
 
 import Flexbox from 'lib-source/uiv2/layout/Flexbox';
+import Grid from 'lib-source/uiv2/layout/Grid';
+import Pinboard from 'lib-source/uiv2/layout/Pinboard';
 
 import DialogComponent from "lib-source/uiv2/dialog";
-import {defineComponentStyle, Theme as _Theme, __setup as createStyles} from "lib-source/v2/style";
+import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent} from "lib-source/v2/style";
 
 import {warningFunc} from "lib-source/v2/utils";
 import {sharedReference, SharedObjectDisplay} from "lib-source/v2/shared";
@@ -211,6 +213,18 @@ defineStyleForComponent(
 <Button.Special />
 */
 
+defineStyleForComponent(
+    Checkbox, 'awesome',
+    {
+        normal: {
+            color: 'cyan'
+        },
+        checked: {
+            color: 'blue'
+        }
+    }
+);
+
 const Main = React.createClass({
     async demo() {
         if (await Dialog.confirm("Really?") === true) {
@@ -243,7 +257,7 @@ const Main = React.createClass({
         return (
             <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
-                {/*<Checkbox checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />*/}
+                <Checkbox.Awesome checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
                 {/*<Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
                 {/*<Combobox selectedIndex={this.state.index} onChange={index => this.setState({index})} scrollToSelected>
@@ -265,7 +279,7 @@ const Main = React.createClass({
                 {/*<div style={{width: '75%', maxWidth: 480}}>
                     <Calendar selectedDate={new Date()} />
                 </div>*/}
-                {/*<Input.Date onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Demo: {month}/{day}/{year}"} />*/}
+                {/*<Input.Date onChange={date => this.setState({date})} date={this.state.date} label="My Birthday?" iconName="ion-calendar" format={"Expiration Date: {month}/{day}/{year}"} />*/}
                 {/*<Button text="Wat" onTap={() => dialog.show({content: <Calendar selectedDate={new Date()} onDateSelected={cblog} />, title: "Select Date", buttons: [{text: "Cancel"}]})} />*/}
                 {/*<input type="datetime" />*/}
                 {/*<input type="time" onChange={evt => cblog(evt.target.value)} ref="test" />*/}
@@ -283,9 +297,37 @@ const Main = React.createClass({
                 {/*<Input.Time value={this.state.date} onChange={date => this.setState({date})} />*/}
                 {/*<Input.Date value={this.state.date} onChange={date => this.setState({date})} />*/}
                 {/*<Input.File onChange={cblog} text="Select File" />*/}
-                <Flexbox colCount={3} padEnd maxItemWidth={110}>
+                {/*<Flexbox colCount={3} padEnd maxItemWidth={100} align="space-around">
                     {arange(11, n => <Button text={n} block flush />)}
-                </Flexbox>
+                </Flexbox>*/}
+                {/*<Grid colCount={3} rowCount={4}>
+                    {arange(11, n => <Button text={n} flush fill />)}
+                </Grid>*/}
+                {/*<Pinboard>
+                    {arange(12,
+                        n => {
+                            const angle = (n / 6) * Math.PI;
+                            const x = Math.cos(angle) * 100 + 160;
+                            const y = Math.sin(angle) * 100 + 160;
+                            const pos = {top: y, left: x, width: 30, height: 30};
+
+                            return <div pinInfo={pos} style={{width: '100%', height: '100%', backgroundColor: 'cyan'}}>{n}</div>;
+                        }
+                    )}
+                </Pinboard>*/}
+                {/*<Input.Search iconName="ion-search" placeholder="Search Stuffs" />*/}
+                <Button text="Normal" />
+                <Button text="Disabled" disabled />
+                <Button.Cancel text="Cancel" />
+                <Button.Confirm text="Confirm" />
+                {/*<Card>
+                    <Pinboard height={50}>
+                        <Icon name="ion-happy" size={40} pinInfo={{top: 0, left: 10, width: 40, height: 50}} />
+                        <div pinInfo={{top: 0, left: 55}}>User Name Thing?</div>
+                        <div pinInfo={{top: 30, left: 55, fontSize: 11}}>User information about positiond and stuff</div>
+                        <div pinInfo={{top: 5, left: 5, width: 10, height: 10, backgroundColor: 'cyan'}} />
+                    </Pinboard>
+                </Card>*/}
                 <DialogComponent />
             </UI.Screen>
         );
@@ -301,11 +343,11 @@ App.start(
 createStyles();
 window.qsel = (...args) => document.querySelector(...args);
 
-const token = ajax.cancelToken();
-(async () => {
-    console.log(await ajax("http://axel669.net/echo/index2.php", {post: [1, 2, 3, 4], token}));
-})();
-chrono.trigger(2000, token.cancel);
+// const token = ajax.cancelToken();
+// (async () => {
+//     console.log(await ajax("http://axel669.net/echo/index2.php", {post: [1, 2, 3, 4], token}));
+// })();
+// chrono.trigger(2000, token.cancel);
 
 // const isPow2 = n => (n & -n) === n;
 // window.collatz = n => (n % 2 === 0) ? n / 2 : 3 * n + 1;

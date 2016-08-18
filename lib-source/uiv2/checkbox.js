@@ -1,4 +1,4 @@
-import {defineComponentStyle} from "lib-source/v2/style";
+import {defineComponentStyle, defineCustomBase} from "lib-source/v2/style";
 import CenterContent from "lib-source/uiv2/CenterContent";
 // import Ripple from "lib-source/uiv2/Ripple";
 import Icon from "lib-source/uiv2/Icon";
@@ -52,31 +52,58 @@ const Checkbox = props => {
         offIconName = ionOffIcon,
         label,
         subTitle = null,
-        onChange = () => console.warn("No onChange given to checkbox")
+        onChange = () => console.warn("No onChange given to checkbox"),
+        styleName = "core"
     } = props;
     const iconName = (checked === true) ? onIconName : offIconName;
+    const iconClassName = `checkbox-core-icon checkbox-${styleName}-icon-custom`;
+    const labelClassName = `checkbox-core-label checkbox-${styleName}-label-custom`;
     let content = label;
 
     if (subTitle !== null) {
+        const subtitleClassName = `checkbox-core-subtitle checkbox-${styleName}-subtitle-custom`;
         content = (
             <div>
                 {label}
-                <div className="checkbox-core-subtitle">{subTitle}</div>
+                <div className={subtitleClassName}>{subTitle}</div>
             </div>
         );
     }
 
     return (
         <UI.Touchable component="div" className="checkbox-core-container" onTap={() => onChange(!checked)}>
-            <div className="checkbox-core-icon" data-checked={checked}>
+            <div className={iconClassName} data-checked={checked}>
                 <CenterContent height="100%">
                     <Icon name={iconName} />
                 </CenterContent>
             </div>
-            <div className="checkbox-core-label">{content}</div>
+            <div className={labelClassName}>{content}</div>
             {/*<Ripple />*/}
         </UI.Touchable>
     );
 };
+Checkbox.componentName = "checkbox";
+
+defineCustomBase(
+    Checkbox,
+    ({normal = null, checked = null, label = null, subtitle = null}) => {
+        const style = {};
+
+        if (normal !== null) {
+            style[".checkbox-core-icon/icon-custom"] = normal;
+        }
+        if (checked !== null) {
+            style[".checkbox-core-icon/icon-custom[data-checked='true']"] = checked;
+        }
+        if (label !== null) {
+            style[".checkbox-core-label/label-custom"] = label;
+        }
+        if (subtitle !== null) {
+            style[".checkbox-core-subtitle/subtitle-custom"] = subtitle;
+        }
+
+        return style;
+    }
+);
 
 export default Checkbox;

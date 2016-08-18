@@ -1,4 +1,16 @@
-const Grid = ({children, colCount, rowCount, width = null, height = null}) => {
+import {defineComponentStyle} from "lib-source/v2/style";
+
+defineComponentStyle(
+    'grid',
+    'core',
+    {
+        "item": {
+            position: "absolute"
+        }
+    }
+);
+
+const Grid = ({children, colCount, rowCount, width = '100%', height = '100%'}) => {
     if (height === null) {
         throw new Error("Height needs to be given to the grid");
     }
@@ -20,14 +32,13 @@ const Grid = ({children, colCount, rowCount, width = null, height = null}) => {
 };
 const GridItem = ({width, height, x, y, content}) => {
     const style = {
-        position: 'absolute',
         width: `${width}%`,
         height: `${height}%`,
         left: `${x * width}%`,
         top: `${y * height}%`
     };
 
-    return <div style={style}>{content}</div>;
+    return <div className="grid-core-item" style={style}>{content}</div>;
 };
 
 export default Grid;

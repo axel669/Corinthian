@@ -22,10 +22,9 @@ const ajax = (url, options = {}) => new Promise(
         } else {
             method = "POST";
             if (FormData.prototype.isPrototypeOf(post) === false) {
+                debugger;
                 post = JSON.stringify(post);
                 contentType = "application/json";
-            } else {
-                // contentType = "application/x-www-form-urlencoded";
             }
         }
 

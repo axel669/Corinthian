@@ -75,23 +75,28 @@ class InputWrapper extends React.Component {
     }
 
     render = () => {
-        const {parser = i => i, onChange = () => {}, iconName = null, style = {}, ...props} = this.props;
+        const {parser = i => i, onChange = () => {}, iconName = null, style = {}, borderRadius = null, ...props} = this.props;
         const handler = evt => {
             // const raw = evt.target.value;
             onChange(parser(evt.target.value));
         };
         let realStyle = {...style};
+        let borderStyle = {};
         let iconDisplay = null;
 
         if (iconName !== null) {
             iconDisplay = <CenterContent className="input-core-icon" height="100%"><Icon name={iconName} size={18} /></CenterContent>;
             realStyle.paddingLeft = 30;
         }
+        if (borderRadius !== null) {
+            realStyle.borderRadius = borderRadius;
+            borderStyle.borderRadius = borderRadius;
+        }
 
         return (
             <div className="input-core-wrapper">
                 <input {...props} style={realStyle} onChange={handler} className="input-core-field" ref="field" />
-                <div className="input-core-highlight-border" />
+                <div className="input-core-highlight-border" style={borderStyle} />
                 {iconDisplay}
             </div>
         );

@@ -18,6 +18,7 @@ defineComponentStyle(
         }
     }
 );
+/*bgcolor textcolor all 3*/
 // const Calendar = ({selectedDate}) =>
 class Calendar extends React.Component {
     constructor(props) {
