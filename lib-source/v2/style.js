@@ -122,6 +122,7 @@ const propStyleName = name => name.replace(/(^\w)|\-\w/g, s => s.slice(-1).toUpp
 const defineStyleForComponent = (component, styleName, options) => {
     const Component = component;
     const styleDef = baseStyles[component.componentName](options);
+    let styledComponent = null;
 
     if (styleDef === null || styleDef === undefined || typeof styleDef !== 'object') {
         console.warn(`Improper type returned from style function for ${component.componentName}:${styleName}. Did you forget to return the constructed style?`);
@@ -129,7 +130,9 @@ const defineStyleForComponent = (component, styleName, options) => {
         defineComponentStyle(component.componentName, styleName, styleDef);
     }
 
-    component[propStyleName(styleName)] = props => <Component {...props} styleName={styleName} />;
+    styledComponent = props => <Component {...props} styleName={styleName} />;
+    styledComponent.parentInfo = component;
+    component[propStyleName(styleName)] = styledComponent;
 };
 
 const createStyles = () => {

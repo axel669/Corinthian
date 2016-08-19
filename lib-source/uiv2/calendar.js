@@ -55,9 +55,9 @@ class Calendar extends React.Component {
     }
 
     select = (date) => {
-        const {onDateSelected = () => {}} = this.props;
+        const {onChange = () => {}} = this.props;
         // console.log(date.toString());
-        onDateSelected(date);
+        onChange(date);
     }
 
     render = () => {
@@ -77,7 +77,7 @@ class Calendar extends React.Component {
                     </CenterContent>
                     <Button pinInfo={{top: 0, right: 0, height: '100%', width: 30}} iconName="ion-arrow-right-b" fill flush onTap={this.nextMonth} textColor="white" />
                 </UI.Pinboard>
-                <UI.Grid colCount={7} rowCount={7} height={180}>
+                <UI.Grid colCount={7} rowCount={7} height={195}>
                     {['s', 'm', 't', 'w', 't', 'f', 's'].map(
                         letter => {
                             return <CenterContent key={letter}>{letter.toUpperCase()}</CenterContent>;
@@ -115,5 +115,9 @@ class Calendar extends React.Component {
     }
 }
 Calendar.componentStyleName = 'calendar';
+
+Calendar.valueProp = "selectedDate";
+Calendar.valueFunction = date => date;
+Calendar.defaultPropValue = () => chrono();
 
 export default Calendar;

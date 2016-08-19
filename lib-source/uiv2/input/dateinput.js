@@ -8,9 +8,9 @@ const DateInput = ({value = chrono(), format = "{month}/{day}/{year}", onChange 
             dialog.hide(dialog.success(date));
         };
         const result = await dialog.show({
-            content: <Calendar selectedDate={value} onDateSelected={handler} key={Date.now()} />,
+            content: <Calendar selectedDate={value} onChange={handler} key={Date.now()} />,
             buttons: [{text: "Cancel"}],
-            title: "Select Date"
+            // title: "Select Date"
         });
 
         if (result.value !== null) {
@@ -23,5 +23,9 @@ const DateInput = ({value = chrono(), format = "{month}/{day}/{year}", onChange 
         </div>
     );
 };
+
+DateInput.valueProp = 'value';
+DateInput.valueFunction = date => date;
+DateInput.defaultPropValue = () => chrono();
 
 export default DateInput;

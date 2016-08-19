@@ -26,6 +26,8 @@ defineComponentStyle(
             width: '100%',
             borderWidth: 0,
             borderBottom: '2px solid lightgray',
+            WebkitBorderRadius: 0,
+            WebkitAppearance: 'none',
             borderRadius: 0,
             backgroundColor: 'transparent',
             margin: 0,
@@ -142,12 +144,36 @@ const Input = {
     Text: props => <LabeledInput {...props} type="text" />,
     Password: props => <LabeledInput {...props} type="password" />,
     Search: props => <LabeledInput {...props} type="search" iconName="ion-search" />,
-    Date: props => <DateInput {...props} />,
-    Range: props => <RangeInput {...props} />,
-    Time: props => <TimeInput {...props} />,
-    File: props => <FileInput {...props} />,
-    URL: ({validator = url => /^(https?:\/\/)?(\w+(\.\w+)+|localhost)(\/[\w\#\-\%]+)*\/?$/.test(url), ...props}) => <ValidatedInput validator={validator} {...props} />,
-    Email: ({validator = email => /^([a-zA-Z]\w*)(\.([a-zA-Z]\w*))*\@([a-zA-Z]\w*)(\.([a-zA-Z]\w*))+$/.test(email), ...props}) => <ValidatedInput validator={validator} {...props} />
+    Date: DateInput,
+    Range: RangeInput,
+    Time: TimeInput,
+    File: FileInput,
+    // Date: props => <DateInput {...props} />,
+    // Range: props => <RangeInput {...props} />,
+    // Time: props => <TimeInput {...props} />,
+    // File: props => <FileInput {...props} />,
+    URL: ({validator = url => /^(https?:\/\/)?(\w+(\.\w+)+|localhost)(\/[\w\#\-\%]+)*\/?$/.test(url), ...props}) => <ValidatedInput validator={validator} {...props} type="url" />,
+    Email: ({validator = email => /^([a-zA-Z]\w*)(\.([a-zA-Z]\w*))*\@([a-zA-Z]\w*)(\.([a-zA-Z]\w*))+$/.test(email), ...props}) => <ValidatedInput validator={validator} {...props} type="email" />
 };
+
+Input.Text.valueProp = 'value';
+Input.Text.valueFunction = text => text;
+Input.Text.defaultPropValue = "";
+
+Input.Password.valueProp = 'value';
+Input.Password.valueFunction = text => text;
+Input.Password.defaultPropValue = "";
+
+Input.Search.valueProp = 'value';
+Input.Search.valueFunction = text => text;
+Input.Search.defaultPropValue = "";
+
+Input.URL.valueProp = 'value';
+Input.URL.valueFunction = (text, valid) => ({text, valid});
+Input.URL.defaultPropValue = "";
+
+Input.Email.valueProp = 'value';
+Input.Email.valueFunction = (text, valid) => ({text, valid});
+Input.Email.defaultPropValue = "";
 
 export default Input;

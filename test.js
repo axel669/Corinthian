@@ -23,6 +23,8 @@ import Flexbox from 'lib-source/uiv2/layout/Flexbox';
 import Grid from 'lib-source/uiv2/layout/Grid';
 import Pinboard from 'lib-source/uiv2/layout/Pinboard';
 
+import Form from 'lib-source/uiv2/Form';
+
 import DialogComponent from "lib-source/uiv2/dialog";
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent} from "lib-source/v2/style";
 
@@ -228,7 +230,8 @@ defineStyleForComponent(
     Toggle, 'awesome',
     {
         on: {
-            thumbColor: 'blue'
+            thumbColor: 'blue',
+            trackColor: 'cyan'
         }
     }
 );
@@ -265,16 +268,8 @@ const Main = React.createClass({
         return (
             <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
-                <Checkbox.Awesome checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
-                <Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
+                {/*<Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
-                {/*<Combobox selectedIndex={this.state.index} onChange={index => this.setState({index})} scrollToSelected>
-                    {Array.from(range({
-                        count: 20,
-                        map: i => <Option value={i ** i}><Spinner size={14} />Test {i}</Option>
-                    }))}
-                    <Option value={'lol'}><Image source={url} height={50} width="50%" /></Option>
-                </Combobox>*/}
                 {/*<Icon name="ion-calendar" size={20} />*/}
                 {/*<Radio selectedIndex={this.state.index} onChange={index => this.setState({index})} title="Test">
                     {Array.from(range({
@@ -302,8 +297,8 @@ const Main = React.createClass({
                 <Input.Range value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />
                 <FileInput text="Test" onChange={files => console.log(files)} multiple />*/}
                 {/*<TimeSelector value={this.state.date} onChange={date => this.setState({date})} />*/}
-                {/*<Input.Time value={this.state.date} onChange={date => this.setState({date})} />*/}
-                {/*<Input.Date value={this.state.date} onChange={date => this.setState({date})} />*/}
+                {/*<Input.Time value={this.state.date} onChange={date => this.setState({date})} />
+                <Input.Date value={this.state.date} onChange={date => this.setState({date})} />*/}
                 {/*<Input.File onChange={cblog} text="Select File" />*/}
                 {/*<Flexbox colCount={3} padEnd maxItemWidth={100} align="space-around">
                     {arange(11, n => <Button text={n} block flush />)}
@@ -324,10 +319,26 @@ const Main = React.createClass({
                     )}
                 </Pinboard>*/}
                 {/*<Input.Search iconName="ion-search" placeholder="Search Stuffs" />*/}
-                <Button text="Normal" />
+                {/*<Checkbox.Awesome checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />*/}
+                {/*<Button text="Normal" />
                 <Button text="Disabled" disabled />
                 <Button.Cancel text="Cancel" />
                 <Button.Confirm text="Confirm" />
+                <Input.Range value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />*/}
+                <Form label="Form">
+                    <Input.Text formName="Text" placeholder="Text" />
+                    <Input.Password formName="Password" placeholder="Password" />
+                    <Input.Search formName="Search" placeholder="Search" />
+                    <Input.URL formName="URL" placeholder="URL" />
+                    <Input.Email formName="Email" placeholder="Email" />
+
+                    <Input.Date formName="date" />
+                    <Input.Time formName="time" />
+                    <Input.File formName="file" multiple valueFormat={list => `Files Selected: ${list.length}`} />
+                    <Input.Range formName="range" min={0} max={255} />
+                </Form>
+                <div style={{position: 'absolute', bottom: 0, height: 50, width: 50, backgroundColor: 'cyan'}} />
+                {/*<Input.File*/}
                 {/*<Card>
                     <Pinboard height={50}>
                         <Icon name="ion-happy" size={40} pinInfo={{top: 0, left: 10, width: 40, height: 50}} />

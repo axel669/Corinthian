@@ -34,4 +34,8 @@ class TimeInput extends React.Component {
     }
 }
 
+TimeInput.valueProp = 'value';
+TimeInput.valueFunction = date => date;
+TimeInput.defaultPropValue = () => chrono();
+
 export default TimeInput;

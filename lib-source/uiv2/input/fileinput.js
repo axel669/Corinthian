@@ -14,14 +14,31 @@ class FileInput extends React.Component {
     }
 
     render = () => {
-        const {text, value, ...props} = this.props;
+        const {value, valueFormat = fileList => fileList[0].name, nullText = "Select a file", ...props} = this.props;
+        let buttonText;
+
+        if (typeof value === 'string') {
+            buttonText = value;
+        }
+        if (Array.isArray(value) === true) {
+            buttonText = valueFormat(value);
+        }
+
+        if (value === null) {
+            buttonText = nullText;
+        }
+
         return (
             <div>
                 <input {...props} type="file" ref="file" style={{display: 'none'}} value="" onChange={this.upload} />
-                <Button text={text} onTap={this.trigger} block />
+                <Button text={buttonText} onTap={this.trigger} block />
             </div>
         );
     }
 }
+
+FileInput.valueProp = "value";
+FileInput.valueFunction = fileList => fileList;
+FileInput.defaultPropValue = null;
 
 export default FileInput;

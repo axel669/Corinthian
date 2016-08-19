@@ -83,4 +83,8 @@ class Combobox extends React.Component {
     }
 }
 
+Combobox.valueProp = "selectedIndex";
+Combobox.valueFunction = (index, value) => ({index, value});
+Combobox.defaultPropValue = 0;
+
 export default Combobox;

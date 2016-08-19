@@ -120,4 +120,8 @@ const RangeInput = props => {
     );
 };
 
+RangeInput.valueProp = 'value';
+RangeInput.valueFunction = n => n;
+RangeInput.defaultPropValue = 0;
+
 export default RangeInput;

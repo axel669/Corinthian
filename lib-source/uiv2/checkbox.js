@@ -86,6 +86,10 @@ const Checkbox = props => {
 };
 Checkbox.componentName = "checkbox";
 
+Checkbox.valueProp = "checked";
+Checkbox.valueFunction = checked => checked;
+Checkbox.defaultPropValue = false;
+
 defineCustomBase(
     Checkbox,
     ({normal = null, checked = null, label = null, subtitle = null}) => transferProps({

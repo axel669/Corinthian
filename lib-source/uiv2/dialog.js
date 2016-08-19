@@ -25,7 +25,7 @@ defineComponentStyle(
             position: 'absolute',
             backgroundColor: 'white',
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
-            borderRadius: 5,
+            // borderRadius: 5,
             width: '75%',
             maxWidth: 480,
             padding: 0,
@@ -43,7 +43,7 @@ defineComponentStyle(
         },
 
         "content": {
-            maxHeight: '40vh',
+            maxHeight: '50vh',
             WebkitOverflowScrolling: 'touch',
             overflow: 'auto',
             borderBottom: '1px solid lightgray',

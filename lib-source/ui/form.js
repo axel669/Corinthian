@@ -336,8 +336,6 @@ class Form extends React.Component {
 
         const {onSubmit = state => console.log(state)} = this.props;
         onSubmit(this.internalState);
-
-        // console.log(this.internalState);
     }
 
     render = () => {
