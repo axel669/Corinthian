@@ -40,7 +40,7 @@ const RadioItem = ({checked, iconColor, children}) => {
     const iconName = `ion-android-radio-button-${checked === true ? 'on' : 'off'}`;
     return (
         <div className="radio-item-core-default-item" data-checked={checked}>
-            <div className="radio-item-core-icon" data-checked={checked}>
+            <div className={`radio-item-core-icon`} data-checked={checked}>
                 <CenterContent height="100%">
                     <Icon size={18} name={iconName} />
                 </CenterContent>
@@ -65,6 +65,7 @@ class Radio extends React.Component {
             layout = 'div',
             selectedIndex,
             onChange = () => {},
+            styleName = 'core',
             title
         } = this.props;
         const Container = layout;

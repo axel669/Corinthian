@@ -13,7 +13,8 @@ defineComponentStyle(
             borderRadius: 3,
             // padding: 3,
             position: 'relative',
-            color: 'black'
+            color: 'black',
+            height: 30
         },
         "icon": {
             position: 'absolute',
@@ -25,7 +26,7 @@ defineComponentStyle(
     }
 );
 
-const comboboxSelect = (index, value) => dialog.success([index, value]);
+// const comboboxSelect = (index, value) => dialog.success([index, value]);
 class Combobox extends React.Component {
     constructor(props) {
         super(props);
@@ -39,7 +40,7 @@ class Combobox extends React.Component {
             title,
             content: children.map(
                 ({props: {value = null, children, style = null, className = null}}, index) => {
-                    const onTap = () => dialog.hide(comboboxSelect(index, value));
+                    const onTap = () => dialog.hide(dialog.success([index, value]));
                     return (
                         <div {...{style, className}} key={index}>
                             <Button text={children} block flush onTap={onTap} />
@@ -63,7 +64,7 @@ class Combobox extends React.Component {
     }
 
     render = () => {
-        const {selectedIndex, children} = this.props;
+        const {selectedIndex, children, height, ...buttonProps} = this.props;
         const flattenedChildren = React.Children.toArray(children);
         let currentChild = "Please select an option";
 
@@ -72,12 +73,12 @@ class Combobox extends React.Component {
         }
 
         return (
-            <Touchable component="div" className="combobox-core-container">
-                <Button text={currentChild} block flush onTap={this.openOptions} />
+            <div className="combobox-core-container" style={{height}}>
+                <Button {...buttonProps} text={currentChild} block flush fill onTap={this.openOptions} />
                 <div className="combobox-core-icon">
                     <Icon name="ion-arrow-down-b" size={24} />
                 </div>
-            </Touchable>
+            </div>
         );
     }
 }

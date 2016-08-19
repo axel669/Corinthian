@@ -217,10 +217,18 @@ defineStyleForComponent(
     Checkbox, 'awesome',
     {
         normal: {
-            color: 'cyan'
+            iconColor: 'cyan'
         },
         checked: {
-            color: 'blue'
+            iconColor: 'blue'
+        }
+    }
+);
+defineStyleForComponent(
+    Toggle, 'awesome',
+    {
+        on: {
+            thumbColor: 'blue'
         }
     }
 );
@@ -258,7 +266,7 @@ const Main = React.createClass({
             <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 <Checkbox.Awesome checked={this.state.checked} onChange={checked => this.setState({checked})} label={"Test"} subTitle="more text?" />
-                {/*<Toggle on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
+                <Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
                 {/*<Combobox selectedIndex={this.state.index} onChange={index => this.setState({index})} scrollToSelected>
                     {Array.from(range({

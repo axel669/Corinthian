@@ -1,5 +1,5 @@
 import {defineComponentStyle, Theme} from "lib-source/v2/style.js";
-import Ripple from "lib-source/uiv2/ripple.js";
+// import Ripple from "lib-source/uiv2/ripple.js";
 import Icon from 'lib-source/uiv2/icon.js';
 
 defineComponentStyle(
@@ -31,7 +31,6 @@ const IconButton = props => {
 
     return (
         <UI.Touchable component="div" className={wrapperName} style={{width: size, height: size}}>
-            <Ripple />
             <div className="button-core-text-wrapper" style={{height: '100%'}}>
                 <div className="button-core-text" style={{padding: 0}}><Icon name={name} size={iconSize} /></div>
             </div>

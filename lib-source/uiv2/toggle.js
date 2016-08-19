@@ -1,4 +1,5 @@
-import {defineComponentStyle} from "lib-source/v2/style";
+import {defineComponentStyle, defineCustomBase} from "lib-source/v2/style";
+import {transferProps} from 'lib-source/v2/utils';
 
 const animationTime = 100;
 defineComponentStyle(
@@ -69,7 +70,8 @@ const Toggle = props => {
         on = false,
         label,
         subTitle = null,
-        onChange = () => console.warn("No onChange given to checkbox")
+        onChange = () => console.warn("No onChange given to checkbox"),
+        styleName = 'core'
     } = props;
     let content = label;
     let toggleStyle;
@@ -85,13 +87,50 @@ const Toggle = props => {
 
     return (
         <UI.Touchable component="div" className="toggle-core-container" onTap={() => onChange(!on)}>
-            <div className="toggle-core-label">{content}</div>
-            <div className="toggle-core-toggle-container" data-on={on}>
-                <div className="toggle-core-toggle" data-on={on} />
+            <div className={`toggle-core-label toggle-${styleName}-label-custom`}>{content}</div>
+            <div className={`toggle-core-toggle-container toggle-${styleName}-toggle-container-custom`} data-on={on}>
+                <div className={`toggle-core-toggle toggle-${styleName}-toggle-custom`} data-on={on} />
             </div>
             {/*<Ripple />*/}
         </UI.Touchable>
     );
 };
+Toggle.componentName = 'toggle';
+
+defineCustomBase(
+    Toggle,
+    ({normal = null, on = null, label = null, subtitle = null}) => transferProps({
+        ".toggle-core-toggle-container/toggle-container-custom": [
+            normal,
+            {trackColor: 'backgroundColor'}
+        ],
+        ".toggle-core-toggle-container/toggle-container-custom[data-on='true']": [
+            on,
+            {trackColor: 'backgroundColor'}
+        ],
+        ".toggle-core-toggle/toggle-custom": [
+            normal,
+            {thumbColor: 'backgroundColor'}
+        ],
+        ".toggle-core-toggle/toggle-custom[data-on='true']": [
+            on,
+            {thumbColor: 'backgroundColor'}
+        ],
+        ".toggle-core-label/label-custom": [
+            label,
+            {
+                textColor: 'color',
+                color: 'backgroundColor'
+            }
+        ],
+        ".toggle-core-subtitle/subtitle-custom": [
+            subtitle,
+            {
+                textColor: 'color',
+                color: 'backgroundColor'
+            }
+        ]
+    })
+);
 
 export default Toggle;

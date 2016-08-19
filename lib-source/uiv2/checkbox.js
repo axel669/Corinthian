@@ -2,6 +2,8 @@ import {defineComponentStyle, defineCustomBase} from "lib-source/v2/style";
 import CenterContent from "lib-source/uiv2/CenterContent";
 // import Ripple from "lib-source/uiv2/Ripple";
 import Icon from "lib-source/uiv2/Icon";
+import vars from 'lib-source/uiv2/vars';
+import {transferProps} from 'lib-source/v2/utils';
 
 defineComponentStyle(
     'checkbox',
@@ -86,24 +88,30 @@ Checkbox.componentName = "checkbox";
 
 defineCustomBase(
     Checkbox,
-    ({normal = null, checked = null, label = null, subtitle = null}) => {
-        const style = {};
-
-        if (normal !== null) {
-            style[".checkbox-core-icon/icon-custom"] = normal;
-        }
-        if (checked !== null) {
-            style[".checkbox-core-icon/icon-custom[data-checked='true']"] = checked;
-        }
-        if (label !== null) {
-            style[".checkbox-core-label/label-custom"] = label;
-        }
-        if (subtitle !== null) {
-            style[".checkbox-core-subtitle/subtitle-custom"] = subtitle;
-        }
-
-        return style;
-    }
+    ({normal = null, checked = null, label = null, subtitle = null}) => transferProps({
+        ".checkbox-core-icon/icon-custom": [
+            normal,
+            {iconColor: 'color'}
+        ],
+        ".checkbox-core-icon/icon-custom[data-checked='true']": [
+            checked,
+            {iconColor: 'color'}
+        ],
+        ".checkbox-core-label/label-custom": [
+            label,
+            {
+                textColor: 'color',
+                color: 'backgroundColor'
+            }
+        ],
+        ".checkbox-core-subtitle/subtitle-custom": [
+            subtitle,
+            {
+                textColor: 'color',
+                color: 'backgroundColor'
+            }
+        ]
+    })
 );
 
 export default Checkbox;

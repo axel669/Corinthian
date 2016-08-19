@@ -2,6 +2,8 @@ import {defineComponentStyle, defineStyleForComponent, defineCustomBase} from "l
 import Ripple from "lib-source/uiv2/ripple.js";
 import Icon from 'lib-source/uiv2/icon.js';
 import Touchable from 'lib-source/uiv2/Touchable';
+import vars from 'lib-source/uiv2/vars';
+import {transferProps} from 'lib-source/v2/utils';
 
 defineComponentStyle(
     'button',
@@ -50,30 +52,12 @@ defineComponentStyle(
             transition: 'background-color 500ms linear'
         },
         ".core-desktop overlay:hover": {
-            backgroundColor: 'rgba(0, 0, 0, 0.05)'
+            backgroundColor: vars.hoverColor
         },
         "wrapper:active > overlay": {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            backgroundColor: vars.activeColor,
             transition: 'none'
         }
-    }
-);
-defineCustomBase(
-    'button',
-    ({normal = null, focus = null, disabled = null}) => {
-        const style = {};
-
-        if (normal !== null) {
-            style[".button-core-wrapper/wrapper-custom"] = normal;
-        }
-        if (focus !== null) {
-            style[".button-core-wrapper/wrapper-custom:focus"] = normal;
-        }
-        if (disabled !== null) {
-            style[".button-core-wrapper/wrapper-custom[disabled]"] = normal;
-        }
-
-        return style;
     }
 );
 
@@ -133,12 +117,48 @@ const Button = props => {
 };
 Button.componentName = 'button';
 
+defineCustomBase(
+    Button,
+    ({normal = null, focus = null, disabled = null}) => transferProps({
+        ".button-core-wrapper/wrapper-custom": [
+            normal,
+            {
+                textColor: 'color',
+                color: 'backgroundColor',
+                borderRadius: 'borderRadius',
+                shadow: 'boxShadow'
+            }
+            // ['backgroundColor', 'color', 'borderRadius', 'boxShadow']
+        ],
+        ".button-core-wrapper/wrapper-custom:focus": [
+            focus,
+            {
+                textColor: 'color',
+                color: 'backgroundColor',
+                borderRadius: 'borderRadius',
+                shadow: 'boxShadow'
+            }
+            // ['backgroundColor', 'color', 'borderRadius', 'boxShadow']
+        ],
+        ".button-core-wrapper/wrapper-custom[disabled]": [
+            disabled,
+            {
+                textColor: 'color',
+                color: 'backgroundColor',
+                borderRadius: 'borderRadius',
+                shadow: 'boxShadow'
+            }
+            // ['backgroundColor', 'color', 'borderRadius', 'boxShadow']
+        ]
+    })
+);
+
 defineStyleForComponent(
     Button, "cancel",
     {
         normal: {
-            backgroundColor: "#b5263e",
-            color: 'white'
+            color: "#b5263e",
+            textColor: 'white'
         }
     }
 );
@@ -146,7 +166,7 @@ defineStyleForComponent(
     Button, "confirm",
     {
         normal: {
-            backgroundColor: "#30d5a7"
+            color: "#30d5a7"
         }
     }
 );
