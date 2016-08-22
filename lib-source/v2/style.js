@@ -187,6 +187,14 @@ export default {
     defineComponentStyle,
     defineCustomBase,
     defineStyleForComponent,
+    genFontCSS(name, dataURI) {
+        return {
+            fontFamily: `"${name}"`,
+            src: `url("${dataURI}")`,
+            fontWeight: "normal",
+            fontStyle: "normal"
+        }
+    },
     Theme,
     __setup: createStyles
 };

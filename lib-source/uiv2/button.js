@@ -73,7 +73,8 @@ const Button = props => {
         fill,
         padding,
         disabled,
-        iconName = null
+        iconName = null,
+        iconSize = null
     } = props;
 
     const wrapperName = `button-core-wrapper button-${styleName}-wrapper-custom`;
@@ -102,7 +103,7 @@ const Button = props => {
         wrapperStyle.margin = 0;
     }
     if (iconName !== null) {
-        text = <span><Icon name={iconName} />{text}</span>;
+        text = <span><Icon name={iconName} size={iconSize} />{text}</span>;
     }
 
     return (

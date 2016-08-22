@@ -1,4 +1,15 @@
-// import CSSTransition from 'react-addons-css-transition-group';
+// import "babel-polyfill";
+//
+// import {XRegExp} from "xregexp";
+// import PubSub from "pubsub-js";
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import CSSTransition from "react-addons-css-transition-group";
+// import * as ReactRouter from "react-router";
+// import {createHashHistory} from "history";
+
+
+// import "lib-source/v2/gesture";
 import chrono from "lib-source/v2/chrono";
 import ajax from "lib-source/v2/ajax";
 
@@ -26,10 +37,16 @@ import Pinboard from 'lib-source/uiv2/layout/Pinboard';
 import Form from 'lib-source/uiv2/Form';
 
 import DialogComponent from "lib-source/uiv2/dialog";
-import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent} from "lib-source/v2/style";
+import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent, genFontCSS} from "lib-source/v2/style";
 
 import {warningFunc} from "lib-source/v2/utils";
 import {sharedReference, SharedObjectDisplay} from "lib-source/v2/shared";
+
+import secure from 'lib-source/v2/crypto';
+import zip from 'lib-source/v2/zip';
+
+import RobotoURI from "lib-source/data-uri/roboto-light.woff.source";
+import IonicURI from "lib-source/data-uri/ionicons.woff.source";
 
 window.chrono = chrono;
 
@@ -236,6 +253,44 @@ defineStyleForComponent(
     }
 );
 
+defineComponentStyle(
+    'app',
+    'core',
+    {
+        "$html": {
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden'
+        },
+        "$body": {
+            fontFamily: "Roboto",
+            padding: 0,
+            margin: 0,
+            width: '100%'
+        }
+    }
+);
+defineComponentStyle(
+    'roboto',
+    'font',
+    {"$@font-face": genFontCSS("Roboto", RobotoURI)}
+);
+defineComponentStyle(
+    'ionic',
+    'font',
+    {"$@font-face": genFontCSS("Ionic", IonicURI)}
+);
+
+class Screen extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render = () => {
+        return <div>{this.props.children}</div>;
+    }
+}
+
 const Main = React.createClass({
     async demo() {
         if (await Dialog.confirm("Really?") === true) {
@@ -266,7 +321,7 @@ const Main = React.createClass({
         }
 
         return (
-            <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
+            <Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 {/*<Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
@@ -306,12 +361,12 @@ const Main = React.createClass({
                 {/*<Grid colCount={3} rowCount={4}>
                     {arange(11, n => <Button text={n} flush fill />)}
                 </Grid>*/}
-                {/*<Pinboard>
+                {/*<Pinboard height={200}>
                     {arange(12,
                         n => {
                             const angle = (n / 6) * Math.PI;
-                            const x = Math.cos(angle) * 100 + 160;
-                            const y = Math.sin(angle) * 100 + 160;
+                            const x = Math.cos(angle) * 70 + 145;
+                            const y = Math.sin(angle) * 70 + 85;
                             const pos = {top: y, left: x, width: 30, height: 30};
 
                             return <div pinInfo={pos} style={{width: '100%', height: '100%', backgroundColor: 'cyan'}}>{n}</div>;
@@ -326,7 +381,26 @@ const Main = React.createClass({
                 <Button.Confirm text="Confirm" />
                 <Input.Range value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />*/}
                 <Form label="Form">
-                    <Input.Text formName="Text" placeholder="Text" />
+                    {/*<Radio layout={Pinboard} layout-height={200}>
+                        {arange(12,
+                            n => {
+                                const angle = (n / 6) * Math.PI;
+                                const x = Math.cos(angle) * 70 + 145;
+                                const y = Math.sin(angle) * 70 + 85;
+                                const pos = {top: y, left: x, width: 30, height: 30};
+
+                                return <div pinInfo={pos} style={{width: '100%', height: '100%'}}>{n}</div>;
+                            }
+                        )}
+                    </Radio>*/}
+                    <Radio title="Test">
+                        {Array.from(range({
+                            count: 10,
+                            map: n => <Option value={n ** n}>{n}</Option>
+                        }))}
+                        <Option><Image source={url} height={30} /></Option>
+                    </Radio>
+                    {/*<Input.Text formName="Text" placeholder="Text" />
                     <Input.Password formName="Password" placeholder="Password" />
                     <Input.Search formName="Search" placeholder="Search" />
                     <Input.URL formName="URL" placeholder="URL" />
@@ -335,9 +409,9 @@ const Main = React.createClass({
                     <Input.Date formName="date" />
                     <Input.Time formName="time" />
                     <Input.File formName="file" multiple valueFormat={list => `Files Selected: ${list.length}`} />
-                    <Input.Range formName="range" min={0} max={255} />
+                    <Input.Range formName="range" min={0} max={255} />*/}
                 </Form>
-                <div style={{position: 'absolute', bottom: 0, height: 50, width: 50, backgroundColor: 'cyan'}} />
+                {/*<div style={{position: 'absolute', bottom: 0, height: 50, width: 50, backgroundColor: 'cyan'}} />*/}
                 {/*<Input.File*/}
                 {/*<Card>
                     <Pinboard height={50}>
@@ -348,19 +422,26 @@ const Main = React.createClass({
                     </Pinboard>
                 </Card>*/}
                 <DialogComponent />
-            </UI.Screen>
+            </Screen>
         );
     }
 });
 
-App.start(
-    <Route component={Wrapper}>
-        <Route path="/" component={Main} />
-        <Route path="/test" component={Main} />
-    </Route>
-);
-createStyles();
+// App.start(
+//     <Route component={Wrapper}>
+//         <Route path="/" component={Main} />
+//         <Route path="/test" component={Main} />
+//     </Route>
+// );
 window.qsel = (...args) => document.querySelector(...args);
+createStyles();
+(async () => {
+    await deviceReady;
+    ReactDOM.render(
+        <Main />,
+        qsel("#app-container")
+    );
+})();
 
 // const token = ajax.cancelToken();
 // (async () => {

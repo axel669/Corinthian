@@ -23,7 +23,8 @@ defineComponentStyle(
             paddingLeft: 30,
             transition: 'background-color 500ms linear'
         },
-        ".radio-item-container:active > default-item": {
+        // ".radio-item-container:active > default-item": {
+        "default-item:active": {
             backgroundColor: 'rgba(0, 0, 0, 0.1)',
             transition: 'none'
         },
@@ -36,17 +37,17 @@ defineComponentStyle(
         }
     }
 );
-const RadioItem = ({checked, iconColor, children}) => {
+const RadioItem = ({checked, iconColor, children, onTap}) => {
     const iconName = `ion-android-radio-button-${checked === true ? 'on' : 'off'}`;
     return (
-        <div className="radio-item-core-default-item" data-checked={checked}>
+        <Touchable component="div" onTap={onTap} className="radio-item-core-default-item" data-checked={checked}>
             <div className={`radio-item-core-icon`} data-checked={checked}>
                 <CenterContent height="100%">
                     <Icon size={18} name={iconName} />
                 </CenterContent>
             </div>
             {children}
-        </div>
+        </Touchable>
     );
 };
 class Radio extends React.Component {
@@ -100,9 +101,9 @@ class Radio extends React.Component {
                 {children.map((child, index) => {
                     const value = child.props.value;
                     return (
-                        <Touchable component="div" className="radio-item-container" key={index} onTap={() => this.select(index, value)}>
-                        <Item checked={selectedIndex === index} {...child.props} />
-                        </Touchable>
+                        // <Touchable component="div" className="radio-item-container" key={index} onTap={() => this.select(index, value)}>
+                            <Item checked={selectedIndex === index} {...child.props} onTap={() => this.select(index, value)} />
+                        // {/*</Touchable>*/}
                     );
                 })}
                 </Container>
@@ -110,5 +111,9 @@ class Radio extends React.Component {
         );
     }
 }
+
+Radio.valueProp = 'selectedIndex';
+Radio.valueFunction = (index, value) => ({index, value});
+Radio.defaultPropValue = 0;
 
 export default Radio;

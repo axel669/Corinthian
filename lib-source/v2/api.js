@@ -1,0 +1,18 @@
+import ajax from "lib-source/v2/ajax";
+
+export default {
+    create(baseURL) {
+        const request = (url, options) => {
+            return ajax(`${baseURL}${url}`, options);
+        };
+        const json = async (url, options) => {
+            const result = await request(url, options);
+            return JSON.parse(result.response);
+        };
+        return {
+            request,
+            json,
+            genURL: url => `${baseURL}${url}`
+        };
+    }
+};

@@ -156,8 +156,9 @@ window.addEventListener(
             }
 
             // if (editableTagNames.indexOf(targetTagName) === -1 && somethingEditable === false && evt.cancelable === true) {
+            if (evt.cancelable === true) {
                 evt.preventDefault();
-            // }
+            }
 
             registeredHandlers.forEach(handlerName => {
                 const handler = registeredCallbacks[handlerName];

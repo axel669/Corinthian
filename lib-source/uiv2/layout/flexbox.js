@@ -1,4 +1,7 @@
 import {defineComponentStyle} from "lib-source/v2/style";
+import Touchable from "lib-source/uiv2/Touchable";
+
+const coolBlue = "#2FB1DF";
 
 defineComponentStyle(
     'flexbox',
@@ -61,5 +64,29 @@ const FlexboxItem = ({content, width, maxWidth, minWidth}) => {
 
     return <div style={itemStyle}>{content}</div>;
 };
+
+defineComponentStyle(
+    "flexbox-radio",
+    'core',
+    {
+        'item': {
+            transition: 'background-color 500ms linear'
+        },
+        "item:active": {
+            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            transition: 'none'
+        },
+        "item[data-checked='true']": {
+            backgroundColor: coolBlue,
+            color: 'white',
+            transition: 'none'
+        }
+    }
+);
+Flexbox.RadioItem = ({children, checked, onTap}) => (
+    <Touchable component="div" className="flexbox-radio-core-item" data-checked={checked} onTap={onTap}>
+        {children}
+    </Touchable>
+);
 
 export default Flexbox;
