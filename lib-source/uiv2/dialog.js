@@ -1,6 +1,7 @@
 import {defineComponentStyle} from "lib-source/v2/style";
 import Button from "lib-source/uiv2/Button";
 import Touchable from "lib-source/uiv2/Touchable";
+import Flexbox from "lib-source/uiv2/layout/Flexbox";
 
 const animationTime = 250;
 defineComponentStyle(
@@ -8,7 +9,7 @@ defineComponentStyle(
     'core',
     {
         "overlay": {
-            position: 'absolute',
+            position: 'fixed',
             top: 0,
             left: 0,
             width: '100%',
@@ -16,7 +17,6 @@ defineComponentStyle(
             backgroundColor: 'rgba(0, 0, 0, 0.35)',
             zIndex: '+100',
             display: 'none',
-            WebkitOverflowScrolling: 'auto',
             opacity: 0,
             transition: `opacity ${animationTime}ms linear`
         },
@@ -25,7 +25,6 @@ defineComponentStyle(
             position: 'absolute',
             backgroundColor: 'white',
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
-            // borderRadius: 5,
             width: '75%',
             maxWidth: 480,
             padding: 0,
@@ -45,11 +44,13 @@ defineComponentStyle(
         "content": {
             maxHeight: '50vh',
             WebkitOverflowScrolling: 'touch',
-            overflow: 'auto',
-            borderBottom: '1px solid lightgray',
+            overflow: 'auto'
+        },
+        "buttons": {
             borderTop: '1px solid lightgray'
         },
         "title": {
+            borderBottom: '1px solid lightgray',
             padding: '5 15',
             fontSize: 20,
             fontWeight: 900,
@@ -97,6 +98,8 @@ class Dialog extends React.Component {
         if (this.animating === true || this.resolver !== null) {
             return dialog.invalid();
         }
+        document.body.style.overflow = 'hidden';
+        document.body.style.WebkitOverflowScrolling = 'auto';
         this.animating = true;
         this.resolver = new Promise(
             resolve => {
@@ -135,6 +138,8 @@ class Dialog extends React.Component {
         await chrono.wait(animationTime);
         this.setState({display: null});
         requestAnimationFrame(() => {
+            document.body.style.overflow = '';
+            document.body.style.WebkitOverflowScrolling = '';
             this.response(value);
             this.response = null;
             this.resolver = null;
@@ -149,6 +154,12 @@ class Dialog extends React.Component {
         this.hide(dialog.cancel(null));
     }
     stopper = (evt) => {
+        evt.stopPropagation();
+    }
+    stopScroll = (evt) => {
+        // if (evt.cancelable === true) {
+        //     evt.preventDefault();
+        // }
         evt.stopPropagation();
     }
 
@@ -184,14 +195,16 @@ class Dialog extends React.Component {
         }
 
         return (
-            <Touchable component="div" onTap={this.close} className="dialog-core-overlay" style={{display, opacity}}>
-                <Touchable component="div" className={`dialog-core-window dialog-core-window-${pos}`} onTap={this.stopper}>
+            <Touchable component="div" onTap={this.close} onTouchMove={evt => evt.preventDefault()} className="dialog-core-overlay" style={{display, opacity}}>
+                <Touchable component="div" className={`dialog-core-window dialog-core-window-${pos}`} onTap={this.stopper} onTouchMove={this.stopScroll}>
                     {titleDisplay}
                     <div className="dialog-core-content" ref="container">
                         {/*<Button text="demo" block onTap={() => this.hide('test')} />*/}
                         {content}
                     </div>
-                    <UI.Flexbox colCount={3}>{buttonList}</UI.Flexbox>
+                    <div className="dialog-core-buttons">
+                        <Flexbox className="dialog-core-buttons" colCount={3}>{buttonList}</Flexbox>
+                    </div>
                 </Touchable>
             </Touchable>
         );

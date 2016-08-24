@@ -44,6 +44,7 @@ import {sharedReference, SharedObjectDisplay} from "lib-source/v2/shared";
 
 import secure from 'lib-source/v2/crypto';
 import zip from 'lib-source/v2/zip';
+import Environment from 'lib-source/v2/Environment';
 
 import RobotoURI from "lib-source/data-uri/roboto-light.woff.source";
 import IonicURI from "lib-source/data-uri/ionicons.woff.source";
@@ -253,21 +254,58 @@ defineStyleForComponent(
     }
 );
 
+if (Environment.app === false) {
+    defineComponentStyle(
+        'global',
+        'elite',
+        {
+            "$*": {
+                boxSizing: 'border-box'
+            },
+            "$html": {
+                width: '100%',
+                height: '100%',
+            },
+            "$body": {
+                fontFamily: "Roboto",
+                padding: 0,
+                margin: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#eee',
+            },
+            "$html, $body": {
+                WebkitOverflowScrolling: 'touch'
+            }
+        }
+    );
+} else {
+    defineComponentStyle(
+        'global',
+        'elite',
+        {
+            "$*": {
+                boxSizing: 'border-box'
+            },
+            "$body": {
+                fontFamily: "Roboto",
+                backgroundColor: '#eee',
+            },
+            "$html, $body": {
+                padding: 0,
+                margin: 0,
+                width: '100%',
+                height: '100%',
+                overflow: 'hidden'
+            }
+        }
+    );
+}
+
 defineComponentStyle(
     'app',
     'core',
     {
-        "$html": {
-            width: '100%',
-            height: '100%',
-            overflow: 'hidden'
-        },
-        "$body": {
-            fontFamily: "Roboto",
-            padding: 0,
-            margin: 0,
-            width: '100%'
-        }
     }
 );
 defineComponentStyle(
@@ -281,13 +319,70 @@ defineComponentStyle(
     {"$@font-face": genFontCSS("Ionic", IonicURI)}
 );
 
+const titleHeight = 40;
+const titleCommonStyle = {
+    top: 0,
+    left: 0,
+    right: 0,
+    height: titleHeight,
+    backgroundColor: coolBlue,
+    zIndex: '+10',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.4)',
+    color: 'white',
+    fontSize: 20
+};
+defineComponentStyle(
+    'app-screen',
+    'core',
+    {
+        "content": {
+            position: 'absolute',
+            top: titleHeight,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            overflow: 'auto'
+        },
+        "title": {
+            position: 'absolute',
+            ...titleCommonStyle
+        }
+    }
+);
+defineComponentStyle(
+    'web-screen',
+    'core',
+    {
+        "content": {
+            marginTop: titleHeight
+        },
+        "title": {
+            position: 'fixed',
+            ...titleCommonStyle
+        }
+    }
+);
+
+const titleClassName = Environment.app === true ? "app-screen-core-title" : "web-screen-core-title";
+const contentClassName = Environment.app === true ? "app-screen-core-content" : "web-screen-core-content";
 class Screen extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render = () => {
-        return <div>{this.props.children}</div>;
+
+        return (
+            <div>
+                <div className={contentClassName}>{this.props.children}</div>
+                <div className={titleClassName}>
+                    <CenterContent height="100%">
+                        {this.props.title}
+                    </CenterContent>
+                </div>
+                <DialogComponent />
+            </div>
+        );
     }
 }
 
@@ -322,6 +417,12 @@ const Main = React.createClass({
 
         return (
             <Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
+                <Input.Text />
+                <Input.Date />
+                <Combobox selectedIndex={0}>
+                    {arange(30, n => <Option>{n}</Option>)}
+                </Combobox>
+                {arange(60, n => <div>{n}</div>)}
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 {/*<Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
@@ -380,7 +481,7 @@ const Main = React.createClass({
                 <Button.Cancel text="Cancel" />
                 <Button.Confirm text="Confirm" />
                 <Input.Range value={this.state.rangeValue} max={255} onChange={rangeValue => this.setState({rangeValue})} />*/}
-                <Form label="Form">
+                {/*<Form label="Form">*/}
                     {/*<Radio layout={Pinboard} layout-height={200}>
                         {arange(12,
                             n => {
@@ -393,13 +494,13 @@ const Main = React.createClass({
                             }
                         )}
                     </Radio>*/}
-                    <Radio title="Test">
+                    {/*<Radio title="Test">
                         {Array.from(range({
                             count: 10,
                             map: n => <Option value={n ** n}>{n}</Option>
                         }))}
                         <Option><Image source={url} height={30} /></Option>
-                    </Radio>
+                    </Radio>*/}
                     {/*<Input.Text formName="Text" placeholder="Text" />
                     <Input.Password formName="Password" placeholder="Password" />
                     <Input.Search formName="Search" placeholder="Search" />
@@ -410,7 +511,7 @@ const Main = React.createClass({
                     <Input.Time formName="time" />
                     <Input.File formName="file" multiple valueFormat={list => `Files Selected: ${list.length}`} />
                     <Input.Range formName="range" min={0} max={255} />*/}
-                </Form>
+                {/*</Form>*/}
                 {/*<div style={{position: 'absolute', bottom: 0, height: 50, width: 50, backgroundColor: 'cyan'}} />*/}
                 {/*<Input.File*/}
                 {/*<Card>
@@ -421,7 +522,6 @@ const Main = React.createClass({
                         <div pinInfo={{top: 5, left: 5, width: 10, height: 10, backgroundColor: 'cyan'}} />
                     </Pinboard>
                 </Card>*/}
-                <DialogComponent />
             </Screen>
         );
     }

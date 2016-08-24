@@ -21,6 +21,7 @@ const Grid = ({children, colCount, rowCount, width = '100%', height = '100%'}) =
     const itemHeight = 100 / rowCount;
     const gridStyle = {
         position: 'relative',
+        overflow: 'hidden',
         width,
         height
     };

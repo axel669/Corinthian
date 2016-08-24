@@ -98,7 +98,8 @@ window.addEventListener(
                 handler.start({touch: data, vars: touchVars[handlerName][data.id]});
             });
         });
-    }
+    },
+    true
 );
 window.addEventListener(
     "touchmove",
@@ -122,7 +123,8 @@ window.addEventListener(
                 handler.move({touch: data, vars, overallVector, difVector});
             });
         });
-    }
+    },
+    true
 );
 window.addEventListener(
     "touchend",
@@ -171,7 +173,8 @@ window.addEventListener(
             touchDataStart[touch.id] = null;
             touchDataLast[touch.id] = null;
         });
-    }
+    },
+    true
 );
 
 (() => {
@@ -268,11 +271,16 @@ register(
             vars.valid = true;
         },
         move ({vars, overallVector}) {
+            // console.log('moving?', overallVector.magnitude);
             if (overallVector.magnitude > 20) {
                 vars.valid = false;
             }
         },
-        end ({vars, startTouch, touch}) {
+        end ({vars, startTouch, touch, overallVector}) {
+            // console.log(overallVector.magnitude);
+            if (overallVector.magnitude > 20) {
+                vars.valid = false;
+            }
             if (vars.valid === true && (touch.time - startTouch.time) < 500) {
                 if (startTouch.target !== document.activeElement && document.activeElement !== null && touch.mouseTriggered === false && ('blur' in document.activeElement)) {
                     document.activeElement.blur();
