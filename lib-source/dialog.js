@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Environment from "lib-source/environment.js";
+import Environment from "lib-source/environment";
 
-import Button from "lib-source/ui/button.js";
-import Image from "lib-source/ui/image.js";
-import TextInput from "lib-source/ui/textinput.js";
-import CenterContent from "lib-source/ui/centercontent.js";
+import Button from "lib-source/ui/button";
+import Image from "lib-source/ui/image";
+import TextInput from "lib-source/ui/textinput";
+import CenterContent from "lib-source/ui/centercontent";
 
-import {Style, Theme} from "lib-source/style.js";
+import {Style, Theme} from "lib-source/style";
 
 import SpinnerDataURL from "lib-source/data-uri/load-spinner.gif.source";
 

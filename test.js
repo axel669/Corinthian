@@ -254,26 +254,30 @@ defineStyleForComponent(
     }
 );
 
+defineComponentStyle(
+    'final',
+    'fantasy',
+    {
+        "$*": {
+            boxSizing: 'border-box'
+        },
+        "$body": {
+            fontFamily: "Roboto",
+            backgroundColor: '#f1f1f1',
+        },
+        "$html, $body": {
+            padding: 0,
+            margin: 0,
+            width: '100%',
+            height: '100%'
+        }
+    }
+);
 if (Environment.app === false) {
     defineComponentStyle(
         'global',
         'elite',
         {
-            "$*": {
-                boxSizing: 'border-box'
-            },
-            "$html": {
-                width: '100%',
-                height: '100%',
-            },
-            "$body": {
-                fontFamily: "Roboto",
-                padding: 0,
-                margin: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#eee',
-            },
             "$html, $body": {
                 WebkitOverflowScrolling: 'touch'
             }
@@ -284,18 +288,7 @@ if (Environment.app === false) {
         'global',
         'elite',
         {
-            "$*": {
-                boxSizing: 'border-box'
-            },
             "$body": {
-                fontFamily: "Roboto",
-                backgroundColor: '#eee',
-            },
-            "$html, $body": {
-                padding: 0,
-                margin: 0,
-                width: '100%',
-                height: '100%',
                 overflow: 'hidden'
             }
         }
@@ -371,6 +364,12 @@ class Screen extends React.Component {
     }
 
     render = () => {
+        const {
+            backText = null,
+            onBack = () => true,
+            leftMenu = null,
+            rightMenu = null
+        } = this.props;
 
         return (
             <div>
@@ -385,6 +384,9 @@ class Screen extends React.Component {
         );
     }
 }
+
+const App = {
+};
 
 const Main = React.createClass({
     async demo() {
@@ -420,9 +422,9 @@ const Main = React.createClass({
                 <Input.Text />
                 <Input.Date />
                 <Combobox selectedIndex={0}>
-                    {arange(30, n => <Option>{n}</Option>)}
+                    {arange(30, n => <Option key={n}>{n}</Option>)}
                 </Combobox>
-                {arange(60, n => <div>{n}</div>)}
+                {arange(60, n => <div key={n}>{n}</div>)}
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 {/*<Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
@@ -542,6 +544,17 @@ createStyles();
         qsel("#app-container")
     );
 })();
+
+window.testFunc = () => {
+    console.time('style gen');
+    const head = document.querySelector("head");
+    const styles = head.querySelectorAll("style");
+    for (const tag of styles) {
+        head.removeChild(tag);
+    }
+    createStyles();
+    console.timeEnd('style gen');
+};
 
 // const token = ajax.cancelToken();
 // (async () => {

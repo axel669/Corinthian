@@ -1,9 +1,19 @@
 import {defineComponentStyle} from "lib-source/v2/style";
 import Button from "lib-source/uiv2/Button";
+import Spinner from "lib-source/uiv2/Spinner";
 import Touchable from "lib-source/uiv2/Touchable";
 import Flexbox from "lib-source/uiv2/layout/Flexbox";
 
+import Environment from "lib-source/v2/Environment";
+
+if (Environment.app === false && Environment.mobile === true) {
+    console.log(
+        Math.min(window.innerWidth, window.innerHeight) * .6
+    );
+}
+
 const animationTime = 250;
+const maxContentHeight = (Environment.mobile === true) ? Math.min(window.innerWidth, window.innerHeight) * .5 : '60vh';
 defineComponentStyle(
     'dialog',
     'core',
@@ -25,14 +35,14 @@ defineComponentStyle(
             position: 'absolute',
             backgroundColor: 'white',
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.6)',
-            width: '75%',
-            maxWidth: 480,
             padding: 0,
             overflow: 'hidden'
         },
         "window-top": {
-            top: '15%',
+            top: '10%',
             left: '50%',
+            width: '75%',
+            maxWidth: 480,
             transform: 'translateX(-50%)'
         },
         "window-center": {
@@ -42,7 +52,7 @@ defineComponentStyle(
         },
 
         "content": {
-            maxHeight: '50vh',
+            maxHeight: maxContentHeight,
             WebkitOverflowScrolling: 'touch',
             overflow: 'auto'
         },
@@ -75,6 +85,19 @@ window.dialog = {
     },
     invalid(value = null, reason = 'invalid') {
         return {value, reason};
+    },
+    spinner(message) {
+        return dialog.show({
+            content: (
+                <div style={{textAlign: 'center', padding: 3}}>
+                    <div>{message}</div>
+                    <Spinner size={40} />
+                </div>
+            ),
+            closable: false,
+            buttons: [],
+            pos: 'center'
+        });
     }
 };
 class Dialog extends React.Component {
@@ -114,10 +137,11 @@ class Dialog extends React.Component {
                 {text: 'ok'}
             ],
             title = null,
-            setup = null
+            setup = null,
+            pos = 'top'
         } = displayProps;
 
-        this.setState({display: 'block', content, buttons, closable, title});
+        this.setState({display: 'block', content, buttons, closable, title, pos});
         await chrono.wait(50);
         this.refs.container.scrollTop = 0;
         if (setup !== null) {

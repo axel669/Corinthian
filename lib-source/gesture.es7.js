@@ -3,12 +3,12 @@ import Environment from "lib-source/environment.js";
 const forEach = Array.prototype.forEach;
 const schedule = (time, func) => setTimeout(func, time);
 
-const touchData = ({pageX:x, pageY:y, identifier:id, target}, {mouseTriggered = false}) => Object.freeze({
+const touchData = ({pageX:x, pageY:y, identifier:id, target}, {mouseTriggered = false}, targetOverride = null) => Object.freeze({
     position: Object.freeze({
         x, y
     }),
     time: Date.now(),
-    target,
+    target: targetOverride || target,
     id,
     mouseTriggered
 });
@@ -80,24 +80,37 @@ registeredCallbacks = {};
 window.addEventListener(
     "touchstart",
     evt => {
-        let {changedTouches} = evt;
+        // let {changedTouches} = evt;
         if (enabled === false) {
             return;
         }
 
-        changedTouches::forEach(touch => {
-            const data = touchData(touch, evt);
+        const touch = evt.changedTouches[0];
+        const data = touchData(touch, evt, evt.target);
 
-            touchDataStart[data.id] = data;
-            touchDataLast[data.id] = data;
+        touchDataStart[data.id] = data;
+        touchDataLast[data.id] = data;
 
-            registeredHandlers.forEach(handlerName => {
-                const handler = registeredCallbacks[handlerName];
+        registeredHandlers.forEach(handlerName => {
+            const handler = registeredCallbacks[handlerName];
 
-                touchVars[handlerName][data.id] = {};
-                handler.start({touch: data, vars: touchVars[handlerName][data.id]});
-            });
+            touchVars[handlerName][data.id] = {};
+            handler.start({touch: data, vars: touchVars[handlerName][data.id]});
         });
+
+        // changedTouches::forEach(touch => {
+        //     const data = touchData(touch, evt);
+        //
+        //     touchDataStart[data.id] = data;
+        //     touchDataLast[data.id] = data;
+        //
+            // registeredHandlers.forEach(handlerName => {
+            //     const handler = registeredCallbacks[handlerName];
+            //
+            //     touchVars[handlerName][data.id] = {};
+            //     handler.start({touch: data, vars: touchVars[handlerName][data.id]});
+            // });
+        // });
     },
     true
 );
@@ -146,13 +159,14 @@ window.addEventListener(
             somethingEditable = false;
             currentNode = data.target;
             while (true) {
-                if (currentNode.getAttribute("contenteditable") === true) {
+                // console.log(currentNode);
+                if (currentNode.getAttribute !== undefined && currentNode.getAttribute("contenteditable") === true) {
                     somethingEditable = true;
                     break;
                 }
 
                 currentNode = currentNode.parentNode;
-                if (currentNode === document) {
+                if (currentNode === document || currentNode === null) {
                     break;
                 }
             }
