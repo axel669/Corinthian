@@ -6,7 +6,7 @@
 // import ReactDOM from "react-dom";
 // import CSSTransition from "react-addons-css-transition-group";
 // import * as ReactRouter from "react-router";
-// import {createHashHistory} from "history";
+import {createHashHistory} from "history";
 
 
 // import "lib-source/v2/gesture";
@@ -35,8 +35,8 @@ import Grid from 'lib-source/uiv2/layout/Grid';
 import Pinboard from 'lib-source/uiv2/layout/Pinboard';
 
 import Form from 'lib-source/uiv2/Form';
+import Screen from 'lib-source/uiv2/Screen';
 
-import DialogComponent from "lib-source/uiv2/dialog";
 import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent, genFontCSS} from "lib-source/v2/style";
 
 import {warningFunc} from "lib-source/v2/utils";
@@ -48,6 +48,8 @@ import Environment from 'lib-source/v2/Environment';
 
 import RobotoURI from "lib-source/data-uri/roboto-light.woff.source";
 import IonicURI from "lib-source/data-uri/ionicons.woff.source";
+
+const {Route, Router, useRouterHistory} = ReactRouter;
 
 window.chrono = chrono;
 
@@ -82,115 +84,9 @@ window.frange = function* (count, map = i => i) {
 };
 window.arange = (count, map) => Array.from(frange(count, map));
 
-const {Route} = ReactRouter;
+// const {Route} = ReactRouter;
 
 const coolBlue = "#2FB1DF";
-
-Theme.define({
-    app: {
-        backgroundColor: 'white',
-        textColor: '#747474'
-    },
-    button: {
-        hoverColor: 'rgba(0, 0, 0, 0.11)',
-        activeColor: 'rgba(0, 0, 0, 0.2)',
-        raised: {
-            color: coolBlue,
-            textColor: 'white'
-        }
-    },
-    card: {
-        backgroundColor: 'white'
-    },
-    progressbar: {
-        backgroundColor: '#B3CEED',
-        color: '#3B8AF3'
-    },
-    radio: {
-        grid: {
-            selectedColor: coolBlue
-        }
-    },
-    rangeInput: {
-        track: {
-            color: coolBlue
-        }
-    },
-    switch: {
-        track: {
-            color: coolBlue
-        }
-    },
-    title: {
-        backgroundColor: coolBlue,
-        textColor: 'white'
-    },
-    userInput: {
-        activeColor: '#2FB1DF',
-        textColor: 'black'
-    }
-});
-
-const ScreenTransition = React.createClass({
-    render() {
-        return <div style={{position: 'absolute', width: '100%', height: '100%'}}>{this.props.children}</div>
-    }
-});
-
-Style.__rawCSS(
-    "test",
-    {
-        selector: ".test-enter",
-        rules: {
-            'transition': 'left 250ms ease-out',
-            left: '100%'
-        }
-    },
-    {
-        selector: ".test-enter.test-enter-active",
-        rules: {
-            left: 0
-        }
-    },
-    {
-        selector: ".test-leave",
-        rules: {
-            'transition': 'left 250ms ease-out',
-            left: 0
-        }
-    },
-    {
-        selector: ".test-leave.test-leave-active",
-        rules: {
-            left: '-100%'
-        }
-    },
-    {
-        selector: ".test-appear",
-        rules: {
-            'transition': 'top 250ms ease-out',
-            top: '100%',
-        }
-    },
-    {
-        selector: ".test-appear.test-appear-active",
-        rules: {
-            top: 0
-        }
-    }
-);
-
-const Wrapper = React.createClass({
-    render() {
-        return (
-            <CSSTransition component="div" transitionName="test" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
-                <ScreenTransition key={Date.now()}>
-                    {this.props.children}
-                </ScreenTransition>
-            </CSSTransition>
-        );
-    }
-});
 
 // window.benchmark = (iterations, first, second) => {
 //     const r = [];
@@ -221,38 +117,6 @@ const Wrapper = React.createClass({
 const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
 */
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
-
-/*
-defineStyleForComponent(
-    Button,
-    'special',
-    {
-    }
-);
-...
-<Button.Special />
-*/
-
-defineStyleForComponent(
-    Checkbox, 'awesome',
-    {
-        normal: {
-            iconColor: 'cyan'
-        },
-        checked: {
-            iconColor: 'blue'
-        }
-    }
-);
-defineStyleForComponent(
-    Toggle, 'awesome',
-    {
-        on: {
-            thumbColor: 'blue',
-            trackColor: 'cyan'
-        }
-    }
-);
 
 defineComponentStyle(
     'final',
@@ -311,82 +175,6 @@ defineComponentStyle(
     'font',
     {"$@font-face": genFontCSS("Ionic", IonicURI)}
 );
-
-const titleHeight = 40;
-const titleCommonStyle = {
-    top: 0,
-    left: 0,
-    right: 0,
-    height: titleHeight,
-    backgroundColor: coolBlue,
-    zIndex: '+10',
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.4)',
-    color: 'white',
-    fontSize: 20
-};
-defineComponentStyle(
-    'app-screen',
-    'core',
-    {
-        "content": {
-            position: 'absolute',
-            top: titleHeight,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            overflow: 'auto'
-        },
-        "title": {
-            position: 'absolute',
-            ...titleCommonStyle
-        }
-    }
-);
-defineComponentStyle(
-    'web-screen',
-    'core',
-    {
-        "content": {
-            marginTop: titleHeight
-        },
-        "title": {
-            position: 'fixed',
-            ...titleCommonStyle
-        }
-    }
-);
-
-const titleClassName = Environment.app === true ? "app-screen-core-title" : "web-screen-core-title";
-const contentClassName = Environment.app === true ? "app-screen-core-content" : "web-screen-core-content";
-class Screen extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render = () => {
-        const {
-            backText = null,
-            onBack = () => true,
-            leftMenu = null,
-            rightMenu = null
-        } = this.props;
-
-        return (
-            <div>
-                <div className={contentClassName}>{this.props.children}</div>
-                <div className={titleClassName}>
-                    <CenterContent height="100%">
-                        {this.props.title}
-                    </CenterContent>
-                </div>
-                <DialogComponent />
-            </div>
-        );
-    }
-}
-
-const App = {
-};
 
 const Main = React.createClass({
     async demo() {
@@ -536,45 +324,94 @@ const Main = React.createClass({
 //     </Route>
 // );
 window.qsel = (...args) => document.querySelector(...args);
-createStyles();
-(async () => {
-    await deviceReady;
-    ReactDOM.render(
-        <Main />,
-        qsel("#app-container")
-    );
-})();
+
+let backRef;
+const App = {
+    async start(appRoutes, options) {
+        await deviceReady;
+        removePreviousStyles();
+        createStyles();
+        routes = appRoutes;
+        backRef = [];
+        navReplace("/");
+    },
+    get rc() {
+        return renderedComponent;
+    }
+};
+if (Environment.app === true) {
+    App.navigtion = {
+        push(url) {
+            backRef.push(currentPath());
+            navReplace(url);
+        },
+        pop() {
+            navReplace(backRef.pop());
+        },
+        replace(url){
+            navReplace(url);
+        }
+    };
+} else {
+    App.navigtion = {
+        push(url) {
+            navPush(url);
+        },
+        pop() {
+            navPop();
+        },
+        replace(url) {
+            navReplace(url);
+        }
+    };
+}
+
+const PlaceHolder = () => <div>Woah</div>;
+let routes = <Route path="/" component={PlaceHolder} />;
+const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
+history.replaceState(null, null, "#/");
+const renderedComponent = ReactDOM.render(
+    <Router history={appHistory}>
+        <Route getChildRoutes={(loc, cb) => cb(null, routes)} />
+    </Router>,
+    qsel("#app-container")
+);
+const currentPath = () => renderedComponent.state.location.pathname;
+const navPush = url => renderedComponent.router.push(url);
+const navReplace = url => renderedComponent.router.replace(url);
+const navPop = () => renderedComponent.router.pop();
+// renderedComponent.router.replace("/_sys_back");
+
+const removePreviousStyles = () => {
+    const head = document.querySelector("head");
+
+    for (const styleTag of head.querySelectorAll("style[data-generated]")) {
+        head.removeChild(styleTag);
+    }
+};
+
+App.start(
+    <Route path="/" component={Main} />
+);
+window._app = App;
+
+// createStyles();
+// (async () => {
+//     await deviceReady;
+//     ReactDOM.render(
+//         <Main />,
+//         qsel("#app-container")
+//     );
+// })();
 
 window.testFunc = () => {
     console.time('style gen');
-    const head = document.querySelector("head");
-    const styles = head.querySelectorAll("style");
-    for (const tag of styles) {
-        head.removeChild(tag);
-    }
+    // const head = document.querySelector("head");
+    // const styles = head.querySelectorAll("style");
+    // for (const tag of styles) {
+    //     head.removeChild(tag);
+    // }
+    removePreviousStyles();
     createStyles();
     console.timeEnd('style gen');
 };
-
-// const token = ajax.cancelToken();
-// (async () => {
-//     console.log(await ajax("http://axel669.net/echo/index2.php", {post: [1, 2, 3, 4], token}));
-// })();
-// chrono.trigger(2000, token.cancel);
-
-// const isPow2 = n => (n & -n) === n;
-// window.collatz = n => (n % 2 === 0) ? n / 2 : 3 * n + 1;
-// window.check = start => {
-//     while (true) {
-//         if (start === 1) {
-//             break;
-//         }
-//         console.log(start);
-//         start = collatz(start);
-//     }
-// };
-//
-// const f = n => (n & -n);
-// for (const i of frange(100)) {
-//     console.log(i, f(i));
-// }

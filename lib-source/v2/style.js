@@ -137,6 +137,7 @@ const defineStyleForComponent = (component, styleName, options) => {
 
 const createStyles = () => {
     const head = document.querySelector("head");
+    const fragment = document.createDocumentFragment();
 
     //  Iterate over the components that have styles defined
     for (const [componentName, styles] of Object.entries(componentStyles)) {
@@ -146,18 +147,23 @@ const createStyles = () => {
             //  Grab all the individual groups of styles defined in the named style
             for (const [descriptor, defs] of Object.entries(styleDefs)) {
                 if (descriptor.startsWith("!") === true) {
+                    let animationLines = [];
+
+                    for (const [selector, def] of Object.entries(defs)) {
+                        animationLines = processDef(animationLines, selector, def);
+                    }
+                    // const animationLines = processDef([], selector, def);
                     //  Repeat an extra time with prefixed keyframes because ios < 9 is pretty awful
                     cssLines.push(`@-webkit-keyframes ${componentName}-${styleName}-animation-${descriptor.slice(1)} {`);
-                    for (const [selector, def] of Object.entries(defs)) {
-                        cssLines = processDef(cssLines, selector, def);
-                    }
+                    cssLines = [...cssLines, ...animationLines];
                     cssLines.push("}");
 
                     //  normal @keyframes css
                     cssLines.push(`@keyframes ${componentName}-${styleName}-animation-${descriptor.slice(1)} {`);
-                    for (const [selector, def] of Object.entries(defs)) {
-                        cssLines = processDef(cssLines, selector, def);
-                    }
+                    cssLines = [...cssLines, ...animationLines];
+                    // for (const [selector, def] of Object.entries(defs)) {
+                    //     cssLines = processDef(cssLines, selector, def);
+                    // }
                     cssLines.push("}");
                 } else {
                     const selector = processSelector(componentName, styleName, descriptor);
@@ -167,10 +173,12 @@ const createStyles = () => {
             const styleTag = document.createElement("style");
             styleTag.setAttribute("type", "text/css");
             styleTag.setAttribute("data-name", `${componentName}/${styleName}`);
+            styleTag.setAttribute("data-generated", true);
             styleTag.innerHTML = cssLines.join('\n');
-            head.appendChild(styleTag);
+            fragment.appendChild(styleTag);
         }
     }
+    head.appendChild(fragment);
 };
 
 let themeValues;
