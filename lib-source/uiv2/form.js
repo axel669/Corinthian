@@ -1,3 +1,5 @@
+import React from "react";
+
 import Button from "lib-source/uiv2/Button";
 
 class ItemContainer extends React.Component {

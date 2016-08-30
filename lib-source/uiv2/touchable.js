@@ -1,5 +1,5 @@
-// import React from "react";
-// import ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 
 const forEach = Array.prototype.forEach;
 const {sqrt} = Math;

@@ -1,58 +1,3 @@
-// import "babel-polyfill";
-//
-// import {XRegExp} from "xregexp";
-// import PubSub from "pubsub-js";
-// import React from "react";
-// import ReactDOM from "react-dom";
-// import CSSTransition from "react-addons-css-transition-group";
-// import * as ReactRouter from "react-router";
-import {createHashHistory} from "history";
-
-
-// import "lib-source/v2/gesture";
-import chrono from "lib-source/v2/chrono";
-import ajax from "lib-source/v2/ajax";
-
-import Icon from 'lib-source/uiv2/icon';
-import Ripple from 'lib-source/uiv2/ripple';
-import Button from 'lib-source/uiv2/button';
-import IconButton from 'lib-source/uiv2/iconbutton';
-import Card from 'lib-source/uiv2/Card';
-import Image from 'lib-source/uiv2/Image';
-import CenterContent from 'lib-source/uiv2/CenterContent';
-import Checkbox from 'lib-source/uiv2/Checkbox';
-import Toggle from 'lib-source/uiv2/Toggle';
-import Touchable from 'lib-source/uiv2/Touchable';
-import Combobox from 'lib-source/uiv2/Combobox';
-import Option from 'lib-source/uiv2/Option';
-import Spinner from 'lib-source/uiv2/Spinner';
-import Radio from 'lib-source/uiv2/Radio';
-import Calendar from 'lib-source/uiv2/Calendar';
-import Input from 'lib-source/uiv2/Input';
-
-import Flexbox from 'lib-source/uiv2/layout/Flexbox';
-import Grid from 'lib-source/uiv2/layout/Grid';
-import Pinboard from 'lib-source/uiv2/layout/Pinboard';
-
-import Form from 'lib-source/uiv2/Form';
-import Screen from 'lib-source/uiv2/Screen';
-
-import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent, genFontCSS} from "lib-source/v2/style";
-
-import {warningFunc} from "lib-source/v2/utils";
-import {sharedReference, SharedObjectDisplay} from "lib-source/v2/shared";
-
-import secure from 'lib-source/v2/crypto';
-import zip from 'lib-source/v2/zip';
-import Environment from 'lib-source/v2/Environment';
-
-import RobotoURI from "lib-source/data-uri/roboto-light.woff.source";
-import IonicURI from "lib-source/data-uri/ionicons.woff.source";
-
-const {Route, Router, useRouterHistory} = ReactRouter;
-
-window.chrono = chrono;
-
 const range = function* (args) {
   let {start = 0, end = null, count = null, step = 1, map = i => i} = args;
 
@@ -84,10 +29,6 @@ window.frange = function* (count, map = i => i) {
 };
 window.arange = (count, map) => Array.from(frange(count, map));
 
-// const {Route} = ReactRouter;
-
-const coolBlue = "#2FB1DF";
-
 // window.benchmark = (iterations, first, second) => {
 //     const r = [];
 //     for (const testNum of range({count: 30})) {
@@ -113,74 +54,11 @@ const coolBlue = "#2FB1DF";
 // const res = benchmark(1e6, (i) => (i % 2 === 0) ? i >> 1 : 0, (i) => (i % 2 === 0) ? i / 2 : 0);
 // console.log(res.map(i => i.join('\t')).join('\n'));
 
-/*
-const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
-*/
-const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
-
-defineComponentStyle(
-    'final',
-    'fantasy',
-    {
-        "$*": {
-            boxSizing: 'border-box'
-        },
-        "$body": {
-            fontFamily: "Roboto",
-            backgroundColor: '#f1f1f1',
-        },
-        "$html, $body": {
-            padding: 0,
-            margin: 0,
-            width: '100%',
-            height: '100%'
-        }
-    }
-);
-if (Environment.app === false) {
-    defineComponentStyle(
-        'global',
-        'elite',
-        {
-            "$html, $body": {
-                WebkitOverflowScrolling: 'touch'
-            }
-        }
-    );
-} else {
-    defineComponentStyle(
-        'global',
-        'elite',
-        {
-            "$body": {
-                overflow: 'hidden'
-            }
-        }
-    );
-}
-
-defineComponentStyle(
-    'app',
-    'core',
-    {
-    }
-);
-defineComponentStyle(
-    'roboto',
-    'font',
-    {"$@font-face": genFontCSS("Roboto", RobotoURI)}
-);
-defineComponentStyle(
-    'ionic',
-    'font',
-    {"$@font-face": genFontCSS("Ionic", IonicURI)}
-);
-
 const Main = React.createClass({
     async demo() {
-        if (await Dialog.confirm("Really?") === true) {
+        // if (await Dialog.confirm("Really?") === true) {
             console.log("Nope!");
-        }
+        // }
     },
     getInitialState() {
         return {
@@ -204,15 +82,25 @@ const Main = React.createClass({
             // console.log('value', value);
             this.setState({text, value});
         }
+        const extension = {
+            type: 'grid',
+            items: [1, 2, 3, 4]
+        };
+        const wat = () => {
+            // debugger;
+            App.navigation.push("/test");
+        };
 
         return (
-            <Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
-                <Input.Text />
+            <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
+                <UI.Button.Raised text="test" onTap={wat} />
+                {/*<ExpandingMenu iconName="ion-navicon-round" iconColor="blue" />*/}
+                {/*<Input.Text />
                 <Input.Date />
                 <Combobox selectedIndex={0}>
                     {arange(30, n => <Option key={n}>{n}</Option>)}
                 </Combobox>
-                {arange(60, n => <div key={n}>{n}</div>)}
+                {arange(60, n => <div key={n}>{n}</div>)}*/}
                 {/*<Image source={url} height={150} color="cyan" />*/}
                 {/*<Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
@@ -312,106 +200,14 @@ const Main = React.createClass({
                         <div pinInfo={{top: 5, left: 5, width: 10, height: 10, backgroundColor: 'cyan'}} />
                     </Pinboard>
                 </Card>*/}
-            </Screen>
+            </UI.Screen>
         );
     }
 });
 
-// App.start(
-//     <Route component={Wrapper}>
-//         <Route path="/" component={Main} />
-//         <Route path="/test" component={Main} />
-//     </Route>
-// );
-window.qsel = (...args) => document.querySelector(...args);
-
-let backRef;
-const App = {
-    async start(appRoutes, options) {
-        await deviceReady;
-        removePreviousStyles();
-        createStyles();
-        routes = appRoutes;
-        backRef = [];
-        navReplace("/");
-    },
-    get rc() {
-        return renderedComponent;
-    }
-};
-if (Environment.app === true) {
-    App.navigtion = {
-        push(url) {
-            backRef.push(currentPath());
-            navReplace(url);
-        },
-        pop() {
-            navReplace(backRef.pop());
-        },
-        replace(url){
-            navReplace(url);
-        }
-    };
-} else {
-    App.navigtion = {
-        push(url) {
-            navPush(url);
-        },
-        pop() {
-            navPop();
-        },
-        replace(url) {
-            navReplace(url);
-        }
-    };
-}
-
-const PlaceHolder = () => <div>Woah</div>;
-let routes = <Route path="/" component={PlaceHolder} />;
-const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
-history.replaceState(null, null, "#/");
-const renderedComponent = ReactDOM.render(
-    <Router history={appHistory}>
-        <Route getChildRoutes={(loc, cb) => cb(null, routes)} />
-    </Router>,
-    qsel("#app-container")
-);
-const currentPath = () => renderedComponent.state.location.pathname;
-const navPush = url => renderedComponent.router.push(url);
-const navReplace = url => renderedComponent.router.replace(url);
-const navPop = () => renderedComponent.router.pop();
-// renderedComponent.router.replace("/_sys_back");
-
-const removePreviousStyles = () => {
-    const head = document.querySelector("head");
-
-    for (const styleTag of head.querySelectorAll("style[data-generated]")) {
-        head.removeChild(styleTag);
-    }
-};
-
 App.start(
-    <Route path="/" component={Main} />
+    <Route>
+        <Route path="/" component={Main} />
+        <Route path="/test" component={() => <UI.Screen title="test" backText="Main" />} />
+    </Route>
 );
-window._app = App;
-
-// createStyles();
-// (async () => {
-//     await deviceReady;
-//     ReactDOM.render(
-//         <Main />,
-//         qsel("#app-container")
-//     );
-// })();
-
-window.testFunc = () => {
-    console.time('style gen');
-    // const head = document.querySelector("head");
-    // const styles = head.querySelectorAll("style");
-    // for (const tag of styles) {
-    //     head.removeChild(tag);
-    // }
-    removePreviousStyles();
-    createStyles();
-    console.timeEnd('style gen');
-};

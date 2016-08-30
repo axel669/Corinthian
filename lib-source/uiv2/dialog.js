@@ -1,3 +1,5 @@
+import React from "react";
+
 import {defineComponentStyle} from "lib-source/v2/style";
 import Button from "lib-source/uiv2/Button";
 import Spinner from "lib-source/uiv2/Spinner";

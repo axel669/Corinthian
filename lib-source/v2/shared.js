@@ -1,3 +1,5 @@
+import React from "react";
+
 const sharedReference = value => ({
     get value() {
         return value;

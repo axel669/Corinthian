@@ -1,3 +1,5 @@
+import React from "react";
+
 import {defineComponentStyle, Theme} from "lib-source/v2/style";
 import Button from "lib-source/uiv2/Button";
 import CenterContent from 'lib-source/uiv2/CenterContent';

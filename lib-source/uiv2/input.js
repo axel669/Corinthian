@@ -1,3 +1,5 @@
+import React from "react";
+
 import {defineComponentStyle} from "lib-source/v2/style";
 import RangeInput from 'lib-source/uiv2/input/RangeInput';
 import DateInput from 'lib-source/uiv2/input/DateInput';

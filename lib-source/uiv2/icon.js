@@ -1,4 +1,5 @@
 import {defineComponentStyle} from "lib-source/v2/style.js";
+import ionic from "lib-source/v2/ionic-icons";
 
 defineComponentStyle(
     'icon',

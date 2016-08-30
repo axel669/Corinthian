@@ -1,4 +1,7 @@
+import React from "react";
+
 import {defineComponentStyle} from "lib-source/v2/style";
+import Button from "lib-source/uiv2/Button";
 import CenterContent from "lib-source/uiv2/CenterContent";
 import DialogComponent from "lib-source/uiv2/dialog";
 import Environment from 'lib-source/v2/Environment';
@@ -48,6 +51,30 @@ defineComponentStyle(
     }
 );
 
+defineComponentStyle(
+    'screen',
+    'core',
+    {
+        "left-panel": {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            fontSize: 14
+        }
+    }
+);
+
+class ExtensionMenu extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render = () => {
+        return <Button iconName="ion-navicon-round" textColor="white" />;
+    }
+}
+
 const titleClassName = Environment.app === true ? "app-screen-core-title" : "web-screen-core-title";
 const contentClassName = Environment.app === true ? "app-screen-core-content" : "web-screen-core-content";
 class Screen extends React.Component {
@@ -58,10 +85,36 @@ class Screen extends React.Component {
     render = () => {
         const {
             backText = null,
-            onBack = () => true,
-            leftMenu = null,
-            rightMenu = null
+            onBack = () => App.navigation.pop(),
+            // leftMenu = null,
+            // rightMenu = null
+            menu = null
         } = this.props;
+        let backButton = null;
+
+        if (backText !== null) {
+            backButton = (
+                <div className="screen-core-left-panel">
+                    <Button text={backText} iconName="ion-arrow-left-b" textColor="white" onTap={onBack} fillHeight flush />
+                </div>
+            );
+        }
+        // let menuDisplay = null;
+        //
+        // if (menu !== null) {
+        //     const {type = 'list', items} = menu;
+        //     menuDisplay = <ExtensionMenu>{items.map(i => <Button block text={i} />)}</ExtensionMenu>;
+        // }
+        // let leftPanel = leftMenu;
+        // let rightPanel = rightMenu;
+
+        // if (leftPanel === null && backText !== null) {
+        //     leftPanel = [{text: backText}];
+        // }
+        //
+        // if (leftPanel !== null) {
+        //     leftPanel = <ExpandingMenu iconName="ion-navicon-round">{leftPanel.map(({text}) => <Button text={text} textColor="white" />)}</ExpandingMenu>;
+        // }
 
         return (
             <div>
@@ -70,6 +123,10 @@ class Screen extends React.Component {
                     <CenterContent height="100%">
                         {this.props.title}
                     </CenterContent>
+                    {backButton}
+                    {/*{menuDisplay}*/}
+                    {/*{leftPanel}*/}
+                    {/*{rightPanel}*/}
                 </div>
                 <DialogComponent />
             </div>

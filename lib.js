@@ -1,5 +1,5 @@
-import "babel-polyfill";
-
+// import "babel-polyfill";
+//
 import {XRegExp} from "xregexp";
 import PubSub from "pubsub-js";
 import React from "react";
@@ -7,255 +7,188 @@ import ReactDOM from "react-dom";
 import CSSTransition from "react-addons-css-transition-group";
 import * as ReactRouter from "react-router";
 import {createHashHistory} from "history";
-// import moment from "moment";
-import chrono from "lib-source/chrono.js";
-import UI from "lib-source/ui.es7.jsx";
-import factotum from "lib-source/factotum.es7.js";
-import Zip from "lib-source/zip.es7.js";
-import fs from "lib-source/fs.es7.js";
-import icons from "lib-source/ionic-icons.js";
-import crypto from "lib-source/crypto.es7.js";
-import Dialog from "lib-source/dialog.js";
-import "lib-source/gesture.es7.js";
-import {Style, Theme} from "lib-source/style.js";
 
-import Environment from "lib-source/environment.js";
+
+import "lib-source/v2/gesture";
+import chrono from "lib-source/v2/chrono";
+import ajax from "lib-source/v2/ajax";
+
+import ionic from "lib-source/v2/ionic-icons";
+
+import Icon from 'lib-source/uiv2/icon';
+import Ripple from 'lib-source/uiv2/ripple';
+import Button from 'lib-source/uiv2/button';
+import IconButton from 'lib-source/uiv2/iconbutton';
+import Card from 'lib-source/uiv2/Card';
+import Image from 'lib-source/uiv2/Image';
+import CenterContent from 'lib-source/uiv2/CenterContent';
+import Checkbox from 'lib-source/uiv2/Checkbox';
+import Toggle from 'lib-source/uiv2/Toggle';
+import Touchable from 'lib-source/uiv2/Touchable';
+import Combobox from 'lib-source/uiv2/Combobox';
+import Option from 'lib-source/uiv2/Option';
+import Spinner from 'lib-source/uiv2/Spinner';
+import Radio from 'lib-source/uiv2/Radio';
+import Calendar from 'lib-source/uiv2/Calendar';
+import Input from 'lib-source/uiv2/Input';
+
+import Flexbox from 'lib-source/uiv2/layout/Flexbox';
+import Grid from 'lib-source/uiv2/layout/Grid';
+import Pinboard from 'lib-source/uiv2/layout/Pinboard';
+
+import Form from 'lib-source/uiv2/Form';
+import Screen from 'lib-source/uiv2/Screen';
+
+import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent, genFontCSS} from "lib-source/v2/style";
+
+import {warningFunc} from "lib-source/v2/utils";
+import {sharedReference, SharedObjectDisplay} from "lib-source/v2/shared";
+
+import secure from 'lib-source/v2/crypto';
+import zip from 'lib-source/v2/zip';
+import Environment from 'lib-source/v2/Environment';
 
 import RobotoURI from "lib-source/data-uri/roboto-light.woff.source";
 import IonicURI from "lib-source/data-uri/ionicons.woff.source";
 
-const {Router, Route, useRouterHistory, hashHistory} = ReactRouter;
+const {Route, Router, useRouterHistory} = ReactRouter;
 
-const App = {};
+const coolBlue = "#2FB1DF";
 
-window.factotum = factotum;
-window.regex = XRegExp;
-window.PubSub = PubSub;
-window.React = React;
-window.ReactDOM = ReactDOM;
-window.ReactRouter = ReactRouter;
-window.UI = UI;
-window.fs = fs;
-window.ionic = icons;
-window.Dialog = Dialog;
-window.security = crypto;
-window.Zip = Zip;
-window.Style = Style;
-window.Theme = Theme;
-window.chrono = chrono;
+/*
+const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
+*/
+const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 
-window.corinthian = Object.freeze({
-    version: "0.1.0"
-});
-
-window.API = {
-    create(baseURL) {
-        const request = (url, options) => {
-            return factotum.ajax(`${baseURL}${url}`, options);
-        };
-        const json = async (url, options) => {
-            const result = await request(url, options);
-            return JSON.parse(result.response);
-        };
-        return {
-            request,
-            json,
-            genURL: url => `${baseURL}${url}`
-        };
-    }
-};
-
-window.CSSTransition = CSSTransition;
-
-const readSetting = (storage, key, name, defaultValue) => {
-    const value = storage.getItem(`${key}:${name}`);
-
-    if (value === null) {
-        return defaultValue;
-    }
-
-    return JSON.parse(value);
-};
-const writeSetting = (storage, key, name, value) => {
-    storage.setItem(`${key}:${name}`, JSON.stringify(value));
-};
-const genStorage = mechanism =>
-    key => ({
-        read(name, defaultValue) {
-            return readSetting(mechanism, key, name, defaultValue);
-        },
-        readObject(...names) {
-            return names.reduce(
-                (result, item) => {
-                    if (typeof item === 'string') {
-                        item = [item, undefined];
-                    }
-                    const [name, defaultValue] = item;
-
-                    result[name] = readSetting(mechanism, key, name, defaultValue);
-                    return result;
-                },
-                {}
-            );
-        },
-        write(name, value) {
-            writeSetting(mechanism, key, name, value);
-        },
-        writeObject(settings) {
-            for (const [name, value] of Object.entries(settings)) {
-                writeSetting(mechanism, key, name, value);
-            }
-        },
-        has(name) {
-            return mechanism.getItem(`${key}:${name}`) !== null;
-        },
-        remove(name) {
-            mechanism.removeItem(`${key}:${name}`);
-        }
-    });
-
-App.createSettings = genStorage(localStorage);
-App.createSession = genStorage(sessionStorage);
-
-window.cblog = ::console.log;
-
-Style.create(
-    "core",
+defineComponentStyle(
+    'final',
+    'fantasy',
     {
-        ".desktop": {},
-        ".web": {
-            overflowY: 'scroll',
-            WebkitOverflowScrolling: 'touch'
+        "$*": {
+            boxSizing: 'border-box'
         },
-        ".app": {
-            position: 'relative',
-            width: '100%',
-            height: '100%',
-            padding: '0px',
-            margin: '0px',
-            fontFamily: 'Roboto',
-            backgroundColor: Theme.get("app/backgroundColor"),
-            color: Theme.get("app/textColor"),
-            textAlign: 'left',
-            WebkitUserSelect: 'none',
-            touchEvents: 'none',
-            WebkitTextSizeAdjust: '100%',
-            overflow: 'hidden'
+        "$body": {
+            fontFamily: "Roboto",
+            backgroundColor: '#f1f1f1',
         },
-        ".icon": {
-            fontFamily: "Ionic",
-            cursor: 'default'
-        },
-        ".componentLabel": {
-            fontSize: 15,
-            color: 'black',
-            padding: 5,
-            paddingLeft: 8,
-            cursor: 'default'
-        },
-        ".viewport": {
-            position: 'absolute',
-            width: '100vw',
-            height: '100vh',
-            left: '-100vw',
-            top: '-100vh',
-            opacity: 0
-        },
-        ".appContainer": {
-            position: 'fixed',
+        "$html, $body": {
+            padding: 0,
+            margin: 0,
             width: '100%',
             height: '100%'
         }
     }
 );
+if (Environment.app === false) {
+    defineComponentStyle(
+        'global',
+        'elite',
+        {
+            "$html, $body": {
+                WebkitOverflowScrolling: 'touch'
+            }
+        }
+    );
+} else {
+    defineComponentStyle(
+        'global',
+        'elite',
+        {
+            "$body": {
+                overflow: 'hidden'
+            }
+        }
+    );
+}
 
-Style.addFonts(
-    "core",
+defineComponentStyle(
+    'app',
+    'core',
     {
-        name: "Roboto",
-        dataURI: RobotoURI
-    },
-    {
-        name: "Ionic",
-        dataURI: IonicURI
     }
 );
-Style.__rawCSS(
-    "core",
-    {
-        selector: "*",
-        rules: {
-            boxSizing: "border-box"
-        }
-    },
-    {
-        selector: "html",
-        rules: {
-            width: '100%',
-            height: '100%',
-            overflow: 'hidden'
-        }
-    }
+defineComponentStyle(
+    'roboto',
+    'font',
+    {"$@font-face": genFontCSS("Roboto", RobotoURI)}
+);
+defineComponentStyle(
+    'ionic',
+    'font',
+    {"$@font-face": genFontCSS("Ionic", IonicURI)}
 );
 
-const clearPrev = () => {
-    const head = document.querySelector("head");
-    for (const node of head.querySelectorAll("style")) {
-        head.removeChild(node);
+window.qsel = (...args) => document.querySelector(...args);
+
+let backRef;
+const App = {
+    async start(appRoutes, options) {
+        await deviceReady;
+        removePreviousStyles();
+        createStyles();
+        routes = appRoutes;
+        backRef = [];
+        navReplace("/");
+    },
+    get rc() {
+        return renderedComponent;
     }
-    // history.replaceState(null, "", "#/");
 };
-let appContainer;
-let appComponent;
-const init = () => {
-    const viewportContainer = document.createElement("div");
-    const bodyClasses = document.body.className;
-    const additionalClasses = Style.getClassNames({
-        "core:app": true,
-        "core:desktop": Environment.mobile === false,
-        "core:web": Environment.app === false
-    });
-
-    appContainer = document.createElement("div");
-    appContainer.className = Style.getClassName("core:appContainer");
-
-    viewportContainer.className = Style.getClassName("core:viewport");
-    appContainer.setAttribute("data-name", "app-container");
-
-    document.body.appendChild(appContainer);
-    document.body.appendChild(Dialog.container);
-    document.body.appendChild(viewportContainer);
-
-    App.viewport = {
-        get width() {
-            return viewportContainer.offsetWidth;
+if (Environment.app === true) {
+    App.navigation = {
+        push(url) {
+            backRef.push(currentPath());
+            navReplace(url);
         },
-        get height() {
-            return viewportContainer.offsetHeight;
+        pop() {
+            if (backRef.length === 0) {
+                throw new Error("Cannot go back");
+            }
+            navReplace(backRef.pop());
+        },
+        replace(url){
+            navReplace(url);
         }
     };
+} else {
+    App.navigation = {
+        push(url) {
+            navPush(url);
+        },
+        pop() {
+            navPop();
+        },
+        replace(url) {
+            navReplace(url);
+        }
+    };
+}
 
-    if (Environment.mobile === false) {
-        appContainer.style.position = null;
-        appContainer.style.overflow = 'visible';
+const PlaceHolder = () => <div>Loading App</div>;
+let routes = <Route path="/" component={PlaceHolder} />;
+const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
+history.replaceState(null, null, "#/");
+const renderedComponent = ReactDOM.render(
+    <Router history={appHistory}>
+        <Route getChildRoutes={(loc, cb) => cb(null, routes)} />
+    </Router>,
+    qsel("#app-container")
+);
+const currentPath = () => renderedComponent.state.location.pathname;
+const navPush = url => renderedComponent.router.push(url);
+const navReplace = url => renderedComponent.router.replace(url);
+const navPop = () => renderedComponent.router.pop();
+// renderedComponent.router.replace("/_sys_back");
+
+const removePreviousStyles = () => {
+    const head = document.querySelector("head");
+
+    for (const styleTag of head.querySelectorAll("style[data-generated]")) {
+        head.removeChild(styleTag);
     }
-    document.body.className = `${bodyClasses} ${additionalClasses}`.trim();
 };
 
-(() => {
-    const frameFunction = () => {
-        requestAnimationFrame(frameFunction);
-        const now = Date.now();
-        PubSub.publishSync("system.framedraw", now - lastFrame);
-        lastFrame = now;
-    };
-    let lastFrame;
-
-    lastFrame = Date.now();
-    requestAnimationFrame(frameFunction);
-})();
-
-const deviceReady = new Promise(
+window.deviceReady = new Promise(
     resolve => {
         if (Environment.app === true) {
             document.addEventListener("deviceready", () => resolve(true));
@@ -265,95 +198,47 @@ const deviceReady = new Promise(
     }
 );
 
+window.chrono = chrono;
+window.ajax = ajax;
 
-if (Environment.app === true) {
-    let history = ['/'];
-    let navVars = {'0': {}};
-    App.navigation = {
-        push(url) {
-            navVars[history.length] = {};
-            history.push(url);
-            appComponent.router.replace(url);
-        },
-        pop(n = 1) {
-            if (n >= history.length) {
-                throw new Error(`Cannot pop ${n} screens off the history`);
-            }
-            const max = history.length;
-
-            history = history.slice(0, -n);
-            factotum.count(
-                {from: history.length, to: max},
-                n => {
-                    navVars[n] = null;
-                }
-            );
-            appComponent.router.replace(history.slice(-1)[0]);
-        },
-        replace(url) {
-            history[history.length - 1] = url;
-            navVars[history.length - 1] = {};
-            appComponent.router.replace(url);
-        },
-        reset() {
-            appComponent.router.replace('/');
-        },
-        get vars() {
-            return navVars[history.length - 1];
-        }
-    };
-} else {
-    App.navigation = {
-        push(url) {
-            appComponent.router.push(url);
-        },
-        pop() {
-            appComponent.router.goBack();
-        },
-        replace(url) {
-            appComponent.router.replace(url);
-        },
-        refresh() {
-            appComponent.refresh();
-        },
-        get vars() {
-            return {};
-        }
-    };
-}
+window.regex = XRegExp;
+window.PubSub = PubSub;
+window.zip = zip;
+window.env = Environment;
+window.security = secure;
+window.ionicIcons = ionic;
 
 window.App = App;
+window.React = React;
+window.ReactDOM = ReactDOM;
+window.Route = Route;
+window.UI = {
+    Icon,
+    Ripple,
+    Button,
+    IconButton,
+    Card,
+    Image,
+    CenterContent,
+    Checkbox,
+    Toggle,
+    Touchable,
+    Combobox,
+    Option,
+    Spinner,
+    Radio,
+    Calendar,
+    Input,
 
-let active = false;
-let routes;
-App.start = async (newRoutes, options = {}) => {
-    // await deviceReady;
-    const {initialPath = "/"} = options;
-    const path = `#${initialPath}`;
-    if (appContainer !== undefined) {
-        appContainer.style.display = 'none';
-    }
-    clearPrev();
-    Style.renderCSS();
+    Flexbox,
+    Grid,
+    Pinboard,
 
-    // console.log(routes === newRoutes);
-    routes = newRoutes;
-
-    if (active === false) {
-        init();
-        // history.replaceState(null, null, path);
-        document.location = path;
-        const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
-        // const appHistory = useRouterHistory(hashHistory);
-        appComponent = ReactDOM.render(
-            <Router history={appHistory}>
-                <Route getChildRoutes={(location, cb) => cb(null, routes)} />
-            </Router>,
-            document.querySelector("div")
-        );
-    } else {
-        App.navigation.replace(path);
-    }
-    active = true;
-    appContainer.style.display = '';
+    Form,
+    Screen
+};
+window.Util = {
+    warningFunc,
+    sharedReference,
+    SharedObjectDisplay
 };

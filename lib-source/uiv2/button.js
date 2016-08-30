@@ -5,6 +5,8 @@ import Touchable from 'lib-source/uiv2/Touchable';
 import vars from 'lib-source/uiv2/vars';
 import {transferProps} from 'lib-source/v2/utils';
 
+const coolBlue = "#2FB1DF";
+
 defineComponentStyle(
     'button',
     'core',
@@ -71,6 +73,7 @@ const Button = props => {
         flush,
         block,
         fill,
+        fillHeight,
         padding,
         disabled,
         iconName = null,
@@ -105,6 +108,10 @@ const Button = props => {
     if (iconName !== null) {
         text = <span><Icon name={iconName} size={iconSize} />{text}</span>;
     }
+    if (fillHeight === true) {
+        wrapperStyle.height = '100%';
+        textWrapperStyle.height = '100%';
+    }
 
     return (
         <Touchable component="div" tabIndex={-1} className={wrapperName} onTap={onTapHandler} disabled={disabled} style={wrapperStyle}>
@@ -129,7 +136,6 @@ defineCustomBase(
                 borderRadius: 'borderRadius',
                 shadow: 'boxShadow'
             }
-            // ['backgroundColor', 'color', 'borderRadius', 'boxShadow']
         ],
         ".button-core-wrapper/wrapper-custom:focus": [
             focus,
@@ -139,7 +145,6 @@ defineCustomBase(
                 borderRadius: 'borderRadius',
                 shadow: 'boxShadow'
             }
-            // ['backgroundColor', 'color', 'borderRadius', 'boxShadow']
         ],
         ".button-core-wrapper/wrapper-custom[disabled]": [
             disabled,
@@ -149,7 +154,6 @@ defineCustomBase(
                 borderRadius: 'borderRadius',
                 shadow: 'boxShadow'
             }
-            // ['backgroundColor', 'color', 'borderRadius', 'boxShadow']
         ]
     })
 );
@@ -168,6 +172,16 @@ defineStyleForComponent(
     {
         normal: {
             color: "#30d5a7"
+        }
+    }
+);
+defineStyleForComponent(
+    Button, "raised",
+    {
+        normal: {
+            color: coolBlue,
+            textColor: 'white',
+            shadow: '0px 2px 2px rgba(0, 0, 0, 0.2)'
         }
     }
 );

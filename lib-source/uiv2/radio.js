@@ -1,3 +1,5 @@
+import React from "react";
+
 import {defineComponentStyle} from "lib-source/v2/style";
 import CenterContent from "lib-source/uiv2/CenterContent";
 import Touchable from "lib-source/uiv2/Touchable";

@@ -1,3 +1,5 @@
+import React from "react";
+
 import {defineComponentStyle} from "lib-source/v2/style.js";
 
 const animationDuration = 300;
