@@ -54,6 +54,11 @@ window.arange = (count, map) => Array.from(frange(count, map));
 // const res = benchmark(1e6, (i) => (i % 2 === 0) ? i >> 1 : 0, (i) => (i % 2 === 0) ? i / 2 : 0);
 // console.log(res.map(i => i.join('\t')).join('\n'));
 
+/*
+const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
+*/
+const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
+
 const Main = React.createClass({
     async demo() {
         // if (await Dialog.confirm("Really?") === true) {
@@ -101,7 +106,7 @@ const Main = React.createClass({
                     {arange(30, n => <Option key={n}>{n}</Option>)}
                 </Combobox>
                 {arange(60, n => <div key={n}>{n}</div>)}*/}
-                {/*<Image source={url} height={150} color="cyan" />*/}
+                {/*<UI.Image source={url} height={50} />*/}
                 {/*<Toggle.Awesome on={this.state.on} onChange={on => this.setState({on})} label={"Test"} subTitle="more text?" />*/}
                 {/*<Button text={<span>{disabled ? <Spinner size={20} /> : null}Button Text</span>} disabled={disabled} onTap={() => this.setState({disabled: true})} />*/}
                 {/*<Icon name="ion-calendar" size={20} />*/}

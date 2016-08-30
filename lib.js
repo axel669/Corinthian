@@ -55,11 +55,6 @@ const {Route, Router, useRouterHistory} = ReactRouter;
 
 const coolBlue = "#2FB1DF";
 
-/*
-const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Bayonetta_2_render.png/revision/latest?cb=20140615210025";
-*/
-const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
-
 defineComponentStyle(
     'final',
     'fantasy',
