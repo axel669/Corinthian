@@ -42,6 +42,7 @@ defineComponentStyle(
     'core',
     {
         "content": {
+            margin: 'auto',
             marginTop: titleHeight
         },
         "title": {
@@ -88,9 +89,11 @@ class Screen extends React.Component {
             onBack = () => App.navigation.pop(),
             // leftMenu = null,
             // rightMenu = null
-            menu = null
+            menu = null,
+            width = 800
         } = this.props;
         let backButton = null;
+        let contentStyle = null;
 
         if (backText !== null) {
             backButton = (
@@ -115,10 +118,16 @@ class Screen extends React.Component {
         // if (leftPanel !== null) {
         //     leftPanel = <ExpandingMenu iconName="ion-navicon-round">{leftPanel.map(({text}) => <Button text={text} textColor="white" />)}</ExpandingMenu>;
         // }
+        if (Environment.app === false) {
+            contentStyle = {
+                width: '100%',
+                maxWidth: width
+            };
+        }
 
         return (
             <div>
-                <div className={contentClassName}>{this.props.children}</div>
+                <div className={contentClassName} tyle={contentStyle}>{this.props.children}</div>
                 <div className={titleClassName}>
                     <CenterContent height="100%">
                         {this.props.title}

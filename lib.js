@@ -31,6 +31,7 @@ import Spinner from 'lib-source/uiv2/Spinner';
 import Radio from 'lib-source/uiv2/Radio';
 import Calendar from 'lib-source/uiv2/Calendar';
 import Input from 'lib-source/uiv2/Input';
+import ProgressBar from 'lib-source/uiv2/ProgressBar';
 
 import Flexbox from 'lib-source/uiv2/layout/Flexbox';
 import Grid from 'lib-source/uiv2/layout/Grid';
@@ -39,7 +40,7 @@ import Pinboard from 'lib-source/uiv2/layout/Pinboard';
 import Form from 'lib-source/uiv2/Form';
 import Screen from 'lib-source/uiv2/Screen';
 
-import {defineComponentStyle, Theme as _Theme, __setup as createStyles, defineStyleForComponent, genFontCSS} from "lib-source/v2/style";
+import {defineComponentStyle,  __setup as createStyles, defineStyleForComponent, genFontCSS} from "lib-source/v2/style";
 
 import {warningFunc} from "lib-source/v2/utils";
 import {sharedReference, SharedObjectDisplay} from "lib-source/v2/shared";
@@ -193,6 +194,20 @@ window.deviceReady = new Promise(
     }
 );
 
+let prevFrameTime = Date.now();
+const frameHandler = () => {
+    const now = Date.now();
+    const frameTime = now - prevFrameTime;
+
+    prevFrameTime = now;
+    requestAnimationFrame(frameHandler);
+    PubSub.publishSync("system.framedraw", frameTime);
+};
+requestAnimationFrame(frameHandler);
+
+window.defineComponentStyle = defineComponentStyle;
+window.defineStyleForComponent = defineStyleForComponent;
+
 window.chrono = chrono;
 window.ajax = ajax;
 
@@ -202,6 +217,8 @@ window.zip = zip;
 window.env = Environment;
 window.security = secure;
 window.ionicIcons = ionic;
+
+window.PubSub = PubSub;
 
 window.App = App;
 window.React = React;
@@ -224,6 +241,7 @@ window.UI = {
     Radio,
     Calendar,
     Input,
+    ProgressBar,
 
     Flexbox,
     Grid,
@@ -237,3 +255,6 @@ window.Util = {
     sharedReference,
     SharedObjectDisplay
 };
+
+window.cblog = ::console.log;
+window.cberr = ::console.error;
