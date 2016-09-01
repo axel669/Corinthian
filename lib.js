@@ -1,5 +1,5 @@
-// import "babel-polyfill";
-//
+import "babel-polyfill";
+
 import {XRegExp} from "xregexp";
 import PubSub from "pubsub-js";
 import React from "react";
@@ -55,6 +55,39 @@ import IonicURI from "lib-source/data-uri/ionicons.woff.source";
 const {Route, Router, useRouterHistory} = ReactRouter;
 
 const coolBlue = "#2FB1DF";
+
+window.range = (size, value) => {
+    let valueFunc;
+    let array;
+    let index;
+
+    array = [];
+    switch (typeof value) {
+        case 'undefined':
+            valueFunc = n => n;
+            break;
+
+        case 'function':
+            valueFunc = value;
+            break;
+
+        default:
+            valueFunc = () => value;
+    }
+
+    index = 0;
+    while (true) {
+        if (index === size) {
+            break;
+        }
+
+        array.push(valueFunc(index));
+
+        index += 1;
+    }
+
+    return array;
+};
 
 defineComponentStyle(
     'final',

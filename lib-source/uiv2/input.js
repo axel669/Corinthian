@@ -150,10 +150,6 @@ const Input = {
     Range: RangeInput,
     Time: TimeInput,
     File: FileInput,
-    // Date: props => <DateInput {...props} />,
-    // Range: props => <RangeInput {...props} />,
-    // Time: props => <TimeInput {...props} />,
-    // File: props => <FileInput {...props} />,
     URL: ({validator = url => /^(https?:\/\/)?(\w+(\.\w+)+|localhost)(\/[\w\#\-\%]+)*\/?$/.test(url), ...props}) => <ValidatedInput validator={validator} {...props} type="url" />,
     Email: ({validator = email => /^([a-zA-Z]\w*)(\.([a-zA-Z]\w*))*\@([a-zA-Z]\w*)(\.([a-zA-Z]\w*))+$/.test(email), ...props}) => <ValidatedInput validator={validator} {...props} type="email" />
 };

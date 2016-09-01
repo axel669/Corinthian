@@ -127,7 +127,7 @@ class Screen extends React.Component {
 
         return (
             <div>
-                <div className={contentClassName} tyle={contentStyle}>{this.props.children}</div>
+                <div className={contentClassName} style={contentStyle}>{this.props.children}</div>
                 <div className={titleClassName}>
                     <CenterContent height="100%">
                         {this.props.title}

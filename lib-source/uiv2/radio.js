@@ -104,7 +104,7 @@ class Radio extends React.Component {
                     const value = child.props.value;
                     return (
                         // <Touchable component="div" className="radio-item-container" key={index} onTap={() => this.select(index, value)}>
-                            <Item checked={selectedIndex === index} {...child.props} onTap={() => this.select(index, value)} />
+                            <Item key={index} checked={selectedIndex === index} {...child.props} onTap={() => this.select(index, value)} />
                         // {/*</Touchable>*/}
                     );
                 })}

@@ -101,6 +101,18 @@ const Main = React.createClass({
                 <UI.Button.Raised text="test" onTap={wat} />
                 <UI.Input.Range min={0} max={100} value={this.state.rangeValue} onChange={rangeValue => this.setState({rangeValue})} />
                 <UI.ProgressBar progress={this.state.rangeValue / 100} />
+                <UI.Form>
+                    <UI.Input.Time formName="time" format="{hour/12padded} - {minute} - {second}" />
+                    <UI.Input.Date formName="date" />
+                    <UI.Input.Text formName="text" />
+                    <UI.Input.Password formName="pw" />
+                    <UI.Input.Search formName="search" />
+                    <UI.Input.URL formName="url" />
+                    <UI.Input.Range min={0} max={100} />
+                    <UI.Radio formName="radio">
+                        {arange(10, n => <UI.Option value={n ** 2}>{n}</UI.Option>)}
+                    </UI.Radio>
+                </UI.Form>
             </UI.Screen>
         );
     }
@@ -112,3 +124,23 @@ App.start(
         <Route path="/test" component={() => <UI.Screen title="test" backText="Main" />} />
     </Route>
 );
+
+// const token = ajax.cancelToken();
+// (async () => {
+//     await chrono.wait(500);
+//     console.log(await dialog.spinner("Logging in"));
+//     // console.log('done');
+//     // console.log(
+//     //     await dialog.spinner("Logging in").then(
+//     //     )
+//     // );
+//     // console.log(await ajax(`http://axel669.net/echo/index2.php?t=${Date.now()}`, {token}));
+// })();
+// (async () => {
+//     // await chrono.wait(1000);
+//     // console.log(await dialog.spinner("Logging in"));
+//     dialog.hide(
+//         dialog.success(await ajax(`http://axel669.net/echo/index2.php?t=${Date.now()}`, {token}))
+//     );
+// })();
+// chrono.trigger(2000, token.cancel);

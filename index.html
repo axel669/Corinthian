@@ -3,6 +3,19 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width, maximum-scale=1.0" />
         <title>Corinthian Test</title>
+
+        <style>
+        @media (orientation: landscape) {
+            .dialog-core-content {
+                max-height: 40vw;
+            }
+        }
+        @media (orientation: portrait) {
+            .dialog-core-content {
+                max-height: 60vh;
+            }
+        }
+        </style>
     </head>
     <body>
         <div id="app-container"></div>

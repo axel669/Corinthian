@@ -85,7 +85,7 @@ class Calendar extends React.Component {
                             return <CenterContent key={letter}>{letter.toUpperCase()}</CenterContent>;
                         }
                     )}
-                    {factotum.range(
+                    {range(
                         42,
                         n => {
                             const date = baseDate.shift(n, 'days');

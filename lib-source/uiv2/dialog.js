@@ -54,7 +54,7 @@ defineComponentStyle(
         },
 
         "content": {
-            maxHeight: maxContentHeight,
+            // maxHeight: maxContentHeight,
             WebkitOverflowScrolling: 'touch',
             overflow: 'auto'
         },
