@@ -5,6 +5,7 @@ import deflateSource from "external/deflate.js.source";
 import inflateSource from "external/inflate.js.source";
 import workerSource from "external/z-worker.js.source";
 
+const zip = window.zip;
 const createURL = source => {
     const blob = new Blob([source], {type: "application/javascript"});
     return URL.createObjectURL(blob);
@@ -20,8 +21,6 @@ zip.workerScripts = {
 };
 
 const zipLib = zip;
-
-window.zip = null;
 
 const readEntry = (entry, writer) => new Promise(
     resolve => entry.getData(writer, resolve)
@@ -51,7 +50,7 @@ const readArrayBuffer = buffer => new Promise(
     }
 );
 const download = async (url, onProgress) => {
-    const buffer = await factotum.ajax(url, {type: 'arraybuffer', onProgress});
+    const buffer = await ajax(url, {type: 'arraybuffer', onProgress});
     return await readArrayBuffer(buffer.response);
 };
 

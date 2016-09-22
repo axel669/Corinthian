@@ -9,9 +9,12 @@ import * as ReactRouter from "react-router";
 import {createHashHistory} from "history";
 
 
+import "lib-source/v2/deviceready";
 import "lib-source/v2/gesture";
 import chrono from "lib-source/v2/chrono";
 import ajax from "lib-source/v2/ajax";
+import appData from "lib-source/v2/appdata";
+import fs from "lib-source/v2/fs";
 
 import ionic from "lib-source/v2/ionic-icons";
 
@@ -102,9 +105,7 @@ defineComponentStyle(
         },
         "$html, $body": {
             padding: 0,
-            margin: 0,
-            width: '100%',
-            height: '100%'
+            margin: 0
         }
     }
 );
@@ -124,7 +125,9 @@ if (Environment.app === false) {
         'elite',
         {
             "$body": {
-                overflow: 'hidden'
+                overflow: 'hidden',
+                width: '100%',
+                height: '100%'
             }
         }
     );
@@ -217,16 +220,6 @@ const removePreviousStyles = () => {
     }
 };
 
-window.deviceReady = new Promise(
-    resolve => {
-        if (Environment.app === true) {
-            document.addEventListener("deviceready", () => resolve(true));
-        } else {
-            resolve(true);
-        }
-    }
-);
-
 let prevFrameTime = Date.now();
 const frameHandler = () => {
     const now = Date.now();
@@ -238,11 +231,16 @@ const frameHandler = () => {
 };
 requestAnimationFrame(frameHandler);
 
+App.getSettings = appData.getSettings;
+App.getSession = appData.getSession;
+App.API = appData.API;
+
 window.defineComponentStyle = defineComponentStyle;
 window.defineStyleForComponent = defineStyleForComponent;
 
 window.chrono = chrono;
 window.ajax = ajax;
+window.fs = fs;
 
 window.regex = XRegExp;
 window.PubSub = PubSub;
@@ -288,6 +286,7 @@ window.Util = {
     sharedReference,
     SharedObjectDisplay
 };
+window.GlobalSettings = App.getSettings("global");
 
 window.cblog = ::console.log;
 window.cberr = ::console.error;
