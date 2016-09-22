@@ -90,10 +90,13 @@ class Screen extends React.Component {
             // leftMenu = null,
             // rightMenu = null
             menu = null,
-            width = 800
+            width = 800,
+            scrollable = false,
+            title = null
         } = this.props;
         let backButton = null;
         let contentStyle = null;
+        let titleDisplay = null;
 
         if (backText !== null) {
             backButton = (
@@ -124,19 +127,35 @@ class Screen extends React.Component {
                 maxWidth: width
             };
         }
+        if (Environment.app === true && scrollable === false) {
+            contentStyle = {
+                overflow: 'hidden'
+            };
+        }
+        // console.log('title', title);
+        if (title !== null) {
+            titleDisplay = (
+                <div className={titleClassName}>
+                <CenterContent height="100%">
+                {title}
+                </CenterContent>
+                {backButton}
+                {/*{menuDisplay}*/}
+                {/*{leftPanel}*/}
+                {/*{rightPanel}*/}
+                </div>
+            );
+        } else {
+            contentStyle = {
+                ...(contentStyle || {}),
+                top: 0
+            };
+        }
 
         return (
             <div>
                 <div className={contentClassName} style={contentStyle}>{this.props.children}</div>
-                <div className={titleClassName}>
-                    <CenterContent height="100%">
-                        {this.props.title}
-                    </CenterContent>
-                    {backButton}
-                    {/*{menuDisplay}*/}
-                    {/*{leftPanel}*/}
-                    {/*{rightPanel}*/}
-                </div>
+                {titleDisplay}
                 <DialogComponent />
             </div>
         );
