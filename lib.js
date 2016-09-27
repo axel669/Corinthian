@@ -286,7 +286,7 @@ window.Util = {
     sharedReference,
     SharedObjectDisplay
 };
-window.GlobalSettings = App.getSettings("global");
+window.GlobalSettings = App.getSettings("");
 
 window.cblog = ::console.log;
 window.cberr = ::console.error;

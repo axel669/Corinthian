@@ -106,14 +106,14 @@ class Form extends React.Component {
 
     render = () => {
         const {Container, childList, containerProps} = this;
-        const {submitText = "Submit"} = this.props;
+        const {submitText = "Submit", buttonType:ButtonType = Button.Raised} = this.props;
 
         return (
             <form onSubmit={this.submit} ref="form">
                 <Container {...containerProps}>
                     {childList}
                 </Container>
-                <Button text={submitText} onTap={this.submit} block />
+                <ButtonType text={submitText} onTap={this.submit} block />
             </form>
         );
     }

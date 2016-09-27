@@ -95,6 +95,9 @@ Touchable = React.createClass({
             throw new Error("Must pass a component into Touchable");
         }
 
+        if (typeof Component === 'function') {
+            return <span ref="node"><Component {...componentProps}>{children}</Component></span>;
+        }
         return <Component ref="node" {...componentProps}>{children}</Component>;
     }
 });

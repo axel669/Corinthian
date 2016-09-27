@@ -37,6 +37,6 @@ export default {
             const serverResponse = await request(url, options);
             return JSON.parse(serverResponse.response);
         };
-        return {request, requestData};
+        return {request, requestData, genURL: url => `${baseURL}/${appName}${url}`};
     }
 };

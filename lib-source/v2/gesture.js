@@ -80,37 +80,39 @@ registeredCallbacks = {};
 window.addEventListener(
     "touchstart",
     evt => {
-        // let {changedTouches} = evt;
+        let {changedTouches} = evt;
         if (enabled === false) {
             return;
         }
 
-        const touch = evt.changedTouches[0];
-        const data = touchData(touch, evt, evt.target);
-
-        touchDataStart[data.id] = data;
-        touchDataLast[data.id] = data;
-
-        registeredHandlers.forEach(handlerName => {
-            const handler = registeredCallbacks[handlerName];
-
-            touchVars[handlerName][data.id] = {};
-            handler.start({touch: data, vars: touchVars[handlerName][data.id]});
-        });
-
-        // changedTouches::forEach(touch => {
-        //     const data = touchData(touch, evt);
+        // console.log(evt.changedTouches);
         //
-        //     touchDataStart[data.id] = data;
-        //     touchDataLast[data.id] = data;
+        // const touch = evt.changedTouches[0];
+        // const data = touchData(touch, evt, evt.target);
         //
-            // registeredHandlers.forEach(handlerName => {
-            //     const handler = registeredCallbacks[handlerName];
-            //
-            //     touchVars[handlerName][data.id] = {};
-            //     handler.start({touch: data, vars: touchVars[handlerName][data.id]});
-            // });
+        // touchDataStart[data.id] = data;
+        // touchDataLast[data.id] = data;
+        //
+        // registeredHandlers.forEach(handlerName => {
+        //     const handler = registeredCallbacks[handlerName];
+        //
+        //     touchVars[handlerName][data.id] = {};
+        //     handler.start({touch: data, vars: touchVars[handlerName][data.id]});
         // });
+
+        changedTouches::forEach(touch => {
+            const data = touchData(touch, evt);
+
+            touchDataStart[data.id] = data;
+            touchDataLast[data.id] = data;
+
+            registeredHandlers.forEach(handlerName => {
+                const handler = registeredCallbacks[handlerName];
+
+                touchVars[handlerName][data.id] = {};
+                handler.start({touch: data, vars: touchVars[handlerName][data.id]});
+            });
+        });
     },
     true
 );
