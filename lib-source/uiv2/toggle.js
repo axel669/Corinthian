@@ -97,6 +97,10 @@ const Toggle = props => {
 };
 Toggle.componentName = 'toggle';
 
+Toggle.valueProp = 'on';
+Toggle.valueFunction = on => on;
+Toggle.defaultPropValue = () => false;
+
 defineCustomBase(
     Toggle,
     ({normal = null, on = null, label = null, subtitle = null}) => transferProps({

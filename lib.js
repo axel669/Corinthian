@@ -287,6 +287,7 @@ window.Util = {
     SharedObjectDisplay
 };
 window.GlobalSettings = App.getSettings("");
+window.GlobalSession = App.getSession("");
 
 window.cblog = ::console.log;
 window.cberr = ::console.error;

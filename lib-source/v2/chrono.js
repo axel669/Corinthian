@@ -507,7 +507,11 @@ const chrono = (arg = null) => {
             return internalDate.toString();
         },
         toJSON() {
-            return internalDate.toJSON();
+            // return internalDate.toJSON();
+            return "{month}-{day}-{year/full} {hour/padded}:{minute/padded}:{second/padded}".replace(
+                /\{(\w+)(\/(\w+))?\}/g,
+                (full, prop, skip, type = 'base') => chronoFormat[prop][type](internalDate)
+            );
         }
     };
 };
