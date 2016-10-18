@@ -1,3 +1,14 @@
+/**
+    @type method
+    @name ajax
+    @return {Promise} Wut
+    @param {string} url
+        The url to request.
+    @param {object} options
+        @property {int} timeout
+            The amount of time to wait before closing the connection.
+*/
+
 const ajax = (url, options = {}) => new Promise(
     (resolve, reject) => {
         const {
