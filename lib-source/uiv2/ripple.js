@@ -1,8 +1,9 @@
 import React from "react";
 
-import {defineComponentStyle} from "lib-source/v2/style.js";
+import {defineComponentStyle} from "lib-source/v2/style";
+import vars from 'lib-source/uiv2/vars';
 
-const animationDuration = 300;
+const animationDuration = 600;
 defineComponentStyle(
     'ripple',
     'core',
@@ -13,7 +14,8 @@ defineComponentStyle(
             left: 0,
             right: 0,
             bottom: 0,
-            zIndex: '+5'
+            zIndex: '+5',
+            overflow: 'hidden'
             // transform: 'translate3d(0, 0, 0)'
         },
         "dot": {
@@ -36,7 +38,7 @@ defineComponentStyle(
                 backgroundColor: 'rgba(0, 0, 0, 0)'
             },
             "70%": {
-                backgroundColor: 'rgba(0, 0, 0, 0.1)'
+                backgroundColor: 'rgba(0, 0, 0, 0.2)'
             },
             "100%": {
                 transform: 'translate(-50%, -50%) scale(1, 1)',
@@ -54,9 +56,12 @@ class Ripple extends React.Component {
     }
 
     touch = (evt) => {
-        const {position} = evt.touch;
+        // const {position} = evt.touch;
         const {top, left} = this.refs.wrapper.getBoundingClientRect();
-        this.triggerRipple(position.x - left, position.y - top);
+        evt.changedTouches::Array.prototype.forEach(touch => {
+            const position = {x: touch.clientX, y: touch.clientY};
+            this.triggerRipple(position.x - left, position.y - top);
+        });
     }
     triggerRipple = (x = null, y) => {
         let {list} = this.state;
@@ -95,11 +100,37 @@ class Ripple extends React.Component {
         const {list} = this.state;
 
         return (
-            <UI.Touchable component="div" className="ripple-core-wrapper" onTap={this.touch} ref="wrapper">
+            <UI.Touchable component="div" className="ripple-core-wrapper" onTouchStart={this.touch} ref="wrapper">
                 {list.map(({id, x, y}) => <div key={id} style={{top: y, left: x}} className="ripple-core-dot" />)}
             </UI.Touchable>
         );
     }
 }
 
+defineComponentStyle(
+    'highlight',
+    'core',
+    {
+        "overlay": {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            transition: 'background-color 500ms linear'
+        },
+        ".core-desktop overlay:hover": {
+            backgroundColor: vars.hoverColor
+        },
+        "*:active > overlay": {
+            backgroundColor: vars.activeColor,
+            transition: 'none'
+        }
+    }
+);
+export const Highlight = () => <div className="highlight-core-overlay" />;
+
 export default Ripple;
+
+export const TapEffect = () => (App.rippleEnabled === true) ? <Ripple /> : <Highlight />;
+// export Highlight;

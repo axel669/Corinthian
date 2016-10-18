@@ -1,5 +1,6 @@
 import {defineComponentStyle, defineCustomBase} from "lib-source/v2/style";
 import {transferProps} from 'lib-source/v2/utils';
+import {TapEffect} from "lib-source/uiv2/ripple";
 
 const animationTime = 100;
 defineComponentStyle(
@@ -91,7 +92,8 @@ const Toggle = props => {
             <div className={`toggle-core-toggle-container toggle-${styleName}-toggle-container-custom`} data-on={on}>
                 <div className={`toggle-core-toggle toggle-${styleName}-toggle-custom`} data-on={on} />
             </div>
-            {/*<Ripple />*/}
+            {/*{App.rippleEnabled === true ? <Ripple /> : null}*/}
+            {/*<TapEffect />*/}
         </UI.Touchable>
     );
 };

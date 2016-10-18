@@ -10,16 +10,19 @@ defineComponentStyle(
             boxShadow: '1px 2px 2px rgba(120, 120, 120, 0.15)',
             border: '1px solid #e0e0e0',
             backgroundColor: 'white',
-            borderRadius: 3
+            borderRadius: 3,
+            overflow: 'hidden'
         },
         "title": {
             fontSize: 20,
-            padding: 3,
-            color: 'black'
+            padding: 5,
+            color: 'black',
+            margin: -5,
+            marginBottom: 0
         }
     }
 );
-const Card = ({children, title = null}) => {
+const Card = ({children, title = null, titleColor = null, titleTextColor = null}) => {
     let content;
 
     if (title === null) {
@@ -27,7 +30,7 @@ const Card = ({children, title = null}) => {
     } else {
         content = (
             <div>
-                <div className="card-core-title">{title}</div>
+                <div className="card-core-title" style={{color: titleTextColor, backgroundColor: titleColor}}>{title}</div>
                 {children}
             </div>
         );

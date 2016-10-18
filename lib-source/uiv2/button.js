@@ -1,6 +1,7 @@
-import {defineComponentStyle, defineStyleForComponent, defineCustomBase} from "lib-source/v2/style.js";
-import Ripple from "lib-source/uiv2/ripple.js";
-import Icon from 'lib-source/uiv2/icon.js';
+import {defineComponentStyle, defineStyleForComponent, defineCustomBase} from "lib-source/v2/style";
+// import Ripple, {Highlight} from "lib-source/uiv2/ripple";
+import {TapEffect} from "lib-source/uiv2/ripple";
+import Icon from 'lib-source/uiv2/icon';
 import Touchable from 'lib-source/uiv2/Touchable';
 import vars from 'lib-source/uiv2/vars';
 import {transferProps} from 'lib-source/v2/utils';
@@ -45,21 +46,21 @@ defineComponentStyle(
             whiteSpace: 'pre',
             display: 'table-cell'
         },
-        "wrapper > overlay": {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            transition: 'background-color 500ms linear'
-        },
-        ".core-desktop overlay:hover": {
-            backgroundColor: vars.hoverColor
-        },
-        "wrapper:active > overlay": {
-            backgroundColor: vars.activeColor,
-            transition: 'none'
-        }
+        // "wrapper > overlay": {
+        //     position: 'absolute',
+        //     top: 0,
+        //     left: 0,
+        //     right: 0,
+        //     bottom: 0,
+        //     transition: 'background-color 500ms linear'
+        // },
+        // ".core-desktop overlay:hover": {
+        //     backgroundColor: vars.hoverColor
+        // },
+        // "wrapper-noripple:active > overlay": {
+        //     backgroundColor: vars.activeColor,
+        //     transition: 'none'
+        // }
     }
 );
 
@@ -80,7 +81,7 @@ const Button = props => {
         iconSize = null
     } = props;
 
-    const wrapperName = `button-core-wrapper button-${styleName}-wrapper-custom`;
+    const wrapperName = `button-core-wrapper${App.rippleElement === true ? '' : " button-core-wrapper-noripple"} button-${styleName}-wrapper-custom`;
 
     const wrapperStyle = {backgroundColor: buttonColor};
     const textWrapperStyle = {};
@@ -89,7 +90,12 @@ const Button = props => {
     let onTapHandler;
 
     if (disabled !== true) {
-        // rippleElement = <Ripple />;
+        // if (App.rippleEnabled === true) {
+        //     rippleElement = <Ripple />;
+        // } else {
+        //     rippleElement = <Highlight />;
+        // }
+        rippleElement = <TapEffect />;
         onTapHandler = onTap;
     }
     if (block === true) {
@@ -118,7 +124,7 @@ const Button = props => {
             <div className="button-core-text-wrapper" style={textWrapperStyle}>
                 <div className="button-core-text" style={textStyle}>{text}</div>
             </div>
-            <div className="button-core-overlay" />
+            {/*<div className="button-core-overlay" />*/}
             {rippleElement}
         </Touchable>
     );

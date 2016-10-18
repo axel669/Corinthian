@@ -59,6 +59,7 @@ const url = "http://vignette1.wikia.nocookie.net/bayonetta/images/e/e3/Cereza_Ba
 */
 const url = "http://assets1.ignimgs.com/thumbs/userUploaded/2014/10/12/Bayonetta2_1280-1413142451100.jpg";
 
+App.rippleEnabled = true;
 const Main = React.createClass({
     async demo() {
         // if (await Dialog.confirm("Really?") === true) {
@@ -97,11 +98,15 @@ const Main = React.createClass({
         };
 
         return (
-            <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo}>
+            <UI.Screen title="Test" backText={"test"} width={600} onBack={this.demo} scrollable>
+                <UI.Card titleColor="#444" titleTextColor="white" title="Test">Content</UI.Card>
+                <UI.Button block text="Test" />
+                <UI.Button text="Test" />
                 <UI.Button.Raised text="test" onTap={wat} />
                 <UI.Input.Range min={0} max={100} value={this.state.rangeValue} onChange={rangeValue => this.setState({rangeValue})} />
                 <UI.ProgressBar progress={this.state.rangeValue / 100} />
                 <UI.Form>
+                    <UI.Toggle formName="toggle" label="Test" />
                     <UI.Input.Time formName="time" format="{hour/12padded} - {minute} - {second}" />
                     <UI.Input.Date formName="date" />
                     <UI.Input.Text formName="text" />

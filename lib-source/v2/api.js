@@ -7,6 +7,9 @@ export default {
         };
         const json = async (url, options) => {
             const result = await request(url, options);
+            if (result === null) {
+                return null;
+            }
             return JSON.parse(result.response);
         };
         return {

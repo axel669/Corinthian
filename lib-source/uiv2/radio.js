@@ -4,6 +4,8 @@ import {defineComponentStyle} from "lib-source/v2/style";
 import CenterContent from "lib-source/uiv2/CenterContent";
 import Touchable from "lib-source/uiv2/Touchable";
 import Icon from "lib-source/uiv2/Icon";
+// import Ripple from "lib-source/uiv2/ripple";
+import {TapEffect} from "lib-source/uiv2/ripple";
 
 defineComponentStyle(
     'radio',
@@ -49,6 +51,7 @@ const RadioItem = ({checked, iconColor, children, onTap}) => {
                 </CenterContent>
             </div>
             {children}
+            <TapEffect />
         </Touchable>
     );
 };

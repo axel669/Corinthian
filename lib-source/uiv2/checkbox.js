@@ -80,7 +80,7 @@ const Checkbox = props => {
                 </CenterContent>
             </div>
             <div className={labelClassName}>{content}</div>
-            {/*<Ripple />*/}
+            {App.rippleEnabled === true ? <Ripple /> : null}
         </UI.Touchable>
     );
 };

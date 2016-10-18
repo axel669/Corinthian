@@ -105,7 +105,9 @@ defineComponentStyle(
         },
         "$html, $body": {
             padding: 0,
-            margin: 0
+            margin: 0,
+            WebkitTouchCallout: 'none',
+            WebkitUserSelect: 'none'
         }
     }
 );
@@ -164,7 +166,8 @@ const App = {
     },
     get rc() {
         return renderedComponent;
-    }
+    },
+    rippleEnabled: false
 };
 if (Environment.app === true) {
     App.navigation = {
