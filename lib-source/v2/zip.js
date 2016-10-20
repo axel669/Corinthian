@@ -54,6 +54,10 @@ const download = async (url, onProgress) => {
     return await readArrayBuffer(buffer.response);
 };
 
+/**
+    @type constructor [internal]
+    @name ZipFile
+*/
 const zipFile = ([entries, reader]) => {
     const entrySort = (first, second) => {
         if (first.filename < second.filename) {
@@ -74,15 +78,30 @@ const zipFile = ([entries, reader]) => {
     entries = entries.sort(entrySort);
 
     return {
+        /**
+            @type Function
+            @name getFile
+            @parent ZipFile
+        */
         getFile(name) {
             if (files.hasOwnProperty(name) === true) {
                 return zipEntry(files[name]);
             }
             return null;
         },
+        /**
+            @type Function
+            @name getEntries
+            @parent ZipFile
+        */
         getEntries() {
             return entries.map(zipEntry);
         },
+        /**
+            @type Function
+            @name extractTo
+            @parent ZipFile
+        */
         async extractTo(dest, onProgress = () => {}) {
             let index;
 
@@ -114,6 +133,17 @@ const zipFile = ([entries, reader]) => {
     };
 };
 
+/**
+    @type Object
+    @name zip
+    @property {Function} download
+        Downloads a zip file and gives back the ZipFile object for it.
+        @return {Promise}
+        @param {String} url
+            The url of the zip file.
+        @param {Function} [optional] onProgress
+            A function to call while the zip file is being downloaded.
+*/
 export default {
     async download(url, onProgress) {
         const zipInfo = await download(url, onProgress);

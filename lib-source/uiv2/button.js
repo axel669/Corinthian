@@ -1,5 +1,4 @@
 import {defineComponentStyle, defineStyleForComponent, defineCustomBase} from "lib-source/v2/style";
-// import Ripple, {Highlight} from "lib-source/uiv2/ripple";
 import {TapEffect} from "lib-source/uiv2/ripple";
 import Icon from 'lib-source/uiv2/icon';
 import Touchable from 'lib-source/uiv2/Touchable';
@@ -45,25 +44,31 @@ defineComponentStyle(
             verticalAlign: 'middle',
             whiteSpace: 'pre',
             display: 'table-cell'
-        },
-        // "wrapper > overlay": {
-        //     position: 'absolute',
-        //     top: 0,
-        //     left: 0,
-        //     right: 0,
-        //     bottom: 0,
-        //     transition: 'background-color 500ms linear'
-        // },
-        // ".core-desktop overlay:hover": {
-        //     backgroundColor: vars.hoverColor
-        // },
-        // "wrapper-noripple:active > overlay": {
-        //     backgroundColor: vars.activeColor,
-        //     transition: 'none'
-        // }
+        }
     }
 );
 
+/**
+    @type Element
+    @name Button
+    @parent UI
+    @desc Displays a button on screen.
+    @property {String} text
+        The text to display in the button.
+    @property {Function} [optional] onTap
+        The function to call when the button is tapped (or clicked on desktop).
+        @param {Event}
+            The event object for the tap.
+    @property {String} [optional] styleName
+    @property {CSSValue} [optional] buttonColor
+    @property {CSSValue} [optional] textColor
+    @property {Boolean} [optional] flush
+    @property {Boolean} [optional] fill
+    @property {fillHeight} [optional] fillHeight
+    @property {CSSValue} [optional] padding
+    @property {String} [optional] iconName
+    @property {CSSValue} [optional] iconSize
+*/
 const Button = props => {
     let {
         text,

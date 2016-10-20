@@ -1,5 +1,11 @@
 import ajax from "lib-source/v2/ajax";
 
+/**
+    @type Object
+    @name API
+    @parent App
+    @property {Function}
+*/
 export default {
     create(baseURL) {
         const request = (url, options) => {
