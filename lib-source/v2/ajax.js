@@ -119,9 +119,8 @@ const ajax = (url, options = {}) => new Promise(
         that needs to be cancelled needs its own token.
     @property {Boolean} used
         Whether or not the token has been given to a request.
-    @function cancel()
+    @property {Function} cancel
         Cancels the request that has been given this token.
-
 */
 ajax.cancelToken = () => {
     let request = null;

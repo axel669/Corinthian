@@ -5,9 +5,16 @@ let decrypt;
 let hash;
 
 /**
+    @type Object
+    @name secure
+    @desc An object with security related functions.
+*/
+
+/**
     @type Function
     @name encrypt
     @parent secure
+    @static
     @desc
         Encrypts a string using the given options.
     @param {String} data
@@ -50,6 +57,7 @@ encrypt = (str, key, {iv = null, algorithm = 'aes256', output = 'hex', input = '
     @type Function
     @name decrypt
     @parent secure
+    @static
     @desc
         Decrypts a string using the given options.
     @param {String} data
@@ -92,6 +100,7 @@ decrypt = (str, key, {iv = null, algorithm = 'aes256', input = 'hex', output = '
     @type Function
     @name hash
     @parent secure
+    @static
     @desc
         Returns a hash of the string using the given algorithm.
     @param {String} str

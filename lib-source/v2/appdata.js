@@ -28,6 +28,11 @@ const getStorage = (storage, appKey) => {
     };
 };
 
+/**
+    @type Object
+    @name App
+*/
+
 export default {
     getSettings: name => getStorage(localStorage, name),
     getSession: name => getStorage(sessionStorage, name),
@@ -66,7 +71,6 @@ export default {
                 parsed into an object. The resolved value will be the result of
                 calling JSON.parse on the response.
         */
-
         const requestData = async (url, options) => {
             const serverResponse = await request(url, options);
             return JSON.parse(serverResponse.response);

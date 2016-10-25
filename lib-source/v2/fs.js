@@ -244,7 +244,7 @@ export default {
         @type Function
         @name fileRead
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async fileRead(name, type = 'text') {
         return await readfile(name, type);
@@ -253,7 +253,7 @@ export default {
         @type Function
         @name dirRead
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async dirRead(name) {
         if (isFile(name) === true) {
@@ -265,7 +265,7 @@ export default {
         @type Function
         @name fileWrite
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async fileWrite(name, data, mode = 'truncate') {
         const [protocol] = getInfo(name);
@@ -290,7 +290,7 @@ export default {
         @type Function
         @name fileCreate
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async fileCreate(name) {
         return await get(name, {create: true});
@@ -299,7 +299,7 @@ export default {
         @type Function
         @name dirCreate
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async dirCreate(name) {
         return await get(name, {create: true});
@@ -308,7 +308,7 @@ export default {
         @type Function
         @name fileRemove
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async fileRemove(name) {
         return await removeEntry(name, 'remove');
@@ -317,7 +317,7 @@ export default {
         @type Function
         @name dirRemove
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async dirRemove(name, recursive = false) {
         const functionName = (recursive === true) ? "removeRecursively" : "remove";
@@ -327,21 +327,21 @@ export default {
         @type Function
         @name fileExists
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     fileExists: exists,
     /**
         @type Function
         @name dirExists
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     dirExists: exists,
     /**
         @type Function
         @name fileMove
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async fileMove(source, dest) {
         if (isFile(source) !== isFile(dest)) {
@@ -353,7 +353,7 @@ export default {
         @type Function
         @name fileCopy
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async fileCopy(source, dest) {
         if (isFile(source) !== isFile(dest)) {
@@ -365,7 +365,7 @@ export default {
         @type Function
         @name dirMove
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async dirMove(source, dest) {
         if (isFile(source) !== isFile(dest)) {
@@ -377,7 +377,7 @@ export default {
         @type Function
         @name dirTree
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async dirTree(name, files = []) {
         const list = await fs.dirRead(name);
@@ -395,7 +395,7 @@ export default {
         @type Function
         @name url
         @parent fs
-        @returns {String}
+        @return {String}
     */
     url(fileName) {
         const [protocol, fullPath] = getInfo(fileName);
@@ -405,7 +405,7 @@ export default {
         @type Function
         @name entry
         @parent fs
-        @returns {Promise}
+        @return {Promise}
     */
     async entry(url) {
         return await get(url, {create: false});
