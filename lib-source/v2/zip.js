@@ -136,15 +136,19 @@ const zipFile = ([entries, reader]) => {
 /**
     @type Object
     @name zip
-    @property {Function} download
-        Downloads a zip file and gives back the ZipFile object for it.
-        @return {Promise}
+*/
+export default {
+	/**
+		@name download
+		@type Function
+		@parent zip
+        @desc Downloads a zip file and gives back the ZipFile object for it.
         @param {String} url
             The url of the zip file.
         @param {Function} [optional] onProgress
-            A function to call while the zip file is being downloaded.
-*/
-export default {
+        	A function to call while the zip file is being downloaded.
+        @return {Promise}
+	*/
     async download(url, onProgress) {
         const zipInfo = await download(url, onProgress);
         return zipFile(zipInfo);
